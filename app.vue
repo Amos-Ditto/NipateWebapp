@@ -3,9 +3,6 @@
     <header id="top-navbar" class="flex justify-align-center">
       <TopNavbar></TopNavbar>
     </header>
-    <!-- <header id="top-2-navbar" class="flex align-center padding-4">
-      <TopBar></TopBar>
-    </header> -->
     <NuxtPage />
   </main>
 </template>

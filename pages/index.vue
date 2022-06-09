@@ -7,17 +7,13 @@
             <section class="w-100 padding-8">
                 <div class="background-img"></div>
                 <div class="splash-context w-100 top-3 left-1 gap-2">
-                    <div class="splash-text c-dark font-24 f-weight-900 h-100 flex align-center top-3 w-50">
+                    <div class="grid-item splash-text c-dark font-24 f-weight-900 h-100 flex align-center top-3 w-50">
                         <h3 class="">Powerful and easy to use platform</h3>
                     </div>
-                    <div class="img-banner">
+                    <div class="img-banner grid-item ">
                         <img src="@/assets/logo-img-removebg-preview.png" alt="" class="bg-inherit">
                     </div>
-                    <div class="get-started-banner flex align-center gap-2 w-100 top-3">
-                        <button class="started bg-gold color-white btn-started btn-b-8 btn-b-none f-weight-900 font-18 padding-8">Get Started</button>
-                        <button class="contact font-20 bg-inherit btn-b-none flex align-center flex-row gap-1 padding-8">Contactus <div class="i-mdi-arrow-forward" /> </button>
-                    </div>
-                    <div class="get-started-banner flex align-center gap-2 w-100 top-3">
+                    <div class="grid-item get-started-banner flex align-center gap-2 w-100 top-3">
                         <button class="started bg-gold color-white btn-started btn-b-8 btn-b-none f-weight-900 font-18 padding-8">Get Started</button>
                         <button class="contact font-20 bg-inherit btn-b-none flex align-center flex-row gap-1 padding-8">Contactus <div class="i-mdi-arrow-forward" /> </button>
                     </div>
@@ -42,6 +38,7 @@
 
 }
 .background-img {
+    background-image: url('@/assets/blob-haikei.svg');
     position: absolute;
     left: 0%;
     z-index: -1;
@@ -51,7 +48,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-image: url('@/assets/blob-haikei.svg');
 }
 .splash-context {
     display: grid;
@@ -62,8 +58,8 @@
     justify-items: stretch;
     align-items: stretch;
     .img-banner {
-        // height: 40vh;
-        // width: 10rem;
+        height: 40vh;
+        width: 10rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -74,12 +70,6 @@
         }
     }
 }
-// .splash-text {
-//     width: 40%;
-// }
-// .get-started-banner {
-//     grid-area: 2 / 1 / 3 / 2;
-// }
 .started {
     font-family: Roboto;
     cursor: pointer;
@@ -101,7 +91,7 @@
     .background-img {
         aspect-ratio: 600/400;
         top: 5rem;
-        background-image: url('@/assets/blob-haikei (1).svg');
+        background-image: url('@/assets/blob-haikei(1).svg');
     }
     section {
         width: 80%;
