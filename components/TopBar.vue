@@ -4,8 +4,8 @@
             <img src="@/assets/logo-removebg.png" alt="" class="wh-100 border-4">
         </div>
         <div class="links bg-inherit flex align-center gap-1 padding-4 h-100">
-            <NuxtLink to="/" class="flex justify-align-center font-14 h-100 padding-w-4">Home</NuxtLink>
-            <a href="#" class="bg-inherit flex justify-align-center font-14 h-100 padding-w-4">About Us</a>
+            <NuxtLink to="/" class="flex justify-align-center font-16 h-100 padding-w-4">Home</NuxtLink>
+            <a href="#" class="bg-inherit flex justify-align-center font-16 h-100 padding-w-4">About Us</a>
         </div>
     </div>
 </template>

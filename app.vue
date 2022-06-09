@@ -115,6 +115,9 @@ body {
 .padding-8 {
   padding: 8px;
 }
+.padding-12 {
+  padding: 12px;
+}
 .padding-w-4 {
   padding: 0 4px;
 }
@@ -136,9 +139,6 @@ body {
 .absolute {
   position: absolute;
 }
-.border-4 {
-  border-radius: 4px;
-}
 .color-white {
   color: var(--color-white);
 }
@@ -157,11 +157,17 @@ body {
 .top-3 {
   margin-top: 3rem;
 }
+.border-4 {
+  border-radius: 4px;
+}
 .b-4 {
   border-radius: 4px;
 }
 .b-8 {
   border-radius: 8px;
+}
+.br-12 {
+  border-radius: 12px;
 }
 .btn-b-none {
   border: none;
@@ -175,6 +181,24 @@ body {
 }
 .bg-gold {
   background: var(--color-gold);
+}
+.w-2 {
+  width: 20%;
+}
+.w-3 {
+  width: 30%;
+}
+.w-4 {
+  width: 40%;
+}
+.w-6 {
+  width: 60%;
+}
+.w-7 {
+  width: 70%;
+}
+.w-8 {
+  width: 80%;
 }
 #top-navbar {
   width: 100vw;
