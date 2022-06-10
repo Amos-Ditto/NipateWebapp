@@ -34,7 +34,7 @@ a {
         position: absolute;
         content: '';
         width: 100%;
-        height: 1px;
+        height: 2px;
         background: #f2542d;
         bottom: 0%;
         left: 0%;
@@ -79,7 +79,7 @@ button {
     .btn-desk {
         display: block;
         &:hover {
-            transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.04, 1.04, 1.04);
         }
     }
     .btn-mobile {
