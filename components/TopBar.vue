@@ -7,14 +7,17 @@
             <NuxtLink to="/" class="flex justify-align-center font-16 h-100 padding-w-4">Home</NuxtLink>
             <NuxtLink to="/Login" class="bg-inherit flex justify-align-center font-16 h-100 padding-w-4">About Us</NuxtLink>
             <button class="btn-desk border-dark padding-8 b-8 font-14 l-space color-variant-dark">Register</button>
-            <button class="btn-desk bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700">Login</button>
-            <button class="btn-mobile bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700">SignUp</button>
+            <button class="btn-desk bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700" @click="redirectLogin">Login</button>
+            <button class="btn-mobile bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700" @click="redirectLogin">SignUp</button>
         </div>
     </div>
 </template>
 
 <script setup>
-
+const router = useRouter();
+function redirectLogin() {
+    router.push("/Login");
+}
 </script>
 
 <style lang="scss" scoped>
@@ -59,9 +62,6 @@ button {
     display: none;
 }
 @media screen and (min-width: 600px) {
-    .container {
-        // padding: 0 50px;
-    }
     .logo {
         width: 35%;
         justify-content: center;
