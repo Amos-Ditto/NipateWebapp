@@ -5,7 +5,10 @@
         </div>
         <div class="links bg-inherit flex align-center gap-1 padding-4 h-100">
             <NuxtLink to="/" class="flex justify-align-center font-16 h-100 padding-w-4">Home</NuxtLink>
-            <a href="#" class="bg-inherit flex justify-align-center font-16 h-100 padding-w-4">About Us</a>
+            <NuxtLink to="/Login" class="bg-inherit flex justify-align-center font-16 h-100 padding-w-4">About Us</NuxtLink>
+            <button class="btn-desk border-dark padding-8 b-8 font-14 l-space color-variant-dark">Register</button>
+            <button class="btn-desk bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700">Login</button>
+            <button class="btn-mobile bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700">SignUp</button>
         </div>
     </div>
 </template>
@@ -48,15 +51,39 @@ a {
     height: 2rem;
 
 }
+button {
+    cursor: pointer;
+    transition: tansform .4s ease;
+}
+.btn-desk {
+    display: none;
+}
 @media screen and (min-width: 600px) {
     .container {
-        padding: 0 50px;
+        // padding: 0 50px;
+    }
+    .logo {
+        width: 35%;
+        justify-content: center;
+        img {
+            width: 30%;
+        }
     }
     a {
         font-size: large;
     }
     .links {
-        margin-right: 2rem;
+        width: 40%;
+        padding-left: 16px;
+    }
+    .btn-desk {
+        display: block;
+        &:hover {
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+    }
+    .btn-mobile {
+        display: none;
     }
 }
 </style>

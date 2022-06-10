@@ -57,6 +57,7 @@ body {
 .font-20 {font-size: 20px;}
 .font-24 {font-size: 24px;}
 .f-weight-500 {font-weight: 500;}
+.f-weight-700 {font-weight: 700;}
 .f-weight-900 {font-weight: 900;}
 .padding-2 {padding: 2px;}
 .padding-4 {padding: 4px;}
@@ -74,6 +75,8 @@ body {
 .c-dark {color: var(--color-dark);}
 .left-1 {margin-left: 1rem;}
 .left-3 {margin-left: 3rem;}
+.top-1 {margin-top: 1rem;}
+.top-2 {margin-top: 2rem;}
 .top-3 {margin-top: 3rem;}
 .border-4 {border-radius: 4px;}
 .b-4 {border-radius: 4px;}
@@ -83,12 +86,21 @@ body {
 .btn-b-4 {border-radius: 4px;}
 .btn-b-8 {border-radius: 8px;}
 .bg-gold {background: var(--color-gold);}
+.border-dark {border: 1px solid var(--color-variant-black);}
+.l-space {letter-spacing: 1px;}
 .w-20 {width: 20%;}
 .w-30 {width: 30%;}
 .w-40 {width: 40%;}
 .w-60 {width: 60%;}
 .w-70 {width: 70%;}
 .w-80 {width: 80%;}
+.hrem-1 {height: 1rem;}
+.hrem-2 {height: 2rem;}
+.hrem-3 {height: 3rem;}
+.hrem-4 {height: 4rem;}
+.hrem-5 {height: 5rem;}
+.hrem-6 {height: 6rem;}
+.hrem-7 {height: 7rem;}
 .font-30 {font-size: 30px;}
 #top-navbar {
   width: 100vw;
