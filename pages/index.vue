@@ -13,7 +13,7 @@
                         </h3>
                     </div>
                     <div class="splash-continue flex flex-row justify-align-center w-100 gap-2 top-3">
-                        <button class="padding-12 font-18 btn-b-none bg-gold br-12">Get Started</button>
+                        <button class="padding-12 font-18 btn-b-none bg-gold br-20 l-space-2">Get Started</button>
                         <button class="padding-12 flex flex-row font-16 b-4 bg-inherit br-12">Contact Us <div class="i-mdi-chevron-right font-20"></div></button>
                     </div>
                 </main>
@@ -51,7 +51,7 @@
 button {
     transition: transform .3s;
     &:hover {
-        transform: scaleX(1.12);
+        transform: scaleX(1.04);
     }
 }
 .splash-title {

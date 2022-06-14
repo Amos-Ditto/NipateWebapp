@@ -5,8 +5,8 @@
         </div>
         <div class="links bg-inherit flex align-center gap-1 padding-4 h-100">
             <NuxtLink to="/" class="flex justify-align-center font-16 h-100 padding-w-4">Home</NuxtLink>
-            <NuxtLink to="/Login" class="bg-inherit flex justify-align-center font-16 h-100 padding-w-4">About Us</NuxtLink>
-            <button class="btn-desk border-dark padding-8 b-8 font-14 l-space color-variant-dark">Register</button>
+            <NuxtLink to="/" class="bg-inherit flex justify-align-center font-16 h-100 padding-w-4">About Us</NuxtLink>
+            <button class="btn-desk border-dark padding-8 b-8 font-14 l-space color-variant-dark" @click="redirectRegister">Register</button>
             <button class="btn-desk bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700" @click="redirectLogin">Login</button>
             <button class="btn-mobile bg-gold btn-b-none padding-8 b-8 font-14 l-space color-white f-weight-700" @click="redirectLogin">SignUp</button>
         </div>
@@ -17,6 +17,9 @@
 const router = useRouter();
 function redirectLogin() {
     router.push("/Login");
+};
+function redirectRegister() {
+    router.push("/Register");
 }
 </script>
 

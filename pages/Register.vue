@@ -1,18 +1,25 @@
 <template>
     <NuxtLayout name="custom">
-
-        <main class="w-100 flex justify-align-center top-3 flex-column gap-3 padding-12">
+        <main class="w-100 flex justify-align-center top-3 flex-column gap-2 padding-12">
             <div class="title-section flex justify-align-center flex-column">
                 <div class="logo w-100 flex justify-align-center">
                     <img src="@/assets/logo-img-removebg-preview.png" alt="" class="w-30 hrem-4">
                 </div>
-                <h3 class="top-2 font-24">Login in to Nipate App</h3>
+                <h3 class="top-1 font-24">Sign Up to Nipate App</h3>
             </div>
-            <div class="input-fields top-3 w-100 flex flex-column gap-1 justify-align-center">
-                <span class="font-18">Enter your mobile number and password.</span>
+            <div class="input-fields w-100 flex flex-column gap-1 justify-align-center">
+                <span class="font-18">Enter your personal details.</span>
                 <div class="input-field relative hrem-3 w-100 flex justify-align-center">
                     <input type="text" placeholder="phone number" class="h-100">
                     <div class="i-mdi-phone mdi-icons"></div>
+                </div>
+                <div class="input-field relative hrem-3 w-100 flex justify-align-center">
+                    <input type="text" placeholder="ID Number" class="h-100">
+                    <div class="i-mdi-account-box-outline mdi-icons"></div>
+                </div>
+                <div class="input-field relative hrem-3 w-100 flex justify-align-center">
+                    <input type="text" placeholder="first name" class="h-100">
+                    <div class="i-mdi-account-circle mdi-icons"></div>
                 </div>
                 <div class="input-field relative hrem-3 w-100 flex justify-align-center">
                     <input type="password" placeholder="password" class="h-100" ref="password">
@@ -22,21 +29,23 @@
                         <div class="i-mdi-eye" v-show="!visible_password" @click="showPassword"></div>
                     </div>
                 </div>
-                <div class="forgot-password flex justify-align-center hrem-1">
-                    <a href="#" class="c-dark font-20">Forgot your password?</a>
+                <div class="input-field relative hrem-3 w-100 flex justify-align-center">
+                    <input type="password" placeholder="Confirm password" class="h-100" ref="confirm_password">
+                    <div class="i-mdi-lock mdi-icons"></div>
+                    <div class="mdi-password">
+                        <div class="i-mdi-eye-off" v-show="visible_confirm_password" @click="hideConfirmPassword"></div>
+                        <div class="i-mdi-eye" v-show="!visible_confirm_password" @click="showConfirmPassword"></div>
+                    </div>
                 </div>
-                <div class="submit-btn w-100 flex justify-align-center top-1">
-                    <button class="bg-gold w-80 hrem-3 btn-b-none b-4 font-18">Login</button>
+                <div class="submit-btn w-100 flex justify-align-center top-2">
+                    <button class="bg-gold w-80 hrem-3 btn-b-none b-4 font-18">Submit</button>
                 </div>
                 <div class="forgot-password flex justify-align-center hrem-1 top-2">
-                    <p class="c-dark font-18">Don't have an account yet?</p>
-                    <NuxtLink to="/Register" class="c-dark font-18">Sign Up</NuxtLink>
+                    <p class="c-dark font-18">Already have an account?</p>
+                    <NuxtLink to="/Login" class="c-dark font-18">Login</NuxtLink>
                 </div>
             </div>
         </main>
-        <template #footer>
-
-        </template>
     </NuxtLayout>
 </template>
 
@@ -52,10 +61,21 @@ function hidePassword() {
     password.value.type = 'password';
     visible_password.value = false;
 }
+
+const visible_confirm_password = ref(false);
+const confirm_password = ref(null);
+function showConfirmPassword() {
+    confirm_password.value.type = 'text';
+    visible_confirm_password.value = true;
+}
+function hideConfirmPassword() {
+    confirm_password.value.type = 'password';
+    visible_confirm_password.value = false;
+}
 </script>
 
-<style lang="scss" scoped>
 
+<style lang="scss" scoped>
 input {
     border: 1px solid #c0c0c0;
     color: #003049;
@@ -105,4 +125,5 @@ input {
         width: 30%;
     }
 }
+
 </style>

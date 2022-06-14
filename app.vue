@@ -33,6 +33,9 @@ body {
   font-family: serif;
   color: var(--color-black);
   overflow-x: hidden;
+  button {
+    cursor: pointer;
+  }
 }
 
 .flex {display: flex;}
@@ -82,12 +85,15 @@ body {
 .b-4 {border-radius: 4px;}
 .b-8 {border-radius: 8px;}
 .br-12 {border-radius: 12px;}
+.br-20 {border-radius: 20px;}
+.br-50 {border-radius: 50%;}
 .btn-b-none {border: none; outline: none;}
 .btn-b-4 {border-radius: 4px;}
 .btn-b-8 {border-radius: 8px;}
 .bg-gold {background: var(--color-gold);}
 .border-dark {border: 1px solid var(--color-variant-black);}
 .l-space {letter-spacing: 1px;}
+.l-space-2 {letter-spacing: 2px;}
 .w-20 {width: 20%;}
 .w-30 {width: 30%;}
 .w-40 {width: 40%;}
