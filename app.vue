@@ -1,6 +1,6 @@
 <template>
-  <main class=" w-full bg-zinc-100 ">
-    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel quaerat sed eligendi consequatur commodi, laboriosam illo suscipit quam molestiae quo ullam voluptatum aspernatur quae expedita at dolores doloribus non hic?</h3>
+  <main class="w-screen h-screen bg-slate-50">
+    <NuxtPage />
   </main>
 </template>
 
@@ -13,6 +13,31 @@
 body {
   margin: 0%;
   padding: 0%;
-  font-family: Arial, sans-serif;
+  width: 100vw;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+.page-enter-from{
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  main {
+    @apply m-0 p-0;
+  }
 }
 </style>
