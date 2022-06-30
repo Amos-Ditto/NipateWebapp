@@ -1,13 +1,6 @@
-import presetIcons from '@unocss/preset-icons'
 import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
-  buildModules: ['@unocss/nuxt'],
-
-  unocss: {
-    preflight: false,
-    presets: [
-      presetIcons(),
-    ],
-  },
+    buildModules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
+    css: ["@/assets/css/main.css"],
 })
