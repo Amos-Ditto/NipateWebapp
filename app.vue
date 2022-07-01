@@ -1,3 +1,18 @@
+<script setup lang="ts">
+
+const title = ref<string>('Nipate App');
+const description = ref<string>('This is nipate development app');
+
+useHead({
+  title: title.value,
+  meta: [{
+    name: 'nipate',
+    content: description.value
+  }]
+})
+
+</script>
+
 <template>
   <main class="w-screen h-screen bg-slate-50">
     <NuxtPage />

@@ -25,14 +25,14 @@ const openMobileNavbar = ():void => {
         <div class="right">
             <div class="wide-screen">
                 <div class="auth-btns">
-                    <button class="w-login">Log In</button>
-                    <button class="w-register">Register</button>
+                    <button class="w-login"><NuxtLink to="/auth">Log In</NuxtLink></button>
+                    <button class="w-register"><NuxtLink to="/auth/register">Register</NuxtLink></button>
                 </div>
             </div>
 
             <!-- mobile navbar toggle -->
             <div class="menu-button text-4xl sm:hidden cursor-pointer">
-                <div class="i-mdi-reorder-horizontal" v-if="!mobilenavbar" @click="openMobileNavbar" />
+                <div class="i-mdi-menu" v-if="!mobilenavbar" @click="openMobileNavbar" />
                 <div class="i-mdi-close" v-if="mobilenavbar" @click="openMobileNavbar" />
             </div>
 
@@ -47,8 +47,8 @@ const openMobileNavbar = ():void => {
                         <div class="link">Contact Us</div>
 
                     </div>
-                    <button class="login">Log In</button>
-                    <button class="register">Register</button>
+                    <button class="login"><NuxtLink to="/auth">Log In</NuxtLink></button>
+                    <button class="register"><NuxtLink to="/auth/register">Register</NuxtLink></button>
                 </div>
             </div>
         </transition>
@@ -57,15 +57,12 @@ const openMobileNavbar = ():void => {
 
 <style>
 
-.toggleicon-enter, .toggleicon-leave-to {
+.shownav-enter-from , .shownav-leave-to {
+    transform: translateY(-100%);
     opacity: 0;
 }
-.toggleicon-enter-from, .toggleicon-leave {
-    transform: scale(0);
-}
-
-.toggleicon-enter-active, .toggleicon-leave-active {
-    transition: opacity 300ms ease;
+.shownav-enter-active, .shownav-leave-active {
+    transition: transform 300ms ease, opacity 300ms ease;
 }
 
 @tailwind components;
@@ -82,17 +79,17 @@ const openMobileNavbar = ():void => {
         @apply w-[6rem] sm:w-[8.4rem] h-[60%] sm:h-[80%];
     }
     .mobile-nav {
-        @apply absolute mt-[3.5rem] p-4 w-full min-h-[4vh] z-[-2] top-0 left-0 bg-slate-100 shadow flex justify-center;
+        @apply absolute mt-[3.8rem] p-4 w-full min-h-[4vh] z-[-2] top-0 left-0 flex justify-center;
     }
     .mobile-nav .container {
-        @apply w-full flex flex-col gap-2 items-center p-1;
+        @apply w-full flex flex-col gap-2 items-center p-1 bg-slate-100 shadow;
     }
     .container .links {
         @apply flex justify-center items-center flex-col w-full gap-2 mb-2 p-2;
     }
     .container .links .link {
-        @apply flex justify-start w-[80%] py-2 font-bold tracking-wider pl-4 border-b border-neutral-400;
-        @apply hover:bg-slate-200 rounded-t cursor-pointer;
+        @apply flex justify-center w-[80%] py-2 font-bold tracking-wider pl-4;
+        @apply hover:bg-slate-200 rounded cursor-pointer;
         transition: background-color 200ms ease;
     }
     .container button {
@@ -103,7 +100,7 @@ const openMobileNavbar = ():void => {
         @apply border-blue-500 border;
     }
     .register {
-        @apply bg-blue-500 text-white;
+        @apply bg-blue-500 text-white mb-2;
     }
     .right {
         @apply flex items-center flex-row h-full;
