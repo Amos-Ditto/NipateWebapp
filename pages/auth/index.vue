@@ -28,6 +28,7 @@ const dataResponse = ref<AuthApiRes>({
 })
 
 const fetchToken = async () => {
+    authError.value = false;
     fetching.value = true;
     const formdata: FormData = {
         MobileNumber: formData.value.MobileNumber,
@@ -43,16 +44,20 @@ const fetchToken = async () => {
     .then((response) => {
         if (response.status !== 200) {
             authError.value = true;
+            return;
         }
         return response.json();
     })
     .then(data => {
-        dataResponse.value.authtoken = data;
         fetching.value = false;
-        router.push('/');
+        if (authError.value === false) {
+            dataResponse.value.authtoken = data;
+            console.log(dataResponse.value.authtoken);
+            router.push('/');
+        }
     })
     .catch((error) => {
-        dataResponse.value.non_field_errors = error;
+        console.log("retry");
         fetching.value = false;
     })
 }
@@ -76,20 +81,25 @@ const closeErrorModal = (): void => {
 </script>
 
 <template>
-    <div class="container">
-        <div class="logo">
-            <img src="@/assets/img/logo-img-removebg-preview.png" alt="">
+    <div class="container w-[280px] md:w-[320px] lg:w-[400px] min-h-[40%] absolute top-[6%] flex items-center justify-center flex-col">
+        <div class="logo w-full h-[3.5rem] flex justify-center items-center">
+            <img src="@/assets/img/logo-img-removebg-preview.png" alt="logo" class="w-[3.4rem] h-[3rem]">
         </div>
-        <div class="title">
+        <div class="title w-full h-[2rem] flex items-center justify-center text-xl font-semibold mt-1">
             <h3>Login to Nipate</h3>
         </div>
         <transition name="error-popup">
-            <div class="error-container" v-if="authError">
-                <h3>you entered incorrect number or password</h3>
+            <div 
+                class="error-container w-[300px] md:w-[320px] max-h-0 lg:w-[400px] rounded border border-red-400 mt-1
+                    flex items-center justify-center flex-row gap-3 overflow-hidden" 
+                v-if="authError"
+                :class="authError && 'max-h-[3rem] py-4'"
+            >
+                <h3 class="text-sm italic text-red-500">you entered incorrect number or password</h3>
                 <div class="i-mdi-close cursor-pointer hover:scale-125" @click="closeErrorModal" />
             </div>
         </transition>
-        <div class="input-fields cursor-not-allowed">
+        <div class="input-fields mt-4 w-[300px] md:w-[320px] lg:w-[400px] min-h-[5rem] gap-2 rounded flex flex-col border border-neutral-200 p-3">
             <div class="input-field">
                 <label for="number">Mobile number</label>
                 <input type="text" id="number" :class="valid_no ? 'border-zinc-300' : 'border-red-400'" v-model="formData.MobileNumber">
@@ -98,50 +108,44 @@ const closeErrorModal = (): void => {
                 <label for="password">Password</label>
                 <input type="password" id="password" :class="valid_pass ? 'border-zinc-300' : 'border-red-400'" v-model="formData.password">
             </div>
-            <div class="btn-field">
-                <button :class="fetching && 'skeleton-loading'" @click="submitForm">Log In</button>
+            <div class="btn-field flex items-center justify-center w-full mt-4">
+                <button 
+                    class="bg-orange-500 text-white w-[98%] hover:bg-orange-600 hover:scale-x-100 relative flex items-center justify-center py-2 rounded-md text-base font-bold"
+                    :class="fetching && 'skeleton-loading cursor-not-allowed'" @click="submitForm"
+                >
+                    Log In
+                    <UtilsLoadingSpinner class=" scale-50 absolute top-[20%] right-[15%] w-1 h-1" :class="!fetching && 'hidden'" />
+                </button>
             </div>
         </div>
         <div class="register-container">
             <h3>New to Nipate?</h3>
-            <a href="#">Create account.</a>
+            <NuxtLink to="/auth/register" class="text-blue-500 font-bold">Create account.</NuxtLink>
         </div>
     </div>
 </template>
 
-<style>
+<style scoped>
 
-.error-popup-enter-from{
-  opacity: 0;
-  transform: translateY(-10px);
-}
 
 .error-popup-enter-active , .error-popup-leave-active {
-  transition: all 0.4s;
+    opacity: 1;
+    transition: height 300ms ease, opacity 200ms ease, padding 300ms ease;
 }
-.error-popup-enter , .error-popup-leave-to {
-  opacity: 0;
+.error-popup-enter-from , .error-popup-leave-to {
+    opacity: 0;
+    padding: 0px 0px;
+    height: 0px;
+}
+
+.error-container {
+    line-height: 3rem;
 }
 
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
-    .container {
-        @apply w-[280px] md:w-[320px] lg:w-[400px] min-h-[40%] absolute top-[6%] flex items-center flex-col;
-    }
-    .container .logo {
-        @apply w-full h-[3.5rem] flex justify-center items-center;
-    }
-    .container .logo img {
-        @apply w-[3.4rem] h-[3rem];
-    }
-    .container .title {
-        @apply w-full h-[2rem] flex items-center justify-center text-xl font-semibold mt-1;
-    }
-    .container .input-fields {
-        @apply mt-4 w-[300px] md:w-[320px] lg:w-[400px] min-h-[5rem] gap-2 rounded flex flex-col border border-neutral-200 p-3;
-    }
     .container .input-fields .input-field {
         @apply w-full flex flex-col gap-1;
     }
@@ -155,19 +159,9 @@ const closeErrorModal = (): void => {
     .input-fields .input-field input:focus {
         @apply border-green-300;
     }
-    .input-fields .btn-field {
-        @apply flex items-center justify-center w-full mt-4;
-    }
-    .input-fields .btn-field button {
-        @apply bg-orange-500 text-white w-[98%] hover:bg-orange-600 hover:scale-x-100;
-        transition: background-color 200ms ease;
-    }
     .container .register-container {
         @apply w-[300px] md:w-[320px] lg:w-[400px] rounded border border-neutral-200 min-h-[3rem] mt-8;
         @apply text-sm tracking-wide p-3 flex items-center justify-center gap-1;
-    }
-    .container .register-container a {
-        @apply text-blue-500 font-bold;
     }
     .skeleton-loading {
         animation: skeleton 1s linear infinite alternate;
@@ -176,16 +170,11 @@ const closeErrorModal = (): void => {
         to {
             @apply bg-orange-300;
         }
-        
-    }
-    .error-container {
-        @apply w-[300px] md:w-[320px] lg:w-[400px] h-[3.4rem] rounded border border-red-400 mt-1;
-        @apply flex items-center justify-center flex-row gap-3;
-    }
-    .error-container h3 {
-        @apply text-sm italic text-red-500;
     }
 }
 
+.input-fields .btn-field button {
+    transition: background-color 200ms ease;
+}
 
 </style>

@@ -1,19 +1,11 @@
 <template>
     <NuxtLayout name="default">
-        <main>
+        <main class="w-full h-full flex justify-center items-center relative">
             <NuxtPage />
         </main>
     </NuxtLayout>
 </template>
 
-<style>
+<style scoped>
 
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-    main {
-        @apply w-full h-full flex justify-center relative;
-    }
-}
 </style>

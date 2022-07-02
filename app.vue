@@ -1,7 +1,26 @@
 <script setup lang="ts">
-
+import { isNavigationFailure } from "vue-router";
+import LoadingBar from "./components/utils/loadingBar.vue";
+const router = useRouter();
 const title = ref<string>('Nipate App');
 const description = ref<string>('This is nipate development app');
+const succesfull = ref<boolean>(true);
+const routes = ref<boolean>(false);
+
+router.beforeEach(to => {
+  console.log('before each');
+  succesfull.value = true;
+  routes.value = true;
+})
+router.afterEach((to, from, failure) => {
+  console.log('after each');
+  if (isNavigationFailure(failure)) {
+    succesfull.value = false;
+  }
+  setTimeout(() => {
+    routes.value = false;
+  }, 1000);
+})
 
 useHead({
   title: title.value,
@@ -14,7 +33,8 @@ useHead({
 </script>
 
 <template>
-  <main class="w-screen h-screen bg-slate-50">
+  <main class="w-screen h-screen bg-slate-50 m-0 p-0 relative">
+    <LoadingBar v-if="routes"  :class="succesfull ? 'bg-green-500 loading-bar' : 'bg-green-500 loading-bar'" />
     <NuxtPage />
   </main>
 </template>
@@ -46,13 +66,15 @@ body {
 .page-leave-to {
   opacity: 0;
 }
-
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  main {
-    @apply m-0 p-0;
+.loading-bar {
+  animation: load 2s linear;
+}
+@keyframes load {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
   }
 }
 </style>
