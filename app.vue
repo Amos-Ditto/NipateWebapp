@@ -8,12 +8,10 @@ const succesfull = ref<boolean>(true);
 const routes = ref<boolean>(false);
 
 router.beforeEach(to => {
-  console.log('before each');
   succesfull.value = true;
   routes.value = true;
 })
 router.afterEach((to, from, failure) => {
-  console.log('after each');
   if (isNavigationFailure(failure)) {
     succesfull.value = false;
   }

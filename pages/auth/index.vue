@@ -50,9 +50,12 @@ const fetchToken = async () => {
     })
     .then(data => {
         fetching.value = false;
+        if (authError.value === true) {
+            console.log(data);
+            
+        }
         if (authError.value === false) {
             dataResponse.value.authtoken = data;
-            console.log(dataResponse.value.authtoken);
             router.push('/');
         }
     })
@@ -142,34 +145,29 @@ const closeErrorModal = (): void => {
     line-height: 3rem;
 }
 
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-    .container .input-fields .input-field {
-        @apply w-full flex flex-col gap-1;
-    }
-    .input-fields .input-field label {
-        @apply text-[0.95rem] italic md:ml-3;
-    }
-    .input-fields .input-field input {
-        @apply w-full h-[2.1rem] border-2 outline-none rounded px-2 text-blue-900 tracking-wider bg-slate-50;
-        transition: border 200ms ease;
-    }
-    .input-fields .input-field input:focus {
-        @apply border-green-300;
-    }
-    .container .register-container {
-        @apply w-[300px] md:w-[320px] lg:w-[400px] rounded border border-neutral-200 min-h-[3rem] mt-8;
-        @apply text-sm tracking-wide p-3 flex items-center justify-center gap-1;
-    }
-    .skeleton-loading {
-        animation: skeleton 1s linear infinite alternate;
-    }
-    @keyframes skeleton {
-        to {
-            @apply bg-orange-300;
-        }
+.container .input-fields .input-field {
+    @apply w-full flex flex-col gap-1;
+}
+.input-fields .input-field label {
+    @apply text-[0.95rem] italic md:ml-3;
+}
+.input-fields .input-field input {
+    @apply w-full h-[2.1rem] border-2 outline-none rounded px-2 text-blue-900 tracking-wider bg-slate-50;
+    transition: border 200ms ease;
+}
+.input-fields .input-field input:focus {
+    @apply border-green-300;
+}
+.container .register-container {
+    @apply w-[300px] md:w-[320px] lg:w-[400px] rounded border border-neutral-200 min-h-[3rem] mt-8;
+    @apply text-sm tracking-wide p-3 flex items-center justify-center gap-1;
+}
+.skeleton-loading {
+    animation: skeleton 1s linear infinite alternate;
+}
+@keyframes skeleton {
+    to {
+        @apply bg-orange-300;
     }
 }
 
