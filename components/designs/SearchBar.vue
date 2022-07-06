@@ -1,11 +1,9 @@
 <template>
-    <div class="search h-[4rem] w-full flex flex-row items-center px-6 text-xl text-neutral-500">
-        <div class="filter-by">
-            <div class="i-mdi-filter" />
-        </div>
-        <div class="input w-[60%] ml-2 relative flex items-center tracking-widest">
-            <input type="text" placeholder="search by ...">
-            <div class="i-mdi-magnify absolute right-1" />
+    <div class="search h-full w-[80%] flex flex-row items-center">
+        <div class="input w-full h-full ml-2 relative flex items-center tracking-widest text-neutral-600 text-2xl">
+            <div class="i-mdi-filter-variant absolute left-6" />
+            <input type="text" placeholder="search for products or services">
+            <div class="i-mdi-magnify absolute right-7" />
         </div>
     </div>
 </template>
@@ -14,6 +12,8 @@
 
 .input input {
     letter-spacing: 1.5px;
-    @apply w-full py-1 outline-none border-b border-neutral-500 bg-inherit placeholder:italic lg:placeholder:text-base placeholder:text-base italic px-3 text-sm;
+    @apply w-full h-full px-14 outline-none bg-inherit placeholder:italic lg:placeholder:text-base placeholder:text-base italic text-lg;
+    @apply rounded-3xl border border-neutral-300 focus:border-orange-400;
+    transition: border 300ms ease;
 }
 </style>

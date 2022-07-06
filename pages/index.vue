@@ -6,23 +6,23 @@
             </nav>
         </template>
         <hr>
-        <main class="h-[80vh] w-full px-4 pt-3 flex flex-row gap-3 md:gap-6 bg-slate-100">
-            <div class="side-nav w-[16%] shadow bg-slate-50 rounded">
+        <main class="context">
+            <div class="side-nav">
                 <DesignsSideBar />
             </div>
-            <section class="px-2 flex flex-col w-[75%]">
+            <section>
                 <div class="center w-full flex flex-col gap-8">
-                    <div class="searchbar w-full rounded-t bg-slate-50 shadow">
+                    <div class="searchbar">
                         <DesignsSearchBar />
                     </div>
-                    <div class="content w-full min-h-[12rem] p-4 rounded-t bg-slate-50 shadow">
-                        <h1>Main content</h1>
+                    <div class="content w-full min-h-[20rem] p-2">
+                        <div class="categories w-full">
+                            <h3 class="text-2xl font-bold text-neutral-600">Categories</h3>
+                            <LazyContextCategories />
+                        </div>
                     </div>
                 </div>
             </section>
-            <div class="tags w-[15%] min-h-[5rem] p-2 shadow bg-slate-50 rounded">
-                <LazyDesignsCategoryList />
-            </div>
         </main>
         <hr>
         <template #footer>
@@ -32,3 +32,19 @@
         </template>
     </NuxtLayout>
 </template>
+
+<style scoped>
+
+.context {
+    @apply h-[80vh] w-full px-4 pt-3 flex flex-row gap-3 md:gap-6;
+}
+.context .side-nav {
+    @apply w-[16%] border-r-[0.5px] border-neutral-300;
+}
+.context section {
+    @apply px-2 flex flex-col w-[75%] md:pt-5;
+}
+section .searchbar {
+    @apply w-[96%] h-[3rem] flex items-center justify-center;
+}
+</style>
