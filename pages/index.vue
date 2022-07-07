@@ -15,10 +15,17 @@
                     <div class="searchbar">
                         <DesignsSearchBar />
                     </div>
-                    <div class="content w-full min-h-[20rem] p-2">
+                    <div class="content w-full min-h-[20rem] md:p-2 flex flex-col gap-6">
                         <div class="categories w-full">
-                            <h3 class="text-2xl font-bold text-neutral-600">Categories</h3>
+                            <h3 class="text-2xl font-bold text-neutral-600">Categories.</h3>
                             <LazyContextCategories />
+                        </div>
+                        <hr>
+                        <div class="requests">
+                            <h3 class="text-xl font-bold text-neutral-600 font-serif">Top Services requested.</h3>
+                            <div class="requests w-full pt-6">
+                                <LazyContextRequestServices />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -26,7 +33,7 @@
         </main>
         <hr>
         <template #footer>
-            <div class="w-full h-[2rem] pt-5 flex items-center justify-center">
+            <div class="w-full h-[2rem] pt-5 pb-8 flex items-center justify-center">
                 <h3>Copyright of Bespoke Systems @2022</h3>
             </div>
         </template>
@@ -36,15 +43,17 @@
 <style scoped>
 
 .context {
-    @apply h-[80vh] w-full px-4 pt-3 flex flex-row gap-3 md:gap-6;
+    @apply md:h-[90vh] w-full px-1 md:px-4 pt-3 flex flex-row gap-3 md:gap-6;
 }
 .context .side-nav {
-    @apply w-[16%] border-r-[0.5px] border-neutral-300;
+    @apply hidden md:block w-[16%] border-r-[0.5px] border-neutral-300;
 }
 .context section {
-    @apply px-2 flex flex-col w-[75%] md:pt-5;
+    @apply px-2 flex flex-col w-full md:w-[80%] md:pt-5 md:overflow-y-auto;
+    transition: width 300ms ease;
 }
 section .searchbar {
-    @apply w-[96%] h-[3rem] flex items-center justify-center;
+    @apply w-full md:w-[96%] h-[3rem] flex items-center justify-center;
+    transition: width 300ms ease;
 }
 </style>

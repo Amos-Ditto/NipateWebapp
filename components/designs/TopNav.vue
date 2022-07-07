@@ -15,7 +15,10 @@
             </div>
         </div>
         <div class="right">
-            <div class="auth-btn text-sm font-serif hidden sm:flex flex-row md:gap-2 lg:gap-3">
+            <div class="menu-btn h-full flex items-center md:hidden">
+                <UtilsHumberBtn />
+            </div>
+            <div class="auth-btn">
                 <button><NuxtLink to="/auth">Log In</NuxtLink></button>
                 <button class="border border-blue-500"><NuxtLink to="/auth/register">Join</NuxtLink></button>
             </div>
@@ -28,10 +31,10 @@ nav {
     @apply w-full h-[3.5rem] md:h-[4rem] md:pt-5 flex justify-between items-center;
 }
 .left {
-    @apply grid grid-cols-2 pt-2 md:pt-0 px-10 md:px-11 gap-6 h-full;
+    @apply grid grid-cols-2 pt-2 md:pt-0 px-16 md:px-11 gap-6 h-full;
 }
 .left img {
-    @apply w-[9rem] md:w-[10rem] h-[80%] md:h-[3.2rem] mb-2;
+    @apply w-[10rem] md:w-[10rem] h-[86%] md:h-[3.2rem] mb-2;
     transition: height 300ms ease, width 300ms ease;
 }
 .left .links {
@@ -57,7 +60,7 @@ nav {
     @apply border-neutral-800 text-orange-500;
 }
 .auth-btn {
-    @apply h-full items-center flex gap-3;
+    @apply h-full items-center text-sm font-serif hidden md:flex md:flex-row md:gap-2 lg:gap-3;
 }
 .auth-btn button {
     @apply px-4 py-1 flex items-center rounded font-sans text-base hover:text-orange-500 hover:border-orange-500;
