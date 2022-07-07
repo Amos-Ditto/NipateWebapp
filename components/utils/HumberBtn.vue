@@ -1,22 +1,29 @@
 <script setup lang="ts">
+// Props
+const props = defineProps<{
+    closemobilenav: boolean;
+}>();
+const emit = defineEmits<{
+    (event: 'openMSideNav');
+}>();
 const open = ref<boolean>(false);
 
 const onOpen = ():void => {
-    open.value = !open.value;
+    emit("openMSideNav");
 }
 </script>
 
 <template>
     <div
-        class="menu-btn relative w-[32px] h-[22px] flex items-center justify-center pt-2 cursor-pointer"
-        @click="onOpen" :class="open && 'open'"
+        class="menu-btn relative w-[38px] h-[34px] flex items-center justify-center cursor-pointer hover:bg-neutral-400 rounded"
+        @click="onOpen" :class="props.closemobilenav && 'open'"
     >
         <div class="menubtn"></div>
     </div>
 </template>
 <style scoped>
 .menubtn {
-    @apply w-full h-[3.1px] bg-neutral-500 rounded;
+    @apply w-[80%] h-[3.1px] bg-neutral-500 rounded;
     animation: background-color 300ms ease;
 }
 .menu-btn.open .menubtn {
@@ -24,7 +31,7 @@ const onOpen = ():void => {
 }
 .menubtn::before , .menubtn::after {
     content: '';
-    @apply absolute w-full h-[3.1px] bg-neutral-500 rounded;
+    @apply absolute w-[80%] h-[3.1px] bg-neutral-500 rounded;
 }
 .menubtn::before {
     @apply -translate-y-[9px];

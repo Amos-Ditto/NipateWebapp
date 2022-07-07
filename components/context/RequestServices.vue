@@ -3,7 +3,7 @@
         <hr>
         <ContextRequestCard>
             <template #title>
-                <div class="w-full flex-row flex gap-1 px-2 text-neutral-600">
+                <div class="w-full flex-row flex gap-1 px-2">
                     <div class="product flex flex-row gap-2 tracking-wide">
                         <p>Bodaboda</p>
                         <span>in:</span>
@@ -14,17 +14,19 @@
                 </div>
             </template>
             <div class="content w-full">
-                <div class="message w-full text-neutral-800">
+                <div class="message w-full text-neutral-800 gap-2 flex">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
-                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic text-neutral-600">
+            </div>
+            <template #duration>
+                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic">
                     <span>30 mins</span><p>ago.</p>
                 </div>
-            </div>
+            </template>
         </ContextRequestCard>
         <ContextRequestCard>
             <template #title>
-                <div class="w-full flex-row flex gap-1 px-2 text-neutral-600">
+                <div class="w-full flex-row flex gap-1 px-2">
                     <div class="product flex flex-row gap-2 tracking-wide">
                         <p>Mechanic</p>
                         <span>in:</span>
@@ -38,14 +40,16 @@
                 <div class="message w-full text-neutral-800">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
-                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic text-neutral-600">
-                    <span>1 hr</span><p>ago.</p>
-                </div>
             </div>
+            <template #duration>
+                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic">
+                    <span>1 h</span><p>ago.</p>
+                </div>
+            </template>
         </ContextRequestCard>
         <ContextRequestCard>
             <template #title>
-                <div class="w-full flex-row flex gap-1 px-2 text-neutral-600">
+                <div class="w-full flex-row flex gap-1 px-2">
                     <div class="product flex flex-row gap-2 tracking-wide">
                         <p>Bodaboda</p>
                         <span>in:</span>
@@ -59,14 +63,16 @@
                 <div class="message w-full text-neutral-800">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
-                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic text-neutral-600">
-                    <span>1 hr</span><p>ago.</p>
-                </div>
             </div>
+            <template #duration>
+                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic">
+                    <span>1 h</span><p>ago.</p>
+                </div>
+            </template>
         </ContextRequestCard>
         <ContextRequestCard>
             <template #title>
-                <div class="w-full flex-row flex gap-1 px-2 text-neutral-600">
+                <div class="w-full flex-row flex gap-1 px-2">
                     <div class="product flex flex-row gap-2 tracking-wide">
                         <p>Bodaboda</p>
                         <span>in:</span>
@@ -80,10 +86,12 @@
                 <div class="message w-full text-neutral-800">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
-                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic text-neutral-600">
-                    <span>2 hr</span><p>ago.</p>
-                </div>
             </div>
+            <template #duration>
+                <div class="duration w-full flex flex-row gap-1 px-4 justify-end italic">
+                    <span>3 h</span><p>ago.</p>
+                </div>
+            </template>
         </ContextRequestCard>
     </main>
 </template>

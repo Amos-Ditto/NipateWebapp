@@ -1,3 +1,18 @@
+<script setup lang="ts">
+// Props
+defineProps<{
+    closemobilenav: boolean;
+}>();
+// Emits
+const emit = defineEmits<{
+    (event: "openMSideNav")
+}>();
+
+// Methods
+const openMSideNav = (): void => {
+    emit("openMSideNav");
+};
+</script>
 <template>
     <nav>
         <div class="left">
@@ -16,7 +31,7 @@
         </div>
         <div class="right">
             <div class="menu-btn h-full flex items-center md:hidden">
-                <UtilsHumberBtn />
+                <UtilsHumberBtn @open-m-side-nav="openMSideNav" :closemobilenav="closemobilenav" />
             </div>
             <div class="auth-btn">
                 <button><NuxtLink to="/auth">Log In</NuxtLink></button>
@@ -31,7 +46,7 @@ nav {
     @apply w-full h-[3.5rem] md:h-[4rem] md:pt-5 flex justify-between items-center;
 }
 .left {
-    @apply grid grid-cols-2 pt-2 md:pt-0 px-16 md:px-11 gap-6 h-full;
+    @apply grid grid-cols-2 pt-2 md:pt-0 px-4 md:px-11 gap-6 h-full;
 }
 .left img {
     @apply w-[10rem] md:w-[10rem] h-[86%] md:h-[3.2rem] mb-2;
