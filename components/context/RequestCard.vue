@@ -13,6 +13,6 @@
 </template>
 <style scoped>
 .card {
-    transition: scale 200ms ease;
+    transition: transform 200ms ease;
 }
 </style>

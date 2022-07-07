@@ -17,6 +17,7 @@ const loading = ref<boolean>(false);
 const fetcherror = ref<boolean>(false);
 const catcherror = ref<boolean>(false);
 
+const check_no_validity = ref<boolean>(false);
 const valid_no = ref<boolean>(false);
 const valid_id = ref<boolean>(false);
 const valid_fname = ref<boolean>(false);
@@ -40,12 +41,14 @@ const selectLocation = (id: number, Name: string):void => {
 }
 
 const createAccount = async () => {
+    check_no_validity.value = false;
     valid_no.value = false; valid_id.value = false; valid_fname.value = false; valid_lname.value = false;
     valid_location.value = false; valid_gender.value = false; valid_password.value = false; valid_cpassword.value = false;
 
     fetcherror.value = false; catcherror.value = false;
     // Validate form
     if (mobilenumber.value.length < 9) {valid_no.value = true; return;}
+    if (mobilenumber.value.length >= 11) {check_no_validity.value = true; return;}
 
     if (id_number.value === undefined) {valid_id.value = true; return;}
 
@@ -132,44 +135,48 @@ const retryCreateAccount = () => {
                 </div>
                 <div class="mobile-id-fields w-full py-2 flex flex-col md:grid md:grid-cols-2">
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="m-number" class="italic pl-2 font-semibold tracking-wide">Mobile Number: <span class="valid" v-if="valid_no">*</span></label>
+                        <label for="m-number" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">
+                            Mobile Number:
+                            <span class="valid" v-if="valid_no">*</span>
+                            <span class="text-red-400 text-xs font-light pl-3" v-if="check_no_validity">enter in valid format</span>
+                        </label>
                         <div class="input w-full relative">
                             <input
                                 type="text" id="m-number" placeholder="e.g 0712345678 "
-                                class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1"
+                                class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1"
                                 v-model="mobilenumber"
                             >
-                            <div class="i-mdi-phone absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
+                            <div class="i-mdi-phone absolute left-0 top-0 translate-x-[50%] translate-y-[60%]" />
                         </div>
                     </div>
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="id-no" class="italic pl-2 font-semibold tracking-wide">ID Number: <span class="valid" v-if="valid_id">*</span></label>
+                        <label for="id-no" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">ID Number: <span class="valid" v-if="valid_id">*</span></label>
                         <div class="input w-full relative">
-                            <input type="number" id="id-no" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 pr-1" v-model="id_number">
-                            <div class="i-mdi-account-circle absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
+                            <input type="number" id="id-no" class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 pr-1" v-model="id_number">
+                            <div class="i-mdi-account-circle absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
                         </div>
                     </div>
                 </div>
 
-                <div class="names-field w-full py-2 flex flex-col md:grid md:grid-cols-2">
+                <div class="names-field w-full flex flex-col md:grid md:grid-cols-2">
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="fname" class="italic pl-2 font-semibold tracking-wide">First name: <span class="valid" v-if="valid_fname">*</span></label>
+                        <label for="fname" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">First name: <span class="valid" v-if="valid_fname">*</span></label>
                         <div class="input w-full relative">
-                            <input type="text" id="fname" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="fname">
-                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
+                            <input type="text" id="fname" class="outline-none h-[2.2rem] sm:h-[2.6rem]  w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="fname">
+                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
                         </div>
                     </div>
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="lname" class="italic pl-2 font-semibold tracking-wide">Last name: <span class="valid" v-if="valid_lname">*</span></label>
+                        <label for="lname" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">Last name: <span class="valid" v-if="valid_lname">*</span></label>
                         <div class="input w-full relative">
-                            <input type="text" id="lname" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="lname">
-                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
+                            <input type="text" id="lname" class="outline-none h-[2.2rem] sm:h-[2.6rem]  w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="lname">
+                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
                         </div>
                     </div>
                 </div>
                 <div class="select-location w-full justify-center py-2 px-2 relative">
                     <div
-                        class="select-btn px-1 md:px-3 py-3 md:py-4 max-w-[11rem] md:max-w-[12.5rem] min-h-[2rem]
+                        class="select-btn px-1 md:px-3 py-3 md:py-4 min-w-[11rem] max-w-[14rem] md:max-w-[12.5rem] min-h-[2rem]
                         flex flex-row items-center justify-center gap-4 text-xs md:text-sm font-bold border border-neutral-400 rounded cursor-pointer
                         hover:gap-5 hover:border-neutral-600 hover:text-neutral-800"
                         @click="chooseLocation" :class="valid_location && 'border-red-500'"
@@ -177,14 +184,14 @@ const retryCreateAccount = () => {
                         <p id="locationName" class="truncate">Choose your location</p>
                         <div class="i-mdi-chevron-right text-xl rotate-90 sm:rotate-0" :class="showlocationcomp && '-rotate-90 sm:-rotate-180'" />
                     </div>
-                    <LazyLocationsSelectLocation class=" w-[45%] sm:w-[45%] md:w-[40%] shadow-md rounded h-[12rem] sm:h-[16rem]
+                    <LazyLocationsSelectLocation class=" w-[88%] sm:w-[45%] md:w-[40%] shadow-md rounded h-[12rem] sm:h-[16rem]
                         absolute bottom-1 sm:top-0 left-0 translate-x-1 sm:translate-x-48 md:translate-x-56 translate-y-full sm:translate-y-0
                         z-[99] bg-slate-50 overflow-hidden"
                         v-if="showlocationcomp" @selected-location="selectLocation"
                     />
                 </div>
                 <div class="gender-input w-full flex flex-col">
-                    <h3 class="text-base font-semibold italic tracking-wide">Choose your gender: <span class="valid" v-if="valid_gender">*</span></h3>
+                    <h3 class="text-sm sm:text-base font-semibold italic tracking-wide">Choose your gender: <span class="valid" v-if="valid_gender">*</span></h3>
                     <div class="pl-8 sm:pl-4 w-[16%] flex flex-row gap-4 mt-2">
                         <div class="input-field flex items-center justify-between gap-3">
                             <label for="male" class="italic text-xs font-semibold tracking-wide">Male:</label>
@@ -198,17 +205,17 @@ const retryCreateAccount = () => {
                 </div>
                 <div class="names-field w-full py-2 flex flex-col md:grid md:grid-cols-2">
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="password" class="italic pl-2 font-semibold tracking-wide">Password: <span class="valid" v-if="valid_password">*</span></label>
+                        <label for="password" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">Password: <span class="valid" v-if="valid_password">*</span></label>
                         <div class="input w-full relative">
-                            <input type="password" id="password" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="password">
-                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
+                            <input type="password" id="password" class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="password">
+                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
                         </div>
                     </div>
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="cpassword" class="italic pl-2 font-semibold tracking-wide">Confirm password: <span class="valid" v-if="valid_cpassword">*</span></label>
+                        <label for="cpassword" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">Confirm password: <span class="valid" v-if="valid_cpassword">*</span></label>
                         <div class="input w-full relative">
-                            <input type="password" id="cpassword" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="confirmpassword">
-                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
+                            <input type="password" id="cpassword" class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="confirmpassword">
+                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
                         </div>
                     </div>
                 </div>
@@ -235,6 +242,7 @@ input {
     letter-spacing: 1px;
     background-color: inherit;
     @apply focus:border-green-700;
+    transition: width 300ms ease;
 }
 .valid {
     @apply text-red-500 text-lg;

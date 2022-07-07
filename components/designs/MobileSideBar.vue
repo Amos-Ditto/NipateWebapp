@@ -51,7 +51,7 @@ ul li a::before {
     @apply hover:text-orange-500 rounded;
 }
 .authbtns button:nth-child(2) {
-    @apply border-blue-800 border;
+    @apply border-blue-800 border hover:border-orange-500;
 }
 .authbtns button a {
     @apply w-full h-full;

@@ -32,6 +32,7 @@ const onOpen = ():void => {
 .menubtn::before , .menubtn::after {
     content: '';
     @apply absolute w-[80%] h-[3.1px] bg-neutral-500 rounded;
+    transition: transform 300ms ease;
 }
 .menubtn::before {
     @apply -translate-y-[9px];

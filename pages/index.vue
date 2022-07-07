@@ -44,14 +44,12 @@ const openMSideNav = (): void => {
                         </div>
                     </div>
                 </div>
+                <hr>
+                <div class="w-full h-[2rem] pt-5 pb-8 flex items-center justify-center">
+                    <h3>Copyright of Bespoke Systems @2022</h3>
+                </div>
             </section>
         </main>
-        <hr>
-        <template #footer>
-            <div class="w-full h-[2rem] pt-5 pb-8 flex items-center justify-center">
-                <h3>Copyright of Bespoke Systems @2022</h3>
-            </div>
-        </template>
     </NuxtLayout>
 </template>
 
@@ -72,7 +70,7 @@ const openMSideNav = (): void => {
     @apply hidden md:block w-[16%] border-r-[0.5px] border-neutral-300;
 }
 .context section {
-    @apply px-2 flex flex-col w-full md:w-[80%] md:pt-5 md:overflow-y-auto;
+    @apply px-2 flex flex-col w-full md:w-[84%] md:pt-5 md:overflow-y-auto;
     transition: width 300ms ease;
 }
 section .searchbar {
