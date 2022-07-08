@@ -14,16 +14,20 @@ const emit = defineEmits<{
 // Condition Transitions data
 const county_suspense = ref<boolean>(false);
 const town_suspense = ref<boolean>(false);
-const showloactiontype = ref<boolean>(true);
+const showlocationtype = ref<boolean>(true);
+const fetcherror = ref<boolean>(false);
+const townfetcherror = ref<boolean>(false);
 
 // Transition methods
 
 const fetchData = async () => {
+    fetcherror.value = false;
     county_suspense.value = true;
     await fetch(`${baseUrl.value}/location/counties/`)
     .then(res => {
         if (res.status !== 200) {
             county_suspense.value = true;
+            fetcherror.value = true;
         } else {
             return res.json();
         }
@@ -34,6 +38,7 @@ const fetchData = async () => {
     })
     .catch(error => {
         county_suspense.value = true;
+        fetcherror.value = true;
         console.log("Error");
     })
 };
@@ -41,13 +46,14 @@ fetchData();
 
 
 const selectId = async (event: number) => {
-    showloactiontype.value = false;
+    townfetcherror.value = false;
+    showlocationtype.value = false;
     town_suspense.value = true;
     await fetch(`${baseUrl.value}/location/towns/?CountyID=${event}`)
     .then(res => {
         if (res.status !== 200) {
-            console.log("Error api");
             town_suspense.value = true;
+            townfetcherror.value = true;
             return;
         }
         return res.json();
@@ -55,29 +61,33 @@ const selectId = async (event: number) => {
     .then(data => {
         town_suspense.value = false;
         towns.value = data;
-        console.log(data);
-        console.log(towns.value);
     })
     .catch(eror => {
         town_suspense.value = true;
-        console.log("Error");
+        townfetcherror.value = true;
     })
 }
 
 const selectTownId = (id: number, Name: string):void => {
     emit("selectedLocation", id, Name);
 };
+const reloadFetch = () => {
+    fetchData();
+};
+const reloadFetchtowns = () => {
+    showlocationtype.value = true;
+}
 </script>
 <template>
     <div class="locations w-full py-3 px-2 overflow-y-hidden">
         <transition name="togglemenu">
-            <div class="counties w-full" v-if="showloactiontype">
+            <div class="counties w-full" v-if="showlocationtype">
                 <div class="search">
                     <input type="text" placeholder="search for county">
                     <div class="i-mdi-magnify absolute leading-10 top-0 sm:top-1 translate-y-full left-[15%] flex items-center" />
                 </div>
-                <div class="error w-full p-2 flex justify-center" :class="county_suspense ? 'block' : 'hidden'" >
-                    <button>
+                <div class="error w-full flex justify-center" :class="fetcherror ? 'opacity-100 p-2' : 'opacity-0 p-0'" >
+                    <button v-if="fetcherror" @click="reloadFetch">
                         <div class="i-mdi-restart text-2xl" />
                         Error
                     </button>
@@ -91,13 +101,13 @@ const selectTownId = (id: number, Name: string):void => {
             </div>
         </transition>
         <transition name="togglemenu">
-            <div class="towns w-full" v-if="!showloactiontype">
+            <div class="towns w-full" v-if="!showlocationtype">
                 <div class="search">
                     <input type="text" placeholder="search for location">
                     <div class="i-mdi-magnify absolute leading-10 top-0 sm:top-1 translate-y-full left-[15%] flex items-center" />
                 </div>
-                <div class="error w-full p-2 flex justify-center" :class="town_suspense ? 'block' : 'hidden'" >
-                    <button>
+                <div class="error w-full p-2 flex justify-center" :class="townfetcherror ? 'opacity-100 p-2' : 'opacity-0 p-0'" >
+                    <button v-if="townfetcherror" @click="reloadFetchtowns">
                         <div class="i-mdi-restart text-2xl" />
                         Error
                     </button>

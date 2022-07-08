@@ -42,12 +42,16 @@ useHead({
 * {
   box-sizing: border-box;
 }
+html {
+  height: -webkit-fill-available;
+}
 
 body {
   margin: 0%;
   padding: 0%;
   width: 100vw;
   height: 100vh;
+  height: -webkit-fill-available;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }

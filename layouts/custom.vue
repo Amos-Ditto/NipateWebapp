@@ -1,7 +1,7 @@
 <template>
 
     <section class="w-full h-full flex flex-col">
-        <header>
+        <header class="z-[999]">
             <slot name="header"></slot>
         </header>
         <main class="w-full">

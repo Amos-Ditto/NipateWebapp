@@ -49,7 +49,7 @@
             </LazyUtilsCardCategory>
         </div>
         <div class="load-more flex items-center">
-            <button class="px-4 py-3 truncate underline underline-offset-1">Show more...</button>
+            <button class="px-4 py-2 text-neutral-600 border border-neutral-500 rounded-lg">more...</button>
         </div>
     </main>
 </template>

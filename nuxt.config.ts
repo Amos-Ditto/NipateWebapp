@@ -6,6 +6,9 @@ export default defineNuxtConfig({
     unocss: {
         icons: true,
         presets: [presetIcons({})],
+    },
+    publicRuntimeConfig: {
+        base_Url: process.env.BASE_URL,
     }
 
 })

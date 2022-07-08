@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const router = useRouter();
-const baseUrl = ref<string>('http://127.0.0.1:8000');
+const config = useRuntimeConfig();
 
 interface FormData {
     MobileNumber: string;
@@ -16,6 +16,7 @@ const valid_no = ref<boolean>(true);
 const valid_pass = ref<boolean>(true);
 const fetching = ref<boolean>(false);
 const authError = ref<boolean>(false);
+const caughterror = ref<boolean>(false);
 
 interface AuthApiRes {
     authtoken?: string;
@@ -29,6 +30,7 @@ const dataResponse = ref<AuthApiRes>({
 
 const fetchToken = async () => {
     authError.value = false;
+    caughterror.value = false;
     fetching.value = true;
     const formdata: FormData = {
         MobileNumber: formData.value.MobileNumber,
@@ -36,7 +38,7 @@ const fetchToken = async () => {
     }
     valid_no.value = true;
     valid_pass.value = true;
-    await fetch(`${baseUrl.value}/auth/login`, {
+    await fetch(`${config.base_Url}/auth/login`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formdata),
@@ -50,10 +52,6 @@ const fetchToken = async () => {
     })
     .then(data => {
         fetching.value = false;
-        if (authError.value === true) {
-            console.log(data);
-            
-        }
         if (authError.value === false) {
             dataResponse.value.authtoken = data;
             router.push('/');
@@ -62,6 +60,7 @@ const fetchToken = async () => {
     .catch((error) => {
         console.log("retry");
         fetching.value = false;
+        caughterror.value = true;
     })
 }
 
@@ -80,7 +79,9 @@ const submitForm = (): void | undefined => {
 const closeErrorModal = (): void => {
     authError.value = !authError.value;
 }
-
+const retryFetch = () => {
+    fetchToken();
+}
 </script>
 
 <template>
@@ -91,17 +92,24 @@ const closeErrorModal = (): void => {
         <div class="title w-full h-[2rem] flex items-center justify-center text-xl font-semibold mt-1">
             <h3>Login to Nipate</h3>
         </div>
-        <transition name="error-popup">
-            <div 
-                class="error-container w-[300px] md:w-[320px] max-h-0 lg:w-[400px] rounded border border-red-400 mt-1
-                    flex items-center justify-center flex-row gap-3 overflow-hidden" 
-                v-if="authError"
-                :class="authError && 'max-h-[3rem] py-4'"
-            >
+        <div 
+            class="error-container w-[300px] md:w-[320px] lg:w-[400px] rounded border border-red-400 mt-1
+                flex items-center justify-center flex-row gap-3 overflow-hidden" 
+            :class="authError ? 'max-h-[3rem] opacity-100 py-6' : 'opacity-0 max-h-0'"
+        >
+            <div class="lists w-full flex flex-row items-center justify-center gap-2" v-if="authError">
                 <h3 class="text-sm italic text-red-500">you entered incorrect number or password</h3>
                 <div class="i-mdi-close cursor-pointer hover:scale-125" @click="closeErrorModal" />
             </div>
-        </transition>
+        </div>
+        <div class="offline" :class="caughterror ? 'opacity-100 max-h-[3rem]' : 'py-3 opacity-0 max-h-0'">
+            <button class="rounded py-1 px-2 bg-red-400 flex flex-row gap-2 items-center justify-center text-white font-bold text-base"
+                @click="retryFetch"  v-if="caughterror"
+            >
+                <div class="i-mdi-restore font-bold text-2xl" />
+                Retry
+            </button>
+        </div>
         <div class="input-fields mt-4 w-[300px] md:w-[320px] lg:w-[400px] min-h-[5rem] gap-2 rounded flex flex-col border border-neutral-200 p-3">
             <div class="input-field">
                 <label for="number">Mobile number</label>
@@ -113,11 +121,11 @@ const closeErrorModal = (): void => {
             </div>
             <div class="btn-field flex items-center justify-center w-full mt-4">
                 <button 
-                    class="bg-orange-500 text-white w-[98%] hover:bg-orange-600 hover:scale-x-100 relative flex items-center justify-center py-2 rounded-md text-base font-bold"
+                    class="bg-orange-500 text-white w-[98%] h-[3rem] hover:bg-orange-600 hover:scale-x-100 relative flex items-center justify-center py-2 rounded-md text-base font-bold"
                     :class="fetching && 'skeleton-loading cursor-not-allowed'" @click="submitForm"
                 >
-                    Log In
-                    <UtilsLoadingSpinner class=" scale-50 absolute top-[20%] right-[15%] w-1 h-1" :class="!fetching && 'hidden'" />
+                    <p :class="fetching && 'hidden'">Log In</p>
+                    <UtilsLoadingSpinner class=" scale-50" :class="!fetching && 'hidden'" />
                 </button>
             </div>
         </div>
@@ -142,7 +150,10 @@ const closeErrorModal = (): void => {
 }
 
 .error-container {
-    line-height: 3rem;
+    transition: opacity 300ms ease , height 300ms ease-out;
+}
+.offline {
+    transition: opacity 300ms ease , height 300ms ease-out;
 }
 
 .container .input-fields .input-field {

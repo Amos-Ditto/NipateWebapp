@@ -43,7 +43,7 @@ const openMSideNav = (): void => {
 
 <style scoped>
 nav {
-    @apply w-full h-[3.5rem] md:h-[4rem] md:pt-5 flex justify-between items-center;
+    @apply w-full h-[3.5rem] md:h-[4rem] md:pt-5 flex justify-between items-center z-[999];
 }
 .left {
     @apply grid grid-cols-2 pt-2 md:pt-0 px-4 md:px-11 gap-6 h-full;

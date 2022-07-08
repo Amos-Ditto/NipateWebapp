@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const router = useRouter();
-const baseUrl = ref<string>('http://127.0.0.1:8000');
+const config = useRuntimeConfig();
 
 const mobilenumber = ref<string>('');
 const id_number = ref<number>();
@@ -68,7 +68,7 @@ const createAccount = async () => {
     console.log("Submitted");
     loading.value = true;
 
-    await fetch(`${baseUrl.value}/auth/registration/`, {
+    await fetch(`${config.base_Url}/auth/registration/`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -105,18 +105,18 @@ const retryCreateAccount = () => {
 </script>
 
 <template>
-    <section class="flex justify-center w-full pt-16 px-2 overflow-y-auto mt-40 md:mt-0">
-        <div class="reg-container flex flex-col w-full sm:w-[580px] md:w-[750px] p-4 sm:shadow rounded mt-8 mb-12">
+    <section class="flex justify-center w-full h-full px-2 md:mt-0 fixed top-0 left-0 sm:relative">
+        <div class="reg-container flex flex-col w-full sm:w-[580px] md:w-[750px] px-2 py-8 sm:shadow rounded mb-4 overflow-y-auto">
             <div class="title">
-                <h3 class=" text-neutral-700 text-2xl md:text-4xl font-semibold sm:font-bold">
-                    Hi, Welcome to <span class="text-orange-500 italic">Ni</span>pate.
+                <h3 class=" text-neutral-700 text-3xl md:text-4xl font-semibold sm:font-bold">
+                    Welcome to <span class="text-orange-600">Ni</span>pate.
                 </h3>
                 <div class="login-link w-full flex justify-end text-sm pr-4 sm:pr-16 text-neutral-600">
                     <h3>Already have an account? <NuxtLink to="/auth">Log In</NuxtLink>.</h3>
                 </div>
             </div>
             <hr>
-            <div class="form-fields w-full flex flex-col justify-start items-start gap-1 md:gap-4 mt-2 pl-2 sm:pl-0 sm:mt-6 text-neutral-600">
+            <div class="form-fields w-full flex flex-col justify-start items-start gap-2 md:gap-4 mt-2 pl-2 sm:pl-0 sm:mt-6 text-neutral-600">
                 <div class="fetch-error w-full py-3 border-red-500 border flex justify-center rounded" v-if="fetcherror">
                     <h3 class="text-xs md:text-sm font-bold italic flex items-center justify-center gap-2 md:gap-8 relative w-full">
                         <div class="i-mdi-alert-circle-outline text-xl text-red-500" />
@@ -135,7 +135,7 @@ const retryCreateAccount = () => {
                 </div>
                 <div class="mobile-id-fields w-full py-2 flex flex-col md:grid md:grid-cols-2">
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="m-number" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">
+                        <label for="m-number" class="italic pl-2 text-base font-semibold tracking-wide ">
                             Mobile Number:
                             <span class="valid" v-if="valid_no">*</span>
                             <span class="text-red-400 text-xs font-light pl-3" v-if="check_no_validity">enter in valid format</span>
@@ -143,34 +143,34 @@ const retryCreateAccount = () => {
                         <div class="input w-full relative">
                             <input
                                 type="text" id="m-number" placeholder="e.g 0712345678 "
-                                class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1"
-                                v-model="mobilenumber"
+                                class="outline-none h-[2.6rem] w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1"
+                                v-model="mobilenumber" :class="check_no_validity && 'border-red-500'"
                             >
-                            <div class="i-mdi-phone absolute left-0 top-0 translate-x-[50%] translate-y-[60%]" />
+                            <div class="i-mdi-phone absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
                         </div>
                     </div>
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="id-no" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">ID Number: <span class="valid" v-if="valid_id">*</span></label>
+                        <label for="id-no" class="italic pl-2 text-base font-semibold tracking-wide ">ID Number: <span class="valid" v-if="valid_id">*</span></label>
                         <div class="input w-full relative">
-                            <input type="number" id="id-no" class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 pr-1" v-model="id_number">
-                            <div class="i-mdi-account-circle absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
+                            <input type="number" id="id-no" class="outline-none h-[2.6rem] w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 pr-1" v-model="id_number">
+                            <div class="i-mdi-account-circle absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
                         </div>
                     </div>
                 </div>
 
                 <div class="names-field w-full flex flex-col md:grid md:grid-cols-2">
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="fname" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">First name: <span class="valid" v-if="valid_fname">*</span></label>
+                        <label for="fname" class="italic pl-2 text-base font-semibold tracking-wide ">First name: <span class="valid" v-if="valid_fname">*</span></label>
                         <div class="input w-full relative">
-                            <input type="text" id="fname" class="outline-none h-[2.2rem] sm:h-[2.6rem]  w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="fname">
-                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
+                            <input type="text" id="fname" class="outline-none h-[2.6rem]  w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="fname">
+                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
                         </div>
                     </div>
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="lname" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">Last name: <span class="valid" v-if="valid_lname">*</span></label>
+                        <label for="lname" class="italic pl-2 text-base font-semibold tracking-wide ">Last name: <span class="valid" v-if="valid_lname">*</span></label>
                         <div class="input w-full relative">
-                            <input type="text" id="lname" class="outline-none h-[2.2rem] sm:h-[2.6rem]  w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="lname">
-                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
+                            <input type="text" id="lname" class="outline-none h-[2.6rem]  w-[88%] sm:w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="lname">
+                            <div class="i-mdi-user absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@ const retryCreateAccount = () => {
                         hover:gap-5 hover:border-neutral-600 hover:text-neutral-800"
                         @click="chooseLocation" :class="valid_location && 'border-red-500'"
                     >
-                        <p id="locationName" class="truncate">Choose your location</p>
+                        <p id="locationName" class="truncate text-sm">Choose your location</p>
                         <div class="i-mdi-chevron-right text-xl rotate-90 sm:rotate-0" :class="showlocationcomp && '-rotate-90 sm:-rotate-180'" />
                     </div>
                     <LazyLocationsSelectLocation class=" w-[88%] sm:w-[45%] md:w-[40%] shadow-md rounded h-[12rem] sm:h-[16rem]
@@ -191,31 +191,31 @@ const retryCreateAccount = () => {
                     />
                 </div>
                 <div class="gender-input w-full flex flex-col">
-                    <h3 class="text-sm sm:text-base font-semibold italic tracking-wide">Choose your gender: <span class="valid" v-if="valid_gender">*</span></h3>
+                    <h3 class="text-lg font-semibold italic tracking-wide">Choose your gender: <span class="valid" v-if="valid_gender">*</span></h3>
                     <div class="pl-8 sm:pl-4 w-[16%] flex flex-row gap-4 mt-2">
                         <div class="input-field flex items-center justify-between gap-3">
-                            <label for="male" class="italic text-xs font-semibold tracking-wide">Male:</label>
+                            <label for="male" class="italic text-base sm:text-xs font-semibold tracking-wide">Male:</label>
                             <input type="radio" name="gender" id="male" class="w-6 h-6 cursor-pointer" value="1" v-model="gender">
                         </div>
                         <div class="input-field flex items-center justify-between gap-3">
-                            <label for="female" class="italic text-xs font-semibold tracking-wide">Female:</label>
+                            <label for="female" class="italic text-base sm:text-xs font-semibold tracking-wide">Female:</label>
                             <input type="radio" name="gender" id="female" class="w-6 h-6 cursor-pointer" value="2" v-model="gender">
                         </div>
                     </div>
                 </div>
                 <div class="names-field w-full py-2 flex flex-col md:grid md:grid-cols-2">
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="password" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">Password: <span class="valid" v-if="valid_password">*</span></label>
+                        <label for="password" class="italic pl-2 text-base font-semibold tracking-wide ">Password: <span class="valid" v-if="valid_password">*</span></label>
                         <div class="input w-full relative">
-                            <input type="password" id="password" class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="password">
-                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
+                            <input type="password" id="password" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9  pr-1" v-model="password">
+                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
                         </div>
                     </div>
                     <div class="input-field py-2 flex flex-col gap-2">
-                        <label for="cpassword" class="italic pl-2 text-sm sm:text-base font-semibold tracking-wide ">Confirm password: <span class="valid" v-if="valid_cpassword">*</span></label>
+                        <label for="cpassword" class="italic pl-2 text-base font-semibold tracking-wide ">Confirm password: <span class="valid" v-if="valid_cpassword">*</span></label>
                         <div class="input w-full relative">
-                            <input type="password" id="cpassword" class="outline-none h-[2.2rem] sm:h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="confirmpassword">
-                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[60%] sm:translate-y-[80%]" />
+                            <input type="password" id="cpassword" class="outline-none h-[2.6rem] w-[80%]  border border-neutral-400 rounded pl-7 md:pl-9 pr-1" v-model="confirmpassword">
+                            <div class="i-mdi-lock absolute left-0 top-0 translate-x-[50%] translate-y-[80%]" />
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@ const retryCreateAccount = () => {
 <style scoped>
 
 .title {
-    @apply w-full h-[4rem] md:h-[5rem] mt-3 flex flex-col items-start justify-start gap-1 md:gap-2;
+    @apply w-full h-[5rem] md:h-[5rem] md:mt-3 flex flex-col items-start justify-start gap-3;
 }
 .login-link a {
     @apply text-orange-500 font-bold text-base italic underline hover:text-orange-600 tracking-wider;

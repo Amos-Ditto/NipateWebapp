@@ -14,7 +14,7 @@
                 </div>
             </template>
             <div class="content w-full">
-                <div class="message w-full text-neutral-800 gap-2 flex">
+                <div class="message w-full gap-2 flex">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 </div>
             </template>
             <div class="content w-full">
-                <div class="message w-full text-neutral-800">
+                <div class="message w-full">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 </div>
             </template>
             <div class="content w-full">
-                <div class="message w-full text-neutral-800">
+                <div class="message w-full">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 </div>
             </template>
             <div class="content w-full">
-                <div class="message w-full text-neutral-800">
+                <div class="message w-full">
                     <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt ipsam.</h3>
                 </div>
             </div>
