@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Locations from '~~/types/LocationTypes';
 
-const baseUrl = ref<string>("http://127.0.0.1:8000");
+const config = useRuntimeConfig();
 
 const counties = ref<Locations[]>([]);
 const towns = ref<Locations[]>();
@@ -12,6 +12,7 @@ const emit = defineEmits<{
 }>();
 
 // Condition Transitions data
+const emptylist = ref<boolean>(false);
 const county_suspense = ref<boolean>(false);
 const town_suspense = ref<boolean>(false);
 const showlocationtype = ref<boolean>(true);
@@ -23,7 +24,7 @@ const townfetcherror = ref<boolean>(false);
 const fetchData = async () => {
     fetcherror.value = false;
     county_suspense.value = true;
-    await fetch(`${baseUrl.value}/location/counties/`)
+    await fetch(`${config.base_Url}/location/counties/`)
     .then(res => {
         if (res.status !== 200) {
             county_suspense.value = true;
@@ -34,6 +35,10 @@ const fetchData = async () => {
     })
     .then(data => {
         county_suspense.value = false;
+        if (data === undefined || data.length == 0) {
+            console.log(data);
+            emptylist.value = true;
+        };
         counties.value = data;
     })
     .catch(error => {
@@ -49,7 +54,7 @@ const selectId = async (event: number) => {
     townfetcherror.value = false;
     showlocationtype.value = false;
     town_suspense.value = true;
-    await fetch(`${baseUrl.value}/location/towns/?CountyID=${event}`)
+    await fetch(`${config.base_Url}/location/towns/?CountyID=${event}`)
     .then(res => {
         if (res.status !== 200) {
             town_suspense.value = true;
@@ -59,6 +64,9 @@ const selectId = async (event: number) => {
         return res.json();
     })
     .then(data => {
+        if (data === undefined || data.lenght == 0) {
+            emptylist.value = true;
+        };
         town_suspense.value = false;
         towns.value = data;
     })
@@ -80,46 +88,52 @@ const reloadFetchtowns = () => {
 </script>
 <template>
     <div class="locations w-full py-3 px-2 overflow-y-hidden">
-        <transition name="togglemenu">
-            <div class="counties w-full" v-if="showlocationtype">
-                <div class="search">
-                    <input type="text" placeholder="search for county">
-                    <div class="i-mdi-magnify absolute leading-10 top-0 sm:top-1 translate-y-full left-[15%] flex items-center" />
-                </div>
-                <div class="error w-full flex justify-center" :class="fetcherror ? 'opacity-100 p-2' : 'opacity-0 p-0'" >
-                    <button v-if="fetcherror" @click="reloadFetch">
-                        <div class="i-mdi-restart text-2xl" />
-                        Error
-                    </button>
-                </div>
-                <div class="places w-full sm:mt-2">
-                    <div>
-                        <LazyLocationsLocationList v-if="!county_suspense" :locations="counties" @select-id="selectId" />
-                        <SuspenseComponentsLocationSuspense v-if="county_suspense" />
+        <div class="empty-list flex flex-col items-center justify-center text-sm text-neutral-600" v-if="emptylist">
+            <h3 class="font-bold">Can't find any location</h3>
+            <h3 class="underline">Contact Us for this issue</h3>
+        </div>
+        <div class="content w-full" v-if="!emptylist">
+            <transition name="togglemenu">
+                <div class="counties w-full" v-if="showlocationtype">
+                    <div class="search">
+                        <input type="text" placeholder="search for county">
+                        <div class="i-mdi-magnify absolute leading-10 top-0 sm:top-1 translate-y-full left-[15%] flex items-center" />
+                    </div>
+                    <div class="error w-full flex justify-center" :class="fetcherror ? 'opacity-100 p-2' : 'opacity-0 p-0'" >
+                        <button v-if="fetcherror" @click="reloadFetch">
+                            <div class="i-mdi-restart text-2xl" />
+                            Error
+                        </button>
+                    </div>
+                    <div class="places w-full sm:mt-2">
+                        <div>
+                            <LazyLocationsLocationList v-if="!county_suspense" :locations="counties" @select-id="selectId" />
+                            <SuspenseComponentsLocationSuspense v-if="county_suspense" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </transition>
-        <transition name="togglemenu">
-            <div class="towns w-full" v-if="!showlocationtype">
-                <div class="search">
-                    <input type="text" placeholder="search for location">
-                    <div class="i-mdi-magnify absolute leading-10 top-0 sm:top-1 translate-y-full left-[15%] flex items-center" />
-                </div>
-                <div class="error w-full p-2 flex justify-center" :class="townfetcherror ? 'opacity-100 p-2' : 'opacity-0 p-0'" >
-                    <button v-if="townfetcherror" @click="reloadFetchtowns">
-                        <div class="i-mdi-restart text-2xl" />
-                        Error
-                    </button>
-                </div>
-                <div class="places w-full sm:mt-2">
-                    <div>
-                        <LazyLocationsTownList v-if="!town_suspense" :locations="towns" @select-town-id="selectTownId" />
-                        <SuspenseComponentsLocationSuspense v-if="town_suspense" />
+            </transition>
+            <transition name="togglemenu">
+                <div class="towns w-full" v-if="!showlocationtype">
+                    <div class="search">
+                        <input type="text" placeholder="search for location">
+                        <div class="i-mdi-magnify absolute leading-10 top-0 sm:top-1 translate-y-full left-[15%] flex items-center" />
+                    </div>
+                    <div class="error w-full p-2 flex justify-center" :class="townfetcherror ? 'opacity-100 p-2' : 'opacity-0 p-0'" >
+                        <button v-if="townfetcherror" @click="reloadFetchtowns">
+                            <div class="i-mdi-restart text-2xl" />
+                            Error
+                        </button>
+                    </div>
+                    <div class="places w-full sm:mt-2">
+                        <div>
+                            <LazyLocationsTownList v-if="!town_suspense" :locations="towns" @select-town-id="selectTownId" />
+                            <SuspenseComponentsLocationSuspense v-if="town_suspense" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </transition>
+            </transition>
+        </div>
     </div>
 </template>
 

@@ -2,9 +2,9 @@
     <nav class="w-full p-2">
         <ul class="w-full flex flex-col gap-3">
             <li><NuxtLink to="/" ><div class="i-mdi-magnify text-2xl" /> Search</NuxtLink></li>
-            <li><NuxtLink to="/" ><div class="i-mdi-format-list-bulleted text-2xl" /> Services</NuxtLink></li>
-            <li><NuxtLink to="/" ><div class="i-mdi-ad text-2xl" /> Advertise</NuxtLink></li>
-            <li><NuxtLink to="/" ><div class="i-mdi-account-box text-2xl" /> Your account</NuxtLink></li>
+            <li><NuxtLink to="/services" ><div class="i-mdi-format-list-bulleted text-2xl" /> Services</NuxtLink></li>
+            <li><NuxtLink to="" ><div class="i-mdi-ad text-2xl" /> Advertise</NuxtLink></li>
+            <li><NuxtLink to="" ><div class="i-mdi-account-box text-2xl" /> Your account</NuxtLink></li>
         </ul>
     </nav>
 
@@ -19,11 +19,7 @@ ul li a {
     @apply border-b border-neutral-400 hover:border-orange-400 hover:text-orange-400 hover:px-4;
     transition: color 200ms ease, border 200ms ease, padding 200ms ease;
 }
-ul li a::before {
-    content: '';
-    height: 100%;
-    width: 4px;
-    transition: visibility 200ms ease;
-    @apply bg-orange-500 invisible absolute left-0 top-0;
+.router-link-active {
+    @apply border-orange-400 text-orange-400 px-4;
 }
 </style>

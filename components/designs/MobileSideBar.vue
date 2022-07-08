@@ -12,7 +12,7 @@ const closeMSideNav = (): void => {
         <div class="menu w-[56%] h-full bg-slate-100 flex flex-col gap-3 pt-16 px-3 mb-[3.2rem] overflow-y-auto overflow-x-hidden relative">
             <ul class="w-full flex flex-col gap-1">
                 <li><NuxtLink to="/" ><div class="i-mdi-magnify text-2xl" /> Search</NuxtLink></li>
-                <li><NuxtLink to="" ><div class="i-mdi-format-list-bulleted text-2xl" /> Services</NuxtLink></li>
+                <li><NuxtLink to="/services" ><div class="i-mdi-format-list-bulleted text-2xl" /> Services</NuxtLink></li>
                 <li><NuxtLink to="" ><div class="i-mdi-ad text-2xl" /> Advertise</NuxtLink></li>
                 <li><NuxtLink to="" ><div class="i-mdi-account-box text-2xl" /> Your account</NuxtLink></li>
             </ul>
