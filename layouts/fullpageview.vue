@@ -26,11 +26,11 @@ const openMSideNav = (): void => {
                 </div>
             </transition>
             <section>
-                <div class="center w-full flex flex-col gap-8 min-h-[80vh]">
+                <div class="center w-full">
                     <slot></slot>
                 </div>
                 <hr>
-                <div class="w-full h-[2rem] pt-5 pb-8 flex items-center justify-center">
+                <div class="w-full h-[2rem] flex items-center justify-center">
                     <slot name="footer"></slot>
                 </div>
             </section>
@@ -55,7 +55,7 @@ const openMSideNav = (): void => {
     @apply hidden md:block w-[16%] border-r-[0.5px] border-neutral-300;
 }
 .context section {
-    @apply px-2 flex flex-col w-full md:w-[84%] md:pt-5 md:overflow-y-auto;
+    @apply flex flex-col w-full md:pt-5 md:overflow-y-auto;
     transition: width 300ms ease;
 }
 section .searchbar {

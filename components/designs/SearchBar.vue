@@ -34,10 +34,10 @@ const onSearch = (): void => {
 };
 </script>
 <template>
-    <div class="search mt-2 md:mt-0 h-full w-full md:w-[80%] flex flex-row items-center justify-center relative">
+    <div class="search mt-2 md:mt-0 h-full w-[96%] md:w-[80%] flex flex-row items-center justify-center relative">
         <div class="input w-full h-full ml-2 relative flex items-center tracking-widest text-neutral-600 text-2xl">
             <div class="i-mdi-filter-variant absolute left-4 md:left-6 hover:text-orange-400 cursor-pointer" />
-            <input type="text" placeholder="search for products or services" @click="onSearch">
+            <input type="text" placeholder="search for products or services" @click="onSearch" class=" disabled:cursor-not-allowed">
             <div class="i-mdi-magnify absolute right-4 md:right-7 hover:text-orange-400 cursor-pointer" />
         </div>
         <transition name="fade">
@@ -63,7 +63,7 @@ const onSearch = (): void => {
 }
 .input input {
     letter-spacing: 1.5px;
-    @apply w-full h-full px-14 outline-none bg-inherit placeholder:italic lg:placeholder:text-base placeholder:text-base italic text-lg;
+    @apply w-full h-full px-12 outline-none bg-inherit placeholder:italic lg:placeholder:text-base placeholder:text-base italic text-lg;
     @apply rounded-3xl border border-neutral-300 focus:border-orange-400;
     transition: border 300ms ease;
 }
