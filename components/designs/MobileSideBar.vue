@@ -8,7 +8,7 @@ const closeMSideNav = (): void => {
 </script>
 
 <template>
-    <main class="h-full w-full flex flex-row bg-transparent gap-0">
+    <main class="h-full w-full flex flex-row bg-transparent gap-0 pb-[20px]">
         <div class="menu w-[56%] sm:w-[38%] h-full bg-slate-100 flex flex-col gap-3 pt-16 px-3 mb-[3.2rem] overflow-y-auto overflow-x-hidden relative">
             <ul class="w-full flex flex-col gap-1">
                 <li><NuxtLink to="/" ><div class="i-mdi-magnify text-2xl" /> Search</NuxtLink></li>
@@ -16,7 +16,7 @@ const closeMSideNav = (): void => {
                 <li><NuxtLink to="" ><div class="i-mdi-ad text-2xl" /> Advertise</NuxtLink></li>
                 <li><NuxtLink to="" ><div class="i-mdi-account-box text-2xl" /> Your account</NuxtLink></li>
             </ul>
-            <div class="authbtns w-full flex flex-col gap-2 pt-8 absolute bottom-12">
+            <div class="authbtns w-full flex flex-col gap-2 pt-8 absolute bottom-0 pb-[30px]">
                 <button><NuxtLink to="/auth" class="underline">Log in</NuxtLink></button>
                 <button><NuxtLink to="/auth/register">Join</NuxtLink></button>
             </div>

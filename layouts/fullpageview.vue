@@ -21,7 +21,7 @@ const openMSideNav = (): void => {
                 <DesignsSideBar />
             </div>
             <transition name="slide-nav">
-                <div class="mobile-nav w-[96vw] h-[100vh] z-[90] block md:hidden fixed left-0 top-0" v-if="openmobilenav">
+                <div class="mobile-nav w-full h-full z-[90] block md:hidden fixed left-0 top-0" v-if="openmobilenav">
                     <DesignsMobileSideBar @close-m-side-nav="openMSideNav" />
                 </div>
             </transition>
