@@ -102,6 +102,9 @@ const retryCreateAccount = () => {
     createAccount();
     return;
 }
+const toggleBack = ():void => {
+    router.back();
+};
 </script>
 
 <template>
@@ -111,7 +114,10 @@ const retryCreateAccount = () => {
                 <h3 class=" text-neutral-700 text-3xl md:text-4xl font-semibold sm:font-bold">
                     Welcome to <span class="text-orange-600">Ni</span>pate.
                 </h3>
-                <div class="login-link w-full flex justify-end text-sm pr-4 sm:pr-16 text-neutral-600">
+                <div class="login-link w-full flex justify-between text-sm pr-4 sm:pr-16 text-neutral-600">
+                    <div class="back-btn">
+                        <button class="flex flex-row items-center text-sm font-bold underline relative" @click="toggleBack"><div class="i-mdi-chevron-left text-2xl" />Back</button>
+                    </div>
                     <h3>Already have an account? <NuxtLink to="/auth">Log In</NuxtLink>.</h3>
                 </div>
             </div>
@@ -237,6 +243,12 @@ const retryCreateAccount = () => {
 }
 .login-link a {
     @apply text-orange-500 font-bold text-base italic underline hover:text-orange-600 tracking-wider;
+}
+.back-btn button .i-mdi-chevron-left {
+    transition: margin 300ms ease;
+}
+.back-btn button:hover .i-mdi-chevron-left {
+    @apply mr-1;
 }
 input {
     letter-spacing: 1px;

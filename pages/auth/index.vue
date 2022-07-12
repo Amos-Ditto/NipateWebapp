@@ -82,6 +82,9 @@ const closeErrorModal = (): void => {
 const retryFetch = () => {
     fetchToken();
 }
+const toggleRouteBack = ():void => {
+    router.back();
+};
 </script>
 
 <template>
@@ -132,6 +135,11 @@ const retryFetch = () => {
         <div class="register-container">
             <h3>New to Nipate?</h3>
             <NuxtLink to="/auth/register" class="text-blue-500 font-bold">Create account.</NuxtLink>
+        </div>
+        <div class="back-btn w-full mt-6 px-2">
+            <button class="underline text-sm flex flex-row items-center text-neutral-600 hover:text-neutral-800 hover:tracking-wider" @click="toggleRouteBack">
+                <div class="i-mdi-chevron-left text-xl" /> Back
+            </button>
         </div>
     </div>
 </template>
@@ -184,6 +192,10 @@ const retryFetch = () => {
 
 .input-fields .btn-field button {
     transition: background-color 200ms ease;
+}
+
+.back-btn button {
+    transition: letter-spacing 300ms ease, color 300ms ease;
 }
 
 </style>

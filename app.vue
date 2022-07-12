@@ -54,6 +54,15 @@ body {
   height: -webkit-fill-available;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  /* For disabling user selection */
+
+  /* -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; */
 }
 .page-enter-from{
   opacity: 0;

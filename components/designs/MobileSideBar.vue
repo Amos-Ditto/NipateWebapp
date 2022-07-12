@@ -36,7 +36,7 @@ ul li a {
     @apply border-b border-neutral-400 hover:border-orange-400 hover:text-orange-400 hover:px-4;
     transition: color 200ms ease, border 200ms ease, padding 200ms ease;
 }
-.router-link-active {
+.router-link-exact-active {
     @apply text-orange-500 border-orange-500;
 }
 .authbtns button {

@@ -1,18 +1,14 @@
-# Nipate Location Based Services
+# Nipate Location Based Services.
 ![logo](docs/img/Thumbnail.png)
 
-## Setup
+----------
 
-Make sure to install the dependencies:
-
+## Local Setup
 ```bash
-# yarn
+# yarn to install the dependencies:
 $ yarn install
-```
-## Development Server
 
-Start the development server on http://localhost:3000
-
-```bash
-$ npm run dev
+# Start the development server on http://localhost:3000
+$ yarn dev
 ```
+

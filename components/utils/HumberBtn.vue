@@ -15,7 +15,7 @@ const onOpen = ():void => {
 
 <template>
     <div
-        class="menu-btn relative w-[38px] h-[34px] flex items-center justify-center cursor-pointer hover:bg-neutral-400 rounded"
+        class="menu-btn relative w-[38px] h-[34px] flex items-center justify-center cursor-pointer"
         @click="onOpen" :class="props.closemobilenav && 'open'"
     >
         <div class="menubtn"></div>
