@@ -11,8 +11,8 @@
             <hr>
             <div class="requests">
                 <h3 class="text-xl font-bold text-neutral-600 font-serif">Top Services requested.</h3>
-                <div class="requests w-full pt-6">
-                    <LazyContextRequestServices />
+                <div class="requests w-full pt-4 flex flex-row justify-start">
+                    <LazyContextRequestServices class="w-full md:w-[60%]" />
                 </div>
             </div>
         </div>
