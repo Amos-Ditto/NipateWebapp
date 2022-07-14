@@ -52,7 +52,7 @@ const openMSideNav = (): void => {
     @apply md:h-[90vh] w-full px-1 md:px-4 pt-3 flex flex-row gap-3 md:gap-6;
 }
 .context .side-nav {
-    @apply hidden md:block w-[16%] border-r-[0.5px] border-neutral-300;
+    @apply hidden md:block w-[18%] border-r-[0.5px] border-neutral-300;
 }
 .context section {
     @apply flex flex-col w-full md:pt-5 md:overflow-y-auto;

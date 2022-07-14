@@ -14,6 +14,7 @@
 </template>
 <style scoped>
 .card {
+    font-family: "NonBreakingSpaceOverride","Hoefler Text",Garamond,"Times New Roman",serif;
     transition: transform 200ms ease, background-color 300ms ease;
 }
 .title , .main {

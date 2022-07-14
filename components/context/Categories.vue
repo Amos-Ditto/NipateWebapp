@@ -51,7 +51,7 @@
             </div>
         </section>
         <div class="load-more flex items-center mt-4">
-            <button class="px-1 py-0 text-neutral-600 border-b border-neutral-300 hover:border-neutral-500 flex flex-row items-center gap-1 hover:tracking-widest font-bold font-sans">
+            <button class="px-1 py-0 text-neutral-600 hover:border-neutral-500 flex flex-row items-center gap-1 hover:tracking-widest font-bold font-sans">
                 more <div class="i-mdi-chevron-right rotate-90 md:rotate-0" />
             </button>
         </div>

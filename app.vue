@@ -44,10 +44,17 @@ useHead({
 }
 html {
   height: -webkit-fill-available;
+  -webkit-text-size-adjust: 100%;
 }
 
+/* font-family: "NonBreakingSpaceOverride","Hoefler Text",Garamond,"Times New Roman",serif; */
+
 body {
-  margin: 0%;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.8;
+  margin: 0;
+  text-rendering: optimizeLegibility;
   padding: 0%;
   width: 100vw;
   height: 100vh;
