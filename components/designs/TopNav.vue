@@ -17,25 +17,16 @@ const openMSideNav = (): void => {
     <nav>
         <div class="left">
             <img src="@/assets/img/logo-removebg.png" alt="logo">
-            <div class="links">
-                <!-- <NuxtLink to="/" class="link">
-                    <span>Home</span>
-                </NuxtLink> -->
-                <div class="link">
-                    <a href="#">About Us</a>
-                </div>
-                <div class="link">
-                    <a href="#">Contact Us</a>
-                </div>
-            </div>
         </div>
         <div class="right">
             <div class="menu-btn h-full flex items-center md:hidden">
                 <UtilsHumberBtn @open-m-side-nav="openMSideNav" :closemobilenav="closemobilenav" />
             </div>
-            <div class="auth-btn">
-                <button><NuxtLink to="/auth">Log In</NuxtLink></button>
-                <button class="border border-blue-500"><NuxtLink to="/auth/register">Join</NuxtLink></button>
+            <div class="links flex-row pt-2 gap-14 font-[500] tracking-wide hidden md:flex text-neutral-600">
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <NuxtLink to="/auth">Login</NuxtLink>
+                <NuxtLink to="/auth/register">Join</NuxtLink>
             </div>
         </div>
     </nav>
@@ -43,42 +34,23 @@ const openMSideNav = (): void => {
 
 <style scoped>
 nav {
-    @apply w-full h-[3.5rem] md:h-[4rem] md:pt-5 flex justify-between items-center z-[999];
-}
-.left {
-    @apply grid grid-cols-2 pt-2 md:pt-0 px-4 md:px-11 gap-6 h-full;
+    @apply w-[90%] md:w-[80%] flex flex-row py-1.5 sm:py-2 items-center justify-between pr-8 md:pr-0;
+    font-family: "NonBreakingSpaceOverride","Hoefler Text",Garamond,"Times New Roman",serif;
+    transition: width 300ms ease;
 }
 .left img {
-    @apply w-[10rem] md:w-[10rem] h-[86%] md:h-[3.2rem] mb-2;
-    transition: height 300ms ease, width 300ms ease;
-}
-.left .links {
-    @apply hidden font-serif md:flex flex-row gap-2 lg:gap-4 pt-1;
-}
-.left , .right {
-    transition: width 300ms ease;
-    @apply h-full items-center flex;
+    @apply w-[150px] sm:w-[160px] h-[45px] sm:h-[48px];
+    transition: width 300ms ease , height 300ms ease;
 }
 .right {
-    @apply flex items-center gap-3 h-full pr-10;
+    @apply pt-2.5 sm:pt-0 flex flex-row gap-4 px-4;
 }
-.links .link {
-    @apply border-b-2 px-3 pt-3 border-transparent hover:border-neutral-800;
-    transition: border 300ms ease;
-}
-.links .link:hover a {
-    @apply text-orange-500;
+.links a {
+    font-family: "DM Sans", Sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: capitalize;
     transition: color 300ms ease;
-}
-
-.link.router-link-active {
-    @apply border-neutral-800 text-orange-500;
-}
-.auth-btn {
-    @apply h-full items-center text-sm font-serif hidden md:flex md:flex-row md:gap-2 lg:gap-3;
-}
-.auth-btn button {
-    @apply px-4 py-1 flex items-center rounded font-sans text-base hover:text-orange-500 hover:border-orange-500;
-    transition: color 300ms ease, border 300ms ease;
+    @apply hover:text-green-500 tracking-widest;
 }
 </style>

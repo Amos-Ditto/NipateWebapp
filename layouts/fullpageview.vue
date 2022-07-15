@@ -11,7 +11,7 @@ const openMSideNav = (): void => {
 <template>
     <NuxtLayout name="custom" class="overflow-y-auto">
         <template #header>
-            <nav class="w-full bg-slate-100 z-[100]">
+            <nav class="w-full bg-slate-100 z-[100] flex justify-center shadow md:shadow-md">
                 <LazyDesignsTopNav class="w-full" @open-m-side-nav="openMSideNav" :closemobilenav="closemobilenav" />
             </nav>
         </template>
@@ -39,6 +39,9 @@ const openMSideNav = (): void => {
 </template>
 
 <style scoped>
+section {
+    transition: width 300ms ease;
+}
 
 /* Animate sliding side bar */
 .slide-nav-enter-from , .slide-nav-leave-to {
