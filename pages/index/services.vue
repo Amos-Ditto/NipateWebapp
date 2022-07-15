@@ -1,3 +1,12 @@
+<script setup lang="ts">
+
+const findlocation = ref<boolean>(false);
+
+// Methods
+const filterLocation = ():void => {
+    findlocation.value = !findlocation.value;
+}
+</script>
 <template>
     <main class="w-full flex flex-col py-1 gap-2 overflow-y-auto relative min-h-[60vh]">
         <div class="navigation-bar w-full flex flex-row justify-between">
@@ -14,22 +23,18 @@
         <hr>
         <div class="filter-btns flex flex-row px-3 gap-3 w-full md:w-auto">
             <div class="relative filter-btn">
-                <button>Location <div class="i-mdi-map-marker" /></button>
-                <!-- <div class="dropdown z-10">
-                    <div class="pointer w-[1.15rem] h-[1.15rem] absolute top-0 left-4 bg-inherit rotate-45 rounded -translate-y-[50%] -z-20 border border-neutral-300"></div>
-                    <div class="menu-context w-full h-full bg-inherit">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, libero? Possimus, vero eaque asperiores quam commodi dolorem tempore excepturi error alias doloribus! Esse provident quasi veritatis eveniet aperiam quis adipisci!
-                    </div>
-                </div> -->
+                <button
+                    @click="filterLocation"
+                    :class="findlocation && 'border-green-500 text-green-500'">Location <div class="i-mdi-map-marker" />
+                </button>
+                <DropdownsMenuDropDown v-if="findlocation" />
             </div>
             <div class="relative filter-btn">
                 <button>services <div class="i-mdi-account-wrench" /></button>
-                <DropdownsMenuDropDown />
             </div>
         </div>
         <section class="pt-3 md:pt-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum aspernatur aperiam voluptatum natus nulla debitis nobis provident necessitatibus eligendi eum, incidunt pariatur deserunt voluptatem veritatis itaque! Soluta dignissimos incidunt quibusdam?
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus aspernatur illo cupiditate aut quam incidunt ipsum impedit sit corporis sint. Inventore deleniti quibusdam necessitatibus placeat quam? Iste earum facilis eaque?
+            
         </section>
     </main>
 </template>
