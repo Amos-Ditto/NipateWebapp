@@ -9,7 +9,7 @@ const openMSideNav = (): void => {
 </script>
 
 <template>
-    <NuxtLayout name="custom" class="overflow-y-auto">
+    <NuxtLayout name="custom">
         <template #header>
             <nav class="w-full bg-slate-100 z-[100] flex justify-center shadow md:shadow-md">
                 <LazyDesignsTopNav class="w-full" @open-m-side-nav="openMSideNav" :closemobilenav="closemobilenav" />

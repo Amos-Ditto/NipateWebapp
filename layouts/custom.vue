@@ -1,6 +1,6 @@
 <template>
 
-    <section class="w-full h-full flex flex-col">
+    <section class="w-full h-full flex flex-col overflow-y-auto">
         <header class="z-[999]">
             <slot name="header"></slot>
         </header>

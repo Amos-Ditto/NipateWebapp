@@ -1,14 +1,35 @@
 <script setup lang="ts">
+import ServicesList from "../../components/context/ServicesList.vue";
 
 const findlocation = ref<boolean>(false);
+const findservices = ref<boolean>(false);
 
 // Methods
 const filterLocation = ():void => {
-    findlocation.value = !findlocation.value;
+    if (findservices.value == true) {
+        findservices.value = false;
+    };
+    setTimeout(() => {
+        findlocation.value = !findlocation.value;
+    }, 200);
+}
+const filterServices = ():void => {
+    if (findlocation.value == true) {
+        findlocation.value = false;
+    };
+    setTimeout(() => {
+        findservices.value = !findservices.value;
+    }, 200);
+}
+const closeServiceSearch = ():void => {
+    findservices.value = false;
+};
+const closeLocationSearch = ():void => {
+    findlocation.value = false;
 }
 </script>
 <template>
-    <main class="w-full flex flex-col py-1 gap-2 overflow-y-auto relative min-h-[60vh]">
+    <main class="w-full flex flex-col py-1 gap-2 overflow-y-auto relative min-h-[80vh]">
         <div class="navigation-bar w-full flex flex-row justify-between">
             <div class="filters flex items-center">
                 <button class="flex flex-row items-center text-neutral-600 text-sm gap-2 px-2 font-bold hover:text-green-600">
@@ -25,16 +46,28 @@ const filterLocation = ():void => {
             <div class="relative filter-btn">
                 <button
                     @click="filterLocation"
-                    :class="findlocation && 'border-green-500 text-green-500'">Location <div class="i-mdi-map-marker" />
+                    :class="findlocation ? 'border-green-500 text-green-500' : 'text-neutral-500 border-neutral-300'"
+                >
+                    Location <div class="i-mdi-map-marker" />
                 </button>
-                <DropdownsMenuDropDown v-if="findlocation" />
+                <DropdownsMenuDropDown v-if="findlocation" @close-location-search="closeLocationSearch" />
             </div>
             <div class="relative filter-btn">
-                <button>services <div class="i-mdi-account-wrench" /></button>
+                <button
+                    :class="findservices ? 'border-green-500 text-green-500' : 'text-neutral-500 border-neutral-300'"
+                    @click="filterServices"
+                >
+                    services <div class="i-mdi-account-wrench" /></button>
+                <DropdownsServicesDropDown v-if="findservices" @close-service-search="closeServiceSearch" />
             </div>
         </div>
-        <section class="pt-3 md:pt-4">
-            
+        <section class="pt-3 md:pt-4 flex w-full flex-row gap-4">
+            <div class="services-list w-full sm:w-[80%] md:w-[60%]">
+                <ServicesList />
+            </div>
+            <div class="request-stats hidden sm:block w-[30%]">
+
+            </div>
         </section>
     </main>
 </template>
@@ -52,7 +85,7 @@ const filterLocation = ():void => {
     transition: color 250ms ease;
 }
 .filter-btns button {
-    @apply flex flex-row items-center gap-1.5 text-neutral-500 text-sm md:text-base border border-neutral-300 px-2 md:px-4 py-1 rounded;
+    @apply flex flex-row items-center gap-1.5 text-sm md:text-base border px-2 md:px-4 py-1 rounded;
     @apply hover:border-green-500 hover:text-green-500;
     transition: border 300ms ease , color 300ms ease;
 }

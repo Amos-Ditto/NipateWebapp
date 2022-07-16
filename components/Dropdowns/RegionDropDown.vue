@@ -1,6 +1,6 @@
 <template>
     <main class="w-full flex items-center text-neutral-600 border-t border-neutral-300">
-        <div class="tag w-full flex flex-row justify-between items-center hover:px-3.5 px-4 py-1 tracking-wider">
+        <div class="tag w-full flex flex-row justify-between items-center hover:px-3.5 px-4 py-1 tracking-wider cursor-pointer hover:brightness-200">
             <h3>Nakuru</h3>
             <div class="i-mdi-chevron-right" />
         </div>
