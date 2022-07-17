@@ -11,7 +11,6 @@ const counties: Location[] = [
 const selectLocation = ():void => {
     selectlocation.value = !selectlocation.value;
 };
-console.log("Location loaded");
 
 </script>
 <template>
@@ -30,10 +29,9 @@ console.log("Location loaded");
         <transition name="slide-filters" mode="out-in">
             <div class="locations w-full flex flex-col gap-2"  v-if="selectlocation">
                 <div class="top-side w-full flex flex-row items-center text-neutral-600">
-                    <div class="i-mdi-arrow-back cursor-pointer hover:bg-blue-500 text-xl" @click="selectLocation" />
-                    <h3 class="font-semibold text-base flex flex-row items-center gap-1 pl-8">Nakuru <div class="i-mdi-map-marker" /></h3>
+                    <h3 class="font-semibold text-base flex flex-row items-center gap-1">Nakuru <div class="i-mdi-map-marker" /></h3>
                 </div>
-                <div class="tag-values flex flex-col gap-1 px-2 py-1 max-h-[230px] overflow-y-auto">
+                <div class="tag-values flex flex-col gap-1 px-2 py-1 h-[230px] overflow-y-auto">
                     <label>
                         <input type="checkbox">
                         <span class="pl-2">Kabarak</span>
@@ -51,8 +49,9 @@ console.log("Location loaded");
                         <span class="pl-2">Kiamunyi</span>
                     </label>
                 </div>
-                <div class="search-btn w-full flex items-center justify-center">
-                    <button class="font-mono">search</button>
+                <div class="search-btn w-full flex items-center justify-start gap-6">
+                    <div class="i-mdi-arrow-back cursor-pointer hover:bg-blue-500 hover:scale-125 text-xl" @click="selectLocation" />
+                    <button>search</button>
                 </div>
             </div>
         </transition>
@@ -86,7 +85,10 @@ console.log("Location loaded");
     @apply w-[1rem] h-[1rem];
 }
 .search-btn button {
-    @apply bg-blue-400 text-white font-bold px-8 py-1 tracking-wide rounded hover:bg-blue-600;
+    @apply bg-blue-400 text-white font-bold font-mono px-8 py-1 tracking-wide rounded hover:bg-blue-600;
     transition: background-color 300ms ease;
+}
+.i-mdi-arrow-back {
+    transition: transform 300ms ease, background-color 300ms ease;
 }
 </style>

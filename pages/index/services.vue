@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import ServicesList from "../../components/context/ServicesList.vue";
-
-const selectservices = ref<boolean>(false);
 
 </script>
 <template>
@@ -13,14 +10,26 @@ const selectservices = ref<boolean>(false);
             </div>
         </div>
         <hr>
+        <section class="w-full lg:hidden flex flex-row gap-4">
+            <div class="mobile-view-filter text-neutral-500">
+                <button class="px-2 border border-neutral-300 py-1 flex flex-row items-center gap-1 text-sm rounded">
+                    Location <div class="i-mdi-map-marker" />
+                </button>
+            </div>
+            <div class="mobile-view-filter text-neutral-500">
+                <button class="px-2 border border-neutral-300 py-1 flex flex-row items-center gap-1 text-sm rounded">
+                    Services <div class="i-mdi-account-wrench" />
+                </button>
+            </div>
+        </section>
         <section class="w-full flex flex-row justify-evenly">
             
-            <section class="flex flex-row gap-4 w-full md:w-[75%]">
+            <section class="service-requests flex flex-row gap-4 w-full lg:w-[75%]">
                 <div class="services-list w-full">
-                    <ServicesList />
+                    <LazyContextServicesList />
                 </div>
             </section>
-            <div class="filters-tags hidden md:flex flex-col w-[20%] py-3">
+            <div class="filters-tags hidden lg:flex flex-col w-[20%] py-3">
                 <button class="flex flex-row items-center text-neutral-600 text-lg italic gap-3 px-2 font-bold hover:text-green-600">
                     Find by <div class="i-mdi-filter-variant" />
                 </button>
@@ -63,5 +72,8 @@ const selectservices = ref<boolean>(false);
 .search-btn button {
     @apply bg-blue-400 text-white font-bold px-8 tracking-wide rounded hover:bg-blue-600;
     transition: background-color 300ms ease;
+}
+.service-requests {
+    transition: width 300ms ease;
 }
 </style>

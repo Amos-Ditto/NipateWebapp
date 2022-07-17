@@ -1,5 +1,5 @@
 <template>
-    <main class="list-card w-full min-h-[120px] shadow bg-white px-2 md:px-6 py-1 md:py-3 flex flex-col gap-1 md:gap-3 rounded">
+    <main class="list-card w-full min-h-[120px] shadow bg-white hover:bg-slate-50 px-2 md:px-6 py-1 md:py-3 flex flex-col gap-1 md:gap-3 rounded">
         <div class="top w-full flex flex-row justify-between items-center">
             <h3 class="text-xs font-sans text-neutral-500 tracking-wide">Commutation & Transport</h3>
             <span class="text-xs text-neutral-400">30 mins ago</span>
@@ -25,3 +25,9 @@
         </div>
     </main>
 </template>
+
+<style scoped>
+.list-card {
+    transition: background-color 300ms ease;
+}
+</style>

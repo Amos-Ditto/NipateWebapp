@@ -12,7 +12,6 @@ const groups: Groups[] = [
 const selectServices = ():void => {
     selectservices.value = !selectservices.value;
 };
-console.log("Services loaded");
 </script>
 <template>
     <div class="tag w-full flex flex-col gap-2 shadow bg-white rounded h-[320px] px-1 py-2">
@@ -29,7 +28,31 @@ console.log("Services loaded");
         <transition name="slide-filters" mode="out-in">
             <div class="locations w-full flex flex-col gap-2"  v-if="selectservices">
                 <h3 class="text-neutral-600 font-semibold text-base flex flex-row items-center gap-1">Transport & Commutation <div class="i-mdi-account-wrench" /></h3>
-                <div class="tag-values flex flex-col gap-1 px-2 py-1 max-h-[230px] overflow-y-auto">
+                <div class="tag-values flex flex-col gap-1 px-2 py-1 h-[235px] overflow-y-auto">
+                    <label>
+                        <input type="checkbox">
+                        <span class="pl-2">Boda boda</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span class="pl-2">Taxi</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span class="pl-2">Movers</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span class="pl-2">Boda boda</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span class="pl-2">Taxi</span>
+                    </label>
+                    <label>
+                        <input type="checkbox">
+                        <span class="pl-2">Movers</span>
+                    </label>
                     <label>
                         <input type="checkbox">
                         <span class="pl-2">Boda boda</span>
@@ -43,9 +66,9 @@ console.log("Services loaded");
                         <span class="pl-2">Movers</span>
                     </label>
                 </div>
-                <div class="w-full flex items-center justify-around">
-                    <div class="i-mdi-arrow-back hover:bg-blue-500 cursor-pointer text-xl" @click="selectServices" />
-                    <button class="bg-blue-400 text-white font-bold text-base px-6 py-1 rounded font-mono tracking-wide">search</button>
+                <div class="search-btn w-full flex items-center justify-start gap-9">
+                    <div class="i-mdi-arrow-back hover:bg-blue-500 hover:scale-125 cursor-pointer text-xl" @click="selectServices" />
+                    <button class="bg-blue-400 hover:bg-blue-600 text-white font-bold text-base px-6 py-1 rounded font-mono tracking-wide">search</button>
                 </div>
             </div>
         </transition>
@@ -62,6 +85,7 @@ console.log("Services loaded");
 }
 .slide-filters-enter-active {
     transition: opacity 500ms ease, transform 300ms ease;
+    overflow: hidden;
 }
 .tag-values label {
     @apply w-full flex flex-row items-center text-neutral-500;
@@ -76,5 +100,8 @@ console.log("Services loaded");
 }
 .tag-values label input {
     @apply w-[1rem] h-[1rem];
+}
+.i-mdi-arrow-back , .search-btn button {
+    transition: transform 300ms ease, background-color 300ms ease;
 }
 </style>
