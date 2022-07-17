@@ -34,7 +34,7 @@ const openMSideNav = (): void => {
 
 <style scoped>
 nav {
-    @apply w-[90%] md:w-[80%] flex flex-row py-1.5 sm:py-2 items-center justify-between pr-8 md:pr-0;
+    @apply w-[90%] md:w-[80%] flex flex-row py-1.5 sm:py-2 items-center justify-between sm:pr-8 md:pr-0;
     font-family: "NonBreakingSpaceOverride","Hoefler Text",Garamond,"Times New Roman",serif;
     transition: width 300ms ease;
 }
