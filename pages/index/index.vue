@@ -1,8 +1,5 @@
 <template>
     <main class="w-full flex flex-col justify-center px-2 gap-4">
-        <div class="searchbar">
-            <DesignsSearchBar />
-        </div>
         <div class="content w-full min-h-[20rem] md:p-2 flex flex-col gap-4 pt-5">
             <div class="categories w-full">
                 <h3 class="text-2xl font-bold text-neutral-600">Categories.</h3>

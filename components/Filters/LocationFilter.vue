@@ -18,6 +18,7 @@ const selectLocation = ():void => {
         <transition name="slide-filters" mode="out-in">
             <div class="locations w-full flex flex-col gap-2 p-2"  v-if="!selectlocation">
                 <h3 class="text-neutral-600 font-semibold text-base flex flex-row items-center gap-1">Locations <div class="i-mdi-map-marker" /></h3>
+                <hr>
                 <div class="tag-values flex flex-col gap-1 px-2 py-1 max-h-[240px] overflow-y-auto">
                     <button
                         v-for="(county, index) in counties" @click="selectLocation">
@@ -27,10 +28,11 @@ const selectLocation = ():void => {
             </div>
         </transition>
         <transition name="slide-filters" mode="out-in">
-            <div class="locations w-full flex flex-col gap-2"  v-if="selectlocation">
+            <div class="locations w-full flex flex-col gap-1"  v-if="selectlocation">
                 <div class="top-side w-full flex flex-row items-center text-neutral-600">
                     <h3 class="font-semibold text-base flex flex-row items-center gap-1">Nakuru <div class="i-mdi-map-marker" /></h3>
                 </div>
+                <hr>
                 <div class="tag-values flex flex-col gap-1 px-2 py-1 h-[230px] overflow-y-auto">
                     <label>
                         <input type="checkbox">
@@ -78,8 +80,8 @@ const selectLocation = ():void => {
     gap: 0.5em;
 }
 .tag-values button {
-    @apply w-full flex items-center text-start text-neutral-500;
-    @apply text-base hover:bg-slate-100 py-2 px-2 cursor-pointer;
+    @apply flex text-start text-neutral-500 w-auto;
+    @apply text-base hover:bg-slate-100 py-1 px-2 cursor-pointer;
 }
 .tag-values label input {
     @apply w-[1rem] h-[1rem];
