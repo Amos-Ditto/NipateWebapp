@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import Locations from '~~/types/LocationTypes';
 const config = useRuntimeConfig();
 const apierror = ref<boolean>(false);
 const instantloading = ref<boolean>(false);
 
-interface ApiCounties {
-    id: Number;
-    Name: String;
-}
-const apicounties = ref<ApiCounties[]>();
+const openfiltercounter = ref<boolean>(true);
+const filterlocationtags = ref<Locations[]>();
+
+const apicounties = ref<Locations[]>();
 
 const searchlocationmobile = ref<boolean>(false);
 
@@ -46,7 +46,7 @@ initialApiRequest();
     <main class="w-full flex flex-col py-1 gap-2 overflow-y-auto relative min-h-[80vh]">
         <div class="navigation-bar w-full flex flex-row justify-between lg:md:justify-start items-center">
             <div class="mobile-search-btn lg:hidden text-neutral-500 px-4">
-                <button>Find by <div class="i-mdi-filter-variant text-base" /></button>
+                <button class="py-1">Find by <div class="i-mdi-filter-variant text-base" /></button>
             </div>
             <div class="links flex flex-row md:gap-8">
                 <button>My requests</button>
@@ -56,25 +56,22 @@ initialApiRequest();
         <hr>
         <section class="w-full lg:hidden flex flex-row gap-4 px-6">
             <div class="mobile-view-filter text-neutral-500 relative">
-                <button class="btn-location" @click="searchLocationMobile">Location <div class="i-mdi-map-marker" /></button>
+                <button
+                    class="btn-location" :class="searchlocationmobile ? 'border-green-500 text-green-500' : 'border-neutral-300'"
+                    @click="searchLocationMobile"
+                >
+                    <div class="i-mdi-map-marker" /> Location</button>
                 <Transition name="drop-down">
                     <LazyDropDownsLocationDropDown v-if="searchlocationmobile" :counties="apicounties" :instantloading="instantloading" />
                 </Transition>
             </div>
             <div class="mobile-view-filter text-neutral-500 relative flex items-center justify-center">
-                <button class="btn-location">Services <div class="i-mdi-account-wrench" /></button>
+                <button class="btn-location"><div class="i-mdi-account-wrench" /> Services</button>
                 <!-- <LazyDropDownsServicesDropDown /> -->
             </div>
         </section>
-        <section class="w-full px-4">
-            <div class="mobile-filter-tags border border-neutral-300 py-1 rounded-lg w-full flex flex-row items-center justify-between px-4">
-                <div class="filter-tags w-[80%] text-neutral-600 flex flex-wrap gap-2">
-                    <button class="bg-zinc-200 rounded px-3 py-1 text-xs tracking-wide italic">Kabarak</button>
-                    <button class="bg-zinc-200 rounded px-3 py-1 text-xs tracking-wide italic">Kabarak</button>
-                    <button class="bg-zinc-200 rounded px-3 py-1 text-xs tracking-wide italic">Kabarak</button>
-                </div>
-                <button class="bg-orange-300 px-3 py-1 rounded-lg text-white font-bold">search</button>
-            </div>
+        <section class="filter-container w-full px-4 lg:hidden py-1">
+            <DropDownsSelectedFilters v-if="openfiltercounter" />
         </section>
         <section class="w-full flex flex-row justify-evenly">
             
@@ -145,8 +142,14 @@ initialApiRequest();
     @apply flex flex-row items-center text-xs font-semibold italic px-3 tracking-wider gap-1.5;
 }
 .mobile-view-filter .btn-location {
-    @apply px-2 border border-neutral-300 py-1 flex flex-row items-center gap-1 text-sm rounded;
+    @apply px-3 border py-2 flex flex-row items-center gap-1 text-sm rounded;
     @apply hover:text-green-500;
     transition: color 300ms ease , border 300ms ease;
+}
+.mobile-filter-tags .filters-tags button {
+    transition: background-color 300ms ease;
+}
+.filter-container {
+    transition: height 300ms ease;
 }
 </style>

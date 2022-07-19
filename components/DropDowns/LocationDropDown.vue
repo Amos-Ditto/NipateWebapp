@@ -59,7 +59,7 @@ const toggleGroupLocation = ():void => {
                     <div class="i-mdi-magnify absolute left-0 translate-x-[150%] translate-y-[10%]" />
                 </div>
                 <hr>
-                <h3 class=" text-xs italic px-4">select by this tags</h3>
+                <h3 class=" text-xs italic px-4">select your location by this tags</h3>
                 <div class="group-btn flex flex-wrap items-center w-full max-h-[130px] gap-4 px-4 py-4 overflow-y-auto">
                     <button v-for="(town, index) in towns" :key="index">{{town.name}}</button>
                 </div>
