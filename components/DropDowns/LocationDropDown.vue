@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import Locations from '~~/types/LocationTypes';
 const togglegrouplocation = ref<boolean>(true);
+
+const emit = defineEmits<{
+    (event: 'selectLocationFilterTag', payload:Locations);
+}>();
 
 interface Location {
     name: string;
@@ -13,14 +18,19 @@ defineProps<{
     counties: ApiCounties[];
     instantloading: boolean;
 }>();
-const towns: Location[] = [
-    {name: 'Kabarak'}, {name: 'Kiamunyi'}, {name: 'Mercy Njeri'}
+
+const towns: Locations[] = [
+    {id: 1, Name: 'Kabarak'}, {id: 2, Name: 'Kiamunyi'}, {id: 3, Name: 'Mercy Njeri'}
 ]
 
 // Methods
 const toggleGroupLocation = ():void => {
     togglegrouplocation.value = !togglegrouplocation.value;
 }
+
+const selectLocationFilterTag = (payload: Locations):void => {
+    emit("selectLocationFilterTag", payload);
+};
 </script>
 <template>
     <div class="drop-down">
@@ -61,7 +71,10 @@ const toggleGroupLocation = ():void => {
                 <hr>
                 <h3 class=" text-xs italic px-4">select your location by this tags</h3>
                 <div class="group-btn flex flex-wrap items-center w-full max-h-[130px] gap-4 px-4 py-4 overflow-y-auto">
-                    <button v-for="(town, index) in towns" :key="index">{{town.name}}</button>
+                    <button
+                        v-for="(town, index) in towns" :key="index"
+                        @click="selectLocationFilterTag(town)"
+                    >{{town.Name}}</button>
                 </div>
             </div>
         </transition>

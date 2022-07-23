@@ -1,21 +1,29 @@
 <script setup lang="ts">
-import Locations from '~~/types/LocationTypes';
+import {Locations, Categories} from '~~/types/LocationTypes';
 const config = useRuntimeConfig();
 const apierror = ref<boolean>(false);
 const instantloading = ref<boolean>(false);
 
-const openfiltercounter = ref<boolean>(true);
-const filterlocationtags = ref<Locations[]>();
+const openfiltercounter = ref<boolean>(false);
+const filterlocationtags = ref<Locations[]>([]);
+const filtercategorytags = ref<Categories[]>([]);
 
-const apicounties = ref<Locations[]>();
+const apicounties = ref<Locations[]>([]);
+const apicategories = ref<Categories[]>([]);
 
 const searchlocationmobile = ref<boolean>(false);
+const searchservicesmobile = ref<boolean>(false);
 
 
 // Methods
 const searchLocationMobile = ():void => {
+    searchservicesmobile.value = false;
     searchlocationmobile.value = !searchlocationmobile.value;
 };
+const searchServicesMobile = ():void => {
+    searchlocationmobile.value = false;
+    searchservicesmobile.value = !searchservicesmobile.value;
+}
 
 const fetchCountyLocations = async (type:void) => {
     await fetch(`${config.base_Url}/location/counties/`)
@@ -23,7 +31,6 @@ const fetchCountyLocations = async (type:void) => {
         if (res.status !== 200) {
             apierror.value = true;
             return;
-        }else {
         }
         return res.json();
     })
@@ -35,12 +42,89 @@ const fetchCountyLocations = async (type:void) => {
         console.log(error);
     })
 };
+const fetchServiceCategories = async (type:void) => {
+    await fetch(`${config.base_Url}/service/category/`)
+    .then((res) => {
+        if (res.status !== 200) {
+            apierror.value = true;
+            return;
+        }
+        return res.json();
+    })
+    .then(response => {
+        apicategories.value = response;
+    })
+    .catch(error => {
+        apierror.value = true;
+        console.log(error);
+    })
+};
 const initialApiRequest = async(type: void) => {
     instantloading.value = true;
     await fetchCountyLocations();
+    console.log('fetching from another api');
+    
+    await fetchServiceCategories();
     instantloading.value = false;
 };
 initialApiRequest();
+
+
+const enter = (el: HTMLElement): void => {
+    el.style.height = "auto";
+    let height = getComputedStyle(el).height;
+    el.style.height = '0';
+    getComputedStyle(el);
+    setTimeout(() => {el.style.height = height});
+
+};
+
+const afterEnter = (el: HTMLElement): void => {
+    el.style.height = "auto";
+};
+
+const leave = (el: HTMLElement): void => {
+    el.style.height = getComputedStyle(el).height;
+    getComputedStyle(el);
+    setTimeout(() => {el.style.height = '0'});
+};
+
+// Receive emits methods
+const selectLocationFilterTag = (event: Locations): void => {
+    if (filterlocationtags.value.length > 0) {
+        for(let i=0; i < filterlocationtags.value.length; i++) {
+            if (filterlocationtags.value[i]['id'] === event['id']) {
+                return;
+            }
+        }
+    }
+    filterlocationtags.value.push(event);
+    openfiltercounter.value = true;
+};
+const selectCategoryFilterTag = (event: Categories): void => {
+    if (filtercategorytags.value.length > 0) {
+        for(let i=0; i < filtercategorytags.value.length; i++) {
+            if (filtercategorytags.value[i]['id'] === event['id']) {
+                return;
+            }
+        }
+    }
+    filtercategorytags.value.push(event);
+    openfiltercounter.value = true;
+}
+const popFilterTag = (event: Locations['id']): void => {
+    for(let i=0; i < filterlocationtags.value.length; i++) {
+        if (filterlocationtags.value[i]['id'] === event) {
+
+            // Edit this delete item
+            // filterlocationtags.value.slice
+            if(filterlocationtags.value.length === 0 && filtercategorytags.value.length === 0) {
+                openfiltercounter.value = false;
+            }
+            break;
+        }
+    }
+};
 </script>
 <template>
     <main class="w-full flex flex-col py-1 gap-2 overflow-y-auto relative min-h-[80vh]">
@@ -54,7 +138,7 @@ initialApiRequest();
             </div>
         </div>
         <hr>
-        <section class="w-full lg:hidden flex flex-row gap-4 px-6">
+        <section class="w-full lg:hidden flex flex-row gap-4 px-6 relative">
             <div class="mobile-view-filter text-neutral-500 relative">
                 <button
                     class="btn-location" :class="searchlocationmobile ? 'border-green-500 text-green-500' : 'border-neutral-300'"
@@ -62,21 +146,47 @@ initialApiRequest();
                 >
                     <div class="i-mdi-map-marker" /> Location</button>
                 <Transition name="drop-down">
-                    <LazyDropDownsLocationDropDown v-if="searchlocationmobile" :counties="apicounties" :instantloading="instantloading" />
+                    <LazyDropDownsLocationDropDown
+                        v-if="searchlocationmobile" :counties="apicounties"
+                        :instantloading="instantloading" @select-location-filter-tag="selectLocationFilterTag" />
                 </Transition>
             </div>
             <div class="mobile-view-filter text-neutral-500 relative flex items-center justify-center">
-                <button class="btn-location"><div class="i-mdi-account-wrench" /> Services</button>
-                <!-- <LazyDropDownsServicesDropDown /> -->
+                <button
+                    @click="searchServicesMobile"
+                    class="btn-location" :class="searchservicesmobile ? 'border-green-500 text-green-500' : 'border-neutral-300'"
+                ><div class="i-mdi-account-wrench" /> Services</button>
+                <Transition name="drop-down">
+                    <LazyDropDownsServicesDropDown
+                        v-if="searchservicesmobile" :apicategories="apicategories"
+                        :instantloading="instantloading" @select-category-filter-tag="selectCategoryFilterTag" />
+                </Transition>
             </div>
+            <Transition name="drop-down">
+                <div class="mobile-search-btn absolute right-0 flex items-center h-full" v-if="openfiltercounter">
+                    <button class="text-xs bg-orange-400 hover:bg-orange-500 tracking-wider rounded p-1.5 text-white font-bold">search</button>
+                </div>
+            </Transition>
         </section>
-        <section class="filter-container w-full px-4 lg:hidden py-1">
-            <DropDownsSelectedFilters v-if="openfiltercounter" />
+        <section class="filter-container w-full px-2 lg:hidden py-0 shadow border-t border-neutral-200">
+            <Transition name="menu-mobile" @enter="enter" @after-enter="afterEnter" @leave="leave">
+                <div class="filter-container-counter w-full flex flex-row items-center overflow-x-auto" v-if="openfiltercounter">
+                    <div class="filter-text flex flex-row items-center text-neutral-400 text-sm italic tracking-wide">
+                        <h3>filters</h3>
+                        <div class="i-mdi-chevron-right text-lg" />
+                    </div>
+                    <DropDownsSelectedFilters
+                        :locationtags="filterlocationtags" @pop-filter-tag="popFilterTag"
+                        :producttags="filtercategorytags"
+                    />
+                </div>
+            </Transition>
         </section>
         <section class="w-full flex flex-row justify-evenly">
             
             <section class="service-requests flex flex-row gap-4 w-full lg:w-[75%]">
-                <div class="services-list w-full">
+                <div class="services-list w-full pt-1">
+                    <h3 class="text-neutral-500 font-bold tracking-wide px-4">Services Requested:</h3>
                     <LazyContextServicesList />
                 </div>
             </section>
@@ -102,7 +212,10 @@ initialApiRequest();
 .drop-down-enter-active , .drop-down-leave-active {
     transition: opacity 400ms ease;
 }
-
+.menu-mobile-enter-active, .menu-mobile-leave-active {
+    transition: height 250ms ease-in-out;
+    overflow: hidden;
+}
 .navigation-bar {
     @apply pr-2 md:pr-16 pt-3 md:pt-0;
 }
@@ -142,8 +255,8 @@ initialApiRequest();
     @apply flex flex-row items-center text-xs font-semibold italic px-3 tracking-wider gap-1.5;
 }
 .mobile-view-filter .btn-location {
-    @apply px-3 border py-2 flex flex-row items-center gap-1 text-sm rounded;
-    @apply hover:text-green-500;
+    @apply px-2.5 border py-1.5 flex flex-row items-center gap-1 text-sm rounded;
+    @apply hover:text-green-500 hover:border-green-500;
     transition: color 300ms ease , border 300ms ease;
 }
 .mobile-filter-tags .filters-tags button {

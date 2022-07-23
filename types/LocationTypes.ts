@@ -3,4 +3,9 @@ interface Locations {
     Name: string;
 }
 
-export default Locations;
+interface Categories {
+    id: number;
+    Name: string;
+}
+
+export {Locations, Categories};
