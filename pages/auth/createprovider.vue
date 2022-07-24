@@ -23,7 +23,7 @@ const closeProductSelect = (): void => {
                     <h3 class="text-neutral-600 text-base sm:text-2xl tracking-wide font-thin">Create Provider Account Today!</h3>
                 </div>
     
-                <div class="context w-full md:w-[750px] lg:w-[780px] sm:w-[600px] flex-wrap-reverse flex justify-between items-center pt-8 pb-8 gap-8 sm:gap-0">
+                <div class="context w-full md:w-[750px] lg:w-[780px] sm:w-[600px] flex-wrap-reverse sm:flex-wrap flex justify-between items-start flex-row pt-8 pb-8 pr-4 gap-8 sm:gap-0">
                     <div class="form w-full sm:w-[50%] px-2 flex flex-col gap-8">
                         <div class="input-field w-full flex-col flex items-start gap-1 relative">
                             <label for="product" class="text-neutral-500 text-sm tracking-wide px-2">Product/Service to offer</label>
