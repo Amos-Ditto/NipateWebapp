@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Locations from '~~/types/LocationTypes';
+import {Locations} from '~~/types/LocationTypes';
 const togglegrouplocation = ref<boolean>(true);
 
 const emit = defineEmits<{
