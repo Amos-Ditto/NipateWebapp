@@ -207,6 +207,10 @@ const updateUser = async(type: void) => {
     }, 500);
 
 }
+
+const routeBack = ():void => {
+    router.back();
+}
 </script>
 <template>
     <main class="w-full h-screen fixed top-0 m-0 bg-gray-100 overflow-y-auto">
@@ -350,7 +354,7 @@ const updateUser = async(type: void) => {
                 </div>
     
     
-                <div class="back-btn fixed bottom-[9%] right-[3%] sm:left-[4%] bg-white w-[2.5rem] h-[2.4rem] rounded-[50%] border-[3px] border-neutral-300 flex items-center justify-center hover:bg-neutral-300">
+                <div class="back-btn fixed bottom-[9%] right-[3%] sm:left-[4%] bg-white w-[2.5rem] h-[2.4rem] rounded-[50%] border-[3px] border-neutral-300 flex items-center justify-center hover:bg-neutral-300" @click="routeBack">
                     <div class="i-mdi-chevron-left text-neutral-500 text-4xl" />
                     <div class="hover-back absolute top-[-120%] px-4 py-1 bg-neutral-300 flex items-center justify-center rounded invisible opacity-0">
                         <p class="text-neutral-800 text-xs font-bold tracking-tight">back</p>

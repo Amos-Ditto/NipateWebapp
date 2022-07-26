@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+const router = useRouter();
 const selectproducts = ref<boolean>(false);
 
 const openProductSelect = ():void => {
@@ -7,6 +7,10 @@ const openProductSelect = ():void => {
 };
 const closeProductSelect = (): void => {
     selectproducts.value = false;
+}
+
+const routeBack = ():void => {
+    router.back();
 }
 </script>
 <template>
@@ -122,7 +126,7 @@ const closeProductSelect = (): void => {
                 </div>
     
     
-                <div class="back-btn fixed bottom-[9%] right-[3%] bg-white w-[2.5rem] h-[2.4rem] rounded-[50%] border-[3px] border-neutral-300 flex items-center justify-center hover:bg-neutral-300">
+                <div class="back-btn fixed bottom-[9%] right-[3%] bg-white w-[2.5rem] h-[2.4rem] rounded-[50%] border-[3px] border-neutral-300 flex items-center justify-center hover:bg-neutral-300" @click="routeBack">
                     <div class="i-mdi-chevron-left text-neutral-500 text-4xl" />
                     <div class="hover-back absolute top-[-120%] px-4 py-1 bg-neutral-300 flex items-center justify-center rounded invisible opacity-0">
                         <p class="text-neutral-800 text-xs font-bold tracking-tight">back</p>

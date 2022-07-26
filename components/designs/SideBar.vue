@@ -1,10 +1,10 @@
 <template>
     <nav class="w-full p-2">
         <ul class="w-full flex flex-col gap-3">
-            <li><NuxtLink to="/" ><div class="i-mdi-magnify text-2xl" /> Search</NuxtLink></li>
-            <li><NuxtLink to="/services" ><div class="i-mdi-format-list-bulleted text-2xl" /> Services</NuxtLink></li>
-            <li><NuxtLink to="" ><div class="i-mdi-ad text-2xl" /> Advertise</NuxtLink></li>
-            <li><NuxtLink to="" ><div class="i-mdi-account-box text-2xl" /> Your account</NuxtLink></li>
+            <li><NuxtLink to="/" >Search</NuxtLink></li>
+            <li><NuxtLink to="/services" >Services</NuxtLink></li>
+            <li><NuxtLink to="" >Advertise</NuxtLink></li>
+            <li><NuxtLink to="/auth/createprovider" >Your account</NuxtLink></li>
         </ul>
     </nav>
 
