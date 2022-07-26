@@ -8,4 +8,12 @@ interface Categories {
     Name: string;
 }
 
-export {Locations, Categories};
+interface User {
+    id?: number;
+    MobileNumber?: string;
+    IDNumber?: number;
+    FirstName?: string;
+    SurName?: string;
+}
+
+export {Locations, Categories, User};

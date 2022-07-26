@@ -6,8 +6,7 @@
 
 <style>
 .loader {
-    width: 48px;
-    height: 48px;
+    @apply w-full h-full;
     border: 5px solid rgb(210, 216, 221);
     border-bottom-color: transparent;
     border-radius: 50%;
