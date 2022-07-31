@@ -12,6 +12,10 @@ const closeProductSelect = (): void => {
 const routeBack = ():void => {
     router.back();
 }
+
+const redirectAuth = (): void => {
+    router.push('/auth');
+}
 </script>
 <template>
     <main class="w-full h-screen fixed top-0 m-0 bg-gray-100">
@@ -26,7 +30,14 @@ const routeBack = ():void => {
                 <div class="header w-full md:w-[750px] lg:w-[780px] sm:w-[600px] h-[4.5rem] sm:h-[5.4rem] bg-white border border-neutral-200 rounded-t flex items-center px-2 sm:px-6 md:px-10">
                     <h3 class="text-neutral-600 text-base sm:text-2xl tracking-wide font-thin">Create Provider Account Today!</h3>
                 </div>
-    
+                <!-- <div class="network-error w-full md:w-[750px] lg:w-[780px] sm:w-[600px] flex items-center">
+                    <h3>Looks like you lost your connection. Please check it and try again.</h3>
+                    <button>
+                        <div class="i-mdi-restore text-xl" />
+                        <span class="loader"></span>
+                        Retry
+                    </button>
+                </div> -->
                 <div class="context w-full md:w-[750px] lg:w-[780px] sm:w-[600px] flex-wrap-reverse sm:flex-wrap flex justify-between items-start flex-row pt-8 pb-8 pr-4 gap-8 sm:gap-0">
                     <div class="form w-full sm:w-[50%] px-2 flex flex-col gap-8">
                         <div class="input-field w-full flex-col flex items-start gap-1 relative">
@@ -40,6 +51,9 @@ const routeBack = ():void => {
                                 <div class="close-btn absolute right-0 top-0 translate-y-[25%] translate-x-[-50%] flex items-center justify-center bg-slate-200 rounded-full p-1 cursor-pointer" @click="closeProductSelect">
                                     <div class="i-mdi-close" />
                                 </div>
+                                <div class="dropdown-content w-full">
+                                    <DropDownsLocationComponent />
+                                </div>
                             </div>
                         </div>
                         <div class="input-field w-full flex-col flex items-start gap-1">
@@ -51,9 +65,9 @@ const routeBack = ():void => {
                         </div>
                         <div class="input-field w-full flex-col flex items-start gap-1">
                             <label for="product" class="text-neutral-500 text-sm tracking-wide px-2">Available on this Days</label>
-                            <div class="checkboxes w-[88%] flex flex-wrap gap-x-2 gap-y-1">
+                            <div class="checkboxes w-[88%] flex flex-wrap gap-x-4 gap-y-4 px-2">
                                 <div class="checkbox-option flex flex-row items-center w-full px-2 gap-6">
-                                    <label class="">
+                                    <label class="gap-2">
                                         <input type="checkbox" class="w-[2rem] h-[1rem]">
                                         <span class="text-base">All</span>
                                     </label>
@@ -120,7 +134,11 @@ const routeBack = ():void => {
                             </div>
                         </div>
                         <div class="change-btn pt-4">
-                            <button class="bg-blue-400 hover:bg-blue-600 rounded-full px-6 py-1 text-white font-bold tracking-wide">change account</button>
+                            <button
+                                @click="redirectAuth"
+                                class="bg-blue-400 hover:bg-blue-600 rounded-full px-6 py-1 text-white font-bold tracking-wide">
+                                change account
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -178,18 +196,17 @@ const routeBack = ():void => {
     @apply visible opacity-100;
 } */
 .checkboxes label {
-    @apply flex flex-row items-center text-neutral-500;
-    @apply text-sm tracking-wide hover:bg-slate-100 px-2 py-2 cursor-pointer;
-    display: grid;
-    grid-template-columns: 1em auto;
-    gap: 0.2em;
+    @apply flex flex-row gap-2 cursor-pointer text-neutral-500 font-normal;
 }
 .checkbox-option label {
     @apply flex flex-row items-center text-neutral-500;
-    @apply text-sm tracking-wide hover:bg-slate-100 px-2 py-2 cursor-pointer;
+    @apply text-base tracking-wide hover:bg-slate-100 px-2 py-2 cursor-pointer;
     display: grid;
     grid-template-columns: 1.5em auto;
     gap: 0.8em;
+}
+label input[type="checkbox"] {
+    @apply bg-blue-400 p-8;
 }
 /* .input-field .input:focus-within .i-mdi-chevron-down {
     @apply rotate-180;
@@ -211,16 +228,32 @@ const routeBack = ():void => {
     .header {
         background-size: 30% 50%;
     }
-    .checkboxes label {
-        grid-template-columns: .8em auto;
-        gap: 0.2em;
+}
+
+.network-error {
+    @apply gap-8 text-center flex flex-col text-sm text-neutral-500 py-8;
+}
+.network-error button {
+    @apply flex items-center flex-row gap-1 text-lg font-bold bg-blue-400 px-4 py-1;
+    @apply rounded-md text-slate-100 tracking-wide ;
+}
+.loader {
+    width: 21px;
+    height: 21px;
+    border: 4px solid #FFF;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
     }
-    .checkbox-option label {
-        @apply flex flex-row items-center text-neutral-500;
-        @apply text-sm tracking-wide hover:bg-slate-100 px-2 py-2 cursor-pointer;
-        display: grid;
-        grid-template-columns: 1.5em auto;
-        gap: 0.8em;
+    100% {
+        transform: rotate(360deg);
     }
 }
 </style>

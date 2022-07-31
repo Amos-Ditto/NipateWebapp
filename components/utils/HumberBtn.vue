@@ -6,7 +6,6 @@ const props = defineProps<{
 const emit = defineEmits<{
     (event: 'openMSideNav');
 }>();
-const open = ref<boolean>(false);
 
 const onOpen = ():void => {
     emit("openMSideNav");
