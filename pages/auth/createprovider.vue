@@ -48,11 +48,11 @@ const redirectAuth = (): void => {
                                 <div class="i-mdi-chevron-down absolute right-0 translate-x-[-150%] text-lg" :class="selectproducts && 'rotate-180'" />
                             </div>
                             <div class="dropdown-container w-[84%] sm:w-full absolute bottom-0 translate-y-[110%] bg-white min-h-[5rem] rounded z-20" :class="selectproducts ? 'visible opacity-100' : 'invisible opacity-0'">
-                                <div class="close-btn absolute right-0 top-0 translate-y-[25%] translate-x-[-50%] flex items-center justify-center bg-slate-200 rounded-full p-1 cursor-pointer" @click="closeProductSelect">
+                                <div class="close-btn z-20 absolute right-0 top-0 translate-y-[25%] translate-x-[-50%] flex items-center justify-center bg-slate-200 rounded-full p-1 cursor-pointer" @click="closeProductSelect">
                                     <div class="i-mdi-close" />
                                 </div>
                                 <div class="dropdown-content w-full">
-                                    <DropDownsLocationComponent />
+                                    <DropDownsProductComponent />
                                 </div>
                             </div>
                         </div>
