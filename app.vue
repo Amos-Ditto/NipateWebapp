@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { isNavigationFailure } from "vue-router";
-import LoadingBar from "./components/utils/loadingBar.vue";
 const router = useRouter();
 const title = ref<string>('Nipate App');
 const description = ref<string>('This is nipate development app');
@@ -31,8 +30,8 @@ useHead({
 </script>
 
 <template>
-  <main class="w-screen h-screen bg-slate-50 m-0 p-0 relative">
-    <LoadingBar v-if="routes"  :class="succesfull ? 'bg-green-500 loading-bar' : 'bg-green-500 loading-bar'" />
+  <main class="fixed bottom-0 top-0 left-0 right-0 bg-gray-100 m-0 p-0 overflow-y-auto">
+    <UtilsPageLoading v-if="routes" />
     <NuxtPage />
   </main>
 </template>
