@@ -12,10 +12,10 @@
         <div class="card-footer">
             <div class="user-details">
                 <div
-                    class="user-icon w-[22px] h-[22px] flex items-center justify-center rounded-full text-neutral-400 bg-gray-200">
+                    class="user-icon w-[22px] sm:w-[32px] h-[22px] sm:h-[32px] flex items-center justify-center rounded-full text-neutral-400 bg-gray-200">
                     <div class="i-mdi-account"></div>
                 </div>
-                <span>Rafiki cafe</span>
+                <span>Rafiki cafe Rafiki cafe</span>
             </div>
             <div class="user-location">
                 <div class="i-mdi-google-maps text-neutral-400"></div>
@@ -30,7 +30,7 @@
 
 <style scoped>
 .card {
-    @apply  min-w-[220px] sm:w-[280px] sm:h-[180px] px-8 h-[180px] border border-gray-300;
+    @apply  min-w-[220px] max-w-[320px] sm:max-w-[400px] sm:min-w-[340px] sm:h-[190px] px-8 h-[180px] border border-gray-300;
     @apply flex flex-col px-2 py-8 justify-between rounded-md hover:border-gray-400 cursor-pointer;
     transition: width 300ms , height 300ms , border 300ms;
 }
@@ -54,9 +54,12 @@
     @apply flex flex-row gap-1 items-center w-[50%] overflow-hidden;
 }
 .card-footer .user-details span , .card-footer .user-location span {
-    @apply text-xs;
+    @apply text-xs truncate;
 }
 .location-name {
     @apply flex flex-row items-center text-sm gap-0;
+}
+.user-icon {
+    transition: width 300ms , height 300ms;
 }
 </style>
