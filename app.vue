@@ -31,7 +31,7 @@ useHead({
 
 <template>
   <main class="fixed bottom-0 top-0 left-0 right-0 bg-gray-100 m-0 p-0 overflow-y-auto">
-    <UtilsPageLoading v-if="routes" />
+    <UtilsPageLoading v-if="routes" class="absolute top-0 left-0 z-20" />
     <NuxtPage />
   </main>
 </template>
