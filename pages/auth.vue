@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import {useAuthStore} from '~/stores/authentications';
+
+const userauthenticated = useAuthStore();
+
+const toggleUserWhenLoggedIn = ():void => {
+    userauthenticated.toggleIsUserAuthenticated();
+}
+toggleUserWhenLoggedIn();
+
+</script>
 <template>
     <main class="w-full h-full">
         <header class="h-[4em] sm:h-[4.8em] flex items-center w-full px-2 sm:px-8">

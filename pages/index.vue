@@ -1,9 +1,14 @@
 <script setup lang="ts">
-const router = useRoute();
-console.log(router.name);
+import {useAuthStore} from '~/stores/authentications';
 
-const userauthenticated = ref<boolean>(false);
+// const userauthenticated = ref<boolean>(true);
 
+const userauthenticated = useAuthStore();
+const opensearch = ref<boolean>(false);
+
+const toggleOpenSearchField = ():void => {
+    opensearch.value = !opensearch.value;
+}
 </script>
 <template>
     <NuxtLayout>
@@ -26,13 +31,13 @@ const userauthenticated = ref<boolean>(false);
                     <button>Transport</button>
                 </div>
             </div>
-            <div class="hero-container gap-4">
+            <div class="hero-container gap-4 relative" v-if="!userauthenticated.getIsUserAuthenticated">
                 <div class="hero-text">
                     <h3 class="text-2xl sm:text-4xl md:text-[2.8rem] font-bold sm:leading-[40px]">Find the best people <br class="hidden sm:block"> to serve you</h3>
                 </div>
-                <div class="search-bar lg:w-[600px]">
+                <div class="search-bar lg:w-[600px] relative">
                     <div class="input-field w-[80%] md:w-[60%] lg:w-[70%] flex items-center relative">
-                        <input type="search" placeholder="Search for service">
+                        <input type="search" placeholder="Search for service" @focusin="toggleOpenSearchField">
                         <div class="i-mdi-filter-variant absolute left-0 z-[2] translate-x-[60%] xs:translate-x-[80%] text-lg xs:text-xl text-neutral-400"></div>
                     </div>
                     <button class="loc-btn bg-white border border-neutral-300 focus:border-orange-300 hover:border-orange-200 hover:bg-gray-200">
@@ -43,14 +48,21 @@ const userauthenticated = ref<boolean>(false);
                         <div class="i-mdi-magnify block xs:hidden text-xl scale-125"></div>
                     </button>
                 </div>
+                <div class="search-feature absolute translate-y-[105%] lg:translate-y-[100%] lg:translate-x-[-5%] z-30 w-[98vw] sm:w-[100%]  md:w-[640px] lg:w-[800px] min-h-[12rem] bottom-0 lg:right-0 bg-gray-200 rounded-b" v-if="opensearch">
+                    <PageFeauturesSearchDropDown />
+                    <div class="search-feature-footer absolute bottom-0 right-0 w-full min-h-[2rem] flex justify-end items-center px-4 py-1">
+                        <button class="px-3 py-0.5 hover:bg-red-500 bg-red-400 rounded-md text-white font-bold" @click="toggleOpenSearchField">close</button>
+
+                    </div>
+                </div>
             </div>
-            <div class="search-bar-auth" v-if="userauthenticated">
+            <div class="search-bar-auth relative" v-if="userauthenticated.getIsUserAuthenticated">
                 <div class="search-content w-full capitalize text-sm md:text-lg italic px-4">
                     <h3 class="hidden xs:block">search for services at certain 'location':</h3>
                 </div>
                 <div class="search-bar">
                     <div class="input-field w-[80%] md:w-[60%] lg:w-[50%] flex items-center relative">
-                        <input type="search" placeholder="Search for service">
+                        <input type="search" placeholder="Search for service" @focusin="toggleOpenSearchField">
                         <div class="i-mdi-filter-variant absolute left-0 z-[2] translate-x-[80%] text-xl text-neutral-400"></div>
                     </div>
                     <button class="loc-btn bg-white border border-neutral-300 focus:border-orange-300 hover:border-orange-200 hover:bg-gray-200">
@@ -60,6 +72,13 @@ const userauthenticated = ref<boolean>(false);
                         <span class="hidden xs:block">Search</span>
                         <div class="i-mdi-magnify block xs:hidden text-xl scale-125"></div>
                     </button>
+                </div>
+                <div class="search-feature-auth" v-if="opensearch">
+                    <PageFeauturesSearchDropDown />
+                    <div class="search-feature-footer absolute bottom-0 right-0 w-full min-h-[2rem] flex justify-end items-center px-4 py-1">
+                        <button class="px-3 py-0.5 hover:bg-red-500 bg-red-400 rounded-md text-white font-bold" @click="toggleOpenSearchField">close</button>
+
+                    </div>
                 </div>
             </div>
             <div class="body-content w-full py-1">
@@ -122,6 +141,12 @@ const userauthenticated = ref<boolean>(false);
     transition: background-color 300ms;
 }
 .search-bar-auth {
-    @apply  w-full items-center gap-1 flex justify-center flex-col px-2 xs:px-5 sm:px-20;
+    @apply  w-full items-start gap-1 flex justify-center flex-col px-2 xs:px-5 sm:px-20;
+}
+.search-feature-auth {
+    @apply  absolute flex justify-start items-start translate-y-[105%] z-30 w-full sm:w-[80%] md:w-[72%] lg:w-[56%] min-h-[12rem] bottom-0 bg-gray-200 rounded-b;
+}
+.search-feature , .search-feature-auth {
+    transition: width 300ms;
 }
 </style>
