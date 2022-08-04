@@ -1,22 +1,33 @@
+<script setup lang="ts">
+
+const openauthdropdown = ref<boolean>(false);
+
+const openAuthDropDown = ():void => {
+    openauthdropdown.value = !openauthdropdown.value;
+}
+</script>
+
 <template>
     <nav class=" w-full flex items-center flex-row justify-between px-4 sm:px-8">
         <div class="logo flex h-full items-center">
             <img src="@/assets/img/Logo/Decoupled.svg" alt="nipate">
         </div>
-        <div class="right-auth text-neutral-600 hidden flex-row gap-1 xs:gap-3">
+        <div class="right-auth xs:flex text-neutral-600 hidden flex-row gap-1 xs:gap-3">
             <button><NuxtLink to="/auth" class="block w-full h-full">Login</NuxtLink></button>
             <button>Register</button>
         </div>
-        <div class="auth-user relative flex items-center justify-center">
-            <div class="user-icon">
+        <div class="auth-user relative flex xs:hidden items-center justify-center">
+            <div class="user-icon" @click="openAuthDropDown">
                 <div class="i-mdi-account scale-125"></div>
-                <div class="i-mdi-chevron-down text-sm"></div>
+                <div class="i-mdi-menu-down text-lg scale-125" :class="openauthdropdown && 'rotate-180'"></div>
             </div>
-            <div class="user-drop-down">
-                <div class="drop-down-bg z-20 fixed right-0 w-screen h-[70vh] bg-transparent translate-x-[12%] top-0"></div>
+            <div class="user-drop-down" v-if="openauthdropdown">
+                <div class="drop-down-bg z-20 fixed right-0 w-screen h-[70vh] bg-transparent translate-x-[12%] top-0" @click="openAuthDropDown"></div>
                 <div class="drop-down-context">
-                    <button class="auth-btn text-neutral-600">Login</button>
-                    <button class="auth-btn bg-orange-400 text-slate-100">Register</button>
+                    <button class="auth-btn text-neutral-600">
+                        <NuxtLink to="/auth" class="block w-full h-full text-left">Login</NuxtLink>
+                    </button>
+                    <button class="auth-btn ">Register</button>
                 </div>
             </div>
         </div>
@@ -49,8 +60,8 @@
     @apply rounded-md flex justify-start items-start flex-col px-2 py-2 gap-2;
 }
 .drop-down-context button.auth-btn {
-    @apply w-full flex items-center justify-center rounded-md tracking-wider;
-    @apply font-bold px-2 py-1 hover:bg-orange-400 hover:text-slate-100;
+    @apply w-full flex items-center justify-start rounded-md tracking-wider;
+    @apply font-bold px-2 py-1 hover:bg-orange-500 hover:text-slate-100 text-neutral-500;
     transition: background-color 300ms , color 300ms;
 }
 </style>

@@ -30,15 +30,15 @@ const userauthenticated = ref<boolean>(false);
                 <div class="hero-text">
                     <h3 class="text-2xl sm:text-4xl md:text-[2.8rem] font-bold sm:leading-[40px]">Find the best people <br class="hidden sm:block"> to serve you</h3>
                 </div>
-                <div class="search-bar">
-                    <div class="input-field w-[80%] md:w-[60%] lg:w-[50%] flex items-center relative">
+                <div class="search-bar lg:w-[600px]">
+                    <div class="input-field w-[80%] md:w-[60%] lg:w-[70%] flex items-center relative">
                         <input type="search" placeholder="Search for service">
-                        <div class="i-mdi-filter-variant absolute left-0 z-[2] translate-x-[80%] text-xl text-neutral-400"></div>
+                        <div class="i-mdi-filter-variant absolute left-0 z-[2] translate-x-[60%] xs:translate-x-[80%] text-lg xs:text-xl text-neutral-400"></div>
                     </div>
                     <button class="loc-btn bg-white border border-neutral-300 focus:border-orange-300 hover:border-orange-200 hover:bg-gray-200">
                         <div class="i-mdi-google-maps text-xl xs:text-2xl"></div>
                     </button>
-                    <button class="search-btn px-20 xs:w-[20%] lg:w-[9%]">
+                    <button class="search-btn px-20 xs:w-[20%] lg:w-[16%]">
                         <span class="hidden xs:block">Search</span>
                         <div class="i-mdi-magnify block xs:hidden text-xl scale-125"></div>
                     </button>
@@ -72,7 +72,7 @@ const userauthenticated = ref<boolean>(false);
 <style scoped>
 
 .categories::-webkit-scrollbar {
-    width: 0px;
+    /* width: 0px; */
     display: none;
 }
  
@@ -107,7 +107,7 @@ const userauthenticated = ref<boolean>(false);
 }
 .search-bar .input-field input {
     @apply w-full outline-none bg-white h-[2.4rem] xs:h-[2.8rem] sm:h-[3.6rem] border border-neutral-300 rounded-l-xl;
-    @apply pl-11 text-sm xs:text-lg tracking-widest focus:border-orange-200;
+    @apply pl-8 xs:pl-11 text-sm xs:text-lg tracking-widest focus:border-orange-200;
     transition: height 300ms;
 }
 .search-bar button {
