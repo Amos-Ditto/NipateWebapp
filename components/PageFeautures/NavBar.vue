@@ -1,10 +1,41 @@
 <script setup lang="ts">
 
 const openauthdropdown = ref<boolean>(false);
+const showmoreservices = ref<boolean>(false);
 
+const emit = defineEmits<{
+    (event: 'toggleMenuVisibility')
+}>();
 const openAuthDropDown = ():void => {
     openauthdropdown.value = !openauthdropdown.value;
 }
+
+const showMoreServices = ():void => {
+    console.log("Open");
+    
+    showmoreservices.value = !showmoreservices.value;
+}
+
+const toggleMenuVisibility = ():void => {
+    emit("toggleMenuVisibility");
+}
+
+// Transition Methods
+const enter = (el: HTMLElement): void => {
+    el.style.height = "auto";
+    let height = getComputedStyle(el).height;
+    el.style.height = '0';
+    getComputedStyle(el);
+    setTimeout(() => {el.style.height = height});
+};
+const afterEnter = (el: HTMLElement): void => {
+    el.style.height = "auto";
+};
+const leave = (el: HTMLElement): void => {
+    el.style.height = getComputedStyle(el).height;
+    getComputedStyle(el);
+    setTimeout(() => {el.style.height = '0'});
+};
 </script>
 
 <template>
@@ -28,7 +59,7 @@ const openAuthDropDown = ():void => {
                     <div class="i-mdi-menu-down text-lg scale-125" :class="openauthdropdown && 'rotate-180'"></div>
                 </div> -->
                 <div class="mobile-menu-btn">
-                    <div class="menu-icon"> 
+                    <div class="menu-icon" @click="toggleMenuVisibility"> 
                         <div class="i-mdi-dots-vertical scale-150"></div>
                     </div>
                 </div>
@@ -51,22 +82,23 @@ const openAuthDropDown = ():void => {
                 <ul class="flex flex-row justify-evenly xs:justify-start gap-x-2 py-[1px] px-2 xs:px-4 text-sm text-neutral-200 font-bold w-full">
                     <li class="text-slate-50">All</li>
                     <li>Boda</li>
-                    <li>Housing</li>
-                    <li>Garage</li>
-                    <li>
+                    <li>Plumbers</li>
+                    <li @click="showMoreServices" :class="showmoreservices && 'bg-orange-500 text-white'">
                         More
-                        <div class="i-mdi-chevron-down"></div>
-                        <div class="list-drop-drown">
-                            <ul>
-                                <li>Plumbers</li>
-                                <li>Electrician</li>
-                                <li>Carpenters</li>
-                                <li>Chefs</li>
-                                <li>Find out more
-                                    <div class="i-mdi-arrow-right ml-1"></div>
-                                </li>
-                            </ul>
-                        </div>
+                        <div class="i-mdi-chevron-down" :class="showmoreservices && 'rotate-180'"></div>
+                        <transition name="show-service-menu" @enter="enter" @after-enter="afterEnter" @leave="leave">
+                            <div class="list-drop-drown" v-if="showmoreservices">
+                                <ul>
+                                    <li>Garage</li>
+                                    <li>Electrician</li>
+                                    <li>Carpenters</li>
+                                    <li>Chefs</li>
+                                    <li>Find out more
+                                        <div class="i-mdi-arrow-right ml-1"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </transition>
                     </li>
                     <!-- <li>Catering</li> -->
                 </ul>
@@ -117,10 +149,6 @@ nav {
 .service-list ul li .i-mdi-chevron-down {
     transition: transform 300ms ease;
 }
-.service-list ul li:hover .i-mdi-chevron-down {
-    @apply rotate-180;
-    transition: transform 300ms ease;
-}
 .mobile-menu-btn .menu-icon {
     @apply  w-[2.4rem] h-[2.4rem] rounded-full hover:bg-orange-300 flex flex-col text-white text-xl items-center justify-center px-2 py-2;
     @apply cursor-pointer;
@@ -133,7 +161,7 @@ nav {
     @apply w-full flex flex-col gap-1;
 }
 .list-drop-drown ul li {
-    @apply text-slate-600 w-full flex justify-start;
+    @apply text-slate-600 w-full flex justify-start z-0;
     @apply hover:bg-gray-200 hover:text-slate-600;
 }
 .list-drop-drown ul li .i-mdi-arrow-right {
@@ -141,5 +169,14 @@ nav {
 }
 .list-drop-drown ul li:hover:last-of-type .i-mdi-arrow-right {
     @apply translate-x-[40%];
+}
+
+/* service menu transition */
+.show-service-menu-enter-from {
+    @apply translate-y-[80%] opacity-0 -z-10;
+}
+.show-service-menu-enter-active {
+    transition: height 250ms ease-in-out , opacity 400ms , transform 250ms;
+    overflow: hidden;
 }
 </style>

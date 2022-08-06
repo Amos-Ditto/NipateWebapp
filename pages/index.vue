@@ -157,9 +157,10 @@ const toggleOpenSearchField = ():void => {
     @apply w-full px-2 flex items-center flex-row gap-0;
 }
 .hero-option .hero-search input {
-    @apply w-[75%] h-[2.6rem] outline-none border-y border-l border-gray-300 rounded-l-md;
+    @apply w-[75%] h-[2.6rem] pl-10 text-base tracking-wider outline-none border-y border-l border-gray-300 rounded-l-md;
 }
 .hero-option .hero-search button {
-    @apply h-[2.6rem] bg-orange-400 text-slate-200 font-semibold text-lg px-3 rounded-r;
+    @apply h-[2.6rem] bg-orange-400 hover:bg-orange-500 text-slate-200 font-semibold text-lg px-3 rounded-r;
+    transition: background-color 300ms;
 }
 </style>
