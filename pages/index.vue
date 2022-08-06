@@ -13,26 +13,17 @@ const toggleOpenSearchField = ():void => {
 <template>
     <NuxtLayout>
         <main class="w-full px-0 xs:px-2 text-neutral-500 flex items-center flex-col gap-4">
-            <hr>
-            <div class="header-container w-full px-4 sm:px-12 gap-2 flex flex-col pt-4">
-                <h3 class="font-bold text-xl sm:text-3xl tracking-tight text-slate-600">Service Categories</h3>
-                <div class="categories flex flex-row gap-4 py-2 w-full overflow-x-auto">
-                    <button>All</button>
-                    <button><NuxtLink to="/">Housing</NuxtLink></button>
-                    <button><NuxtLink :to="{name: 'index-categories'}">Transport</NuxtLink></button>
-                    <button><NuxtLink :to="{name: 'index-groups'}">Catering</NuxtLink></button>
-                    <button>Transport</button>
-                    <button><NuxtLink to="/">Housing</NuxtLink></button>
-                    <button><NuxtLink :to="{name: 'index-categories'}">Transport</NuxtLink></button>
-                    <button><NuxtLink :to="{name: 'index-groups'}">Catering</NuxtLink></button>
-                    <button>Transport</button>
-                    <button><NuxtLink to="/">Housing</NuxtLink></button>
-                    <button><NuxtLink :to="{name: 'index-categories'}">Transport</NuxtLink></button>
-                    <button><NuxtLink :to="{name: 'index-groups'}">Catering</NuxtLink></button>
-                    <button>Transport</button>
+            <div class="hero-option">
+                <div class="hero-title">
+                    <h3>Find the best people to serve you</h3>
+                </div>
+                <div class="hero-search">
+                    <div class="i-mdi-filter-variant absolute left-0 translate-x-[180%] text-xl"></div>
+                    <input type="search" id="search">
+                    <button>search</button>
                 </div>
             </div>
-            <div class="hero-container gap-4 relative" v-if="!userauthenticated.getIsUserAuthenticated">
+            <!-- <div class="hero-container gap-4 relative" v-if="!userauthenticated.getIsUserAuthenticated">
                 <div class="hero-text">
                     <h3 class="text-slate-600 text-2xl sm:text-4xl md:text-[2.8rem] font-bold sm:leading-[40px]">Find the best people <br class="hidden sm:block"> to serve you</h3>
                 </div>
@@ -81,7 +72,7 @@ const toggleOpenSearchField = ():void => {
 
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="body-content w-full py-1">
                 <NuxtPage />
             </div>
@@ -149,5 +140,26 @@ const toggleOpenSearchField = ():void => {
 }
 .search-feature , .search-feature-auth {
     transition: width 300ms;
+}
+
+/* Test hero */
+
+.hero-option {
+    @apply mt-4 w-full min-h-[8rem] py-4 px-4 flex flex-col gap-4;
+}
+.hero-option .hero-title {
+    @apply text-start;
+}
+.hero-option .hero-title h3 {
+    @apply text-xl font-bold text-slate-600;
+}
+.hero-option .hero-search {
+    @apply w-full px-2 flex items-center flex-row gap-0;
+}
+.hero-option .hero-search input {
+    @apply w-[75%] h-[2.6rem] outline-none border-y border-l border-gray-300 rounded-l-md;
+}
+.hero-option .hero-search button {
+    @apply h-[2.6rem] bg-orange-400 text-slate-200 font-semibold text-lg px-3 rounded-r;
 }
 </style>

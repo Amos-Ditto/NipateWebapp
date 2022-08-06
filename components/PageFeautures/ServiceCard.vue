@@ -30,7 +30,7 @@
 
 <style scoped>
 .card {
-    @apply  min-w-[220px] max-w-[320px] sm:max-w-[400px] sm:min-w-[340px] sm:h-[190px] px-8 h-[180px] border border-gray-300;
+    @apply  min-w-[220px] max-w-[320px] sm:max-w-[400px] sm:min-w-[340px] sm:h-[190px] h-[180px] border border-gray-300;
     @apply flex flex-col px-2 py-8 justify-between rounded-md hover:border-gray-400 cursor-pointer;
     transition: width 300ms , height 300ms , border 300ms;
 }

@@ -1,6 +1,6 @@
 <template>
     <main class="w-full flex-col flex">
-        <header class="h-[4em] sm:h-[4.8em] flex items-center bg-orange-400">
+        <header class="min-h-[4em] sm:min-h-[4.8em] flex items-center justify-center bg-orange-400 w-full ">
             <PageFeauturesNavBar />
         </header>
         <main class="w-full">
