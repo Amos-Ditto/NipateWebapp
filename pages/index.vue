@@ -13,8 +13,9 @@ const toggleOpenSearchField = ():void => {
 <template>
     <NuxtLayout>
         <main class="w-full px-0 xs:px-2 text-neutral-500 flex items-center flex-col gap-4">
+            <hr>
             <div class="header-container w-full px-4 sm:px-12 gap-2 flex flex-col pt-4">
-                <h3 class="font-bold text-xl sm:text-3xl tracking-tight">Service Categories</h3>
+                <h3 class="font-bold text-xl sm:text-3xl tracking-tight text-slate-600">Service Categories</h3>
                 <div class="categories flex flex-row gap-4 py-2 w-full overflow-x-auto">
                     <button>All</button>
                     <button><NuxtLink to="/">Housing</NuxtLink></button>
@@ -33,7 +34,7 @@ const toggleOpenSearchField = ():void => {
             </div>
             <div class="hero-container gap-4 relative" v-if="!userauthenticated.getIsUserAuthenticated">
                 <div class="hero-text">
-                    <h3 class="text-2xl sm:text-4xl md:text-[2.8rem] font-bold sm:leading-[40px]">Find the best people <br class="hidden sm:block"> to serve you</h3>
+                    <h3 class="text-slate-600 text-2xl sm:text-4xl md:text-[2.8rem] font-bold sm:leading-[40px]">Find the best people <br class="hidden sm:block"> to serve you</h3>
                 </div>
                 <div class="search-bar lg:w-[600px] relative">
                     <div class="input-field w-[80%] md:w-[60%] lg:w-[70%] flex items-center relative">

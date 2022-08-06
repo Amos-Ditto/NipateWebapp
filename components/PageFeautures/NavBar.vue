@@ -42,7 +42,7 @@ const openAuthDropDown = ():void => {
 }
 .right-auth button {
     @apply px-3 xs:px-4 py-1 text-sm xs:text-base sm:text-lg font-bold;
-    @apply first:border-2 border-neutral-400 rounded-md hover:border-neutral-600;
+    @apply first:border-2 border-slate-100 rounded-md hover:border-neutral-600;
     @apply last:bg-orange-500 last:text-slate-100 hover:last:bg-orange-600;
     transition: border 300ms , background-color 300ms;
 }
