@@ -27,13 +27,13 @@ const printOut = ():void => {
 }
 </script>
 <template>
-    <main class="w-full flex-col flex">
-        <header class="min-h-[4em] sm:min-h-[4.8em] flex items-center justify-center bg-orange-400 w-full relative">
+    <main class="w-full flex-col flex justify-center items-center gap-4">
+        <header class="min-h-[3.6rem] sm:min-h-[4.8em] flex items-center justify-center bg-orange-400 w-full relative">
             <PageFeauturesNavBar @toggle-menu-visibility="toggleMobileDropDownMenu" />
             <transition name="open-mobile-menu" @enter="enter" @after-enter="afterEnter" @leave="leave">
                 <div class="menu-drop-down-features" v-if="mobiledropdowncontext">
-                    <div class="toggling-area top-0 bottom-0 right-0 left-0 absolute bg-transparent"></div>
-                    <div class="mobile-menu-context absolute top-0 right-1.5 min-h-[6rem] w-[12rem] bg-gray-200">
+                    <div class="toggling-area top-0 bottom-0 right-0 left-0 absolute bg-transparent" @click="toggleMobileDropDownMenu"></div>
+                    <div class="mobile-menu-context">
                         <ul class="w-full flex flex-col gap-1 py-2" @click="toggleMobileDropDownMenu">
                             <li @click="printOut">Register</li>
                             <li>Login</li>
@@ -44,7 +44,7 @@ const printOut = ():void => {
                 </div>
             </transition>
         </header>
-        <main class="w-full">
+        <main class="w-full lg:w-[84%]">
             <slot></slot>
         </main>
         <footer class="w-full flex flex-col items-center text-neutral-600 px-4 pt-4">
@@ -62,6 +62,9 @@ const printOut = ():void => {
 header {
     transition: height 300ms ease;
 }
+main {
+    transition: width 300ms;
+}
 
 /* Transitions */
 
@@ -72,9 +75,13 @@ header {
     transition: height 300ms;
 }
 
+.mobile-menu-context {
+    @apply absolute top-0 right-1.5 min-h-[6rem] sm:min-h-[8rem] w-[12rem] sm:w-[16rem] bg-gray-200 rounded-md;
+}
+
 /* End of transitions */
 .mobile-menu-context ul li {
-    @apply text-slate-600 text-base px-2 py-1.5 cursor-pointer;
+    @apply text-slate-600 font-bold sm:text-xl px-2 py-1.5 cursor-pointer;
     @apply hover:bg-gray-300;
     transition: background-color 300ms;
 }

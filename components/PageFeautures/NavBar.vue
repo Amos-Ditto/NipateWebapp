@@ -2,6 +2,7 @@
 
 const openauthdropdown = ref<boolean>(false);
 const showmoreservices = ref<boolean>(false);
+const hidetopnav = ref<boolean>(false);
 
 const emit = defineEmits<{
     (event: 'toggleMenuVisibility')
@@ -36,28 +37,16 @@ const leave = (el: HTMLElement): void => {
     getComputedStyle(el);
     setTimeout(() => {el.style.height = '0'});
 };
+
 </script>
 
 <template>
-    <nav class=" w-full md:w-[80%] flex flex-col gap-4 xs:gap-2 md:gap-6 justify-center items-center">
-        <div class="top-nav w-full flex items-center flex-row justify-between px-4 sm:px-8">
+    <nav class=" w-full lg:w-[80%] flex flex-col gap-4 xs:gap-2 md:gap-6 justify-center items-center" :class="hidetopnav && 'fixed top-0 left-0 right-0 bg-orange-400 z-40'">
+        <div class="top-nav w-full flex items-center flex-row justify-between px-4 sm:px-8" v-if="!hidetopnav">
             <div class="logo flex h-full items-center">
                 <img src="@/assets/img/Logo/Decoupled.svg" alt="nipate">
             </div>
-            <div class="right-auth xs:flex text-neutral-600 hidden flex-row gap-1 xs:gap-3">
-                <button><NuxtLink to="/auth" class="block w-full h-full">Login</NuxtLink></button>
-                <button>Register</button>
-                <!-- <div class="mobile-menu-btn">
-                    <div class="menu-icon"> 
-                        <div class="i-mdi-dots-vertical scale-150"></div>
-                    </div>
-                </div> -->
-            </div>
-            <div class="auth-user relative flex xs:hidden items-center justify-center">
-                <!-- <div class="user-icon" @click="openAuthDropDown">
-                    <div class="i-mdi-account scale-125"></div>
-                    <div class="i-mdi-menu-down text-lg scale-125" :class="openauthdropdown && 'rotate-180'"></div>
-                </div> -->
+            <div class="auth-user relative flex md:hidden items-center justify-center">
                 <div class="mobile-menu-btn">
                     <div class="menu-icon" @click="toggleMenuVisibility"> 
                         <div class="i-mdi-dots-vertical scale-150"></div>
@@ -74,11 +63,8 @@ const leave = (el: HTMLElement): void => {
                 </div>
             </div>
         </div>
-        <div class="features-nav w-full md:w-[90%] shadow-sm">
+        <div class="features-nav w-full md:w-[90%] flex flex-row shadow-sm pr-4" :class="hidetopnav && 'pt-2 flex items-center'">
             <div class="service-list flex flex-col gap-1 w-full">
-                <!-- <h3 class="font-bold text-slate-200 px-4">Services</h3>
-                <hr> -->
-                <!-- <hr class=" bg-orange-300"> -->
                 <ul class="flex flex-row justify-evenly xs:justify-start gap-x-2 py-[1px] px-2 xs:px-4 text-sm text-neutral-200 font-bold w-full">
                     <li class="text-slate-50">All</li>
                     <li>Boda</li>
@@ -100,7 +86,12 @@ const leave = (el: HTMLElement): void => {
                             </div>
                         </transition>
                     </li>
-                    <!-- <li>Catering</li> -->
+                </ul>
+            </div>
+            <div class="nav-links">
+                <ul class="flex flex-row items-center gap-2">
+                    <li class="hidden xs:flex">My Account</li>
+                    <li class="hidden md:block"><NuxtLink :to="{name: 'auth-register'}" class="w-full block h-full">Register</NuxtLink></li>
                 </ul>
             </div>
         </div>
@@ -113,8 +104,8 @@ nav {
     transition: width 300ms;
 }
 .logo img {
-    @apply w-[7.5rem] sm:w-[9rem] h-[3.4rem];
-    transition: width 300ms;
+    @apply w-[7.5rem] sm:w-[9rem] h-[3.4rem] md:scale-110;
+    transition: width 300ms, transform 300ms;
 }
 .right-auth button {
     @apply px-3 xs:px-4 py-1 text-sm xs:text-base sm:text-lg font-bold;
@@ -142,7 +133,7 @@ nav {
 }
 
 .service-list ul li {
-    @apply px-3 xs:px-4 py-2 cursor-pointer text-sm xs:text-base md:text-lg border-b-2 xs:border-b-4 border-transparent hover:border-slate-50;
+    @apply px-3 xs:px-4 py-2 cursor-pointer text-sm xs:text-lg md:text-xl border-b-2 xs:border-b-4 border-transparent hover:border-slate-50;
     @apply first:border-slate-50 hover:text-white flex flex-row items-center justify-center relative;
     transition: background-color 300ms , border 300ms , color 300ms;
 }
@@ -155,7 +146,7 @@ nav {
     transition: background-color 300ms;
 }
 .list-drop-drown {
-    @apply absolute bottom-0 right-0 xs:right-auto translate-y-[105%] w-[9rem] xs:w-[12rem] min-h-[6rem] bg-gray-50;
+    @apply absolute bottom-0 right-0 xs:right-auto translate-y-[105%] w-[9rem] xs:w-[12rem] min-h-[6rem] bg-gray-50 z-20;
 }
 .list-drop-drown ul {
     @apply w-full flex flex-col gap-1;
@@ -178,5 +169,11 @@ nav {
 .show-service-menu-enter-active {
     transition: height 250ms ease-in-out , opacity 400ms , transform 250ms;
     overflow: hidden;
+}
+
+.features-nav .nav-links ul li {
+    @apply text-slate-200 text-lg md:text-xl font-bold whitespace-nowrap px-1.5 md:px-3 py-1.5 border-2 border-slate-200 rounded-md;
+    @apply cursor-pointer hover:border-slate-50 hover:text-slate-50;
+    transition: border 300ms , color 300ms;
 }
 </style>

@@ -17,6 +17,7 @@ toggleUserWhenLoggedIn();
             </div>
         </header>
         <section class="w-full">
+            <NuxtPage />
         </section>
     </main>
 </template>
