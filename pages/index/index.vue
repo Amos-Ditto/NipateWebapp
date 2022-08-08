@@ -1,27 +1,41 @@
+<script setup lang="ts">
+// const router = useRoute();
+// console.log(router.name);
+
+
+</script>
 <template>
-    <main class="w-full flex flex-col justify-center px-2 gap-4">
-        <div class="content w-full min-h-[20rem] md:p-2 flex flex-col gap-4 pt-5">
-            <div class="categories w-full">
-                <h3 class="text-2xl font-bold text-neutral-600">Categories.</h3>
-                <LazyContextCategories />
+    <main class="w-full text-2xl px-2 xs:px-4 sm:px-12 pt-2 xs:pt-8 flex flex-col gap-2 xs:gap-4 sm:gap-6">
+       <div class="services">
+            <div class="header">
+                <h3>Services Around your Area</h3>
             </div>
-            <hr>
-            <div class="requests">
-                <h3 class="text-xl font-bold text-neutral-600 font-serif">Top Services requested.</h3>
-                <div class="requests w-full pt-4 flex flex-row justify-start">
-                    <!-- <ServicesList /> -->
-                    <ContextServicesList />
-                    <!-- <LazyContextRequestServices class="w-full md:w-[60%]" /> -->
-                </div>
+            <div class="service-list">
+                <PageFeauturesServiceListCard />
+                <PageFeauturesServiceListCard />
+                <PageFeauturesServiceListCard />
+                <PageFeauturesServiceListCard />
             </div>
-        </div>
+       </div>
     </main>
 </template>
 
-
 <style scoped>
-.searchbar {
-    @apply w-full md:w-[96%] h-[3rem] flex items-center justify-center;
-    transition: width 300ms ease;
+
+.services {
+    @apply w-full flex flex-col gap-2 md:gap-4;
+    transition: gap 300ms;
+}
+.services .header {
+    @apply w-full items-center md:px-4;
+    transition: padding 300ms;
+}
+.services .header h3 {
+    @apply font-bold text-xl md:text-2xl text-slate-600;
+    transition: font-size 300ms;
+}
+.services .service-list {
+    @apply w-full grid grid-cols-1 md:grid-cols-2 md:gap-x-8 px-1 gap-y-2 md:gap-y-4;
+    transition: gap 300ms , grid-template-columns 300ms;
 }
 </style>
