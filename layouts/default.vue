@@ -21,10 +21,7 @@ const leave = (el: HTMLElement): void => {
     getComputedStyle(el);
     setTimeout(() => {el.style.height = '0'});
 };
-const printOut = ():void => {
-    console.log("click register");
-    
-}
+
 </script>
 <template>
     <main class="w-full flex-col flex justify-center items-center gap-4">
@@ -35,8 +32,12 @@ const printOut = ():void => {
                     <div class="toggling-area top-0 bottom-0 right-0 left-0 absolute bg-transparent" @click="toggleMobileDropDownMenu"></div>
                     <div class="mobile-menu-context">
                         <ul class="w-full flex flex-col gap-1 py-2" @click="toggleMobileDropDownMenu">
-                            <li @click="printOut">Register</li>
-                            <li>Login</li>
+                            <li>
+                                <NuxtLink :to="{name: 'auth-register'}" class="w-full block h-full">Register</NuxtLink>
+                            </li>
+                            <li>
+                                <NuxtLink :to="{name: 'auth-login'}" class="w-full block h-full">Login</NuxtLink>
+                            </li>
                             <li>My account</li>
                             <li>Provider Account</li>
                         </ul>

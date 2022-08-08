@@ -56,9 +56,11 @@ const leave = (el: HTMLElement): void => {
                     <div class="drop-down-bg z-20 fixed right-0 w-screen h-[70vh] bg-transparent translate-x-[12%] top-0" @click="openAuthDropDown"></div>
                     <div class="drop-down-context">
                         <button class="auth-btn text-neutral-600">
-                            <NuxtLink to="/auth" class="block w-full h-full text-left">Login</NuxtLink>
+                            <NuxtLink :to="{name: 'auth-login'}" class="block w-full h-full text-left">Login</NuxtLink>
                         </button>
-                        <button class="auth-btn ">Register</button>
+                        <button class="auth-btn ">
+                            <NuxtLink :to="{name: 'auth-login'}" class="w-full block h-full">Register</NuxtLink>
+                        </button>
                     </div>
                 </div>
             </div>
