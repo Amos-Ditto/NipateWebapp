@@ -19,9 +19,11 @@ const toggleOpenSearchField = ():void => {
                     <h3>Find the best people <br> to serve you</h3>
                 </div>
                 <div class="hero-search">
-                    <div class="input-field-search relative">
+                    <div class="input-field-search relative flex flex-row gap-0">
                         <input type="search" id="search" placeholder="search services based on locations ...">
-                        <button class="h-full px-6 rounded-full absolute right-0"><div class="i-mdi-arrow-right text-neutral-500 scale-125"></div></button>
+                        <button>
+                           <span class="text-slate-100 font-bold text-base xs:text-lg sm:text-2xl">Search</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -51,11 +53,11 @@ const toggleOpenSearchField = ():void => {
     @apply w-full px-2 flex items-center xs:justify-center flex-row gap-0;
 }
 .hero-option .input-field-search {
-    @apply relative flex items-center justify-start w-[85%] xs:w-[80%] md:w-[70%] lg:w-[60%];
+    @apply relative flex items-center justify-start w-[94%] xs:w-[80%] md:w-[70%] lg:w-[60%];
     transition: width 300ms;
 }
 .hero-option .hero-search input {
-    @apply w-full pl-3 sm:pl-8 pr-14 text-base xs:text-lg sm:text-2xl tracking-wider outline-none border-y border border-gray-300 rounded-md xs:rounded-full;
+    @apply w-full pl-2 pr-2 text-base xs:text-lg sm:text-2xl tracking-wider outline-none border-y border border-gray-300 rounded-l-md;
     @apply placeholder:text-base placeholder:xs:text-lg placeholder:sm:text-2xl placeholder:italic bg-gray-100;
 }
 .hero-option .hero-search button {
@@ -69,5 +71,8 @@ const toggleOpenSearchField = ():void => {
 }
 .hero-option .hero-search input , .hero-option .hero-search button {
     @apply h-[2.6rem] xs:h-[3.2rem] md:h-[3.6rem];
+}
+.input-field-search button {
+    @apply w-[4rem] sm:w-[7rem] bg-orange-400 flex items-center justify-center px-2 rounded-r-md hover:bg-orange-500;
 }
 </style>
