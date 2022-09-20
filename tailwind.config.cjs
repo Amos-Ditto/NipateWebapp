@@ -35,6 +35,7 @@ module.exports = {
         whip : 'papayawhip',
         tomato: 'tomato',
         dodgerblue: 'dodgerblue',
+        darkgreen: '#346974',
       }
     },
   },

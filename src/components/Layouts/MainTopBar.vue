@@ -1,5 +1,5 @@
 <template>
-    <header class="w-full h-full flex flex-col bg-gray-50">
+    <header class="w-full h-full flex flex-col bg-gray-100">
         <div class="top-nav">
             <div class="top-left-nav">
                 <img src="../../assets/Logo/Vector.svg" alt="logo">
@@ -7,9 +7,13 @@
             </div>
             <div class="top-right-nav">
                 <!-- <small>New to this site?</small> -->
-                <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">Register</button>
+                <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">
+                    <router-link class="block" :to="{name: 'Register'}" >Register</router-link>
+                </button>
                 <small>or</small>
-                <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">Login</button>
+                <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
+                    <router-link class="block" :to="{name: 'Login'}" >Login</router-link>
+                </button>
             </div>
         </div>
         <div class="bottom-nav">
@@ -21,7 +25,7 @@
                     <li>Services</li>
                     <!-- <li>Requests</li> -->
                     <li><div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
-                        <div class="i-mdi-account text-2xl text-slate-400"></div>
+                        <div class="i-mdi-account text-2xl text-darkgreen"></div>
                     </div>Account</li>
                 </ul>
             </div>
@@ -62,7 +66,8 @@
     transition: background-color 300ms ease;
 }
 .bottom-left-nav li {
-    @apply px-1 text-base text-slate-500 font-bold hover:text-steelblue cursor-pointer;
+    @apply px-1 text-base font-bold hover:text-steelblue cursor-pointer;
     @apply flex items-center flex-row gap-1 underline last:no-underline;
+    color: #014451;
 }
 </style>
