@@ -3,17 +3,22 @@ import { ref } from 'vue';
 
 
 const opensearch = ref<boolean>(false);
+const searchvalue = ref<string>('');
 
 const toggleOpenSearch = (): void => { opensearch.value = true }
 const toggleCloseSearch = (): void => { opensearch.value = false }
 const toggleOpenCloseSearch = (): void => { opensearch.value = !opensearch.value }
 
+const onInputKeyDown = (e: Event): void => {
+    console.log(searchvalue.value);
+    if(searchvalue.value.trim().length >= 3) {toggleOpenSearch()}
+}
 </script>
 <template>
     <div class="w-full flex flex-col justify-center items-center gap-y-1">
         <h3 class="text-slate-700 text-xl sm:text-2xl md:text-3xl font-[600] transition-font duration-300">Find the best people to serve you</h3>
         <div class="search-bar flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-8 w-[90%] md:w-[75%] lg:w-[70%] xl:w-[60%] relative transition-all duration-300">
-            <input type="text" placeholder="search data e.g Housing, Kabarak">
+            <input type="text" placeholder="search data e.g Housing, Kabarak" v-model="searchvalue" @input="onInputKeyDown" @focusout="toggleCloseSearch">
             <div class="i-mdi-menu-down absolute right-4 text-2xl cursor-pointer transition-transform duration-300" :class="opensearch && 'rotate-180'" @click="toggleOpenCloseSearch"></div>
             <transition name="fade">
                 <div class="browse-by w-full absolute bottom-0 translate-y-[104%] bg-gray-100 py-1 min-h-[3rem] flex flex-col gap-1 shadow" v-if="opensearch">

@@ -32,19 +32,19 @@
 <style scoped>
 
 .top-nav {
-    @apply py-0.5 flex flex-row justify-between w-full border-b border-gray-200 px-[4px] lg:px-[78px];
+    @apply py-1 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px];
     transition: padding 300ms ease;
 }
 .top-nav .top-left-nav {
     @apply flex items-center flex-row py-0.5;
 }
 .top-nav .top-left-nav img {
-    @apply max-w-[5.8rem] min-w-[3.5rem] h-[2.5rem] last:mt-1;
+    @apply max-w-[4.8rem] sm:max-w-[5.8rem] min-w-[3rem] sm:min-w-[3.5rem] h-[2rem] sm:h-[2.5rem] last:mt-1 transition-all duration-300;
 }
 
 .top-nav .top-right-nav {
-    @apply py-0.5 flex flex-row items-center gap-3;
-    transition: padding 300ms ease;
+    @apply py-0.5 flex flex-row items-center gap-1.5 sm:gap-3;
+    transition: padding 300ms ease , gap 300ms ease;
 }
 .top-nav .top-right-nav small {
     @apply text-slate-400 text-xs tracking-wide;
