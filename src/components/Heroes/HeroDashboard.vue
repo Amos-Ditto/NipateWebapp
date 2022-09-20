@@ -16,7 +16,7 @@ const onInputKeyDown = (e: Event): void => {
 </script>
 <template>
     <div class="w-full flex flex-col justify-center items-center gap-y-1">
-        <h3 class="text-xl sm:text-2xl md:text-3xl font-[600] transition-font duration-300">Find the best people to serve you</h3>
+        <h3 class="text-xl sm:text-2xl md:text-3xl text-[#014451] font-[600] transition-font duration-300">Find the best people to serve you</h3>
         <div class="search-bar flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-8 w-[90%] md:w-[75%] lg:w-[70%] xl:w-[60%] relative transition-all duration-300">
             <input type="text" placeholder="search data e.g Housing, Kabarak" v-model="searchvalue" @input="onInputKeyDown" @focusout="toggleCloseSearch">
             <div class="i-mdi-menu-down absolute right-4 text-2xl cursor-pointer transition-transform duration-300" :class="opensearch && 'rotate-180'" @click="toggleOpenCloseSearch"></div>
@@ -58,13 +58,10 @@ const onInputKeyDown = (e: Event): void => {
     @apply bg-gray-100 py-2 rounded-sm border border-gray-300 w-full outline-none px-4 tracking-wider text-lg text-slate-600 font-serif placeholder:text-base;
 }
 .browse-by small , .hero-browse-by small {
-    @apply: text-darkgreen;
+    @apply text-[#014451];
 }
 .hero-browse-by button,
 .browse-by button {
     @apply border  border-orange-200 py-1 px-2 hover:bg-orange-300 rounded text-slate-700 font-serif text-base transition-colors duration-300;
-}
-h3 {
-    color: #014451;
 }
 </style>

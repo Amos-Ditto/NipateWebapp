@@ -11,7 +11,7 @@ import RecentServiceData from '../../components/Cards/RecentServiceData.vue';
         <section class="w-full flex flex-col gap-4 pb-8 pt-1 sm:pt-3 transition-pad duration-300">
             <div class="recent-services flex flex-col gap-y-2 w-full">
                 <div class="recent-title w-full px-4">
-                    <h3 class="text-xl text-slate-600 uppercase">Most Recent</h3>
+                    <h3 class="text-xl text-slate-700 uppercase">Most Recent</h3>
                 </div>
                 <div class="recent-services grid grid-cols-1 sm:grid-cols-2 gap-y-0.5 transition-all sm:gap-y-4 gap-x-2 lg:gap-x-5 px-4">
                     <RecentServiceData />
