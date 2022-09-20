@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import MainTopBar from '../components/Layouts/MainTopBar.vue';
+import MainFooter from '../components/Layouts/MainFooter.vue';
 
 </script>
 <template>
     <main>
-        <MainTopBar class="sticky top-0" />
+        <MainTopBar class="sticky top-0 z-30" />
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
           </transition>
         </router-view>
+        <MainFooter />
     </main>
 </template>
 
