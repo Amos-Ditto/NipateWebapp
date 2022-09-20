@@ -23,7 +23,9 @@ module.exports = {
       transitionProperty: {
         'height': 'height',
         'width': 'width',
-        'rotate': 'rotate'
+        'rotate': 'rotate',
+        'font': 'font',
+        'pad': 'padding',
       },
       backgroundColor: {
         'dark-opacity': 'rgba(0, 0, 0, 0.4)'

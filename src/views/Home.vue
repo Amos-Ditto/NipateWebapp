@@ -4,7 +4,7 @@ import MainTopBar from '../components/Layouts/MainTopBar.vue';
 </script>
 <template>
     <main>
-        <MainTopBar />
+        <MainTopBar class="sticky top-0" />
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">
             <component :is="Component" />
