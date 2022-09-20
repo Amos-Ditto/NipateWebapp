@@ -19,7 +19,7 @@
             <div class="bottom-left-nav flex items-center flex-row">
                 <ul class="flex flex-row items-center gap-4">
                     <li>Services</li>
-                    <li>Requests</li>
+                    <!-- <li>Requests</li> -->
                     <li><div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
                         <div class="i-mdi-account text-2xl text-slate-400"></div>
                     </div>Account</li>
