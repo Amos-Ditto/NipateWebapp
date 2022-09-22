@@ -1,35 +1,106 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import type UserTokenDetails from '../../Types/UserFetch';
 
-const formLoginSubmit = (): void => {
-    console.log('Submitted');
-    
+
+
+const base_url = import.meta.env.VITE_BASE_URL;
+const router = useRouter();
+
+interface FormData {
+    MobileNumber: string
+    password: string
+}
+const login_formdata = ref<FormData>({
+    MobileNumber: '', password: ''
+})
+
+interface Error {
+    error?: string[]
+    MobileNumber?: string[]
+    password?: string[]
+}
+
+const userfetcheddata = ref<UserTokenDetails>();
+const errors = ref<Error>();
+// Conditional errors
+const validno = ref<boolean>(false);
+const validpass = ref<boolean>(false);
+
+const mobilenumber_errormsg = ref<string>('Please enter a valid Mobile Number');
+const password_errormsg = ref<string>('Invalid user creditentials');
+
+const formLoginSubmit = async (type: void) => {
+    if(login_formdata.value.MobileNumber.length !== 9) {
+        mobilenumber_errormsg.value = 'Please enter a valid Mobile Number';
+        validno.value = true;
+        return;
+    }
+    let formdata:FormData = {
+        MobileNumber: '254' + login_formdata.value.MobileNumber,
+        password: login_formdata.value.password
+    }
+
+    const response = await fetch(`${base_url}auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formdata)
+    })
+
+    if(response.ok) {
+        userfetcheddata.value = await response.json();
+        router.push({name: 'Dashboard'});
+    } else {
+        errors.value = await response.json();
+        if(errors.value?.error) {
+            validno.value = true; validpass.value = true;
+            password_errormsg.value = errors.value.error[0];
+            mobilenumber_errormsg.value = errors.value.error[0]
+        }
+        console.log('Error json: ', errors.value);
+        
+    }
 }
 </script>
 <template>
     <section class="w-full flex items-center justify-center flex-col px-2 sm:px-8 transition-pad duration-300">
-        <form @submit.prevent="formLoginSubmit" class="w-full md:w-[600px] px-2 pt-16 sm:pt-8 pb-4 flex flex-col items-center justify-center">
+        <form @submit.prevent="formLoginSubmit()" class="w-full md:w-[600px] px-2 pt-16 sm:pt-8 pb-4 flex flex-col items-center justify-center">
             <h3 class="text-[#346974] text-3xl sm:text-2xl font-bold transition-font duration-300">Login to your Account</h3>
             <div class="input-fields flex flex-col justify-center items-center w-full gap-y-8 pt-16">
                 <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="phone" class="text-[#346974] text-sm font-semibold">Mobile Number</label>
                     <div class="input w-full flex flex-row gap-x-1">
-                        <div class="phone-icon-label px-2 py-2 bg-slate-50 border border-gray-300 w-[20%] rounded-l flex flex-row items-center justify-center gap-x-1 opacity-75">
+                        <div class="phone-icon-label px-2 py-2 bg-slate-50 border-2 border-gray-300 w-[20%] rounded-l flex flex-row items-center justify-center gap-x-1 opacity-75">
                             <img src="../../assets/bgImg/Flag-of-Kenya.svg" alt="ke" class="w-[1.2rem] h-[1rem]">
                             <small class="tracking-wide text-sm text-slate-600 font-serif">+254</small>
                         </div>
-                        <input type="text" name="phone" id="phone" class="w-[80%] rounded-r placeholder:text-slate-500" placeholder="eg 712345678">
+                        <input type="text" name="phone" id="phone" 
+                            class="w-[80%] rounded-r placeholder:text-slate-500" placeholder="eg 712345678"
+                            v-model="login_formdata.MobileNumber" @input="validno = false"
+                        >
+                    </div>
+                    <div class="error-status w-full px-0.5 flex flex-row justify-start items-center gap-x-2" v-if="validno">
+                        <div class="i-mdi-alert-outline text-orange-400 text-lg"></div>
+                        <small class="text-sm text-orange-400">{{mobilenumber_errormsg}}</small>
                     </div>
                 </div>
                 <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="password" class="text-[#346974] text-sm font-semibold">Password</label>
                     <div class="input w-full">
-                        <input type="password" id="password" class="w-full rounded ">
+                        <input type="password" id="password" class="w-full rounded " v-model="login_formdata.password" @input="validpass = false">
+                    </div>
+                    <div class="error-status w-full px-0.5 flex flex-row justify-start items-center gap-x-2" v-if="validpass">
+                        <div class="i-mdi-alert-outline text-orange-400 text-lg"></div>
+                        <small class="text-sm text-orange-400">{{password_errormsg}}</small>
                     </div>
                 </div>
             </div>
             <div class="submit-btn w-[80%] sm:w-[75%] pt-8 pb-4 flex items-center transition-width duration-300">
-                <button type="submit" 
-                    class="px-12 py-1.5 text-base font-bold tracking-wide text-slate-100 bg-orange-600 rounded hover:bg-orange-500 transition-colors duration-300"
+                <button type="submit"
+                    class="min-w-[9.2rem] px-12 py-2 text-lg font-bold tracking-wide text-slate-100 bg-orange-600 rounded hover:bg-orange-500 transition-colors duration-300"
                 >Login</button>
             </div>
             <div class="create-new w-[80%] sm:w-[75%] py-2 flex flex-row gap-x-2 items-center transition-width duration-300">
@@ -43,6 +114,6 @@ const formLoginSubmit = (): void => {
 <style scoped>
 
 input {
-    @apply py-2 bg-gray-100 border border-gray-300 px-3 outline-none focus:border-blue-300 transition-colors duration-300 tracking-wider text-slate-700;
+    @apply py-2 bg-gray-100 border-2 border-gray-300 px-3 outline-none focus:border-blue-300 transition-colors duration-300 tracking-wider text-slate-700;
 }
 </style>
