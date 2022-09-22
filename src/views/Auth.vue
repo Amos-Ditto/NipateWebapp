@@ -27,6 +27,6 @@
 }
 
 .logo img {
-    @apply min-w-[2.4rem] max-w-[2.5rem] last:max-w-[4.6rem] sm:min-w-[4rem] sm:max-w-[5rem] sm:last:max-w-[6rem] h-[2.1rem] last:h-[2.4rem] sm:h-[2.6rem] sm:last:h-[3rem] transition-all duration-300;
+    @apply min-w-[2.5rem] max-w-[2.6rem] last:max-w-[5.8rem] sm:min-w-[4rem] sm:max-w-[5rem] sm:last:max-w-[6.2rem] h-[2.4rem] last:h-[2.6rem] sm:h-[2.6rem] sm:last:h-[3rem] transition-all duration-300;
 }
 </style>

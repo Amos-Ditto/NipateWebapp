@@ -22,7 +22,7 @@
             </div>
             <div class="bottom-left-nav flex items-center flex-row">
                 <ul class="flex flex-row items-center gap-4">
-                    <li>Services</li>
+                    <!-- <li>Services</li> -->
                     <!-- <li>Requests</li> -->
                     <li><div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
                         <div class="i-mdi-account text-2xl text-darkgreen"></div>
@@ -67,7 +67,7 @@
 }
 .bottom-left-nav li {
     @apply px-1 text-base font-bold hover:text-steelblue cursor-pointer;
-    @apply flex items-center flex-row gap-1 underline last:no-underline;
+    @apply flex items-center flex-row gap-1;
     color: #014451;
 }
 </style>
