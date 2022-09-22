@@ -73,11 +73,11 @@ const formLoginSubmit = async (type: void) => {
                 <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="phone" class="text-[#346974] text-sm font-semibold">Mobile Number</label>
                     <div class="input w-full flex flex-row gap-x-1">
-                        <div class="phone-icon-label px-2 py-2 bg-slate-50 border-2 border-gray-300 w-[20%] rounded-l flex flex-row items-center justify-center gap-x-1 opacity-75">
+                        <div class="phone-icon-label px-2 py-2 bg-slate-50 border-2 border-gray-300 w-[20%] rounded-l flex flex-row items-center justify-center gap-x-1 opacity-90">
                             <img src="../../assets/bgImg/Flag-of-Kenya.svg" alt="ke" class="w-[1.2rem] h-[1rem]">
-                            <small class="tracking-wide text-sm text-slate-600 font-serif">+254</small>
+                            <small class="tracking-wide text-sm text-slate-700 font-serif">+254</small>
                         </div>
-                        <input type="text" name="phone" id="phone" 
+                        <input type="text" name="phone" id="phone" required
                             class="w-[80%] rounded-r placeholder:text-slate-500" placeholder="eg 712345678"
                             v-model="login_formdata.MobileNumber" @input="validno = false"
                         >
@@ -90,7 +90,7 @@ const formLoginSubmit = async (type: void) => {
                 <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="password" class="text-[#346974] text-sm font-semibold">Password</label>
                     <div class="input w-full">
-                        <input type="password" id="password" class="w-full rounded " v-model="login_formdata.password" @input="validpass = false">
+                        <input type="password" id="password" class="w-full rounded" required v-model="login_formdata.password" @input="validpass = false">
                     </div>
                     <div class="error-status w-full px-0.5 flex flex-row justify-start items-center gap-x-2" v-if="validpass">
                         <div class="i-mdi-alert-outline text-orange-400 text-lg"></div>
