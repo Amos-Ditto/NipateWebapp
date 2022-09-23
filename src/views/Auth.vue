@@ -1,6 +1,6 @@
 <template>
-    <main class="w-full flex flex-col gap-2 justify-center">
-        <nav class="w-full px-8 py-6">
+    <main class="w-full flex flex-col gap-2 justify-center pb-12">
+        <nav class="w-full px-8 py-3">
             <div class="logo flex flex-row px-1 gap-2">
                 <img src="../assets/Logo/Vector.svg" alt="logo">
                 <img src="../assets/Logo/Nipate.svg" alt="logo">

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 
-const submitUserRegistration = () => {
+const emit = defineEmits<{
+    (e: 'toggleContinueRegistration'): void
+}>()
 
+const submitUserRegistration = () => {
+    emit('toggleContinueRegistration');
 }
 </script>
 
@@ -11,7 +15,7 @@ const submitUserRegistration = () => {
         class="w-[96%] md:w-[600px] px-2 pt-2 sm:pt-4 pb-4 flex flex-col items-start sm:items-center justify-start sm:justify-center transition-all duration-300"
     >
         <h3 class="text-[#346974] text-3xl sm:text-2xl font-light transition-font duration-300">Register as a User</h3>
-        <div class="input-fields w-full sm:w-[80%] flex flex-col gap-y-4 pt-14 sm:pt-12 transition-all duration-300">
+        <div class="input-fields w-full sm:w-[80%] flex flex-col gap-y-6 pt-14 sm:pt-12 transition-all duration-300">
             <div class="input-field w-full flex flex-col gap-y-2">
                 <label for="phone" class="text-[#346974] text-base font-semibold">Mobile Number</label>
                 <div class="input w-full flex flex-row gap-x-1">
