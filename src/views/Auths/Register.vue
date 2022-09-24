@@ -20,7 +20,7 @@ const toggleFinishRegistration = (): void => {
 <template>
     <section class="w-full px-4 sm:px-8 flex flex-col justify-center items-center">
         <div class="w-full flex flex-row justify-center">
-            <Transition name="slide-up" mode="out-in">
+            <Transition name="slide" mode="out-in">
                 <UserDetails v-if="toggleforms" @toggle-continue-registration="toggleContinueRegistration" />
                 <UserOtherDetails v-else="toggleforms" @toggle-finish-registration="toggleFinishRegistration" />
             </Transition>
@@ -34,17 +34,17 @@ const toggleFinishRegistration = (): void => {
 
 <style scoped>
 
-.slide-up-enter-active,
-.slide-up-leave-active {
+.slide-enter-active,
+.slide-leave-active {
   transition: all 0.25s ease-out;
 }
 
-.slide-up-enter-from {
+.slide-enter-from {
   opacity: 0;
   transform: translateX(30px);
 }
 
-.slide-up-leave-to {
+.slide-leave-to {
   opacity: 0;
   transform: translateX(-30px);
 }
