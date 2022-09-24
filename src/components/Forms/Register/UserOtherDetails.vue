@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, watch, watchEffect } from 'vue';
+
 
 const emit = defineEmits<{
     (e: 'toggleFinishRegistration'): void
@@ -6,6 +8,37 @@ const emit = defineEmits<{
 
 const submitOtherDetails = (): void => {
     emit('toggleFinishRegistration');
+}
+
+// Form data
+const location = ref<string>('');
+const county = ref<string>('');
+const counties = ref<string[]>(['Nakuru', 'Baringo', 'Nakuru', 'Baringo', 'Nakuru', 'Baringo', 'Nakuru'])
+const searchcounties = ref<string[]>([]);
+
+const opencounty = ref<boolean>(false);
+const openlocation = ref<boolean>(false);
+
+const closeSelectCounty = (): void => {opencounty.value=false}
+const openSelectCounty = (): void => {opencounty.value=true}
+
+const closeSelectLocation = (): void => {openlocation.value=false}
+const openSelectLocation = (): void => {openlocation.value=true}
+
+const checkString = (str: string) => {
+    return str.toLocaleLowerCase().includes(county.value.toLocaleLowerCase())
+}
+
+const onCountyChange = (event: Event): void => {
+        openSelectCounty();
+        searchcounties.value = counties.value.filter(checkString)
+        // closeSelectCounty();
+}
+
+const onLocationChange = (event: Event): void => {
+    
+    console.log(location.value)
+    openSelectLocation();
 }
 
 </script>
@@ -19,15 +52,18 @@ const submitOtherDetails = (): void => {
             <div class="input-field w-full flex flex-col gap-y-2">
                 <label for="county" class="text-[#346974] text-base font-semibold tracking-wide">Your Region/County</label>
                 <div class="input w-full flex flex-col relative items-center justify-center">
-                    <input type="text" id="county">
-                    <div class="i-mdi-chevron-down absolute right-2 cursor-pointer hover:rotate-180 transition-transform duration-300"></div>
-                    <div class="county-list absolute top-full translate-y-0.5 w-full flex flex-col bg-gray-100 z-20 shadow-md">
+                    <input type="text" id="county" v-model.trim="county" @input="onCountyChange">
+                    <div class="i-mdi-chevron-down absolute right-2 cursor-pointer hover:rotate-180 transition-transform duration-300 text-xl" @click="openSelectCounty" :class="opencounty && 'rotate-180'"></div>
+                    <div class="county-list absolute top-full translate-y-0.5 w-full flex flex-col bg-gray-100 z-20 shadow-md" v-if="opencounty">
                         <div class="w-full flex items-center justify-end px-2 py-1 border-b border-gray-300">
-                            <button type="button" class="py-1 px-2 text-[#346974] shadow bg-gray-200 hover:bg-gray-100">close</button>
+                            <button type="button" class="py-1 px-2 text-[#346974] shadow bg-gray-200 hover:bg-gray-100" @click="closeSelectCounty">
+                                close
+                            </button>
                         </div>
-                        <ul class="w-full flex flex-col">
-                            <li><div class="i-mdi-map-marker"></div> Nakuru</li>
-                            <li><div class="i-mdi-map-marker"></div>Baringo</li>
+                        <ul class="w-full flex flex-col max-h-[15rem] overflow-y-auto pb-1">
+                            <li v-for="(countyname, index) in searchcounties"
+                                :key="index" @click="() => {county = countyname; closeSelectCounty();}"
+                            ><div class="i-mdi-map-marker"></div> {{countyname}}</li>
                         </ul>
                     </div>
                 </div>
@@ -35,8 +71,21 @@ const submitOtherDetails = (): void => {
             <div class="input-field w-full flex flex-col gap-y-2">
                 <label for="town" class="text-[#346974] text-base font-semibold tracking-wide">Your Location</label>
                 <div class="input w-full flex flex-col relative items-center justify-center">
-                    <input type="text" id="town">
-                    <div class="i-mdi-chevron-down absolute right-2 cursor-pointer hover:rotate-180 transition-transform duration-300"></div>
+                    <input type="text" id="town" v-model.trim="location" @input="onLocationChange">
+                    <div class="i-mdi-chevron-down absolute right-2 cursor-pointer hover:rotate-180 transition-transform duration-300 text-xl" @click="openSelectLocation" :class="openlocation && 'rotate-180'"></div>
+                    <div class="county-list absolute top-full translate-y-0.5 w-full flex flex-col bg-gray-100 z-20 shadow-md" v-if="openlocation">
+                        <div class="w-full flex items-center justify-end px-2 py-1 border-b border-gray-300">
+                            <button type="button" class="py-1 px-2 text-[#346974] shadow bg-gray-200 hover:bg-gray-100" @click="closeSelectLocation">
+                                close
+                            </button>
+                        </div>
+                        <ul class="w-full flex flex-col max-h-[15rem] overflow-y-auto pb-1">
+                            <li><div class="i-mdi-map-marker"></div> Nakuru</li>
+                            <li><div class="i-mdi-map-marker"></div>Kabarak</li>
+                            <li><div class="i-mdi-map-marker"></div> Rafiki</li>
+                            <li><div class="i-mdi-map-marker"></div>Kiamunyi</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="input-field w-full flex flex-col gap-y-2 pt-3">
@@ -84,7 +133,7 @@ const submitOtherDetails = (): void => {
 
 .input #county,
 .input #town {
-    @apply w-full px-3 py-2 bg-inherit border-b border-gray-300 focus:border-blue-300 text-slate-700;
+    @apply w-full px-3 py-2 bg-inherit border-b border-gray-300 focus:border-blue-300 text-slate-700 tracking-wider;
 }
 input {
     @apply outline-none focus:border-blue-300;

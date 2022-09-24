@@ -1,9 +1,22 @@
-<script setup lang="ts">
+<script setup lang="ts">import { ref } from 'vue';
+
 
 const emit = defineEmits<{
     (e: 'toggleContinueRegistration'): void
 }>()
 
+interface UserDetail {
+    MobileNumber: string
+    IDNumber?: number
+    FirstName: string
+    LastName: string
+}
+
+const userdetails = ref<UserDetail>({
+    MobileNumber: '',
+    FirstName: '',
+    LastName: '',
+})
 const submitUserRegistration = () => {
     emit('toggleContinueRegistration');
 }
@@ -25,6 +38,7 @@ const submitUserRegistration = () => {
                     </div>
                     <input type="text" name="phone" id="phone" required
                         class="w-[80%] rounded-r placeholder:text-slate-500" placeholder="eg 712345678"
+                        v-model.trim="userdetails.MobileNumber"
                     >
                 </div>
             </div>
@@ -33,6 +47,7 @@ const submitUserRegistration = () => {
                 <div class="input w-full flex flex-row gap-x-1">
                     <input type="number" name="idnumber" id="idnumber" required
                         class="w-full rounded placeholder:text-slate-500"
+                        v-model.number="userdetails.IDNumber"
                     >
                 </div>
             </div>
@@ -40,7 +55,7 @@ const submitUserRegistration = () => {
                 <label for="fname" class="text-[#346974] text-base font-semibold">First Name</label>
                 <div class="input w-full flex flex-row gap-x-1">
                     <input type="text" name="fname" id="fname" required
-                        class="w-full rounded"
+                        class="w-full rounded" v-model.trim="userdetails.FirstName"
                     >
                 </div>
             </div>
@@ -48,7 +63,7 @@ const submitUserRegistration = () => {
                 <label for="lname" class="text-[#346974] text-base font-semibold">Last Name</label>
                 <div class="input w-full flex flex-row gap-x-1">
                     <input type="text" name="lname" id="lname" required
-                        class="w-full rounded"
+                        class="w-full rounded" v-model.trim="userdetails.LastName"
                     >
                 </div>
             </div>
