@@ -28,18 +28,16 @@ const errors = ref<Error>();
 const validno = ref<boolean>(false);
 const validpass = ref<boolean>(false);
 
+const see_password = ref<boolean>(false);
+
 const mobilenumber_errormsg = ref<string>('Please enter a valid Mobile Number');
 const password_errormsg = ref<string>('Invalid user creditentials');
 
 const formLoginSubmit = async (type: void) => {
-    if(login_formdata.value.MobileNumber.length !== 9) {
+    if(login_formdata.value.MobileNumber.length !== 10) {
         mobilenumber_errormsg.value = 'Please enter a valid Mobile Number';
         validno.value = true;
         return;
-    }
-    let formdata:FormData = {
-        MobileNumber: '254' + login_formdata.value.MobileNumber,
-        password: login_formdata.value.password
     }
 
     const response = await fetch(`${base_url}auth/login`, {
@@ -47,7 +45,10 @@ const formLoginSubmit = async (type: void) => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(formdata)
+        body: JSON.stringify({
+            MobileNumber: '254' + login_formdata.value.MobileNumber.slice(1),
+            password: login_formdata.value.password
+        })
     })
 
     if(response.ok) {
@@ -60,9 +61,8 @@ const formLoginSubmit = async (type: void) => {
             password_errormsg.value = errors.value.error[0];
             mobilenumber_errormsg.value = errors.value.error[0]
         }
-        console.log('Error json: ', errors.value);
-        
     }
+    
 }
 </script>
 <template>
@@ -78,7 +78,7 @@ const formLoginSubmit = async (type: void) => {
                             <small class="tracking-wide text-sm text-slate-700 font-serif">+254</small>
                         </div>
                         <input type="text" name="phone" id="phone" required
-                            class="w-[80%] rounded-r placeholder:text-slate-500" placeholder="eg 712345678"
+                            class="w-[80%] rounded-r placeholder:text-slate-500" placeholder="eg 0712345678"
                             v-model="login_formdata.MobileNumber" @input="validno = false"
                         >
                     </div>
@@ -89,8 +89,14 @@ const formLoginSubmit = async (type: void) => {
                 </div>
                 <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="password" class="text-[#346974] text-sm font-semibold">Password</label>
-                    <div class="input w-full">
-                        <input type="password" id="password" class="w-full rounded" required v-model="login_formdata.password" @input="validpass = false">
+                    <div class="input w-full relative flex items-center">
+                        <input :type="see_password ? 'text' : 'password'" id="password" class="w-full rounded" required v-model="login_formdata.password" @input="validpass = false">
+                        <div class="show-password absolute right-2 p-4 sm:py-3 cursor-pointer" @click="see_password = !see_password">
+                            <Transition name="slide" mode="out-in">
+                                <div class="i-mdi-eye-off text-slate-600" v-if="see_password"></div>
+                                <div class="i-mdi-eye text-slate-600" v-else="see_password"></div>
+                            </Transition>
+                        </div>
                     </div>
                     <div class="error-status w-full px-0.5 flex flex-row justify-start items-center gap-x-2" v-if="validpass">
                         <div class="i-mdi-alert-outline text-orange-400 text-lg"></div>

@@ -1,21 +1,31 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import type UserRegister from '../../../Types/UserRegister';
+import type { County } from '../../../Types/GeneralTypes';
+import fetchCounties from '../../../composables/Api/FetchLocationCounties';
+import { useRouter } from 'vue-router';
 
+const base_url = import.meta.env.VITE_BASE_URL;
+const router = useRouter();
 
 const emit = defineEmits<{
     (e: 'toggleFinishRegistration'): void
 }>()
+const props = defineProps<{
+    userinitialdata: UserRegister;
+}>();
 
-const submitOtherDetails = (): void => {
-    emit('toggleFinishRegistration');
-}
-
-
+// User data
+const userdata = ref<{
+    UserID: number
+    GenderID: string
+    password: string
+}>({UserID: parseInt(localStorage.getItem('nipate_user_id') || props.userinitialdata.id.toString()), GenderID: '1', password: ''});
 
 // Form data
-const county = ref<string>('');
-const counties = ref<string[]>(['Nakuru', 'Baringo', 'Nakuru', 'Baringo', 'Nakuru', 'Baringo', 'Nakuru'])
-const searchcounties = ref<string[]>([]);
+const county = ref<County>({id: 0, Name: ''});
+const counties = ref<County[]>([]);
+const searchcounties = ref<County[]>([]);
 
 const opencounty = ref<boolean>(false);
 const see_password = ref<boolean>(false);
@@ -23,14 +33,65 @@ const see_password = ref<boolean>(false);
 const closeSelectCounty = (): void => {opencounty.value=false}
 const openSelectCounty = (): void => {opencounty.value=true}
 
+// Fetched counties for selecting location Field
+const fetchCountiesList = async (type: void ) => {
+    counties.value = await fetchCounties(`${base_url}location/counties`);
+    console.log("Fetched: ", counties.value);
+    
+}
+onMounted(() => fetchCountiesList());
+if(localStorage.getItem('nipate_user_id') !== null) {
+    console.log('Local UserID: ', localStorage.getItem('nipate_user_id'));
+    
+}
 const onCountyChange = (event: Event): void => {
-        opencounty.value=true
+        opencounty.value=true;
         searchcounties.value = counties.value.filter((str) => {
-            return str.toLocaleLowerCase().includes(county.value.toLocaleLowerCase())
+            return str.Name.toLocaleLowerCase().includes(county.value.Name.toLocaleLowerCase())
         })
         // closeSelectCounty();
 }
+const selectLocaction = (select_id: number): void => {
+    for(let i=0; i<counties.value.length; i++) {
+        if(counties.value[i].id === select_id) {
+            county.value = counties.value[i];
+            break
+        }
+    }
+    console.log(county.value);
+    
+    closeSelectCounty();
+}
 
+// Api Submit data
+
+const submitOtherDetails = async (): Promise<void> => {
+
+    const response = await fetch(`${base_url}auth/register`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            UserID: userdata.value.UserID,
+            LocationID: county.value.id,
+            GenderID: parseInt(userdata.value.GenderID),
+            password: userdata.value.password
+        })
+    })
+
+    if(response.status === 201) {
+        let data = await response.json();
+        console.log(data);
+        localStorage.removeItem('nipate_user_id');
+        router.push({name: 'Dashboard'});
+    } else {
+        let error = await response.json();
+        console.log(error);
+    }
+
+    // emit('toggleFinishRegistration');
+}
 </script>
 <template>
     <form 
@@ -42,7 +103,7 @@ const onCountyChange = (event: Event): void => {
             <div class="input-field w-full flex flex-col gap-y-2">
                 <label for="county" class="text-[#346974] text-base font-semibold tracking-wide">Your Region/County</label>
                 <div class="input w-full flex flex-col relative items-center justify-center">
-                    <input type="text" id="county" class="w-full rounded" v-model.trim="county" @input="onCountyChange">
+                    <input type="text" id="county" class="w-full rounded" required v-model="county.Name" @input="onCountyChange">
                     <div class="i-mdi-chevron-down absolute right-2 cursor-pointer hover:rotate-180 transition-transform duration-300 text-xl" @click="openSelectCounty" :class="opencounty && 'rotate-180'"></div>
                     <div class="county-list absolute top-full translate-y-0.5 w-full flex flex-col bg-gray-100 z-20 shadow-md" v-if="opencounty">
                         <div class="w-full flex items-center justify-end px-2 py-1 border-b border-gray-300">
@@ -51,9 +112,9 @@ const onCountyChange = (event: Event): void => {
                             </button>
                         </div>
                         <ul class="w-full flex flex-col max-h-[15rem] overflow-y-auto pb-1">
-                            <li v-for="(countyname, index) in searchcounties"
-                                :key="index" @click="() => {county = countyname; closeSelectCounty();}"
-                            ><div class="i-mdi-map-marker"></div> {{countyname}}</li>
+                            <li v-for="(countyitem, index) in searchcounties"
+                                :key="countyitem.id" @click="selectLocaction(countyitem.id)"
+                            ><div class="i-mdi-map-marker"></div> {{countyitem.Name}}</li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +122,7 @@ const onCountyChange = (event: Event): void => {
             <div class="input-field w-full flex flex-col gap-y-2">
                 <label for="gender" class="text-[#346974] text-base font-semibold tracking-wide">Gender</label>
                 <div class="input w-full flex flex-col relative items-center justify-center">
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" v-model="userdata.GenderID">
                         <option value="1">Male</option>
                         <option value="2">Female</option>
                     </select>
@@ -71,7 +132,7 @@ const onCountyChange = (event: Event): void => {
                 <label for="password" class="text-[#346974] text-base font-semibold">Password</label>
                 <div class="input w-full flex flex-row items-center gap-x-1 relative">
                     <input :type="see_password ? 'text' : 'password'" name="password" id="password" required
-                        class="w-full rounded"
+                        class="w-full rounded" v-model="userdata.password"
                     >
                     <div class="show-password absolute right-2 p-4 sm:py-3 cursor-pointer" @click="see_password = !see_password">
                         <Transition name="slide" mode="out-in">
