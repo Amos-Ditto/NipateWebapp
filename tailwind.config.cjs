@@ -25,7 +25,7 @@ module.exports = {
         'width': 'width',
         'rotate': 'rotate',
         'font': 'font',
-        'pad': 'padding',
+        'pad': ['padding', 'gap'],
       },
       backgroundColor: {
         'dark-opacity': 'rgba(0, 0, 0, 0.4)'

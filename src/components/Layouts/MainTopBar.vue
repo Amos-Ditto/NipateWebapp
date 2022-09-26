@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import useAuthentications from '../../store/authentications';
+
+const storeauth = useAuthentications();
+
+</script>
 <template>
     <header class="w-full h-full flex flex-col bg-gray-100">
         <div class="top-nav">
@@ -7,13 +14,23 @@
             </div>
             <div class="top-right-nav">
                 <!-- <small>New to this site?</small> -->
-                <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">
-                    <router-link class="block" :to="{name: 'Register'}" >Register</router-link>
-                </button>
-                <small>or</small>
-                <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
-                    <router-link class="block" :to="{name: 'Login'}" >Login</router-link>
-                </button>
+                <Transition name="slide" mode="out-in">
+                    <div v-if="storeauth.Authenticated">
+                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
+                            Logout
+                            <!-- <router-link class="block" :to="{name: 'Login'}" >Logout</router-link> -->
+                        </button>
+                    </div>
+                    <div v-else="storeauth.Authenticated" class="flex flex-row items-center gap-1.5 sm:gap-3 transition-pad">
+                        <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">
+                            <router-link class="block" :to="{name: 'Register'}" >Register</router-link>
+                        </button>
+                        <small>or</small>
+                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
+                            <router-link class="block" :to="{name: 'Login'}" >Login</router-link>
+                        </button>
+                    </div>
+                </Transition>
             </div>
         </div>
         <div class="bottom-nav">
@@ -36,7 +53,7 @@
 <style scoped>
 
 .top-nav {
-    @apply py-1 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px];
+    @apply py-1.5 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px];
     transition: padding 300ms ease;
 }
 .top-nav .top-left-nav {
@@ -69,5 +86,18 @@
     @apply px-1 text-base font-bold hover:text-steelblue cursor-pointer;
     @apply flex items-center flex-row gap-1;
     color: #014451;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.slide-enter-from {
+  opacity: 0;
+}
+
+.slide-leave-to {
+  opacity: 0;
 }
 </style>

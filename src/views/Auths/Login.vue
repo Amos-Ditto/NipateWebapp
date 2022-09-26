@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import useAuthentications from '../../store/authentications';
 import type UserTokenDetails from '../../Types/UserFetch';
 
 
 
 const base_url = import.meta.env.VITE_BASE_URL;
 const router = useRouter();
+const storeauth = useAuthentications();
 
 interface FormData {
     MobileNumber: string
@@ -22,7 +24,10 @@ interface Error {
     password?: string[]
 }
 
-const userfetcheddata = ref<UserTokenDetails>();
+const userfetcheddata = ref<UserTokenDetails>({
+    MobileNumber: '', FirstName: '', Auth_token: ''
+});
+
 const errors = ref<Error>();
 // Conditional errors
 const validno = ref<boolean>(false);
@@ -54,6 +59,7 @@ const formLoginSubmit = async (type: void) => {
     submitstatus.value = false;
     if(response.ok) {
         userfetcheddata.value = await response.json();
+        storeauth.updateUser(userfetcheddata.value);
         router.push({name: 'Dashboard'});
     } else {
         errors.value = await response.json();
