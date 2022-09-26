@@ -64,9 +64,11 @@ const selectLocaction = (select_id: number): void => {
 }
 
 // Api Submit data
+const submitstatus = ref<boolean>(false);
 
 const submitOtherDetails = async (): Promise<void> => {
 
+    submitstatus.value = true;
     const response = await fetch(`${base_url}auth/register`, {
         method: 'PUT',
         headers: {
@@ -79,6 +81,8 @@ const submitOtherDetails = async (): Promise<void> => {
             password: userdata.value.password
         })
     })
+
+    submitstatus.value = false;
 
     if(response.status === 201) {
         let data = await response.json();
@@ -148,8 +152,14 @@ const submitOtherDetails = async (): Promise<void> => {
                     <div class="progres-dot w-[9px] h-[9px] rounded-full bg-orange-400"></div>
                 </div>
                 <button type="submit"
-                    class="min-w-[9.1rem] px-8 py-2 text-lg font-bold tracking-wide text-slate-100 bg-orange-600 rounded hover:bg-orange-500 transition-colors duration-300"
-                >Finish</button>
+                    class="min-w-[9.1rem] px-8 py-2 text-lg font-bold tracking-wide text-slate-100 bg-orange-600 rounded \
+                    hover:bg-orange-500 transition-colors duration-300 flex items-center justify-center"
+                >
+                    <Transition name="slide" mode="out-in">
+                        <span v-if="!submitstatus">Finish</span>
+                        <span class="loader" v-else="submitstatus" ></span>
+                    </Transition>
+                </button>
             </div>
         </div>
     </form>
@@ -188,5 +198,26 @@ input {
 .slide-leave-to {
   opacity: 0;
   transform: translateY(-3px);
+}
+
+.loader {
+    width: 28px;
+    height: 28px;
+    /* border: 3px solid #FFF;
+    border-bottom-color: #abc; */
+    @apply border-[5px] border-slate-100 border-b-gray-400;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>

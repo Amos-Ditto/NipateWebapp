@@ -27,6 +27,7 @@ const errors = ref<Error>();
 // Conditional errors
 const validno = ref<boolean>(false);
 const validpass = ref<boolean>(false);
+const submitstatus = ref<boolean>(false);
 
 const see_password = ref<boolean>(false);
 
@@ -39,7 +40,7 @@ const formLoginSubmit = async (type: void) => {
         validno.value = true;
         return;
     }
-
+    submitstatus.value = true;
     const response = await fetch(`${base_url}auth/login`, {
         method: "POST",
         headers: {
@@ -50,7 +51,7 @@ const formLoginSubmit = async (type: void) => {
             password: login_formdata.value.password
         })
     })
-
+    submitstatus.value = false;
     if(response.ok) {
         userfetcheddata.value = await response.json();
         router.push({name: 'Dashboard'});
@@ -106,8 +107,14 @@ const formLoginSubmit = async (type: void) => {
             </div>
             <div class="submit-btn w-[80%] sm:w-[75%] pt-8 pb-4 flex items-center transition-width duration-300">
                 <button type="submit"
-                    class="min-w-[9.2rem] px-12 py-2 text-lg font-bold tracking-wide text-slate-100 bg-orange-600 rounded hover:bg-orange-500 transition-colors duration-300"
-                >Login</button>
+                    class="min-w-[9.2rem] px-12 py-2 text-lg font-bold tracking-wide text-slate-100 bg-orange-600 rounded \
+                     hover:bg-orange-500 transition-colors duration-300 flex items-center justify-center"
+                >
+                    <Transition name="slide" mode="out-in">
+                        <span v-if="!submitstatus">Login</span>
+                        <span class="loader" v-else="submitstatus" ></span>
+                    </Transition>
+                </button>
             </div>
             <div class="create-new w-[80%] sm:w-[75%] pt-6 sm:pt-4 pb-2 flex flex-row gap-x-2 items-center transition-width duration-300">
                 <span class="text-[#346974] text-sm">Don't have an account?</span>
@@ -121,5 +128,26 @@ const formLoginSubmit = async (type: void) => {
 
 input {
     @apply py-2 bg-gray-100 border-2 border-gray-300 px-3 outline-none focus:border-blue-300 transition-colors duration-300 tracking-wider text-slate-700;
+}
+
+.loader {
+    width: 28px;
+    height: 28px;
+    /* border: 3px solid #FFF;
+    border-bottom-color: #abc; */
+    @apply border-[5px] border-slate-100 border-b-gray-400;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>

@@ -26,7 +26,7 @@
                     <!-- <li>Requests</li> -->
                     <li><div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
                         <div class="i-mdi-account text-2xl text-darkgreen"></div>
-                    </div>Account</li>
+                    </div>My Account</li>
                 </ul>
             </div>
         </div>
