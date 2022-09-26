@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Home from '../views/Home.vue';
 import auths from './auths';
+import accounts from './accounts';
 
 
 const home = [
@@ -20,14 +21,21 @@ const routes = [
         redirect: {name: 'Dashboard'},
         meta: {title:"Home"},
         children: home
-      },
-      {
+    },
+    {
         path: '/auth',
         name: 'Auths',
         redirect: {name: 'Login'},
         component: () => import('../views/Auth.vue'),
         children: auths,
-    }
+    },
+    {
+        path: '/account',
+        name: 'Account',
+        redirect: {name: 'User'},
+        component: () => import('../views/Account.vue'),
+        children: accounts,
+    },
 ]
 
 

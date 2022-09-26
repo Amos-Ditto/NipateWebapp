@@ -1,8 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useAuthentications from '../../store/authentications';
 
+
+const router = useRouter();
 const storeauth = useAuthentications();
+
+const reDirectToUserAccount = (): void => {
+    if(storeauth.Authenticated) {
+        router.push({ name: 'User' });
+    } else {
+        router.push({name: 'Login', query: { redirect: '/account/me' }});
+    }
+}
 
 </script>
 <template>
@@ -41,9 +52,11 @@ const storeauth = useAuthentications();
                 <ul class="flex flex-row items-center gap-4">
                     <!-- <li>Services</li> -->
                     <!-- <li>Requests</li> -->
-                    <li><div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
-                        <div class="i-mdi-account text-2xl text-darkgreen"></div>
-                    </div>My Account</li>
+                    <li @click="reDirectToUserAccount">
+                        <div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
+                            <div class="i-mdi-account text-2xl text-darkgreen"></div>
+                        </div>My Account
+                    </li>
                 </ul>
             </div>
         </div>

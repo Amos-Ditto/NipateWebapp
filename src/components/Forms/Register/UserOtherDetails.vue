@@ -4,9 +4,13 @@ import type UserRegister from '../../../Types/UserRegister';
 import type { County } from '../../../Types/GeneralTypes';
 import fetchCounties from '../../../composables/Api/FetchLocationCounties';
 import { useRouter } from 'vue-router';
+import useAuthentications from '../../../store/authentications';
+
 
 const base_url = import.meta.env.VITE_BASE_URL;
 const router = useRouter();
+const storeauth = useAuthentications();
+
 
 const emit = defineEmits<{
     (e: 'toggleFinishRegistration'): void
@@ -88,6 +92,7 @@ const submitOtherDetails = async (): Promise<void> => {
         let data = await response.json();
         console.log(data);
         localStorage.removeItem('nipate_user_id');
+        storeauth.updateUser(data);
         router.push({name: 'Dashboard'});
     } else {
         let error = await response.json();

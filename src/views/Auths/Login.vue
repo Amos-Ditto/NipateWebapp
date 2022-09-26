@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import useAuthentications from '../../store/authentications';
 import type UserTokenDetails from '../../Types/UserFetch';
 
@@ -8,6 +8,7 @@ import type UserTokenDetails from '../../Types/UserFetch';
 
 const base_url = import.meta.env.VITE_BASE_URL;
 const router = useRouter();
+const route = useRoute();
 const storeauth = useAuthentications();
 
 interface FormData {
@@ -60,7 +61,9 @@ const formLoginSubmit = async (type: void) => {
     if(response.ok) {
         userfetcheddata.value = await response.json();
         storeauth.updateUser(userfetcheddata.value);
-        router.push({name: 'Dashboard'});
+
+        router.push(route.query.redirect as string || { name: 'Dashboard' })
+        
     } else {
         errors.value = await response.json();
         if(errors.value?.error) {
