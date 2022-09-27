@@ -1,6 +1,12 @@
+<script setup lang="ts">
+import AccountTopBar from '../components/Layouts/AccountTopBar.vue';
+
+
+</script>
+
 <template>
-    <main>
-        <h3>Account</h3>
+    <main class="w-full flex flex-col">
+        <account-top-bar />
         <router-view ></router-view>
     </main>
 </template>

@@ -11,10 +11,6 @@ const base_url = import.meta.env.VITE_BASE_URL;
 const router = useRouter();
 const storeauth = useAuthentications();
 
-
-const emit = defineEmits<{
-    (e: 'toggleFinishRegistration'): void
-}>()
 const props = defineProps<{
     userinitialdata: UserRegister;
 }>();

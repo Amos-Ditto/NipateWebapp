@@ -53,9 +53,10 @@ const reDirectToUserAccount = (): void => {
                     <!-- <li>Services</li> -->
                     <!-- <li>Requests</li> -->
                     <li @click="reDirectToUserAccount">
-                        <div class="user-avatar px-1 py-1 rounded-full bg-gray-200">
+                        <small class="text-sm sm:text-base font-bold hover:text-steelblue">My Account</small>
+                        <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-full bg-gray-200">
                             <div class="i-mdi-account text-2xl text-darkgreen"></div>
-                        </div>My Account
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -66,8 +67,7 @@ const reDirectToUserAccount = (): void => {
 <style scoped>
 
 .top-nav {
-    @apply py-1.5 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px];
-    transition: padding 300ms ease;
+    @apply py-2 sm:py-1 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px] transition-all duration-300;
 }
 .top-nav .top-left-nav {
     @apply flex items-center flex-row py-0.5;
@@ -89,16 +89,15 @@ const reDirectToUserAccount = (): void => {
 }
 
 .bottom-nav {
-    @apply py-3 flex flex-row items-center justify-between shadow-sm px-[16px] lg:px-[78px];
+    @apply py-2.5 flex flex-row items-center justify-between shadow-sm px-[16px] lg:px-[78px];
     transition: padding 300ms ease;
 }
 .bottom-nav button {
     transition: background-color 300ms ease;
 }
 .bottom-left-nav li {
-    @apply px-1 text-base font-bold hover:text-steelblue cursor-pointer;
-    @apply flex items-center flex-row gap-1;
-    color: #014451;
+    @apply text-[#014451] px-1 text-base font-bold hover:text-steelblue cursor-pointer;
+    @apply flex items-center flex-row gap-1 transition-colors duration-200;
 }
 
 .slide-enter-active,
