@@ -28,7 +28,7 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
-  @apply bg-gray-200;
+  @apply bg-gray-200 text-[#346974];
 }
 
 .fade-enter-active,
