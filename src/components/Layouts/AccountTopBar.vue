@@ -5,9 +5,9 @@
             <img src="../../assets/Logo/Nipate.svg" alt="" class="w-[4.4rem] sm:w-[6rem] h-[2.3rem] sm:h-[2.8rem]">
         </router-link>
         <div class="right-nav flex flex-row items-center gap-x-6 sm:gap-x-12 transition-pad duration-300">
-            <div class="notification p-2 sm:p-2.5 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition-colors duration-300">
+            <!-- <div class="notification p-2 sm:p-2.5 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition-colors duration-300">
                 <div class="i-mdi-bell text-lg sm:text-xl text-[#346974]"></div>
-            </div>
+            </div> -->
             <div class="account flex flex-row items-center gap-x-1 cursor-pointer">
                 <small class="text-lg text-[#346974] font-bold tracking-tight">Amos</small>
                 <small class="hidden sm:block text-sm sm:text-lg text-[#346974] font-bold tracking-tight">Kipyegon</small>
