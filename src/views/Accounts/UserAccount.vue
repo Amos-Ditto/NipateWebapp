@@ -41,7 +41,7 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
                 <!-- <ProviderAccountNav /> -->
                 <div class="w-full flex flex-col gap-y-4 px-3">
                     <h3 class="text-lg capitalize font-bold">Services request</h3>
-                    <div class="a-container grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-2">
+                    <div class="a-container grid grid-cols-1 sm:grid-cols-3 gap-x-2 lg:gap-x-6 gap-y-2 transition-pad duration-300">
                         <ServicesCard />
                         <ServicesCard />
                         <ServicesCard />

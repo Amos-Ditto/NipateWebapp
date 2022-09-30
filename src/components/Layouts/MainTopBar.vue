@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentications from '../../store/authentications';
+import MainDropDown from './MainDropDown.vue';
 
 
 const router = useRouter();
 const storeauth = useAuthentications();
+const opendropdown = ref<boolean>(false);
 
 const reDirectToUserAccount = (): void => {
     if(storeauth.Authenticated) {
@@ -17,7 +19,7 @@ const reDirectToUserAccount = (): void => {
 
 </script>
 <template>
-    <header class="w-full h-full flex flex-col bg-gray-100">
+    <header class="w-full h-full flex flex-col bg-gray-100 relative">
         <div class="top-nav">
             <div class="top-left-nav">
                 <img src="../../assets/Logo/Vector.svg" alt="logo">
@@ -44,9 +46,12 @@ const reDirectToUserAccount = (): void => {
                 </Transition>
             </div>
         </div>
-        <div class="bottom-nav">
+        <div class="bottom-nav relative">
             <div class="bottom-left-nav py-1 pl-[20px] flex items-center flex-row">
-                <button class="px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200"><div class="i-mdi-menu text-slate-600 text-2xl"></div></button>
+                <button class="px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200" @click="opendropdown = !opendropdown">
+                    <div class="i-mdi-menu text-slate-600 text-2xl" v-if="!opendropdown"></div>
+                    <div class="i-mdi-close text-slate-600 text-2xl" v-else="opendropdown"></div>
+                </button>
             </div>
             <div class="bottom-left-nav flex items-center flex-row">
                 <ul class="flex flex-row items-center gap-4">
@@ -60,6 +65,12 @@ const reDirectToUserAccount = (): void => {
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="menu-bar w-full min-h-[5rem] absolute top-[102%] py-1 
+            shadow-md bg-gray-100 px-[8px] lg:px-[78px] transition-all duration-300"
+            v-if="opendropdown"
+        >
+            <MainDropDown />
         </div>
     </header>
 </template>
