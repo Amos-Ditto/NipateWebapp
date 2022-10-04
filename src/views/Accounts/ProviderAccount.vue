@@ -5,7 +5,7 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
     
 </script>
 <template>
-    <section class="flex flex-col w-full">
+    <section class="flex flex-col w-full gap-y-8">
         <div class="w-full px-3 flex flex-col gap-y-4 border border-gray-300 py-2 rounded-lg">
             <div
                 class="nav-section-title px-2 flex items-center justify-between lg:pr-10 py-2 border-b border-gray-300">
