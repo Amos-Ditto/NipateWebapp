@@ -5,8 +5,8 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
 </script>
 <template>
     <section class="w-full py-8 px-[8px] sm:px-[2px] md:px-[5px] lg:px-[40px] xl:px-[100px] transition-pad duration-300">
-        <div class="main-section w-full grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-5 grid-flow-row gap-x-1 lg:gap-x-8 gap-y-4">
-            <nav class="side-bar hidden col-span-1 row-span-1 pt-4 pb-8 bg-gray-100 sm:flex flex-col rounded-sm border border-gray-300">
+        <div class="main-section w-full grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-5 grid-flow-row gap-x-4 lg:gap-x-8 gap-y-4">
+            <nav class="side-bar hidden col-span-1 row-span-1 pt-4 pb-8 bg-gray-100 sm:flex flex-col rounded-md border border-gray-300">
                 <ul class="w-full flex flex-col gap-y-1">
                     <li>
                         <router-link :to="{ name: 'Provider-Home' }">
@@ -58,9 +58,7 @@ nav ul li a span {
     @apply text-base font-bold text-[#346974] sm:absolute sm:left-full lg:left-0 lg:relative sm:hidden lg:block;
 }
 
-.button-more:hover span {
-    @apply flex;
-}
+
 
 @media (max-width: 1024px) {
     nav ul li a:hover span {

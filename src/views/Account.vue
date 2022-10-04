@@ -6,7 +6,7 @@ import MainFooter from '../components/Layouts/MainFooter.vue';
 </script>
 
 <template>
-    <main class="w-full flex flex-col">
+    <main class="w-full flex flex-col bg-gray-100">
         <account-top-bar class="sticky top-0 z-20" />
         <router-view ></router-view>
         <main-footer />

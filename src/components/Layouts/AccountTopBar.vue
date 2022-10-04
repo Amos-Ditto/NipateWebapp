@@ -21,7 +21,7 @@ const storeauth = useAuthentications();
         </div>
         <div class="right-nav flex flex-row items-center gap-x-6 sm:gap-x-12 transition-pad duration-300">
             <div class="account flex flex-row items-center gap-x-1 cursor-pointer">
-                <div class="account-icon bg-gray-200 ml-2 p-2 sm:p-2.5 rounded-full">
+                <div class="account-icon bg-gray-200 ml-2 p-2 sm:p-2.5 rounded-lg">
                     <div class="i-mdi-account text-[#346974] text-lg sm:text-xl"></div>
                 </div>
             </div>

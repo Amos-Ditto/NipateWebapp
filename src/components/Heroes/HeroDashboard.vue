@@ -21,7 +21,7 @@ const onInputKeyDown = (e: Event): void => {
             <input type="text" placeholder="search data e.g Housing, Kabarak" v-model="searchvalue" @input="onInputKeyDown" @focusout="toggleCloseSearch">
             <div class="i-mdi-menu-down absolute right-4 text-2xl cursor-pointer transition-transform duration-300" :class="opensearch && 'rotate-180'" @click="toggleOpenCloseSearch"></div>
             <transition name="fade">
-                <div class="browse-by w-full absolute bottom-0 translate-y-[104%] bg-gray-100 py-1 min-h-[3rem] flex flex-col gap-1 shadow" v-if="opensearch">
+                <div class="browse-by w-full absolute bottom-0 translate-y-[104%] bg-gray-200 py-1 min-h-[3rem] flex flex-col gap-1 shadow" v-if="opensearch">
                     <!-- <div class="search-data w-full border-b border-gray-300 min-h-[2rem]">
 
                     </div> -->
@@ -55,7 +55,7 @@ const onInputKeyDown = (e: Event): void => {
   opacity: 0;
 }
 .search-bar input {
-    @apply bg-gray-100 py-2 rounded-sm border border-gray-300 w-full outline-none px-4 tracking-wider text-lg text-slate-600 font-serif placeholder:text-base;
+    @apply bg-gray-100 py-2 rounded-md border border-gray-300 w-full outline-none px-4 tracking-wider text-lg text-slate-600 font-serif placeholder:text-base;
 }
 .browse-by small , .hero-browse-by small {
     @apply text-[#014451];
