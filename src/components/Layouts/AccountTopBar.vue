@@ -1,14 +1,14 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
-import useLayouts from '../../store/layouts';
+import { useLayouts } from '../../store/layouts';
 
-const opendropdown = ref<boolean>(false);
+
 const userlayout = useLayouts();
+const { userdashboard } = storeToRefs(userlayout);
 
 const updateSideBar = ():void => {
     userlayout.updateUserDashboard();
-    opendropdown.value = userlayout.userdashboard
-    console.log(userlayout.userdashboard);
 }
 </script>
 <template>
@@ -16,8 +16,8 @@ const updateSideBar = ():void => {
         <nav class="w-full flex flex-row items-center z-30 justify-between py-5 px-[10px] lg:px-[75px] bg-gray-100 shadow-sm transition-pad duration-300">
             <div class="left-side flex items-center flex-row gap-x-8 px-4 sm:px-0">
                 <button class="sm:hidden px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200" @click="updateSideBar">
-                    <div class="i-mdi-menu text-slate-600 text-2xl" v-if="!opendropdown"></div>
-                    <div class="i-mdi-close text-slate-600 text-2xl" v-else="opendropdown"></div>
+                    <div class="i-mdi-menu text-slate-600 text-2xl" v-if="!userdashboard"></div>
+                    <div class="i-mdi-close text-slate-600 text-2xl" v-else="userdashboard"></div>
                 </button>
                 <router-link :to="{ name: 'Dashboard' }" class="flex flex-row items-center gap-x-3.5">
                     <img src="../../assets/Logo/Vector.svg" alt="logo" class="w-[2.3rem] sm:w-[2.9rem] h-[2.4rem] sm:h-[2.8rem]">
