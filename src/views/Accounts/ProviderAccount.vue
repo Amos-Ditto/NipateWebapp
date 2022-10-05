@@ -6,21 +6,29 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
 </script>
 <template>
     <section class="flex flex-col w-full gap-y-2 sm:gap-y-8">
-        <div class="user-container w-full px-3 pb-12 flex flex-col">
-            <div class="user-details flex flex-row gap-x-3">
-                <div class="user-icon p-2 rounded-xl border border-gray-300 flex items-center justify-center">
-                    <div class="i-mdi-account-outline text-5xl text-slate-400"></div>
-                </div>
-                <div class="user-details-list flex flex-col gap-y-3">
-                    <small class="text-xl font-light">Amos Kipyegon</small>
-                    <div class="location flex flex-row items-center gap-x-2">
-                        <div class="i-mdi-map-marker text-slate-500"></div>
-                        <small class="text-slate-500">Nakuru, Kenya</small>
+        <div class="top-section w-full flex flex-row justify-between">
+
+            <div class="user-container w-full px-3 pb-12 flex flex-col">
+                <div class="user-details flex flex-row gap-x-3">
+                    <div class="user-icon p-2 rounded-xl border border-gray-300 flex items-center justify-center">
+                        <div class="i-mdi-account-outline text-5xl text-slate-400"></div>
+                    </div>
+                    <div class="user-details-list flex flex-col gap-y-3">
+                        <small class="text-xl font-light">Amos Kipyegon</small>
+                        <div class="location flex flex-row items-center gap-x-2">
+                            <div class="i-mdi-map-marker text-slate-500"></div>
+                            <small class="text-slate-500">Nakuru, Kenya</small>
+                        </div>
+                    </div>
+                    <div class="edit p-1 w-6 h-6 flex items-center justify-center cursor-pointer hover:border border-gray-300 rounded-lg">
+                        <div class="i-mdi-pencil-outline text-slate-400 text-sm"></div>
                     </div>
                 </div>
-                <div class="edit p-1 w-6 h-6 flex items-center justify-center cursor-pointer hover:border border-gray-300 rounded-lg">
-                    <div class="i-mdi-pencil-outline text-slate-400 text-sm"></div>
-                </div>
+            </div>
+            <div class="other-links">
+                <button class="py-2 px-3 rounded-3xl bg-slate-700 hover:bg-slate-800 truncate text-xs sm:text-sm font-sans text-slate-100 transition-colors sm:tracking-wide">
+                    Register to offer Services
+                </button>
             </div>
         </div>
         <div class="w-full px-3 flex flex-col gap-y-4 border-gray-300 border py-2 rounded-lg">

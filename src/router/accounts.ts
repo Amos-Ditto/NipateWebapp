@@ -1,9 +1,26 @@
+
+const services_children = [
+    {
+        path: '/account/me/services/list',
+        name: 'Provider-Services-List',
+        component: () => import('../views/Accounts/ServicesList.vue'),
+        meta: {title: 'My-Services-List'}
+    },
+    {
+        path: '/account/me/services/new',
+        name: 'Provider-Services-New',
+        component: () => import('../views/Accounts/CreateService.vue'),
+        meta: {title: 'New-Services'}
+    },
+]
 const children = [
     {
         path: '/account/me/services',
         name: 'Provider-Services',
+        redirect: { name: 'Provider-Services-List' },
         component: () => import('../views/Accounts/ProviderServices.vue'),
-        meta: {title: 'Profile'}
+        meta: {title: 'My Services'},
+        children: services_children
     },
     {
         path: '/account/me/home',
