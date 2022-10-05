@@ -19,7 +19,7 @@ const submitDetails = (): void => {
             <div class="service-details-header w-full items-center flex">
                 <h3 class="text-xl font-bold">Service Details</h3>
             </div>
-            <form @submit.prevent="submitDetails" class="px-2 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-4">
+            <form @submit.prevent="submitDetails" class="px-1 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-8">
                 <div class="input-field w-full flex flex-col gap-y-2">
                     <label for="service-name" class="text-base px-2">Service User Name:</label>
                     <div class="input w-full flex flex-col">
@@ -35,13 +35,13 @@ const submitDetails = (): void => {
                     </div>
                 </div>
                 <div class="description md:col-span-2 py-4 flex flex-col gap-y-2">
-                    <label for="description" class="text-base px-2">Service description</label>
+                    <label for="description" class="text-base px-2">Service description:</label>
                     <div class="input w-full flex flex-col">
-                        <textarea name="description" id="description" cols="30" rows="6" class="py-2.5 rounded-md outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="5" class="py-2.5 rounded-md outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"></textarea>
                     </div>
                 </div>
                 <div class="input-field w-full flex flex-col gap-y-2">
-                    <button class="bg-slate-600 hover:bg-slate-700 transition-colors duration-300 w-[50%] py-2 text-slate-100 font-bold text-lg rounded-md">Submit</button>
+                    <button class="bg-slate-600 hover:bg-slate-700 transition-colors duration-300 w-full md:w-[60%] py-2 text-slate-100 font-bold text-lg rounded-md">Submit</button>
                 </div>
             </form>
         </div>

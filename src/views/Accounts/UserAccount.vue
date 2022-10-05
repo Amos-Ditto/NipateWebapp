@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import ServicesCard from '../../components/Cards/ServicesCard.vue';
-import AdvertCard from '../../components/Cards/AdvertCard.vue';
+import { ref } from 'vue';
+import useLayouts from '../../store/layouts';
+
+const userlayout = useLayouts();
+const opensidebar = ref<boolean>(false);
 
 </script>
 <template>
-    <section class="w-full py-8 px-[8px] sm:px-[2px] md:px-[5px] lg:px-[40px] xl:px-[100px] transition-pad duration-300">
+    <section class="w-full py-8 px-[8px] sm:px-[2px] md:px-[5px] lg:px-[40px] xl:px-[100px] transition-pad duration-300 relative">
         <div class="main-section w-full grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-5 grid-flow-row gap-x-4 lg:gap-x-8 gap-y-4">
             <nav class="side-bar hidden col-span-1 row-span-1 pt-4 pb-8 bg-gray-100 sm:flex flex-col rounded-md border border-gray-300">
                 <ul class="w-full flex flex-col gap-y-1">
@@ -33,6 +36,12 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
                         </router-link>
                     </li>
                 </ul>
+            </nav>
+            <nav class="fixed left-0 right-0 top-0 bottom-0 z-10 sm:hidden" v-show="userlayout.userdashboard">
+                <div class="absolute left-0 top-0 bottom-0 right-0 opacity-60 bg-gray-200"></div>
+                <div class="absolute left-0 top-0 bottom-0 w-[48%] bg-gray-200 py-24">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe labore nulla natus dolore dicta quam placeat. Voluptates nemo ut esse fugiat qui fugit, nihil asperiores unde iste minus reiciendis nam?
+                </div>
             </nav>
             <div class="body-section sm:col-span-7 lg:col-span-4 row-span-3 pb-2 flex flex-col gap-y-4">
                 <!-- Body NavBar -->
