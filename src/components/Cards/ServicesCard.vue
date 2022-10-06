@@ -1,5 +1,5 @@
 <template>
-    <div class="ad-card min-h-[15rem] bg-gray-100 rounded-md border border-gray-300 flex flex-col gap-y-1 relative">
+    <div class="ad-card min-h-[15rem] bg-gray-100 sm:rounded-md border border-gray-300 flex flex-col gap-y-1 relative">
         <div class="card-title py-2 sm:py-1.5 border-b border-gray-300 flex items-center px-2 w-full">
             <h3 class="text-lg text-[#014451]">Catering Services</h3>
         </div>

@@ -28,6 +28,12 @@ const children = [
         component: () => import('../views/Accounts/ProviderAccount.vue'),
         meta: {title: 'Account-Home'}
     },
+    {
+        path: '/account/me/requests',
+        name: 'Service-Requests',
+        component: () => import('../views/Accounts/ServicesRequestList.vue'),
+        meta: {title: 'Request-Lists'}
+    },
 ]
 const accounts = [
     {
