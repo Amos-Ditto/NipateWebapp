@@ -1,8 +1,8 @@
 <template>
     <div
-        class="service-container py-3 w-full flex flex-col gap-y-11 border border-slate-300 rounded-md sm:rounded-xl">
-        <div class="w-full px-4 py-3 flex flex-row items-center justify-between border-b border-gray-300">
-            <h3 class="text-base font-bold tracking-wide">Rafiki Cafe</h3>
+        class="service-container py-3 w-full flex flex-col gap-y-6 sm:gap-y-8 border border-slate-300 rounded-md sm:rounded-xl">
+        <div class="w-full px-4 py-3 flex flex-row items-center justify-between">
+            <h3 class="text-lg font-semibold tracking-wide">Rafiki Cafe</h3>
             <div class="edit-icons flex flex-row items-center gap-x-4">
                 <button
                     class="rounded-full py-0.5 px-1.5 border-2 border-slate-300 hover:border-slate-400 transition-colors text-slate-400">
