@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import ServicesCard from '../../components/Cards/ServicesCard.vue';
 import AdvertCard from '../../components/Cards/AdvertCard.vue';
-    
-    
+
+
 </script>
 <template>
-    <section class="flex flex-col w-full gap-y-2 sm:gap-y-8">
+    <section class="flex flex-col w-full gap-y-4 sm:gap-y-8">
         <div class="top-section w-full flex flex-row justify-between gap-y-6">
 
             <div class="user-container w-full px-0 sm:px-3 pb-12 flex flex-col">
@@ -16,7 +16,7 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
                     <div class="user-details-list flex flex-col gap-y-1.5 sm:gap-y-3">
                         <small class="text-base xs:text-lg sm:text-xl font-light">Amos Kipyegon</small>
                         <div class="location flex flex-row items-center gap-x-0.5 xs:gap-x-1 sm:gap-x-2">
-                            <div class="i-mdi-map-marker text-slate-500 text-sm sm:text-base"></div>
+                            <div class="i-mdi-map-marker-outline text-slate-500 text-sm sm:text-base"></div>
                             <small class="text-slate-500 text-xs">Nakuru, Kenya</small>
                         </div>
                     </div>
@@ -48,11 +48,8 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
                 <ServicesCard />
                 <ServicesCard />
             </div>
-            <!-- <div class="list-all w-full flex items-center justify-end px-1">
-                        <small class="text-base text-green-500 hover:text-orange-500 font-bold italic transition-colors cursor-pointer underline">view all</small>
-                    </div> -->
         </div>
-        <div class="w-full px-3 flex flex-col gap-y-4">
+        <div class="w-full px-3 flex flex-col gap-y-4 pt-12 sm:pt-0">
             <div
                 class="nav-section-title flex items-center justify-between px-6 lg:pr-10 py-3 rounded-md border border-gray-300">
                 <h3 class="text-lg capitalize font-bold">your adverts</h3>

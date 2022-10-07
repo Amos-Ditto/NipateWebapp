@@ -55,7 +55,7 @@ const onInputKeyDown = (e: Event): void => {
   opacity: 0;
 }
 .search-bar input {
-    @apply bg-gray-50 py-2 rounded-md border border-gray-300 w-full outline-none px-4 tracking-wider text-lg text-slate-600 font-serif placeholder:text-base;
+    @apply bg-gray-50 py-1.5 sm:py-2 rounded-md border border-gray-300 w-full outline-none px-4 tracking-wider text-lg text-slate-600 font-serif placeholder:text-base;
 }
 .browse-by small , .hero-browse-by small {
     @apply text-[#014451];

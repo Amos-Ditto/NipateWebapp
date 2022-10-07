@@ -31,7 +31,7 @@ const { userdashboard } = storeToRefs(userlayout);
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{ name: 'User' }" class="sm-links">
+                        <router-link :to="{ name: 'User-Adverts' }" class="sm-links">
                             <div class="i-mdi-plus text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                             <span>Adverts</span>
                         </router-link>
@@ -62,7 +62,7 @@ const { userdashboard } = storeToRefs(userlayout);
                                 </router-link>
                             </li>
                             <li class="xs-links">
-                                <router-link :to="{ name: 'User' }" class="xs-links">
+                                <router-link :to="{ name: 'User-Adverts' }" class="xs-links">
                                     <div class="i-mdi-plus text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Adverts</span>
                                 </router-link>

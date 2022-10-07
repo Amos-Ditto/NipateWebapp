@@ -5,11 +5,14 @@
                 <h3 class="text-lg sm:text-xl font-bold">Service Requests</h3>
             </div>
             <div class="new flex flex-row items-center gap-x-4">
-                <select name="category" id="category" class="w-[6rem] xs:w-auto px-2 py-1 rounded text-slate-500 border-gray-300 hover:border-slate-600 border text-sm outline-none transition-colors duration-300 cursor-pointer">
-                    <option value="all">All</option>
-                    <option value="Responded">Accepted</option>
-                    <option value="noresponse">Not yet Accepted</option>
-                </select>
+                <div class="sort flex flex-row items-center gap-x-2">
+                    <small class="text-base">Sort:</small>
+                    <select name="category" id="category" class="w-[6rem] xs:w-auto px-2 py-1 rounded text-slate-500 border-gray-300 hover:border-slate-600 border text-sm outline-none transition-colors duration-300 cursor-pointer">
+                        <option value="all">All</option>
+                        <option value="Responded">Accepted</option>
+                        <option value="noresponse">Not yet Accepted</option>
+                    </select>
+                </div>
                 <button class="border border-gray-300 hover:bg-slate-600 transition-colors duration-300 rounded py-1 px-3.5 text-slate-600 hover:text-slate-100 text-sm">Refresh</button>
             </div>
         </div>

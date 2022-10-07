@@ -6,7 +6,7 @@
         <div class="card-body py-1 flex flex-col w-full">
             <div class="flex flex-col w-full border-b border-gray-200 py-1">
                 <div class="user-name w-full flex flex-row items-center gap-x-2 px-2">
-                    <div class="user-icon p-1 bg-gray-200 rounded-full">
+                    <div class="user-icon p-1 bg-gray-200 rounded">
                         <div class="i-mdi-account-outline text-lg text-slate-400"></div>
                     </div>
                     <p class="text-xs">Amos Kipyegon</p>

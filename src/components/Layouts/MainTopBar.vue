@@ -59,8 +59,8 @@ const reDirectToUserAccount = (): void => {
                     <!-- <li>Requests</li> -->
                     <li @click="reDirectToUserAccount">
                         <small class="text-sm sm:text-base font-bold hover:text-steelblue">My Account</small>
-                        <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-full bg-gray-200">
-                            <div class="i-mdi-account text-2xl text-darkgreen"></div>
+                        <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
+                            <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
                         </div>
                     </li>
                 </ul>

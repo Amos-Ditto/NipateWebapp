@@ -8,14 +8,14 @@
         </div>
         <div class="card-footer w-full flex flex-row items-center justify-between px-6 py-3 absolute bottom-0">
             <div class="user-name flex items-center gap-2 flex-row">
-                <div class="avatar px-2 py-2 bg-gray-200 rounded-full transition-colors duration-300">
-                    <div class="i-mdi-account text-slate-600 text-xl"></div>
+                <div class="avatar px-1.5 py-1.5 bg-gray-200 rounded-md transition-colors duration-300">
+                    <div class="i-mdi-account-outline text-slate-600 text-xl"></div>
                 </div>
                 <span class="text-slate-500 text-base font-serif">Rafiki Cafe</span>
             </div>
             <div class="location-pin flex items-center gap-2 flex-row">
-                <div class="location-icon px-1 py-1 bg-gray-200 rounded-full transition-colors duration-300">
-                    <div class="i-mdi-map-marker"></div>
+                <div class="location-icon px-1 py-1 bg-gray-200 rounded transition-colors duration-300">
+                    <div class="i-mdi-map-marker-outline"></div>
                 </div>
                 <span class="text-slate-500 text-sm font-serif">Nakuru, Rafiki</span>
             </div>
