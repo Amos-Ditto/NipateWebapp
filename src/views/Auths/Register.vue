@@ -44,7 +44,7 @@ const userRegisteredDetails = (payload: UserRegister): void => {
                 />
             </Transition>
         </div>
-        <div class="other-links w-[96%] md:w-[600px] px-2 sm:px-16 pt-8 sm:pt-6 flex flex-row gap-x-2 items-center justify-center sm:justify-end">
+        <div class="other-links w-[96%] md:w-[600px] px-2 sm:px-16 pt-4 sm:pt-6 flex flex-row gap-x-2 items-center justify-center sm:justify-end">
             <p><small class="text-base font-light tracking-tight text-[#014451]">Already have an Account?</small>
             <router-link :to="{name: 'Login'}" class="text-xl ml-2 hover:underline font-bold text-[#346974] tracking-tight">Login</router-link></p>
         </div>

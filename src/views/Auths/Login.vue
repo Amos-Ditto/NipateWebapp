@@ -80,10 +80,10 @@ const formLoginSubmit = async (type: void) => {
         <form @submit.prevent="formLoginSubmit()" class="w-full md:w-[600px] px-2 pt-16 sm:pt-8 pb-4 flex flex-col items-center justify-center">
             <h3 class="text-[#346974] text-3xl sm:text-2xl font-light transition-font duration-300">Login to your Account</h3>
             <div class="input-fields flex flex-col justify-center items-center w-full gap-y-8 pt-16">
-                <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
+                <div class="input-field w-[94%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="phone" class="text-[#346974] text-sm font-semibold">Mobile Number</label>
                     <div class="input w-full flex flex-row gap-x-1">
-                        <div class="phone-icon-label px-2 py-2 bg-slate-50 border-2 border-gray-300 w-[20%] rounded-l flex flex-row items-center justify-center gap-x-1 opacity-90">
+                        <div class="phone-icon-label px-2 py-2 bg-slate-50 border border-gray-300 w-[20%] rounded-l flex flex-row items-center justify-center gap-x-1 opacity-90">
                             <img src="../../assets/bgImg/Flag-of-Kenya.svg" alt="ke" class="w-[1.2rem] h-[1rem]">
                             <small class="tracking-wide text-sm text-slate-700 font-serif">+254</small>
                         </div>
@@ -97,7 +97,7 @@ const formLoginSubmit = async (type: void) => {
                         <small class="text-sm text-orange-400">{{mobilenumber_errormsg}}</small>
                     </div>
                 </div>
-                <div class="input-field w-[80%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
+                <div class="input-field w-[94%] sm:w-[75%] flex flex-col justify-start gap-y-1.5 transition-width duration-300">
                     <label for="password" class="text-[#346974] text-sm font-semibold">Password</label>
                     <div class="input w-full relative flex items-center">
                         <input :type="see_password ? 'text' : 'password'" id="password" class="w-full rounded" required v-model="login_formdata.password" @input="validpass = false">
@@ -114,7 +114,7 @@ const formLoginSubmit = async (type: void) => {
                     </div>
                 </div>
             </div>
-            <div class="submit-btn w-[80%] sm:w-[75%] pt-8 pb-4 flex items-center transition-width duration-300">
+            <div class="submit-btn w-[94%] sm:w-[75%] pt-8 pb-4 flex items-center transition-width duration-300">
                 <button type="submit"
                     class="min-w-[9.2rem] px-12 py-2 text-lg font-bold tracking-wide text-slate-100 bg-orange-600 rounded \
                      hover:bg-orange-500 transition-colors duration-300 flex items-center justify-center"
@@ -125,7 +125,7 @@ const formLoginSubmit = async (type: void) => {
                     </Transition>
                 </button>
             </div>
-            <div class="create-new w-[80%] sm:w-[75%] pt-6 sm:pt-4 pb-2 flex flex-row gap-x-2 items-center transition-width duration-300">
+            <div class="create-new w-[94%] sm:w-[75%] pt-6 sm:pt-4 pb-2 flex flex-row gap-x-2 items-center transition-width duration-300">
                 <span class="text-[#346974] text-sm">Don't have an account?</span>
                 <router-link :to="{name: 'Register'}" class="text-[#346974] font-bold font-sans hover:text-orange-500 transition-colors duration-300">Create Now</router-link>
             </div>
@@ -136,7 +136,7 @@ const formLoginSubmit = async (type: void) => {
 <style scoped>
 
 input {
-    @apply py-2 bg-gray-100 border-2 border-gray-300 px-3 outline-none focus:border-blue-300 transition-colors duration-300 tracking-wider text-slate-700;
+    @apply py-2 bg-gray-100 border border-gray-300 px-3 outline-none focus:border-blue-300 transition-colors duration-300 tracking-wider text-slate-700;
 }
 
 .loader {

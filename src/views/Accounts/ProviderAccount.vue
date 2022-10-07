@@ -25,10 +25,13 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
                     </div>
                 </div>
             </div>
-            <div class="other-links">
-                <button class="py-2 px-3 rounded-3xl bg-slate-700 hover:bg-slate-800 truncate text-xs sm:text-sm font-sans text-slate-100 transition-colors sm:tracking-wide">
+            <div class="other-links flex flex-row items-start">
+                <button class="py-1.5 px-3 rounded-3xl truncate bg-slate-600 hover:bg-slate-700 transition-colors duration-300 text-slate-100 text-sm flex flex-row items-center gap-x-1">
                     Register to offer Services
                 </button>
+                <!-- <button class="py-2 px-3 rounded-3xl bg-slate-700 hover:bg-slate-800 tracking-wider truncate text-xs sm:text-sm text-slate-100 transition-colors sm:tracking-wide">
+                    Register to offer Services
+                </button> -->
             </div>
         </div>
         <div class="w-full px-3 flex flex-col gap-y-4 border-gray-300 py-2 rounded-lg">

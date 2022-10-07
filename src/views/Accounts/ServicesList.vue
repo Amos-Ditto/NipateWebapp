@@ -16,7 +16,8 @@ const redirectNewServices = () => {
                 <h3 class="text-2xl font-semibold tracking-tight">My Services</h3>
             </div>
             <div class="right-nav">
-                <button class="bg-slate-700 hover:bg-slate-800 transition-colors capitalize text-slate-100 text-sm font-light py-1.5 px-4 rounded-2xl" @click="redirectNewServices">
+                <button class="bg-slate-700 hover:bg-slate-800 flex flex-row items-center gap-x-1.5 transition-colors capitalize text-slate-100 text-sm font-light py-1.5 px-4 rounded-2xl" @click="redirectNewServices">
+                    <div class="i-mdi-plus text-base"></div>
                     add new Service
                 </button>
             </div>

@@ -4,14 +4,8 @@
         <div class="w-full px-3 sm:px-4 py-3 flex flex-row items-center justify-between">
             <h3 class="text-lg font-semibold tracking-wide">Rafiki Cafe</h3>
             <div class="edit-icons flex flex-row items-center gap-x-4">
-                <button
-                    class="rounded-full py-0.5 px-1.5 border-2 border-slate-300 hover:border-slate-400 transition-colors text-slate-400">
-                    <div class="i-mdi-pencil-outline text-xl"></div>
-                </button>
-                <button
-                    class="rounded-full py-0.5 px-1.5 border-2 border-slate-300 hover:border-slate-400 transition-colors text-slate-400">
-                    <div class="i-mdi-delete-outline text-xl"></div>
-                </button>
+                <button class="border border-gray-200 rounded px-2 sm:px-4 py-0.5 sm:py-1 text-xs sm:text-sm hover:text-dodgerblue hover:border-dodgerblue transition-colors duration-300">Edit</button>
+                <button class="border border-gray-200 rounded px-2 sm:px-4 py-0.5 sm:py-1 text-xs sm:text-sm hover:text-tomato hover:border-tomato transition-colors duration-300">Delete</button>
             </div>
         </div>
         <div class="w-full grid grid-cols-1 gap-y-4 gap-x-3">
