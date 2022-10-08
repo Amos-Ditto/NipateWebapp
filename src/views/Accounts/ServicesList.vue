@@ -38,7 +38,7 @@ const redirectNewServices = () => {
                 </div>
                 <div class="new-text flex flex-col items-center justify-center gap-y-2">
                     <p class="text-sm text-slate-500">Add a new Service to offer.</p>
-                    <RouterLink :to="{name: 'Provider-Services'}" class="text-steelblue font-bold hover:underline text-sm" >New Service</RouterLink>
+                    <RouterLink :to="{name: 'Provider-Services-New'}" class="text-steelblue font-bold hover:underline text-sm" >New Service</RouterLink>
                 </div>
             </div>
         </div>

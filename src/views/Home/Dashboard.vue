@@ -5,7 +5,7 @@ import RecentServiceData from '../../components/Cards/RecentServiceData.vue';
 </script>
 <template>
     <main class="w-full pt-8 pb-8 md:pb-24 px-[8px] lg:px-[80px] xl:px-[90px] 2xl:px-[130px] transition-pad duration-300 flex flex-col gap-y-12">
-        <section class="w-full">
+        <section class="w-full py-4">
             <HeroDashboard />
         </section>
         <section class="w-full flex flex-col gap-4 pb-8 pt-1 sm:pt-3 transition-pad duration-300">
