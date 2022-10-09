@@ -47,16 +47,16 @@ const reDirectToUserAccount = (): void => {
             </div>
         </div>
         <div class="bottom-nav relative">
-            <div class="bottom-left-nav py-1 pl-[20px] flex items-center flex-row">
-                <button class="px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200" @click="opendropdown = !opendropdown">
+            <div class="bottom-left-nav px-1 flex items-center flex-row">
+                <MainDropDown />
+                <!-- <button class="px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200" @click="opendropdown = !opendropdown">
                     <div class="i-mdi-menu text-slate-600 text-2xl" v-if="!opendropdown"></div>
                     <div class="i-mdi-close text-slate-600 text-2xl" v-else="opendropdown"></div>
-                </button>
+                </button> -->
             </div>
-            <div class="bottom-left-nav flex items-center flex-row">
+            <div class="bottom-left-nav flex flex-row gap-x-6 items-center justify-between">
+                <!-- <MainDropDown /> -->
                 <ul class="flex flex-row items-center gap-4">
-                    <!-- <li>Services</li> -->
-                    <!-- <li>Requests</li> -->
                     <li @click="reDirectToUserAccount">
                         <small class="text-sm sm:text-base font-bold hover:text-steelblue">My Account</small>
                         <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
@@ -66,19 +66,13 @@ const reDirectToUserAccount = (): void => {
                 </ul>
             </div>
         </div>
-        <div class="menu-bar w-full min-h-[5rem] absolute top-[102%] py-1 
-            shadow-md bg-gray-100 px-[8px] lg:px-[78px] transition-all duration-300"
-            v-if="opendropdown"
-        >
-            <MainDropDown />
-        </div>
     </header>
 </template>
 
 <style scoped>
 
 .top-nav {
-    @apply py-2 sm:py-1 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px] transition-all duration-300;
+    @apply py-2 sm:py-2 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px] transition-all duration-300;
 }
 .top-nav .top-left-nav {
     @apply flex items-center flex-row py-0.5;
@@ -100,7 +94,7 @@ const reDirectToUserAccount = (): void => {
 }
 
 .bottom-nav {
-    @apply py-2.5 flex flex-row items-center justify-between shadow-sm px-[16px] lg:px-[78px];
+    @apply py-4 flex flex-row items-center justify-between shadow-sm px-[10px] lg:px-[78px];
     transition: padding 300ms ease;
 }
 .bottom-nav button {
@@ -108,7 +102,7 @@ const reDirectToUserAccount = (): void => {
 }
 .bottom-left-nav li {
     @apply text-[#014451] px-1 text-base font-bold hover:text-steelblue cursor-pointer;
-    @apply flex items-center flex-row gap-1 transition-colors duration-200;
+    @apply flex items-center flex-row truncate gap-1 transition-colors duration-200;
 }
 
 .slide-enter-active,
