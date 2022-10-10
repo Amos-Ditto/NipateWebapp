@@ -25,7 +25,6 @@ const toggleFinishRegistration = (): void => {
 
 const userRegisteredDetails = (payload: UserRegister): void => {
     fetcheduserinitialdata.value = payload;
-    console.log('Fetched Data: ', fetcheduserinitialdata.value);
     localStorage.setItem('nipate_user_id', payload.id.toString());
 }
 
