@@ -16,7 +16,9 @@ const onInputKeyDown = (e: Event): void => {
 </script>
 <template>
     <div class="w-full flex flex-col justify-center items-center gap-y-1">
-        <h3 class="text-xl sm:text-2xl md:text-3xl text-[#014451] font-[600] transition-font duration-300">Find the best people to serve you</h3>
+        <div class="hero-title flex w-full justify-center items-center">
+            <h3 class="text-center text-3xl sm:text-4xl md:text-5xl text-[#014451] font-[600] tracking-wide transition-font duration-300">Find the best people <br /> to serve you</h3>
+        </div>
         <div class="search-bar flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-8 w-[94%] md:w-[75%] lg:w-[70%] xl:w-[60%] relative transition-all duration-300">
             <input type="text" placeholder="search data e.g Housing, Kabarak" v-model="searchvalue" @input="onInputKeyDown" @focusout="toggleCloseSearch">
             <div class="i-mdi-menu-down absolute right-4 text-2xl cursor-pointer transition-transform duration-300" :class="opensearch && 'rotate-180'" @click="toggleOpenCloseSearch"></div>
