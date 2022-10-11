@@ -7,6 +7,7 @@ const state = {
         MobileNumber: null, FirstName: null, Auth_token: null
     } as UserAuth,
     Authenticated: false as boolean,
+    Provider: false as boolean,
 
 }
 
@@ -23,6 +24,9 @@ const actions = {
     updateUser(payload: UserAuth): void {
         state.User = payload;
         (payload.Auth_token === null) ? state.Authenticated = false : state.Authenticated = true;
+    },
+    updateProvider(): void {
+        state.Provider = !state.Provider;
     }
 }
 

@@ -23,26 +23,26 @@ const children = [
         children: services_children
     },
     {
-        path: '/account/provider/home',
+        path: 'provider',
         name: 'Provider-Home',
         component: () => import('../views/Accounts/ProviderAccount.vue'),
         meta: {title: 'Account-Home'}
     },
 
     {
-        path: '/account/user/home',
+        path: 'client',
         name: 'User-Home',
         component: () => import('../views/Accounts/NonProviderAccount.vue'),
         meta: {title: 'User-Home'}
     },
     {
-        path: '/account/provider/requests',
+        path: 'requests',
         name: 'Service-Requests',
         component: () => import('../views/Accounts/ServicesRequestList.vue'),
         meta: {title: 'Request-Lists'}
     },
     {
-        path: '/account/me/adverts',
+        path: 'adverts',
         name: 'User-Adverts',
         component: () => import('../views/Accounts/AdvertView.vue'),
         meta: {title: 'User-Adverts'}

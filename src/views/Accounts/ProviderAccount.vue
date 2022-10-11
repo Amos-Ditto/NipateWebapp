@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ServicesCard from '../../components/Cards/ServicesCard.vue';
 import AdvertCard from '../../components/Cards/AdvertCard.vue';
+import UserAccountDetails from '../../components/Heroes/UserAccountDetails.vue';
 
 
 </script>
@@ -9,21 +10,7 @@ import AdvertCard from '../../components/Cards/AdvertCard.vue';
         <div class="top-section w-full flex flex-row justify-between gap-y-6">
 
             <div class="user-container w-full px-0 sm:px-3 pb-12 flex flex-col">
-                <div class="user-details flex flex-row gap-x-3 ">
-                    <div class="user-icon p-1 xs:p-1.5 sm:p-2 rounded-xl border border-gray-300 flex items-center justify-center">
-                        <div class="i-mdi-account-outline text-3xl xs:text-4xl sm:text-5xl text-slate-400"></div>
-                    </div>
-                    <div class="user-details-list flex flex-col gap-y-1.5 sm:gap-y-3">
-                        <small class="text-base xs:text-lg sm:text-xl font-light">Amos Kipyegon</small>
-                        <div class="location flex flex-row items-center gap-x-0.5 xs:gap-x-1 sm:gap-x-2">
-                            <div class="i-mdi-map-marker-outline text-slate-500 text-sm sm:text-base"></div>
-                            <small class="text-slate-500 text-xs">Nakuru, Kenya</small>
-                        </div>
-                    </div>
-                    <div class="edit p-1 w-6 h-6 hidden xs:flex items-center justify-center cursor-pointer hover:border border-gray-300 rounded-lg">
-                        <div class="i-mdi-pencil-outline text-slate-400 text-sm"></div>
-                    </div>
-                </div>
+                <UserAccountDetails />
             </div>
             <div class="other-links flex flex-row items-start">
                 <button class="py-1.5 px-3 rounded-3xl truncate bg-slate-600 hover:bg-slate-700 transition-colors duration-300 text-slate-100 text-sm flex flex-row items-center gap-x-1">
