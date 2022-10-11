@@ -1,11 +1,80 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import useAuthentications from '../../store/authentications';
+import { County } from '../../Types/GeneralTypes';
 
+const base_url = import.meta.env.VITE_BASE_URL;
+const router = useRouter();
+const useauth = useAuthentications();
 
 const openselect = ref<boolean>(false);
-
+const counties = ref<County[]>([]);
+const formdata = ref<County>({
+    Name: "Select", id: 0
+});
+const validformdata = ref<boolean>(true);
+const retryfetch = ref<boolean>(false);
+const submitloading = ref<boolean>(false);
 const toggleSelect = (): void => {
     openselect.value = !openselect.value;
+}
+
+const fetchCounties = async(): Promise<void> => {
+    retryfetch.value = !retryfetch.value;
+    await fetch(`${base_url}location/counties`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    .then(res => {
+        return res.json()
+    })
+    .then(response => {
+        counties.value = response;
+    })
+    .catch(error => {
+        retryfetch.value = true;
+    })
+}
+// Fetch Location list
+fetchCounties();
+
+const selectLocation = (payload: County) => {
+    formdata.value = payload;
+    toggleSelect();
+    validformdata.value = true;
+}
+
+const createProviderAccount = async (): Promise<void> => {
+    if(formdata.value.id === 0) {
+        validformdata.value = false;
+        return;
+    }
+    console.log(formdata.value);
+    submitloading.value = true;
+    await fetch(`${base_url}provider/new`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Token f9696bf31cf74c12b58c3cd115799190416b2cca"
+        },
+        body: JSON.stringify({CountyID: formdata.value.id})
+    })
+    .then(res => {
+        return res.json()
+    })
+    .then(response => {
+        router.push({ name: "Provider-Home" });
+        useauth.updateProvider();
+        submitloading.value = false;
+        console.log(response)
+    })
+    .catch(error => {
+        console.log(error);
+        submitloading.value = false;
+    })
 }
 </script>
 <template>
@@ -18,26 +87,22 @@ const toggleSelect = (): void => {
             <div class="input flex items-start flex-col relative">
                 <transition name="popup">
                     <div v-if="openselect"
-                        class="select py-1.5 absolute z-30 -top-full left-1/2 sm:left-1/4 right-0 sm:right-1/2 min-h-[8rem] max-h-[13rem] bg-gray-50 rounded overflow-y-auto"
+                        class="select py-1.5 absolute z-30 -top-full left-1/2 md:left-1/4 right-0 md:right-1/4 lg:right-1/2 min-h-[8rem] max-h-[13rem] bg-gray-50 rounded overflow-y-auto"
                     >
                         <div class="close absolute z-40 top-2 right-2 cursor-pointer hover:bg-gray-300 p-2 rounded-full bg-gray-200" @click="toggleSelect">
                             <div class="i-mdi-close"></div>
                         </div>
-                        <ul class="flex flex-col">
-                            <li>Nakuru</li>
-                            <li>Nairobi</li>
-                            <li>Baringo</li>
-                            <li>Kericho</li>
-                            <li>Nakuru</li>
-                            <li>Nairobi</li>
-                            <li>Baringo</li>
-                            <li>Kericho</li>
+                        <div class="retry w-full min-h-[7rem] flex items-center justify-center" v-if="!retryfetch" @click="fetchCounties">
+                            <button class="border border-steelblue hover:bg-dodgerblue px-3 py-1 capitalize font-light text-sm text-steelblue hover:text-slate-100 transition-colors rounded tracking-wide" @click="fetchCounties">retry</button>
+                        </div>
+                        <ul class="flex flex-col w-full" v-if="retryfetch">
+                            <li v-for="county in counties" @click="selectLocation(county)">{{ county.Name }}</li>
                         </ul>
                     </div>
                 </transition>
                 <button type="button" id="select-loc" @click="toggleSelect"
-                    class="flex flex-row items-center justify-between gap-x-8 min-w-[60%] sm:min-w-[30%] px-4 py-2.5 rounded border border-gray-300">
-                    <small class="font-sans text-sm tracking-wide">select</small>
+                    class="flex flex-row items-center justify-between gap-x-8 min-w-[60%] md:min-w-[30%] px-4 py-2.5 rounded border" :class="validformdata ? 'border-gray-300' : 'border-tomato'">
+                    <small class="font-sans text-sm tracking-wide capitalize">{{ formdata.Name }}</small>
                     <div class="i-mdi-chevron-down"></div>
                 </button>
             </div>
@@ -48,8 +113,11 @@ const toggleSelect = (): void => {
                 Policy.</label>
         </div>
         <div class="submit-provider">
-            <button type="button"
-                class="bg-slate-600 hover:bg-slate-700 capitalize transition-colors duration-300 rounded-sm px-10 sm:px-8 py-1.5 text-slate-100 text-sm">Submit</button>
+            <button type="button" @click="createProviderAccount"
+                class="bg-slate-600 hover:bg-slate-700 capitalize transition-colors duration-300 rounded-sm min-w-[9.3rem] px-10 sm:px-8 py-1.5 text-slate-100 flex flex-row gap-x-2 justify-center items-center">
+                <span class="text-base" v-if="!submitloading">Submit</span>
+                <span class="loader" v-else="submitloading"></span>
+            </button>
         </div>
     </div>
 </template>
@@ -88,4 +156,20 @@ const toggleSelect = (): void => {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+.loader {
+    @apply border-b-gray-400 border-4 border-slate-100 w-6 h-6;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
 </style>

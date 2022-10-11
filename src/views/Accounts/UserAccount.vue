@@ -16,7 +16,7 @@ const { userdashboard } = storeToRefs(userlayout);
             <nav class="side-bar hidden col-span-1 row-span-1 pt-4 pb-8 bg-gray-100 sm:flex flex-col rounded-md border border-gray-300">
                 <ul class="w-full flex flex-col gap-y-1" v-if="!Provider">
                     <li>
-                        <router-link :to="{ name: 'User-Home' }" class="sm-links">
+                        <router-link :to="{ name: 'UserHome' }" class="sm-links">
                             <div class="i-mdi-home-outline text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                             <span>Home</span>
                         </router-link>
@@ -73,7 +73,7 @@ const { userdashboard } = storeToRefs(userlayout);
                     <div class="absolute left-0 top-0 bottom-0 w-[50%] bg-gray-200 py-24">
                         <ul class="w-full flex flex-col gap-y-1 px-1" v-if="!Provider">
                             <li class="xs-links">
-                                <router-link :to="{ name: 'User-Home' }" class="xs-links">
+                                <router-link :to="{ name: 'UserHome' }" class="xs-links">
                                     <div class="i-mdi-home-outline text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Home</span>
                                 </router-link>

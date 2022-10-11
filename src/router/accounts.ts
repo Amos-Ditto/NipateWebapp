@@ -31,7 +31,7 @@ const children = [
 
     {
         path: 'client',
-        name: 'User-Home',
+        name: 'UserHome',
         component: () => import('../views/Accounts/NonProviderAccount.vue'),
         meta: {title: 'User-Home'}
     },
@@ -52,7 +52,7 @@ const accounts = [
     {
         path: '/account/me',
         name: 'User',
-        redirect: {name: 'User-Home'},
+        redirect: {name: 'UserHome'},
         component: () => import('../views/Accounts/UserAccount.vue'),
         meta: {title: 'Me'},
         children: children

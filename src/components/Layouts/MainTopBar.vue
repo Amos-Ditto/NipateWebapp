@@ -7,13 +7,12 @@ import MainDropDown from './MainDropDown.vue';
 
 const router = useRouter();
 const storeauth = useAuthentications();
-const opendropdown = ref<boolean>(false);
 
 const reDirectToUserAccount = (): void => {
     if(storeauth.Authenticated) {
         router.push({ name: 'User' });
     } else {
-        router.push({name: 'Login', query: { redirect: '/account/user/home' }});
+        router.push({name: 'Login', query: { redirect: '/account/me/client' }});
     }
 }
 
