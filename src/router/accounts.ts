@@ -15,7 +15,7 @@ const services_children = [
 ]
 const children = [
     {
-        path: '/account/me/services',
+        path: '/account/provider/services',
         name: 'Provider-Services',
         redirect: { name: 'Provider-Services-List' },
         component: () => import('../views/Accounts/ProviderServices.vue'),
@@ -23,13 +23,20 @@ const children = [
         children: services_children
     },
     {
-        path: '/account/me/home',
+        path: '/account/provider/home',
         name: 'Provider-Home',
         component: () => import('../views/Accounts/ProviderAccount.vue'),
         meta: {title: 'Account-Home'}
     },
+
     {
-        path: '/account/me/requests',
+        path: '/account/user/home',
+        name: 'User-Home',
+        component: () => import('../views/Accounts/NonProviderAccount.vue'),
+        meta: {title: 'User-Home'}
+    },
+    {
+        path: '/account/provider/requests',
         name: 'Service-Requests',
         component: () => import('../views/Accounts/ServicesRequestList.vue'),
         meta: {title: 'Request-Lists'}
@@ -45,7 +52,7 @@ const accounts = [
     {
         path: '/account/me',
         name: 'User',
-        redirect: {name: 'Provider-Home'},
+        redirect: {name: 'User-Home'},
         component: () => import('../views/Accounts/UserAccount.vue'),
         meta: {title: 'Me'},
         children: children

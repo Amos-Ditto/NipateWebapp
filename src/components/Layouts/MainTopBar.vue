@@ -13,7 +13,7 @@ const reDirectToUserAccount = (): void => {
     if(storeauth.Authenticated) {
         router.push({ name: 'User' });
     } else {
-        router.push({name: 'Login', query: { redirect: '/account/me' }});
+        router.push({name: 'Login', query: { redirect: '/account/user/home' }});
     }
 }
 
