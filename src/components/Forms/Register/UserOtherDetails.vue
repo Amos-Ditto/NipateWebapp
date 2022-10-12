@@ -96,7 +96,7 @@ const submitOtherDetails = async (): Promise<void> => {
 <template>
     <form 
         @submit.prevent="submitOtherDetails"
-        class="w-[96%] md:w-[600px] px-2 pt-2 sm:pt-10 pb-4 flex flex-col items-start sm:items-center justify-start sm:justify-center transition-all duration-300 sm:shadow-md sm:bg-gray-50 rounded-md"
+        class="w-[96%] md:w-[600px] px-2 pt-2 sm:pt-10 pb-4 flex flex-col items-start sm:items-center justify-start sm:justify-center transition-all duration-300"
     >
         <h3 class="text-[#346974] text-3xl sm:text-2xl font-light transition-font duration-300">Register as a User</h3>
         <div class="input-fields w-full sm:w-[80%] flex flex-col gap-y-11 sm:gap-y-8 pt-14 sm:pt-12 transition-all duration-300">

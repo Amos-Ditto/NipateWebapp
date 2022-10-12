@@ -13,7 +13,7 @@ const updateSideBar = ():void => {
 </script>
 <template>
     <div class="w-full">
-        <nav class="w-full flex flex-row items-center z-30 justify-between py-5 px-[10px] lg:px-[75px] bg-gray-100 shadow-sm transition-pad duration-300">
+        <nav class="w-full flex flex-row items-center z-30 justify-between py-5 px-[10px] lg:px-[75px] bg-gray-50 shadow-sm transition-pad duration-300">
             <div class="left-side flex items-center flex-row gap-x-8 px-4 sm:px-0">
                 <button class="sm:hidden px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200" @click="updateSideBar">
                     <div class="i-mdi-menu text-slate-600 text-2xl" v-if="!userdashboard"></div>

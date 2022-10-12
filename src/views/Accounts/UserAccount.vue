@@ -13,7 +13,7 @@ const { userdashboard } = storeToRefs(userlayout);
 <template>
     <section class="w-full py-8 px-[8px] sm:px-[2px] md:px-[5px] lg:px-[40px] xl:px-[100px] transition-pad duration-300 relative">
         <div class="main-section w-full grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-5 grid-flow-row gap-x-4 lg:gap-x-8 gap-y-4">
-            <nav class="side-bar hidden col-span-1 row-span-1 pt-4 pb-8 bg-gray-100 sm:flex flex-col rounded-md border border-gray-300">
+            <nav class="side-bar hidden col-span-1 row-span-1 pt-4 pb-8 bg-gray-50 sm:flex flex-col rounded-md border border-gray-300">
                 <ul class="w-full flex flex-col gap-y-1" v-if="!Provider">
                     <li>
                         <router-link :to="{ name: 'UserHome' }" class="sm-links">
@@ -69,8 +69,8 @@ const { userdashboard } = storeToRefs(userlayout);
             </nav>
             <transition name="slide">
                 <nav class="fixed left-0 right-0 top-0 bottom-0 z-10 sm:hidden" v-if="userdashboard">
-                    <div class="absolute left-0 top-0 bottom-0 right-0 opacity-10 bg-gray-200" @click="userlayout.updateUserDashboard"></div>
-                    <div class="absolute left-0 top-0 bottom-0 w-[50%] bg-gray-200 py-24">
+                    <div class="absolute left-0 top-0 bottom-0 right-0 opacity-10 bg-gray-100" @click="userlayout.updateUserDashboard"></div>
+                    <div class="absolute left-0 top-0 bottom-0 w-[50%] bg-gray-100 py-24">
                         <ul class="w-full flex flex-col gap-y-1 px-1" v-if="!Provider">
                             <li class="xs-links">
                                 <router-link :to="{ name: 'UserHome' }" class="xs-links">

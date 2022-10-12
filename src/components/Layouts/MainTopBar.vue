@@ -33,7 +33,7 @@ const logoutUser = (): void => {
 
 </script>
 <template>
-    <header class="w-full h-full flex flex-col bg-gray-100 relative">
+    <header class="w-full h-full flex flex-col bg-gray-50 relative">
         <div class="top-nav">
             <div class="top-left-nav">
                 <img src="../../assets/Logo/Vector.svg" alt="logo">

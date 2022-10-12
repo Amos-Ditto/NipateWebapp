@@ -1,5 +1,5 @@
 <template>
-    <div class="main w-full h-[180px] sm:h-[200px] py-1 bg-gray-100 rounded-sm border border-gray-300 shadow-sm transition-all duration-300 flex flex-col relative gap-y-4 cursor-pointer hover:bg-zinc-200 sm:hover:bg-gray-50">
+    <div class="main w-full h-[180px] sm:h-[200px] py-1 bg-gray-50 rounded border border-gray-300 shadow-sm transition-all duration-300 flex flex-col relative gap-y-4 cursor-pointer hover:bg-zinc-200 sm:hover:bg-gray-50">
         <div class="card-top w-full border-b border-gray-200 px-3 py-2 transition-colors duration-300">
             <h3 class="text-lg font-bold tracking-wider text-[#346974]">Catering Services</h3>
         </div>
