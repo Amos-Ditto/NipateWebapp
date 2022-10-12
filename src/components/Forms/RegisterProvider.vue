@@ -78,11 +78,11 @@ const createProviderAccount = async (): Promise<void> => {
 }
 </script>
 <template>
-    <div class="register-provider flex flex-col gap-y-8 px-6 border border-gray-300 rounded-md py-4">
+    <div class="register-provider flex flex-col gap-y-8 px-6 border border-gray-300 rounded-md py-6">
         <div class="form-title">
-            <h3 class="text-lg font-light tracking-wide">Register to provide Services.</h3>
+            <h3 class="text-xl tracking-wide">Register to provide Services.</h3>
         </div>
-        <div class="input-field flex flex-col gap-y-2">
+        <div class="input-field flex flex-col gap-y-2 pt-5">
             <label for="select-loc" class="text-xs font-bold">Current county:</label>
             <div class="input flex items-start flex-col relative">
                 <transition name="popup">

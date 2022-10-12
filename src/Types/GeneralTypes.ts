@@ -6,5 +6,6 @@ export interface County {
 export interface UserAuth {
     MobileNumber: string | null
     FirstName: string | null
+    LastName: string | null
     Auth_token: string | null
 }

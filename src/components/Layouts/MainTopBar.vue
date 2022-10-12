@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentications from '../../store/authentications';
@@ -7,13 +8,27 @@ import MainDropDown from './MainDropDown.vue';
 
 const router = useRouter();
 const storeauth = useAuthentications();
+const { Authenticated } = storeToRefs(storeauth);
 
 const reDirectToUserAccount = (): void => {
-    if(storeauth.Authenticated) {
+    if(Authenticated.value) {
         router.push({ name: 'User' });
     } else {
         router.push({name: 'Login', query: { redirect: '/account/me/client' }});
     }
+}
+
+const logoutUser = (): void => {
+    console.log("Auth status:", storeauth.Authenticated);
+    
+    storeauth.updateUser({
+        MobileNumber: null, FirstName: null, Auth_token: null,
+        LastName: null
+    })
+    // Authenticated.value = false;
+    localStorage.removeItem("Nipate_user_data");
+    console.log("Auth status 2nd:", storeauth.Authenticated);
+    window.location.reload();   
 }
 
 </script>
@@ -27,19 +42,18 @@ const reDirectToUserAccount = (): void => {
             <div class="top-right-nav">
                 <!-- <small>New to this site?</small> -->
                 <Transition name="slide" mode="out-in">
-                    <div v-if="storeauth.Authenticated">
-                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
-                            Logout
-                            <!-- <router-link class="block" :to="{name: 'Login'}" >Logout</router-link> -->
-                        </button>
-                    </div>
-                    <div v-else="storeauth.Authenticated" class="flex flex-row items-center gap-1.5 sm:gap-3 transition-pad">
+                    <div v-if="!Authenticated" class="flex flex-row items-center gap-1.5 sm:gap-3 transition-pad">
                         <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">
                             <router-link class="block" :to="{name: 'Register'}" >Register</router-link>
                         </button>
                         <small>or</small>
                         <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
                             <router-link class="block" :to="{name: 'Login'}" >Login</router-link>
+                        </button>
+                    </div>
+                    <div v-else>
+                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800" @click="logoutUser">
+                            Logout
                         </button>
                     </div>
                 </Transition>

@@ -30,7 +30,7 @@ const userRegisteredDetails = (payload: UserRegister): void => {
 
 </script>
 <template>
-    <section class="w-full px-4 sm:px-8 flex flex-col justify-center items-center">
+    <section class="w-full px-4 sm:px-8 flex flex-col justify-center items-center ">
         <div class="w-full flex flex-row justify-center">
             <Transition name="slide" mode="out-in">
                 <UserDetails v-if="toggleforms" 

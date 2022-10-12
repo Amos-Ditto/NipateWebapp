@@ -93,7 +93,7 @@ const submitstatus = ref<boolean>(false);
 <template>
     <form
         @submit.prevent="submitUserRegistration()"
-        class="w-[96%] md:w-[600px] px-2 pt-2 sm:pt-4 pb-4 flex flex-col items-start sm:items-center justify-start sm:justify-center transition-all duration-300"
+        class="w-[96%] md:w-[600px] px-2 pt-2 sm:pt-4 pb-4 flex flex-col items-start sm:items-center justify-start sm:justify-center transition-all duration-300 sm:shadow-md sm:bg-gray-50 rounded-lg"
     >
         <h3 class="text-[#346974] text-3xl sm:text-2xl font-light transition-font duration-300">Register as a User</h3>
         <div class="input-fields w-full sm:w-[80%] flex flex-col gap-y-6 sm:gap-y-6 pt-14 sm:pt-12 transition-all duration-300">

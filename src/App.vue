@@ -23,6 +23,8 @@ onMounted(async () => {
     let user_auth = validateUseHeaders(JSON.parse(user_local)["Auth_token"]);
     if((await user_auth).User === true) {
       useAuthentication.updateUser(JSON.parse(user_local));
+    } else {
+      localStorage.removeItem("Nipate_user_data");
     }
   
   }
