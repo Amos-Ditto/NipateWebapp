@@ -1,5 +1,5 @@
 <template>
-    <div class="ad-card min-h-[15rem] w-full flex flex-col gap-y-1 border border-gray-300 sm:rounded-md bg-gray-100 relative">
+    <div class="ad-card min-h-[15rem] w-full flex flex-col gap-y-1 border border-gray-300 sm:rounded-md bg-gray-50 relative">
         <div class="card-title w-full border-b border-gray-300 py-2.5 px-2 flex items-center">
             <h3 class="text-lg">Catering Services</h3>
         </div>

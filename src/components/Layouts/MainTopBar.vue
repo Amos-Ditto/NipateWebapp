@@ -14,7 +14,7 @@ const reDirectToUserAccount = (): void => {
     if(Authenticated.value) {
         router.push({ name: 'User' });
     } else {
-        router.push({name: 'Login', query: { redirect: '/account/me/client' }});
+        router.push({name: 'Login', query: { redirect: '/account/me' }});
     }
 }
 

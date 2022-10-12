@@ -58,7 +58,7 @@ const createProviderAccount = async (): Promise<void> => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Token f9696bf31cf74c12b58c3cd115799190416b2cca"
+            "Authorization": useauth.getUser.Auth_token || ""
         },
         body: JSON.stringify({CountyID: formdata.value.id})
     })

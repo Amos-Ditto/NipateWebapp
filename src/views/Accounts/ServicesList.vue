@@ -10,8 +10,8 @@ const redirectNewServices = () => {
 
 </script>
 <template>
-    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 sm:px-4 lg:px-0 pb-[32vh]">
-        <nav class="w-full flex flex-row items-center justify-between px-3.5">
+    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 lg:px-0 pb-[32vh]">
+        <nav class="w-full flex flex-row items-center justify-between px-0.5 sm:px-3.5">
             <div class="left flex items-center">
                 <h3 class="text-2xl font-semibold tracking-tight">My Services</h3>
             </div>
@@ -22,7 +22,7 @@ const redirectNewServices = () => {
                 </button>
             </div>
         </nav>
-        <div class="body-container w-full py-2 px-1 sm:px-4 flex flex-col gap-y-10">
+        <div class="body-container w-full py-2 px-2 sm:px-6 flex flex-col gap-y-10">
             
             <AccountProviderService />
             <AccountProviderService />
@@ -36,9 +36,11 @@ const redirectNewServices = () => {
                 <div class="new-icon px-1 py-1">
                     <img src="../../assets/bgImg/undraw_subscribe_vspl.svg" alt="img" class="w-[9rem] h-[4rem]">
                 </div>
-                <div class="new-text flex flex-col items-center justify-center gap-y-2">
-                    <p class="text-sm text-slate-500">Add a new Service to offer.</p>
-                    <RouterLink :to="{name: 'Provider-Services-New'}" class="text-steelblue font-bold hover:underline text-sm" >New Service</RouterLink>
+                <div class="new-text flex flex-col items-center justify-center gap-y-4">
+                    <h3 class="text-base font-light">Add a new Service to offer.</h3>
+                    <RouterLink
+                        :to="{name: 'Provider-Services-New'}" class="uppercase border border-slate-400 hover:bg-slate-700 transition-colors duration-300 text-slate-600 hover:text-slate-100 font-light px-4 py-2 rounded-sm text-xs"
+                    >New Service</RouterLink>
                 </div>
             </div>
         </div>

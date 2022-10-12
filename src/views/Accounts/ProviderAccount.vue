@@ -2,7 +2,13 @@
 import ServicesCard from '../../components/Cards/ServicesCard.vue';
 import AdvertCard from '../../components/Cards/AdvertCard.vue';
 import UserAccountDetails from '../../components/Heroes/UserAccountDetails.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
+const redirectNewServices = () => {
+    router.push({ name: 'Provider-Services-New' });
+}
 
 </script>
 <template>
@@ -13,12 +19,10 @@ import UserAccountDetails from '../../components/Heroes/UserAccountDetails.vue';
                 <UserAccountDetails />
             </div>
             <div class="other-links flex flex-row items-start">
-                <button class="py-1.5 px-3 rounded-3xl truncate bg-slate-600 hover:bg-slate-700 transition-colors duration-300 text-slate-100 text-sm flex flex-row items-center gap-x-1">
-                    Register to offer Services
+                <button class="bg-slate-700 hover:bg-slate-800 flex flex-row items-center gap-x-1.5 transition-colors capitalize text-slate-100 text-sm font-light py-2 px-4 rounded-3xl truncate" @click="redirectNewServices">
+                    <div class="i-mdi-plus text-base"></div>
+                    add new Service
                 </button>
-                <!-- <button class="py-2 px-3 rounded-3xl bg-slate-700 hover:bg-slate-800 tracking-wider truncate text-xs sm:text-sm text-slate-100 transition-colors sm:tracking-wide">
-                    Register to offer Services
-                </button> -->
             </div>
         </div>
         <div class="w-full px-3 flex flex-col gap-y-4 border-gray-300 py-2 rounded-lg">

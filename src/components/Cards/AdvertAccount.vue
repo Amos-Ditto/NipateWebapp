@@ -10,7 +10,7 @@ const executeDelete = (): void => {
 </script>
 
 <template>
-    <div class="advert rounded-md border border-gray-300 px-3 lg:px-8 py-3 flex flex-col gap-y-6">
+    <div class="advert bg-gray-50 rounded-md border border-gray-300 px-3 lg:px-8 py-3 flex flex-col gap-y-6">
         <div class="advert-top flex flex-row justify-between">
             <h3 class="text-lg font-bold">Rafiki Cafe</h3>
             <div class="right-top flex flex-row items-center gap-x-4 relative justify-end sm:justify-center">

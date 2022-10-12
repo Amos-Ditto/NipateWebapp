@@ -52,7 +52,7 @@ const accounts = [
     {
         path: '/account/me',
         name: 'User',
-        redirect: {name: 'UserHome'},
+        // redirect: {name: 'UserHome'},
         component: () => import('../views/Accounts/UserAccount.vue'),
         meta: {title: 'Me'},
         children: children
