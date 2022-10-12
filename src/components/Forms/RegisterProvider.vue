@@ -67,7 +67,7 @@ const createProviderAccount = async (): Promise<void> => {
     })
     .then(response => {
         router.push({ name: "Provider-Home" });
-        useauth.updateProvider();
+        useauth.updateProvider(true);
         submitloading.value = false;
         console.log(response)
     })

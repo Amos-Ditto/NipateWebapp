@@ -1,18 +1,45 @@
 <script setup lang="ts">
 
+import { onMounted } from 'vue';
+import useAuthentications from './store/authentications';
+import { UserAuth } from './Types/GeneralTypes';
+
+const base_url = import.meta.env.VITE_BASE_URL;
+const useAuthentication = useAuthentications();
+
+const validateUseHeaders = async (data: string): Promise<{"User": boolean}> => {
+  const response = await fetch(`${base_url}auth/confirm`, {
+    method: 'GET',
+    headers: {
+      "Authorization": data || ""
+    }
+  })
+  return await response.json();
+}
+onMounted(async () => {
+  
+  if(localStorage.getItem("Nipate_user_data")) {
+    let user_local = localStorage.getItem("Nipate_user_data") || "";
+    let user_auth = validateUseHeaders(JSON.parse(user_local)["Auth_token"]);
+    if((await user_auth).User === true) {
+      useAuthentication.updateUser(JSON.parse(user_local));
+    }
+  
+  }
+})
 
 </script>
 
 <template>
   <main>
-
+    
     <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+        <transition name="fade" mode="out-in">
+            <component :is="Component" />
+        </transition>
+      </router-view>
 
-  </main>
+    </main>
 </template>
 
 <style>

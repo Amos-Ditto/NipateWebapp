@@ -80,6 +80,10 @@ const submitOtherDetails = async (): Promise<void> => {
         let data = await response.json();
         localStorage.removeItem('nipate_user_id');
         storeauth.updateUser(data);
+        
+        // Save User to LocalStorage
+        localStorage.setItem("Nipate_user_data", JSON.stringify(data));
+
         router.push({name: 'Dashboard'});
     } else {
         let error = await response.json();

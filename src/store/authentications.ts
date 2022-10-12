@@ -4,7 +4,7 @@ import type { UserAuth } from "../Types/GeneralTypes";
 
 const state = {
     User: {
-        MobileNumber: null, FirstName: null, Auth_token: null
+        MobileNumber: null, FirstName: null, LastName: null, Auth_token: null
     } as UserAuth,
     Authenticated: false as boolean,
     Provider: false as boolean,
@@ -25,8 +25,8 @@ const actions = {
         state.User = payload;
         (payload.Auth_token === null) ? state.Authenticated = false : state.Authenticated = true;
     },
-    updateProvider(): void {
-        state.Provider = !state.Provider;
+    updateProvider(payload: boolean): void {
+        state.Provider = payload;
     }
 }
 

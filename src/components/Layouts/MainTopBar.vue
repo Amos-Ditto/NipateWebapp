@@ -48,10 +48,6 @@ const reDirectToUserAccount = (): void => {
         <div class="bottom-nav relative">
             <div class="bottom-left-nav px-1 flex items-center flex-row">
                 <MainDropDown />
-                <!-- <button class="px-1 py-0.5 border border-gray-300 rounded hover:bg-gray-200" @click="opendropdown = !opendropdown">
-                    <div class="i-mdi-menu text-slate-600 text-2xl" v-if="!opendropdown"></div>
-                    <div class="i-mdi-close text-slate-600 text-2xl" v-else="opendropdown"></div>
-                </button> -->
             </div>
             <div class="bottom-left-nav flex flex-row gap-x-6 items-center justify-between">
                 <!-- <MainDropDown /> -->

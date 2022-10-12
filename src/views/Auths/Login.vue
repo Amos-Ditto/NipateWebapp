@@ -26,7 +26,7 @@ interface Error {
 }
 
 const userfetcheddata = ref<UserTokenDetails>({
-    MobileNumber: '', FirstName: '', Auth_token: ''
+    MobileNumber: '', FirstName: '', LastName: '', Auth_token: ''
 });
 
 const errors = ref<Error>();
@@ -61,6 +61,8 @@ const formLoginSubmit = async (type: void) => {
     if(response.ok) {
         userfetcheddata.value = await response.json();
         storeauth.updateUser(userfetcheddata.value);
+        // Save User to LocalStorage
+        localStorage.setItem("Nipate_user_data", JSON.stringify(userfetcheddata.value));
 
         router.push(route.query.redirect as string || { name: 'Dashboard' })
         
