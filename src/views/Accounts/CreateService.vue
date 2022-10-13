@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import SelectService from '../../components/Cards/SelectService.vue';
-import type { ServicesCategoryEntity } from '../../Types/GeneralTypes';
+import type { ServicesCategoryEntity, CreateServiceForm, ServicesEntity } from '../../Types/GeneralTypes';
 
 
 const toggleservices = ref<boolean>(true);
+const openselect = ref<boolean>(false);
 
 const servicecatgories = ref<ServicesCategoryEntity[]>([
     {
@@ -51,8 +52,20 @@ const selectedcategory = ref<ServicesCategoryEntity>(
     },
 );
 
-const chooseService = (data: ServicesCategoryEntity): void => {
+const formdata = ref<CreateServiceForm>({
+    title: "", description: "",
+    service: {id: 0, Name: 'select category'}
+})
+
+const chooseServiceCategory = (data: ServicesCategoryEntity): void => {
     selectedcategory.value = data;
+    toggleservices.value = !toggleservices.value;
+}
+
+const chooseService = (payload: ServicesEntity, toggle: boolean): void => {
+    formdata.value.service = payload;
+    openselect.value = toggle;
+    toggleservices.value = true;
 }
 
 const submitDetails = (): void => {
@@ -78,31 +91,48 @@ const submitDetails = (): void => {
                 <div class="input-field w-full flex flex-col gap-y-2">
                     <label for="service-name" class="text-sm capitalize font-bold tracking-wide">Service title:</label>
                     <div class="input w-full flex flex-col">
-                        <input type="text" id="service-name" placeholder="title" class=" py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50">
+                        <input
+                            type="text" id="service-name" placeholder="title" v-model="formdata.title"
+                            class=" py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"
+                        >
                     </div>
                 </div>
                 <div class="input-field w-full flex flex-col gap-y-2 relative">
                     <label for="service-select" class="text-sm font-bold tracking-wide">Select Service type:</label>
                     <div class="input w-full flex flex-col">
-                        <button type="button" id="service-select" class=" relative h-[2.8rem] rounded outline-none px-3 tracking-wide text-slate-500 border border-gray-300 bg-gray-50 flex items-center">
-                            <span>select category</span>
+                        <button
+                            type="button" id="service-select" @click="openselect = !openselect"
+                            class=" relative h-[2.8rem] rounded outline-none px-3 tracking-wide text-slate-500 border border-gray-300 bg-gray-50 flex items-center"
+                        >
+                            <span>{{ formdata.service.Name }}</span>
                             <div class="i-mdi-chevron-down text-lg scale-125 absolute right-[5%]"></div>
                         </button>
                     </div>
-                    <div class="selection absolute left-1.5 top-full min-h-[5rem] bg-gray-50 rounded border border-gray-200 flex flex-col transition-all duration-200" :class="toggleservices ? 'right-1.5' : 'right-0 xs:right-1/2 md:right-0 lg:right-1/2'">
+                    <div
+                        v-if="openselect"
+                        class="selection absolute left-1.5 top-full min-h-[5rem] bg-gray-50 rounded border border-gray-200 flex flex-col transition-all duration-200"
+                        :class="toggleservices ? 'right-1.5' : 'right-0 xs:right-1/2 md:right-0 lg:right-1/2'"
+                    >
                         <ul class="categories py-1 w-full flex flex-col max-h-[10rem] overflow-y-auto" v-if="toggleservices">
-                            <li v-for="service in servicecatgories" @click="chooseService(service)">
+                            <li v-for="service in servicecatgories" @click="chooseServiceCategory(service)">
                                 <div class="i-mdi-tick text-green-500 text-base" :class="selectedcategory.id === service.id ? 'block' : 'hidden'"></div>
                                 {{ service.Name }}
                             </li>
                         </ul>
-                        <SelectService v-else />
+                        <SelectService
+                            :services="selectedcategory.services" @choose-service="chooseService"
+                            @close-service-list="toggleservices = !toggleservices" v-else
+                        />
                     </div>
                 </div>
                 <div class="description md:col-span-2 py-4 flex flex-col gap-y-2">
                     <label for="description" class="text-sm capitalize font-bold tracking-wide">Service description:</label>
                     <div class="input w-full flex flex-col">
-                        <textarea name="description" id="description" cols="30" rows="4" placeholder="description" class="py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"></textarea>
+                        <textarea
+                            name="description" id="description" cols="30" rows="4" placeholder="description"
+                            class="py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"
+                            v-model="formdata.description"
+                        ></textarea>
                     </div>
                 </div>
                 <div class="input-field w-full flex flex-col gap-y-2">

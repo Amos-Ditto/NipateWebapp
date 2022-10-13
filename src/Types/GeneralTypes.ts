@@ -13,9 +13,15 @@ export interface UserAuth {
 export interface ServicesCategoryEntity {
     id: number;
     Name: string;
-    services?: (ServicesEntity)[] | null;
+    services: ServicesEntity[];
 }
 export interface ServicesEntity {
     id: number;
     Name: string;
+}
+
+export interface CreateServiceForm {
+    title: string;
+    service: ServicesEntity
+    description: string
 }
