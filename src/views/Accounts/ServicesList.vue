@@ -10,10 +10,10 @@ const redirectNewServices = () => {
 
 </script>
 <template>
-    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 lg:px-0 pb-[32vh]">
-        <nav class="w-full flex flex-row items-center justify-between px-0.5 sm:px-3.5">
+    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 px-1 sm:px-4 lg:px-12 pb-[32vh]">
+        <nav class="w-full flex flex-row items-center justify-between">
             <div class="left flex items-center">
-                <h3 class="text-2xl font-semibold tracking-tight">My Services</h3>
+                <h3 class="text-2xl font-bold uppercase tracking-wide">My Services</h3>
             </div>
             <div class="right-nav">
                 <button class="bg-slate-700 hover:bg-slate-800 flex flex-row items-center gap-x-1.5 transition-colors capitalize text-slate-100 text-xs xs:text-sm font-light py-2 px-3 xs:px-4 rounded-2xl" @click="redirectNewServices">
@@ -22,13 +22,14 @@ const redirectNewServices = () => {
                 </button>
             </div>
         </nav>
-        <div class="body-container w-full py-2 px-2 sm:px-6 flex flex-col gap-y-10">
+        <div class="body-container w-full py-2 px-0 flex flex-col gap-y-8">
             
             <AccountProviderService />
             <AccountProviderService />
-            <div class="new-service w-full flex flex-col rounded-xl py-4 px-4 gap-y-8 justify-center items-center border border-gray-300">
+            
+            <div class="new-service w-full flex flex-col rounded-sm py-4 px-4 gap-y-8 justify-center items-center border border-gray-300">
                 <div class="new-nav w-full flex flex-row justify-between items-center">
-                    <h3 class="text-base font-bold">New Service</h3>
+                    <h3 class="text-xl font-bold tracking-wide">New Service</h3>
                     <div class="new-icon-link p-2 rounded-full border border-gray-300 hover:bg-gray-300 cursor-pointer transition-colors duration-300">
                         <div class="i-mdi-plus text-xl text-gray-500"></div>
                     </div>

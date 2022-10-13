@@ -26,7 +26,7 @@ const chooseService = (payload: ServicesEntity): void => {
                 <div class="i-mdi-arrow-left scale-110"></div>
             </div>
         </div>
-        <ul class="flex flex-col w-full">
+        <ul class="flex flex-col w-full pb-2.5">
             <li v-for="service in services" @click="chooseService(service)">{{ service.Name }}</li>
         </ul>
     </div>

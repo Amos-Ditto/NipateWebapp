@@ -11,13 +11,15 @@ const executeDelete = (): void => {
 </script>
 <template>
     <div
-        class="service-container py-3 w-full flex flex-col gap-y-6 sm:gap-y-8 border border-slate-300 rounded-md sm:rounded-xl relative">
-        <div class="w-full px-3 sm:px-4 py-3 flex flex-row items-center justify-between">
-            <h3 class="text-lg font-semibold tracking-wide">Rafiki Cafe</h3>
+        class="service-container py-0 w-full flex flex-col border border-slate-300 rounded relative"
+    >
+
+        <div class="w-full px-3 sm:px-4 py-5 flex flex-row items-center justify-between border-b border-gray-300">
+            <h3 class="text-xl font-bold tracking-wide">Rafiki Cafe</h3>
             <div class="edit-icons flex flex-row items-center gap-x-4 relative justify-end sm:justify-center">
-                <button class="border border-gray-200 rounded px-2 sm:px-4 py-0.5 sm:py-1 text-xs sm:text-sm hover:text-dodgerblue hover:border-dodgerblue transition-colors duration-300">Edit</button>
+                <button class="border border-gray-200 rounded px-4 py-1 text-sm hover:text-dodgerblue hover:border-dodgerblue transition-colors duration-300">Edit</button>
                 <button
-                    class="border border-gray-200 rounded px-2 sm:px-4 py-0.5 sm:py-1 text-xs sm:text-sm hover:text-tomato hover:border-tomato transition-colors duration-300"
+                    class="border border-gray-200 rounded px-4 py-1 text-sm hover:text-tomato hover:border-tomato transition-colors duration-300"
                     @click="executeDelete" :class="requestdelete && 'border-tomato text-tomato'"
                 >
                     Delete
@@ -34,32 +36,40 @@ const executeDelete = (): void => {
                 </Transition>
             </div>
         </div>
-        <div class="w-full grid grid-cols-1 gap-y-4 gap-x-3">
-            <div
-                class="list-details px-3 sm:px-4 flex flex-col gap-y-3">
+        <div class="w-full grid grid-cols-1 gap-x-3">
+            <div class="list-details flex flex-col">
 
-                <div class="service w-full flex flex-row items-center gap-x-2 flex-wrap">
-                    <small class="text-sm font-bold">Service:</small>
-                    <p class="text-xs truncate">Boda Boda</p>
+                <div class="service w-full flex flex-col gap-y-4 gap-x-2 items-start px-3 sm:px-4 border-b border-gray-200 py-4">
+                    <small class="text-base sm:text-lg font-light">Service:</small>
+                    <button class="px-4 py-1 rounded-xl font-serif bg-gray-200 text-xs sm:text-sm">Boda Boda</button>
                 </div>
-                <div class="loc w-full flex flex-row items-center gap-x-2 flex-wrap">
-                    <small class="text-sm font-bold">Located at:</small>
-                    <p class="text-xs truncate">Shoppers Paradise Plaza, Kenyatta Avenue, Nakuru CBD, Biashara, Nakuru,
-                        Kenya</p>
+                <div class="loc w-full flex flex-col gap-y-4 gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-4">
+                    <small class="text-base sm:text-lg font-light">Located at:</small>
+                    <!-- <div class="loc flex flex-row items-center gap-x-2">
+                        <div class="i-mdi-arrow-right text-sm text-slate-500"></div> 
+                    </div> -->
+                    <p class="text-xs sm:text-sm">Shoppers Paradise Plaza, Kenyatta Avenue, Nakuru CBD, Biashara, Nakuru, Kenya</p>
                 </div>
-                <div class="days-work w-full flex flex-row items-center gap-x-2 flex-wrap">
-                    <small class="text-sm font-bold">Available Days:</small>
-                    <p class="text-xs truncate">Mon , Tue , Wed , Thur , Fri</p>
+                <div class="days-work w-full flex flex-col gap-y-4 items-start gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-4">
+                    <small class="text-base sm:text-lg font-light">Available Days:</small>
+                    <div class="days flex flex-row gap-x-2 gap-y-1 items-center">
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Mon</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Tue</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Wed</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Thur</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Fri</button>
+                    </div>
+                    <!-- <p class="text-xs truncate">Mon , Tue , Wed , Thur , Fri</p> -->
                 </div>
 
-                <div class="days-work w-full flex flex-row items-center gap-x-1 flex-wrap">
+                <!-- <div class="days-work w-full flex flex-row items-center gap-x-1 flex-wrap">
                     <small class="text-sm font-bold">Age Range:</small>
                     <p class="text-xs truncate">All</p>
-                </div>
+                </div> -->
             </div>
-            <div class="description-details flex flex-col py-1 px-3 sm:px-4">
+            <div class="description-details flex flex-col gap-y-4 py-4 px-3 sm:px-4">
                 <p>
-                    <small class="text-sm font-semibold">Description:</small>
+                    <small class="text-base sm:text-lg font-light">Description:</small>
                     <p class="text-sm font-extralight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum exercitationem
                     voluptatibus laudantium expedita illum blanditiis minima id porro.</p>
                 </p>

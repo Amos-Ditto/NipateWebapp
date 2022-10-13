@@ -24,7 +24,7 @@ const updateSideBar = ():void => {
                     <img src="../../assets/Logo/Nipate.svg" alt="" class="w-[4.4rem] sm:w-[6rem] h-[2.3rem] sm:h-[2.8rem]">
                 </router-link>
             </div>
-            <div class="right-nav flex flex-row items-center justify-end gap-x-6 sm:gap-x-12 transition-pad duration-300">
+            <div class="right-nav flex flex-row items-center justify-end gap-x-6 sm:gap-x-12 transition-pad duration-300 px-3">
                 <div class="account flex flex-row items-center gap-x-1 cursor-pointer">
                     <div class="account-icon bg-gray-200 ml-2 p-2 sm:p-2.5 rounded-lg">
                         <div class="i-mdi-account text-[#346974] text-lg sm:text-xl"></div>

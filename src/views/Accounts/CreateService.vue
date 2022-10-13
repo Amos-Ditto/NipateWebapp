@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import SelectService from '../../components/Cards/SelectService.vue';
 import type { ServicesCategoryEntity, CreateServiceForm, ServicesEntity } from '../../Types/GeneralTypes';
 
+
+const router = useRouter();
 
 const toggleservices = ref<boolean>(true);
 const openselect = ref<boolean>(false);
@@ -78,7 +81,9 @@ const submitDetails = (): void => {
         <div class="nav-header flex flex-row justify-between w-full">
             <h3 class="text-xl xs:text-2xl capitalize tracking-wide sm:text-2xl font-bold text-[#014451]">Create New Service</h3>
             <div class="nav-links flex flex-row gap-x-2 items-center">
-                <button class="bg-slate-700 hover:bg-slate-800 transition-colors uppercase text-slate-100 text-xs xs:text-sm font-light py-1.5 px-5 tracking-wider rounded-3xl">
+                <button @click="router.back()"
+                    class="bg-slate-700 hover:bg-slate-800 transition-colors uppercase text-slate-100 text-xs xs:text-sm font-light py-1.5 px-5 tracking-wider rounded-3xl"
+                >
                     back
                 </button>
             </div>
@@ -95,6 +100,10 @@ const submitDetails = (): void => {
                             type="text" id="service-name" placeholder="title" v-model="formdata.title"
                             class=" py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"
                         >
+                        <div class="error-status w-full flex flex-row items-center py-2 px-1 gap-x-2">
+                            <div class="i-mdi-alert-outline text-tomato text-lg"></div>
+                            <small class="text-sm text-tomato">Enter title</small>
+                        </div>
                     </div>
                 </div>
                 <div class="input-field w-full flex flex-col gap-y-2 relative">
@@ -107,6 +116,10 @@ const submitDetails = (): void => {
                             <span>{{ formdata.service.Name }}</span>
                             <div class="i-mdi-chevron-down text-lg scale-125 absolute right-[5%]"></div>
                         </button>
+                        <div class="error-status w-full flex flex-row items-center py-2 px-1 gap-x-2">
+                            <div class="i-mdi-alert-outline text-tomato text-lg"></div>
+                            <small class="text-sm text-tomato">Enter service type</small>
+                        </div>
                     </div>
                     <div
                         v-if="openselect"
@@ -142,7 +155,7 @@ const submitDetails = (): void => {
         </div>
         <div class="location-details pointer-events-none flex flex-col w-full border border-gray-300 rounded py-4 gap-y-10 px-5">
             <div class="service-details-header w-full items-center flex">
-                <h3 class="text-lg sm:text-xl font-light">Your Location Center</h3>
+                <h3 class="text-lg sm:text-xl font-light">Where you offer services?</h3>
             </div>
             <div class="choose-loc py-2 w-full flex flex-col gap-y-6 items-center justify-center">
                 <div class="loc-logo flex items-center w-full justify-center">
