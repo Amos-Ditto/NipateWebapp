@@ -15,7 +15,7 @@ interface FormData {
 
 const fetchToken = async (url: string, payload: FormData) => {
     let fetchedUser: UserTokenDetails = {
-        MobileNumber: '', FirstName: '', Auth_token: ''
+        MobileNumber: '', FirstName: '', LastName: '', Auth_token: ''
     };
 
     let fetchErrors: Error = {};
