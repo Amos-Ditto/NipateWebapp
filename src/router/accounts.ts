@@ -1,7 +1,7 @@
 
 const services_children = [
     {
-        path: '/account/me/services/list',
+        path: '',
         name: 'Provider-Services-List',
         component: () => import('../views/Accounts/ServicesList.vue'),
         meta: {title: 'My-Services-List'}

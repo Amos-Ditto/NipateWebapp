@@ -25,3 +25,44 @@ export interface CreateServiceForm {
     service: ServicesEntity
     description: string
 }
+
+
+export interface ServiceLocation {
+    id: number;
+    Provider: Provider;
+    ServiceTitle: string;
+    Service: Service;
+    ServiceDescription: string;
+    Longitude: string;
+    Lattitude: string;
+    Location: Location | null;
+    workingDays?: (string)[] | null;
+    AgeBracket?: null;
+}
+export interface Provider {
+    id: number;
+    User: User;
+    County: County;
+}
+export interface User {
+    id: number;
+    MobileNumber: string;
+    IDNumber: string;
+    FirstName: string;
+}
+
+export interface Service {
+    id: number;
+    Name: string;
+    CategoryID: number;
+}
+export interface Location {
+    id: number;
+    DisplayName: string;
+    State: string;
+    Town: string;
+    Suburb?: null;
+    Road?: null;
+    Landmark?: null;
+    CenterBlock?: null;
+}

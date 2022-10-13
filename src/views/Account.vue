@@ -13,6 +13,7 @@ const checkProviderStatus = async(data: string | null): Promise<{Provider: boole
     let response = await fetch(`${base_url}provider/status`, {
         method: 'GET',
         headers: {
+            "Content-Type": "application/json",
             "Authorization": data || ""
         }
     })
