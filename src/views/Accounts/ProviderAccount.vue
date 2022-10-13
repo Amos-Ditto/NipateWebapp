@@ -19,7 +19,7 @@ const redirectNewServices = () => {
                 <UserAccountDetails />
             </div>
             <div class="other-links flex flex-row items-start">
-                <button class="bg-slate-700 hover:bg-slate-800 flex flex-row items-center gap-x-1.5 transition-colors capitalize text-slate-100 text-sm font-light py-2 px-4 rounded-3xl truncate" @click="redirectNewServices">
+                <button class="bg-slate-700 hover:bg-slate-800 flex flex-row items-center gap-x-0.5 xs:gap-x-1.5 transition-colors capitalize text-slate-100 text-xs xs:text-sm font-light py-2 px-2.5 xs:px-4 rounded-3xl truncate" @click="redirectNewServices">
                     <div class="i-mdi-plus text-base"></div>
                     add new Service
                 </button>

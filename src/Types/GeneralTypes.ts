@@ -9,3 +9,13 @@ export interface UserAuth {
     LastName: string | null
     Auth_token: string | null
 }
+
+export interface ServicesCategoryEntity {
+    id: number;
+    Name: string;
+    services?: (ServicesEntity)[] | null;
+}
+export interface ServicesEntity {
+    id: number;
+    Name: string;
+}

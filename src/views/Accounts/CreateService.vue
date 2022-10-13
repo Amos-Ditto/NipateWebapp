@@ -1,4 +1,59 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import SelectService from '../../components/Cards/SelectService.vue';
+import type { ServicesCategoryEntity } from '../../Types/GeneralTypes';
+
+
+const toggleservices = ref<boolean>(true);
+
+const servicecatgories = ref<ServicesCategoryEntity[]>([
+    {
+        "id": 3,
+        "Name": "Building & Construction",
+        "services": [
+            {
+            "id": 0,
+            "Name": "Plumbing"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "Name": "Automobile & Mechanics",
+        "services": [
+            {
+            "id": 0,
+            "Name": "Garage"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "Name": "Cleaning & Laundry",
+        "services": [
+            {
+            "id": 0,
+            "Name": "Mama fua"
+            }
+        ]
+    }
+]);
+const selectedcategory = ref<ServicesCategoryEntity>(
+    {
+        "id": 0,
+        "Name": "",
+        "services": [
+            {
+            "id": 0,
+            "Name": ""
+            }
+        ]
+    },
+);
+
+const chooseService = (data: ServicesCategoryEntity): void => {
+    selectedcategory.value = data;
+}
 
 const submitDetails = (): void => {
     console.log("Details");
@@ -8,9 +63,9 @@ const submitDetails = (): void => {
 <template>
     <section class="w-full flex flex-col px-2 gap-y-10 sm:gap-y-12">
         <div class="nav-header flex flex-row justify-between w-full">
-            <h3 class="text-2xl capitalize tracking-wide sm:text-2xl font-bold text-[#014451]">Create New Service</h3>
+            <h3 class="text-xl xs:text-2xl capitalize tracking-wide sm:text-2xl font-bold text-[#014451]">Create New Service</h3>
             <div class="nav-links flex flex-row gap-x-2 items-center">
-                <button class="bg-slate-700 hover:bg-slate-800 transition-colors uppercase text-slate-100 text-sm font-light py-1.5 px-5 tracking-wider rounded-3xl">
+                <button class="bg-slate-700 hover:bg-slate-800 transition-colors uppercase text-slate-100 text-xs xs:text-sm font-light py-1.5 px-5 tracking-wider rounded-3xl">
                     back
                 </button>
             </div>
@@ -26,13 +81,22 @@ const submitDetails = (): void => {
                         <input type="text" id="service-name" placeholder="title" class=" py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50">
                     </div>
                 </div>
-                <div class="input-field w-full flex flex-col gap-y-2">
+                <div class="input-field w-full flex flex-col gap-y-2 relative">
                     <label for="service-select" class="text-sm font-bold tracking-wide">Select Service type:</label>
                     <div class="input w-full flex flex-col">
-                        <button type="button" id="service-select" class=" relative h-[2.8rem] rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50 flex items-center">
+                        <button type="button" id="service-select" class=" relative h-[2.8rem] rounded outline-none px-3 tracking-wide text-slate-500 border border-gray-300 bg-gray-50 flex items-center">
                             <span>select category</span>
-                            <div class="i-mdi-menu-down text-base absolute right-[5%]"></div>
+                            <div class="i-mdi-chevron-down text-lg scale-125 absolute right-[5%]"></div>
                         </button>
+                    </div>
+                    <div class="selection absolute left-1.5 top-full min-h-[5rem] bg-gray-50 rounded border border-gray-200 flex flex-col transition-all duration-200" :class="toggleservices ? 'right-1.5' : 'right-0 xs:right-1/2 md:right-0 lg:right-1/2'">
+                        <ul class="categories py-1 w-full flex flex-col max-h-[10rem] overflow-y-auto" v-if="toggleservices">
+                            <li v-for="service in servicecatgories" @click="chooseService(service)">
+                                <div class="i-mdi-tick text-green-500 text-base" :class="selectedcategory.id === service.id ? 'block' : 'hidden'"></div>
+                                {{ service.Name }}
+                            </li>
+                        </ul>
+                        <SelectService v-else />
                     </div>
                 </div>
                 <div class="description md:col-span-2 py-4 flex flex-col gap-y-2">
@@ -62,3 +126,30 @@ const submitDetails = (): void => {
         </div>
     </section>
 </template>
+
+<style scoped>
+
+.selection {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.selection .categories li {
+    @apply tracking-wide text-sm px-3 py-1.5 hover:bg-gray-200 transition-colors duration-200 cursor-pointer flex flex-row items-center gap-x-2;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    height: 1px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
