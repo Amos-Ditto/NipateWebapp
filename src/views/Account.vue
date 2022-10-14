@@ -49,9 +49,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <main class="w-full flex flex-col bg-gray-50">
+    <main class="w-full flex flex-col bg-gray-50 relative pb-[280px]">
         <account-top-bar class="sticky top-0 z-20" />
         <router-view ></router-view>
-        <main-footer />
+        <main-footer class="absolute bottom-0" />
     </main>
 </template>

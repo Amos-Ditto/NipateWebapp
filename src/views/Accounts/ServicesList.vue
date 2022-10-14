@@ -10,7 +10,7 @@ const redirectNewServices = () => {
 
 </script>
 <template>
-    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 px-1 sm:px-4 lg:px-12 pb-[32vh]">
+    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 px-1 sm:px-4 lg:px-12">
         <nav class="w-full flex flex-row items-center justify-between">
             <div class="left flex items-center">
                 <h3 class="text-2xl font-bold uppercase tracking-wide">My Services</h3>

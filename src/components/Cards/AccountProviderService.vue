@@ -39,25 +39,22 @@ const executeDelete = (): void => {
         <div class="w-full grid grid-cols-1 gap-x-3">
             <div class="list-details flex flex-col">
 
-                <div class="service w-full flex flex-col gap-y-4 gap-x-2 items-start px-3 sm:px-4 border-b border-gray-200 py-4">
+                <div class="service w-full flex flex-col gap-y-4 gap-x-2 items-start px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base sm:text-lg font-light">Service:</small>
-                    <button class="px-4 py-1 rounded-xl font-serif bg-gray-200 text-xs sm:text-sm">Boda Boda</button>
+                    <button class="px-4 py-1 rounded-xl font-serif bg-gray-200 text-sm">Boda Boda</button>
                 </div>
-                <div class="loc w-full flex flex-col gap-y-4 gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-4">
+                <div class="loc w-full flex flex-col gap-y-4 gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base sm:text-lg font-light">Located at:</small>
-                    <!-- <div class="loc flex flex-row items-center gap-x-2">
-                        <div class="i-mdi-arrow-right text-sm text-slate-500"></div> 
-                    </div> -->
-                    <p class="text-xs sm:text-sm">Shoppers Paradise Plaza, Kenyatta Avenue, Nakuru CBD, Biashara, Nakuru, Kenya</p>
+                    <p class="text-sm">Shoppers Paradise Plaza, Kenyatta Avenue, Nakuru CBD, Biashara, Nakuru, Kenya</p>
                 </div>
-                <div class="days-work w-full flex flex-col gap-y-4 items-start gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-4">
+                <div class="days-work w-full flex flex-col gap-y-4 items-start gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base sm:text-lg font-light">Available Days:</small>
                     <div class="days flex flex-row gap-x-2 gap-y-1 items-center">
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Mon</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Tue</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Wed</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Thur</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-xs sm:text-sm">Fri</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Mon</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Tue</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Wed</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Thur</button>
+                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Fri</button>
                     </div>
                     <!-- <p class="text-xs truncate">Mon , Tue , Wed , Thur , Fri</p> -->
                 </div>
@@ -67,7 +64,7 @@ const executeDelete = (): void => {
                     <p class="text-xs truncate">All</p>
                 </div> -->
             </div>
-            <div class="description-details flex flex-col gap-y-4 py-4 px-3 sm:px-4">
+            <div class="description-details flex flex-col gap-y-4 py-3 sm:py-4 px-3 sm:px-4">
                 <p>
                     <small class="text-base sm:text-lg font-light">Description:</small>
                     <p class="text-sm font-extralight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum exercitationem
