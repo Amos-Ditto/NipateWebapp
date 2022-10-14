@@ -10,6 +10,13 @@ const router = useRouter();
 const storeauth = useAuthentications();
 const { Authenticated } = storeToRefs(storeauth);
 
+// Condition data
+const dropdownaccount = ref<boolean>(false);
+
+const toggleDropDownAccount = (): void => {
+    dropdownaccount.value = !dropdownaccount.value;
+}
+
 const reDirectToUserAccount = (): void => {
     if(Authenticated.value) {
         router.push({ name: 'User' });
@@ -63,16 +70,39 @@ const logoutUser = (): void => {
             <div class="bottom-left-nav px-1 flex items-center flex-row">
                 <MainDropDown />
             </div>
-            <div class="bottom-left-nav flex flex-row gap-x-6 items-center justify-between">
+            <div class="bottom-right-nav flex flex-row gap-x-6 items-center justify-between">
                 <!-- <MainDropDown /> -->
-                <div class="account flex flex-row items-center gap-x-0.5 relative">
-                    <small class="text-sm sm:text-base font-light hover:text-steelblue">My Account</small>
-                    <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
-                        <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
+                <div class="account relative">
+                    <div class="account-btn flex flex-row items-center gap-x-0.5 relative cursor-pointer" @click="toggleDropDownAccount">
+                        <small class="text-sm sm:text-base font-light">My Account</small>
+                        <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
+                            <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
+                        </div>
                     </div>
-                    <div class="account-drop-down absolute top-[145%] right-0 min-h-[4rem] w-[18rem] shadow-md bg-gray-50 rounded">
-
-                    </div>
+                    <Transition name="pop-up">
+                        <div v-if="dropdownaccount"
+                            class="account-drop-down flex flex-col gap-y-2.5 py-2 absolute top-[145%] right-0 min-h-[4rem] w-[15rem] xs:w-[18rem] shadow-md bg-gray-50 rounded"
+                        >
+                            <div class="top-drop-down absolute shadow-lg -z-10 right-3 -top-2 w-4 h-4 rotate-45 bg-gray-200"></div>
+                            <div class="user-client flex flex-row items-center gap-x-3 py-1.5 px-2 hover:bg-gray-100 cursor-pointer">
+                                <div class="user-avatar p-1.5 rounded-md bg-gray-200">
+                                    <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
+                                </div>
+                                <div class="user-details flex flex-col gap-y-0">
+                                    <small class="text-sm text-slate-600">Amos Kipyegon</small>
+                                    <small class="text-slate-600 text-xs">provider</small>
+                                </div>
+                            </div>
+                            <div class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
+                                <div class="i-mdi-sign-in text-xl"></div>
+                                <small class="text-base tracking-wide font-light">Register as User</small>
+                            </div>
+                            <div class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
+                                <div class="i-mdi-tools text-xl"></div>
+                                <small class="text-base tracking-wide font-light">Register as Provider</small>
+                            </div>
+                        </div>
+                    </Transition>
                 </div>
                 <ul class="flex flex-row items-center gap-4">
                     <li @click="reDirectToUserAccount">
@@ -108,7 +138,7 @@ const logoutUser = (): void => {
 }
 
 .bottom-nav {
-    @apply py-4 flex flex-row items-center justify-between shadow-sm px-[10px] lg:px-[78px];
+    @apply py-4 flex flex-row items-center justify-between shadow-sm px-1 sm:px-[10px] lg:px-[78px];
     transition: padding 300ms ease;
 }
 .bottom-nav button {
@@ -119,6 +149,17 @@ const logoutUser = (): void => {
     @apply flex items-center flex-row truncate gap-1 transition-colors duration-200;
 }
 
+
+.account-btn:hover small , .account-btn:hover .i-mdi-account-outline {
+    @apply text-steelblue
+}
+
+.pop-up-enter-from {
+    @apply -translate-y-2 opacity-5;
+}
+.pop-up-enter-active {
+    transition: opacity 200ms ease , transform 300ms ease;
+}
 .slide-enter-active,
 .slide-leave-active {
   transition: all 0.25s ease-out;

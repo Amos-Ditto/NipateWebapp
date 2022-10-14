@@ -18,7 +18,7 @@ const onInputKeyDown = (e: Event): void => {
     <div class="w-full py-2 sm:py-5 flex flex-col justify-center items-center gap-y-10 sm:gap-y-16">
         <div class="hero-title flex w-full justify-center items-center">
             <h3
-                class="text-center leading-[1.25] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#014451] font-bold tracking-wide transition-font duration-300"
+                class="text-center leading-[1.25] text-3xl xs:text-5xl sm:text-5xl md:text-6xl lg:text-7xl text-[#014451] font-bold tracking-wide transition-font duration-300"
             >Find the best people <br class="" /> to serve you.</h3>
         </div>
         <div class="serch-container grid grid-cols-3 sm:grid-cols-4 gap-x-2 sm:gap-x-5 w-[84%] sm:w-[65%] lg:w-[50%]">
@@ -80,7 +80,7 @@ const onInputKeyDown = (e: Event): void => {
 
 
 .search-input input {
-    @apply w-full pl-8 md:pl-10 pr-4 py-2 sm:py-2.5 shadow-sm xs:shadow text-base sm:text-lg font-light tracking-wider placeholder:tracking-tight border border-gray-300 rounded-lg outline-none;
+    @apply w-full pl-8 md:pl-10 pr-4 py-2 sm:py-2.5 shadow-sm xs:shadow text-base sm:text-lg font-light tracking-wider border border-gray-300 rounded-lg outline-none;
     @apply transition-all duration-300;
 }
 </style>
