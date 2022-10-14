@@ -15,18 +15,29 @@ const onInputKeyDown = (e: Event): void => {
 }
 </script>
 <template>
-    <div class="w-full flex flex-col justify-center items-center gap-y-1">
+    <div class="w-full py-2 sm:py-5 flex flex-col justify-center items-center gap-y-10 sm:gap-y-16">
         <div class="hero-title flex w-full justify-center items-center">
-            <h3 class="text-center text-3xl sm:text-4xl md:text-5xl text-[#014451] font-[600] tracking-wide transition-font duration-300">Find the best people <br /> to serve you</h3>
+            <h3
+                class="text-center leading-[1.25] text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[#014451] font-bold tracking-wide transition-font duration-300"
+            >Find the best people <br class="" /> to serve you.</h3>
         </div>
-        <div class="search-bar flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-8 w-[94%] md:w-[75%] lg:w-[70%] xl:w-[60%] relative transition-all duration-300">
+        <div class="serch-container grid grid-cols-3 sm:grid-cols-4 gap-x-2 sm:gap-x-5 w-[84%] sm:w-[65%] lg:w-[50%]">
+            <div class="search-input col-span-2 sm:col-span-3 relative flex items-center justify-center">
+                <input type="text" placeholder="Search for service...">
+                <div class="i-mdi-magnify absolute left-3 scale-125 text-base text-slate-500"></div>
+            </div>
+            <div class="search-btn">
+                <button
+                    class="capitalize shadow-md rounded-lg py-2 sm:py-2.5 px-4 sm:px-8 bg-orange-400 hover:bg-orange-500 text-slate-100 text-base sm:text-lg font-light tracking-wider transition-colors duration-300"
+                >search</button>
+            </div>
+        </div>
+        <!-- <div class="search-bar flex flex-col justify-center items-center pt-3 sm:pt-4 md:pt-8 w-[94%] md:w-[75%] lg:w-[70%] xl:w-[60%] relative transition-all duration-300">
             <input type="text" placeholder="search data e.g Housing, Kabarak" v-model="searchvalue" @input="onInputKeyDown" @focusout="toggleCloseSearch">
             <div class="i-mdi-menu-down absolute right-4 text-2xl cursor-pointer transition-transform duration-300" :class="opensearch && 'rotate-180'" @click="toggleOpenCloseSearch"></div>
             <transition name="fade">
                 <div class="browse-by w-full absolute bottom-0 translate-y-[104%] bg-gray-200 py-1 min-h-[3rem] flex flex-col gap-1 shadow" v-if="opensearch">
-                    <!-- <div class="search-data w-full border-b border-gray-300 min-h-[2rem]">
 
-                    </div> -->
                     <div class="w-full flex items-center justify-center py-1 gap-2">
                         <small class="text-xs sm:text-sm">Browse by</small>
                         <button class="text-xs sm:text-sm">Services</button>
@@ -41,7 +52,7 @@ const onInputKeyDown = (e: Event): void => {
             <button>Services</button>
             <small>or</small>
             <button>Location</button>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -65,5 +76,11 @@ const onInputKeyDown = (e: Event): void => {
 .hero-browse-by button,
 .browse-by button {
     @apply border  border-orange-200 py-1 px-2 hover:bg-orange-300 rounded text-slate-700 font-serif text-xs sm:text-sm transition-colors duration-300;
+}
+
+
+.search-input input {
+    @apply w-full pl-8 md:pl-10 pr-4 py-2 sm:py-2.5 shadow-sm xs:shadow text-base sm:text-lg font-light tracking-wider placeholder:tracking-tight border border-gray-300 rounded-lg outline-none;
+    @apply transition-all duration-300;
 }
 </style>

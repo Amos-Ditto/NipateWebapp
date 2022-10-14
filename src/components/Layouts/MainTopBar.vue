@@ -65,12 +65,17 @@ const logoutUser = (): void => {
             </div>
             <div class="bottom-left-nav flex flex-row gap-x-6 items-center justify-between">
                 <!-- <MainDropDown /> -->
+                <div class="account flex flex-row items-center gap-x-0.5 relative">
+                    <small class="text-sm sm:text-base font-light hover:text-steelblue">My Account</small>
+                    <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
+                        <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
+                    </div>
+                    <div class="account-drop-down absolute top-[145%] right-0 min-h-[4rem] w-[18rem] shadow-md bg-gray-50 rounded">
+
+                    </div>
+                </div>
                 <ul class="flex flex-row items-center gap-4">
                     <li @click="reDirectToUserAccount">
-                        <small class="text-sm sm:text-base font-bold hover:text-steelblue">My Account</small>
-                        <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
-                            <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
-                        </div>
                     </li>
                 </ul>
             </div>
@@ -81,7 +86,7 @@ const logoutUser = (): void => {
 <style scoped>
 
 .top-nav {
-    @apply py-2 sm:py-2 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px] transition-all duration-300;
+    @apply py-2.5 sm:py-2 flex flex-row justify-between w-full border-b border-gray-200 px-[8px] lg:px-[78px] transition-all duration-300;
 }
 .top-nav .top-left-nav {
     @apply flex items-center flex-row py-0.5;
