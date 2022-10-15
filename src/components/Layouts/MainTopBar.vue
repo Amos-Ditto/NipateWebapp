@@ -81,9 +81,9 @@ const logoutUser = (): void => {
                     </div>
                     <Transition name="pop-up">
                         <div v-if="dropdownaccount"
-                            class="account-drop-down flex flex-col gap-y-2.5 py-2 absolute top-[145%] right-0 min-h-[4rem] w-[15rem] xs:w-[18rem] shadow-md bg-gray-50 rounded"
+                            class="account-drop-down flex flex-col gap-y-2.5 py-2 absolute top-[145%] right-0 min-h-[4rem] w-[15rem] xs:w-[18rem] bg-gray-50 rounded"
                         >
-                            <div class="top-drop-down absolute shadow-lg -z-10 right-3 -top-2 w-4 h-4 rotate-45 bg-gray-200"></div>
+                            <div class="top-drop-down absolute -z-10 right-3 -top-2 w-4 h-4 rotate-45"></div>
                             <div class="user-client flex flex-row items-center gap-x-3 py-1.5 px-2 hover:bg-gray-100 cursor-pointer">
                                 <div class="user-avatar p-1.5 rounded-md bg-gray-200">
                                     <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
@@ -154,6 +154,12 @@ const logoutUser = (): void => {
     @apply text-steelblue
 }
 
+.account-drop-down {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+.account-drop-down .top-drop-down {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
 .pop-up-enter-from {
     @apply -translate-y-2 opacity-5;
 }

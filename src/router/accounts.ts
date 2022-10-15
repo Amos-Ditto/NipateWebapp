@@ -57,6 +57,12 @@ const accounts = [
         meta: {title: 'Me'},
         children: children
     },
+    {
+        path: 'new-provider',
+        name: 'Register-Provider',
+        component: () => import('../views/Accounts/RegisterProvider.vue'),
+        meta: {title: 'Register as a provider'}
+    }
 ]
 
 export default accounts;

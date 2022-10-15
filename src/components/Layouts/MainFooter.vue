@@ -1,5 +1,5 @@
 <template>
-    <footer class="w-full py-2 bg-gray-50 shadow-md flex items-center flex-col">
+    <footer class="w-full py-2 bg-gray-50 flex items-center flex-col">
         <div class="top-footer w-full border-b border-gray-300 py-2 px-[8px] lg:px-[100px] transition-pad duration-300 flex items-center flex-row">
             <div class="logo py-0.5 flex flex-row items-center">
                 <img src="../../assets/Logo/Vector.svg" alt="logo">
@@ -13,7 +13,7 @@
                 <span>Terms of services</span>
             </div>
             <div class="bottom-b-footer flex flex-col w-full px-1">
-                <small class="text-slate-600">Copyright @ 2022 Bespoke Systems.</small>
+                <small class="text-slate-600 text-sm">Copyright @ 2022 Bespoke Systems.</small>
             </div>
         </div>
     </footer>
@@ -26,7 +26,7 @@
 }
 
 .top-b-footer span {
-    @apply text-xs hover:underline text-slate-600 border-r-2 pl-1 pr-2 border-gray-200 cursor-pointer relative;
+    @apply text-sm hover:underline text-slate-600 border-r-2 pl-1 pr-2 border-gray-200 cursor-pointer relative;
 
 }
 </style>

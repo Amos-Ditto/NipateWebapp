@@ -128,7 +128,12 @@ const { userdashboard } = storeToRefs(userlayout);
             </transition>
             <div class="body-section sm:col-span-7 lg:col-span-4 row-span-3 pb-2 flex flex-col gap-y-4">
                 <!-- Body NavBar -->
-                <router-view></router-view>
+                <router-view v-slot="{ Component }">
+                    <transition name="fade" mode="out-in">
+                        <component :is="Component" />
+                    </transition>
+                </router-view>
+                
             </div>
         </div>
     </section>
@@ -167,5 +172,15 @@ nav ul li a.sm-links span {
     nav ul li a.sm-links:hover span {
         @apply block z-10 bg-gray-100 py-2 px-3 shadow-lg rounded text-sm font-semibold;
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
