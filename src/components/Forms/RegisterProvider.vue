@@ -116,7 +116,7 @@ const createProviderAccount = async (): Promise<void> => {
             <button type="button" @click="createProviderAccount"
                 class="bg-slate-600 hover:bg-slate-700 capitalize transition-colors duration-300 rounded-sm min-w-[9.3rem] px-10 sm:px-8 py-1.5 text-slate-100 flex flex-row gap-x-2 justify-center items-center">
                 <span class="text-base" v-if="!submitloading">Submit</span>
-                <span class="loader" v-else="submitloading"></span>
+                <span class="loader"></span>
             </button>
         </div>
     </div>
