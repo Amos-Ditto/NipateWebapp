@@ -38,6 +38,11 @@ const logoutUser = (): void => {
     window.location.reload();   
 }
 
+const redirectToRegisterProvider = ():void => {
+    router.push({ name: 'Register-Provider' });
+}
+
+
 </script>
 <template>
     <header class="w-full h-full flex flex-col bg-gray-50 relative">
@@ -93,11 +98,13 @@ const logoutUser = (): void => {
                                     <small class="text-slate-600 text-xs">provider</small>
                                 </div>
                             </div>
-                            <div class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
+                            <RouterLink :to="{ name: 'Register' }" class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
                                 <div class="i-mdi-sign-in text-xl"></div>
                                 <small class="text-base tracking-wide font-light">Register as User</small>
-                            </div>
-                            <div class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
+                            </RouterLink>
+                            <div @click="redirectToRegisterProvider"
+                                class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
+                            >
                                 <div class="i-mdi-tools text-xl"></div>
                                 <small class="text-base tracking-wide font-light">Register as Provider</small>
                             </div>
