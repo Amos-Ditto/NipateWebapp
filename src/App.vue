@@ -1,34 +1,34 @@
 <script setup lang="ts">
 
-import { onMounted } from 'vue';
 import useAuthentications from './store/authentications';
-import { UserAuth } from './Types/GeneralTypes';
 
 const base_url = import.meta.env.VITE_BASE_URL;
 const useAuthentication = useAuthentications();
 
-const validateUseHeaders = async (data: string): Promise<{"User": boolean}> => {
-  const response = await fetch(`${base_url}auth/confirm`, {
+const checkUserDetails = async (auth_token: string): Promise<void> => {
+  await fetch(`${base_url}provider/status`, {
     method: 'GET',
     headers: {
-      "Authorization": data || ""
+      "Authorization": auth_token || ""
     }
   })
-  return await response.json();
-}
-onMounted(async () => {
-  
-  if(localStorage.getItem("Nipate_user_data")) {
-    let user_local = localStorage.getItem("Nipate_user_data") || "";
-    let user_auth = validateUseHeaders(JSON.parse(user_local)["Auth_token"]);
-    if((await user_auth).User === true) {
-      useAuthentication.updateUser(JSON.parse(user_local));
+  .then(async response => {
+    if(response.status === 200) {
+      useAuthentication.updateAuthentication(true);
+      useAuthentication.updateUserDetails(await response.json());
     } else {
       localStorage.removeItem("Nipate_user_data");
+      useAuthentication.updateAuthentication(false);
     }
+  })
+  .catch(error => { console.log(error) })
+}
+
+if(localStorage.getItem("Nipate_user_data")) {
+  let user_local = JSON.parse(localStorage.getItem("Nipate_user_data") || "");
+  checkUserDetails(user_local["Auth_token"]);
   
-  }
-})
+}
 
 </script>
 

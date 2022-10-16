@@ -66,3 +66,18 @@ export interface Location {
     Landmark?: null;
     CenterBlock?: null;
 }
+
+export interface UserDetails {
+    id: number;
+    User: User;
+    Location: County;
+    Provider: boolean;
+}
+export interface User {
+    id: number;
+    MobileNumber: string;
+    IDNumber: string;
+    FirstName: string;
+    SurName: string;
+}
+  

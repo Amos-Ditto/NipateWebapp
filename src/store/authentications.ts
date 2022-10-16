@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import type { UserAuth } from "../Types/GeneralTypes";
+import type { UserAuth, UserDetails } from "../Types/GeneralTypes";
 
 
 const state = {
@@ -8,6 +8,21 @@ const state = {
     } as UserAuth,
     Authenticated: false as boolean,
     Provider: false as boolean,
+    UserDetails: {
+        "id": 0,
+        "User": {
+            "id": 0,
+            "MobileNumber": "",
+            "IDNumber": "",
+            "FirstName": "",
+            "SurName": ""
+        },
+        "Location": {
+            "id": 0,
+            "Name": ""
+        },
+        "Provider": false
+    } as UserDetails,
 
 }
 
@@ -17,6 +32,9 @@ const getters = {
     },
     getAuthenticatedStatus(state: {Authenticated: boolean}): boolean {
         return state.Authenticated;
+    },
+    getUserDetails(): UserDetails {
+        return state.UserDetails;
     }
 }
 
@@ -27,6 +45,12 @@ const actions = {
     },
     updateProvider(payload: boolean): void {
         state.Provider = payload;
+    },
+    updateUserDetails(payload: UserDetails): void {
+        state.UserDetails = payload;
+    },
+    updateAuthentication(payload: boolean): void {
+        state.Authenticated = payload;
     }
 }
 

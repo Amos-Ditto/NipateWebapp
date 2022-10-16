@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import RegisterProvider from '../../components/Forms/RegisterProvider.vue';
 import UserAccountDetails from '../../components/Heroes/UserAccountDetails.vue';
 
 
@@ -14,8 +13,6 @@ import UserAccountDetails from '../../components/Heroes/UserAccountDetails.vue';
             </div>
         </div>
         <div class="body-section w-full flex flex-col gap-y-12 px-1 sm:px-4">
-            
-            <RegisterProvider />
 
             <div class="other-section flex flex-col gap-y-12 w-full">
                 <div class="requests-dummy w-full flex flex-col gap-y-3">

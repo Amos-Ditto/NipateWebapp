@@ -8,7 +8,7 @@ import MainDropDown from './MainDropDown.vue';
 
 const router = useRouter();
 const storeauth = useAuthentications();
-const { Authenticated } = storeToRefs(storeauth);
+const { Authenticated, UserDetails } = storeToRefs(storeauth);
 
 // Condition data
 const dropdownaccount = ref<boolean>(false);
@@ -39,7 +39,15 @@ const logoutUser = (): void => {
 }
 
 const redirectToRegisterProvider = ():void => {
-    router.push({ name: 'Register-Provider' });
+    if(!Authenticated.value) {
+        if(UserDetails.value.Provider === true) {
+            router.push({name: 'Login', query: { redirect: '/account/provider' }});
+        } else {
+            router.push({name: 'Login', query: { redirect: '/account/new-provider' }});
+        }
+    } else {
+        router.push({ name: 'Provider-Home' });
+    }
 }
 
 
@@ -54,18 +62,19 @@ const redirectToRegisterProvider = ():void => {
             <div class="top-right-nav">
                 <!-- <small>New to this site?</small> -->
                 <Transition name="slide" mode="out-in">
-                    <div v-if="!Authenticated" class="flex flex-row items-center gap-1.5 sm:gap-3 transition-pad">
+                    
+                    <div v-if="Authenticated">
+                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800" @click="logoutUser">
+                            Logout
+                        </button>
+                    </div>
+                    <div v-else class="flex flex-row items-center gap-1.5 sm:gap-3 transition-pad">
                         <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">
                             <router-link class="block" :to="{name: 'Register'}" >Register</router-link>
                         </button>
                         <small>or</small>
                         <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
                             <router-link class="block" :to="{name: 'Login'}" >Login</router-link>
-                        </button>
-                    </div>
-                    <div v-else>
-                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800" @click="logoutUser">
-                            Logout
                         </button>
                     </div>
                 </Transition>
@@ -94,8 +103,8 @@ const redirectToRegisterProvider = ():void => {
                                     <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
                                 </div>
                                 <div class="user-details flex flex-col gap-y-0">
-                                    <small class="text-sm text-slate-600">Amos Kipyegon</small>
-                                    <small class="text-slate-600 text-xs">provider</small>
+                                    <small class="text-sm text-slate-600">{{ UserDetails.User.FirstName || "Anonymous" }} {{ UserDetails.User.SurName }}</small>
+                                    <small class="text-slate-600 text-xs">{{ UserDetails.Provider ? 'Provider' : 'Client' }}</small>
                                 </div>
                             </div>
                             <RouterLink :to="{ name: 'Register' }" class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">

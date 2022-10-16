@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import useAuthentications from '../../store/authentications';
 import { County } from '../../Types/GeneralTypes';
 
 const base_url = import.meta.env.VITE_BASE_URL;
+const router = useRouter()
+const userauth = useAuthentications();
 
 const openselect = ref<boolean>(false);
 const counties = ref<County[]>([]);
 const retryfetch = ref<boolean>(false);
+const validcounty = ref<boolean>(true);
 
 const selectedcounty = ref<County>({
     Name: 'Select Region', id: 0
@@ -16,6 +21,7 @@ const submitting = ref<boolean>(false);
 
 const toggleSelect = (): void => {
     openselect.value = !openselect.value;
+    validcounty.value = true;
 }
 
 const selectCounty = (county: County): void => {
@@ -24,10 +30,18 @@ const selectCounty = (county: County): void => {
 }
 
 const submitCreateAccount = (): void => {
+    if(selectedcounty.value.id === 0) {
+        validcounty.value = false; return;
+    }
     submitting.value = true;
 
-    setTimeout(() => {submitting.value = false}, 400);
+    setTimeout(() => {
+        submitting.value = false;
+        router.push({ name: 'Provider-Home' });
+    }, 400);
 
+    userauth.updateProvider(true);
+    
 }
 
 const fetchCounties = async(): Promise<void> => {
@@ -59,7 +73,8 @@ fetchCounties();
                 <label for="region" class="text-sm tracking-wide">Where will you be offering services from?</label>
                 <div class="input flex flex-col w-full relative">
                     <button id="region" @click="toggleSelect"
-                        class="py-2 w-full sm:w-3/4 flex flex-row items-center justify-between font-light px-4 border border-gray-300 focus:border-slate-400 rounded capitalize text-base tracking-wide"
+                        class="py-2 w-full sm:w-3/4 flex flex-row items-center justify-between font-light px-4 border focus:border-slate-400 rounded capitalize text-base tracking-wide"
+                        :class="validcounty ? 'border-gray-300' : 'border-tomato'"
                     >
                         {{ selectedcounty.Name }}
                         <div class="i-mdi-chevron-down"></div>
