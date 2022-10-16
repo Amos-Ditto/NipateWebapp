@@ -41,7 +41,6 @@ const getters = {
 const actions = {
     updateUser(payload: UserAuth): void {
         state.User = payload;
-        (payload.Auth_token === null) ? state.Authenticated = false : state.Authenticated = true;
     },
     updateProvider(payload: boolean): void {
         state.Provider = payload;

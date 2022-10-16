@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentications from '../../store/authentications';
 import { County } from '../../Types/GeneralTypes';
@@ -17,6 +17,13 @@ const selectedcounty = ref<County>({
     Name: 'Select Region', id: 0
 })
 
+// Check If user is suppose to be here
+onMounted(() => {
+    if(userauth.UserDetails.Provider) {
+        router.push({ name: 'Provider-Home' });
+    }
+})
+
 const submitting = ref<boolean>(false);
 
 const toggleSelect = (): void => {
@@ -29,19 +36,38 @@ const selectCounty = (county: County): void => {
     toggleSelect();
 }
 
-const submitCreateAccount = (): void => {
+const submitCreateAccount = async (): Promise<void> => {
     if(selectedcounty.value.id === 0) {
         validcounty.value = false; return;
     }
     submitting.value = true;
 
-    setTimeout(() => {
-        submitting.value = false;
-        router.push({ name: 'Provider-Home' });
-    }, 400);
+    await fetch(`${base_url}provider/new`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization":  userauth.User.Auth_token || ""
+        },
+        body: JSON.stringify({CountyID: selectedcounty.value.id})
+    })
+    .then(async response => {
+
+        setTimeout(() => {
+            submitting.value = false;
+        }, 400);
+        if(response.status === 201) {
+            userauth.updateUserDetails(await response.json());
+            router.push({ name: 'Provider-Home' });
+        }
+    })
+    .catch(error => {
+        setTimeout(() => {
+            submitting.value = false;
+        }, 400);
+    })
+
 
     userauth.updateProvider(true);
-    
 }
 
 const fetchCounties = async(): Promise<void> => {

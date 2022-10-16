@@ -63,7 +63,7 @@ const formLoginSubmit = async (type: void) => {
         storeauth.updateUser(userfetcheddata.value);
         // Save User to LocalStorage
         localStorage.setItem("Nipate_user_data", JSON.stringify(userfetcheddata.value));
-
+        checkUserDetails(userfetcheddata.value.Auth_token);
         router.push(route.query.redirect as string || { name: 'Dashboard' })
         
     } else {
@@ -76,6 +76,23 @@ const formLoginSubmit = async (type: void) => {
     }
     
 }
+
+const checkUserDetails = async (auth_token: string): Promise<void> => {
+  await fetch(`${base_url}provider/status`, {
+    method: 'GET',
+    headers: {
+      "Authorization": auth_token || ""
+    }
+  })
+  .then(async response => {
+    storeauth.updateAuthentication(true);
+    storeauth.updateUserDetails(await response.json());
+    console.log(storeauth.UserDetails);
+    
+  })
+  .catch(error => { console.log(error) })
+}
+
 </script>
 <template>
     <section class="w-full flex items-center justify-center flex-col px-2 sm:px-8 transition-pad duration-300">

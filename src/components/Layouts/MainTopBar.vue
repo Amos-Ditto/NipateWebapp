@@ -40,13 +40,14 @@ const logoutUser = (): void => {
 
 const redirectToRegisterProvider = ():void => {
     if(!Authenticated.value) {
-        if(UserDetails.value.Provider === true) {
-            router.push({name: 'Login', query: { redirect: '/account/provider' }});
-        } else {
-            router.push({name: 'Login', query: { redirect: '/account/new-provider' }});
-        }
+        router.push({name: 'Login', query: { redirect: '/account/new-provider' }});
+        
     } else {
-        router.push({ name: 'Provider-Home' });
+        if(UserDetails.value.Provider) {
+            router.push({ name: 'Provider-Home' });
+        } else {
+            router.push({ name: 'Register-Provider' });
+        }
     }
 }
 
