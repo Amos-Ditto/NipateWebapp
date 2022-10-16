@@ -177,7 +177,8 @@ const providerservice = ref<ServiceLocation>({
             "id": 0,
             "MobileNumber": "",
             "IDNumber": "",
-            "FirstName": ""
+            "FirstName": "",
+            "SurName": ""
         },
         "County": {
             "id": 0,
