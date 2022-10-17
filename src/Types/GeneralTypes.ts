@@ -80,4 +80,24 @@ export interface User {
     FirstName: string;
     SurName: string;
 }
+
+export interface CreateService {
+    ServiceTitle: string;
+    ProductID: number;
+    ServiceDescription: string;
+    Longitude: string;
+    Lattitude: string;
+    CenterLocationID: number;
+}
+
+export interface CenterLocation {
+    id: number;
+    DisplayName: string;
+    State: string;
+    Town: string;
+    Suburb: string;
+    Road: string;
+    Landmark: string;
+    CenterBlock: string;
+  }
   

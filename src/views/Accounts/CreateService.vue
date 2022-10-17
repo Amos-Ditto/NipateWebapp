@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { json } from 'stream/consumers';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import SelectService from '../../components/Cards/SelectService.vue';
 import useAuthentications from '../../store/authentications';
-import type { ServicesCategoryEntity, CreateServiceForm, ServicesEntity, ServiceLocation } from '../../Types/GeneralTypes';
+import type { 
+    ServicesCategoryEntity, ServicesEntity, CreateService, CenterLocation
+} from '../../Types/GeneralTypes';
 
 
 const router = useRouter();
@@ -26,189 +27,186 @@ const fetchServices = async(): Promise<ServicesCategoryEntity[]> => {
 
 // Fetch services from API
 onMounted(async () => {
-    servicecatgories.value = await fetchServices();
+    servicecategories.value = await fetchServices();
 });
 
-const servicecatgories = ref<ServicesCategoryEntity[]>([]);
+const servicecategories = ref<ServicesCategoryEntity[]>([]);
 const selectedcategory = ref<ServicesCategoryEntity>(
     {
         "id": 0,
         "Name": "",
         "services": [
             {
-            "id": 0,
-            "Name": ""
+                "id": 0,
+                "Name": ""
             }
         ]
     },
 );
+const centerlocation = ref<CenterLocation>({
+    "id": 0,
+    "DisplayName": "",
+    "State": "",
+    "Town": "",
+    "Suburb": "",
+    "Road": "",
+    "Landmark": "",
+    "CenterBlock": ""
+});
 
-const formdata = ref<CreateServiceForm>({
-    title: "", description: "",
-    service: {id: 0, Name: 'select category'}
-})
-// Form Validation
-const valid_form = ref<{
-    valid_title: boolean;
-    valid_product: boolean
-}>({valid_title: false, valid_product: false});
-const submittingdetails = ref<boolean>(false);
+// Create services form data
+const longitude = ref<string>("");
+const latitude = ref<string>("");
+const toastmessage = ref<string>("");
 const succesfuldetails = ref<boolean>(false);
 const formdatasubmitted = ref<boolean>(true);
 
-const toastmessage = ref<string>("");
-// Location Data
-const locationdetails = ref<{
-    Longitude: number; Lattitude: number
-}>({Longitude: 0, Lattitude: 0});
+
+// Loaders var
 const submittinglocation = ref<boolean>(false);
+const submittingform = ref<boolean>(false);
+
+
+// Form Validation
+const valid_form = ref<{
+    valid_title: boolean;
+    valid_product: boolean,
+    coords: boolean
+}>({valid_title: false, valid_product: false, coords: false});
+
+
+const createservicesformdata = ref<CreateService>({
+    ServiceTitle: '', ProductID: 0, ServiceDescription: '',
+    CenterLocationID: 0, Longitude: '', Lattitude: ''
+})
+const serviceproduct = ref<ServicesEntity>({
+    id: 0, Name: 'select category'
+})
 
 // List items selection
 const chooseServiceCategory = (data: ServicesCategoryEntity): void => {
     selectedcategory.value = data;
     toggleservices.value = !toggleservices.value;
 }
-
-const chooseService = (payload: ServicesEntity, toggle: boolean): void => {
-    formdata.value.service = payload;
+const updateProduct = (payload: ServicesEntity, toggle: boolean): void => {
+    serviceproduct.value = payload;
     openselect.value = toggle;
     toggleservices.value = true;
 }
 
-// Post the first provider service details
-const submitDetails = async (): Promise<void> => {
-    valid_form.value.valid_title = false; valid_form.value.valid_product = false;
-    if(formdata.value.title.length <= 4){
-        valid_form.value.valid_title = true; return
-    }
-    if(formdata.value.service.id === 0) {
-        valid_form.value.valid_product = true; return;
-    }
-    submittingdetails.value = true;
-    let response = await fetch(`${base_url}provider/service`, {
-        method: "POST",
+watch([latitude, longitude], async ([newLatitude, newLongitude]) => {
+    submittinglocation.value = true;
+    await fetch(`${base_url}provider/search-location`, {
+        method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            "Authorization": useauth.getUser.Auth_token || ""
         },
         body: JSON.stringify({
-            "ServiceTitle": formdata.value.title,
-            "ProductID": formdata.value.service.id,
-            "ServiceDescription": formdata.value.description
+            Longitude: longitude.value,
+            Lattitude: latitude.value
         })
     })
-    setTimeout(() => {submittingdetails.value = false}, 300);
-    
-    toastmessage.value = "Succesfully added Service details. Proceed to update location"
-    succesfuldetails.value = true;
-    setTimeout(() => {
-        succesfuldetails.value = false;
-    }, 2000);
+    .then(async response => {
+        centerlocation.value = await response.json();
+        setTimeout(() => {
+            submittinglocation.value = false;
+        }, 400)
+    })
+    .catch(error => {
+        console.log(error);
+        setTimeout(() => {
+            submittinglocation.value = false;
+        }, 400)
+    });
+})
 
-    if(response.status === 201) {
-        providerservice.value = await response.json();
-        console.log(providerservice.value);
-        let scrollinto = document.getElementById("details-form") as HTMLElement;
-        scrollinto.scrollIntoView({ block: 'end',  behavior: 'smooth' });
-    }
-    
-}
-
-// Get user location from browser
-const getCurrentLocation = (): void => {
-    if(providerservice.value.id === 0) {
-        formdatasubmitted.value = false;
-        let scrollinto = document.getElementById("details-form") as HTMLElement;
-        scrollinto.scrollIntoView({ block: 'end',  behavior: 'smooth' });
-        setTimeout(() => {formdatasubmitted.value = true}, 1000);
-        return;
-    }
+// Get Coords func
+const getCurrentLoc = (): void => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(async position => {
-            const lat = position.coords.latitude;
-            const long = position.coords.longitude;
-
-            locationdetails.value.Lattitude = lat;
-            locationdetails.value.Longitude = long;
-
-            providerservice.value = await updateServiceDetailLocation(lat, long);
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log("Current");
+            
+            latitude.value = position.coords.latitude.toString();
+            longitude.value = position.coords.longitude.toString();
             
         }, error => {
-            alert("Need access to get location");
+            alert("Need access to get location: ");
         });
     }
 }
 
-const updateServiceDetailLocation = async (lat: number, long: number): Promise<ServiceLocation> => {
-    submittinglocation.value = true;
-    console.log("Coordinates", lat.toString(), long.toString());
-    
-    let response = await fetch(`${base_url}provider/update-location/service`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": useauth.getUser.Auth_token || ""
-        },
-        body: JSON.stringify({
-            ServiceID: providerservice.value.id,
-            Longitude: long.toString(),
-            Lattitude: lat.toString()
-        })
-    })
-    setTimeout(() => {submittinglocation.value = false}, 500);
-    if(response.ok) {
-        toastmessage.value = "Succesfully Registered a service to offer."
-        succesfuldetails.value = true;
-        setTimeout(() => {
-            succesfuldetails.value = false;
-        }, 3000);
-        return await response.json();
-    } else {
-        return providerservice.value;
+const createService = async (): Promise<void> => {
+    valid_form.value = {
+        coords: false, valid_product: false, valid_title: false
     }
-}
 
-// Post data response
-const providerservice = ref<ServiceLocation>({
-    "id": 0,
-    "Provider": {
-        "id": 0,
-        "User": {
-            "id": 0,
-            "MobileNumber": "",
-            "IDNumber": "",
-            "FirstName": "",
-            "SurName": ""
-        },
-        "County": {
-            "id": 0,
-            "Name": ""
-        }
-    },
-    "ServiceTitle": "",
-    "Service": {
-        "id": 0,
-        "Name": "",
-        "CategoryID": 0
-    },
-    "ServiceDescription": "",
-    "Longitude": '',
-    "Lattitude": '',
-    "Location": null,
-    "workingDays": [],
-    "AgeBracket": null
-})
-
-const completeRedirect = (): void => {
-    if(providerservice.value.id === 0) {
+    if(createservicesformdata.value.ServiceTitle === "") {
+        valid_form.value.valid_title = true;
         formdatasubmitted.value = false;
         let scrollinto = document.getElementById("details-form") as HTMLElement;
-        scrollinto.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+        scrollinto.scrollIntoView({ block: 'end',  behavior: 'smooth' });
         setTimeout(() => {formdatasubmitted.value = true}, 1000);
         return;
     }
-    router.push({ name: "Provider-Services-List" })
+    if(serviceproduct.value.id === 0) {
+        valid_form.value.valid_product = true;
+        formdatasubmitted.value = false;
+        let scrollinto = document.getElementById("details-form") as HTMLElement;
+        scrollinto.scrollIntoView({ block: 'end',  behavior: 'smooth' });
+        setTimeout(() => {formdatasubmitted.value = true}, 1000);
+        return;
+    }
+    if(longitude.value === "" && latitude.value === "") {
+        valid_form.value.coords = true;
+        let scrollinto = document.getElementById("location-details") as HTMLElement;
+        scrollinto.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+        setTimeout(() => {
+            valid_form.value.coords = false;
+        }, 1500);
+        return;
+    }
+    submittingform.value = true;
+    console.log("Auth token: ", useauth.User.Auth_token);
+    
+    let data_form = {
+        "ServiceTitle": createservicesformdata.value.ServiceTitle,
+        "ProductID": serviceproduct.value.id,
+        "ServiceDescription": createservicesformdata.value.ServiceDescription,
+        "Longitude": longitude.value,
+        "Lattitude": latitude.value,
+        "CenterLocationID": centerlocation.value.id
+    }
+    await fetch(`${base_url}provider/service`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": useauth.User.Auth_token || ""
+        },
+        body: JSON.stringify(data_form)
+    })
+    .then(response => {
+        setTimeout(() => {
+            submittingform.value = false;
+        }, 300);
+        if(response.status === 201) {
+            toastmessage.value = "Succesfully created service to offer"
+            succesfuldetails.value = true;
+            setTimeout(() => {
+                succesfuldetails.value = false;
+                router.push({ name: 'Provider-Services-List' });
+            }, 2000);
+        } else {
+            console.log(response.json());
+        }
+    })
+    .catch(error => {
+        setTimeout(() => {
+            submittingform.value = false;
+        }, 300);
+        console.log(error);
+    })
 }
+
 </script>
 <template>
     <section class="w-full flex flex-col px-2 xs:px-4 md:px-8 gap-y-6 relative">
@@ -232,16 +230,17 @@ const completeRedirect = (): void => {
                 <small class="text-xs md:text-sm">{{ toastmessage }}</small>
             </div>
         </Transition>
+
         <div class="service-details mt-4 flex flex-col w-full border border-gray-300 rounded py-4 gap-y-8 sm:gap-y-10 px-5" :class="formdatasubmitted ? 'border-gray-300' : 'border-tomato'">
             <div class="service-details-header text-start w-full px-1 sm:px-2">
                 <h3 class="text-lg sm:text-xl font-light">Service Details</h3>
             </div>
-            <form @submit.prevent="submitDetails" id="details-form" class="px-1 md:px-2 grid grid-cols-1 md:grid-cols-2 gap-y-3.5 xs:gap-y-6 sm:gap-y-8 gap-x-8">
+            <div id="details-form" class="px-1 md:px-2 grid grid-cols-1 md:grid-cols-2 gap-y-3.5 xs:gap-y-6 sm:gap-y-8 gap-x-8">
                 <div class="input-field w-full flex flex-col gap-y-2">
                     <label for="service-name" class="text-sm capitalize font-bold tracking-wide">Service title:</label>
                     <div class="input w-full flex flex-col">
                         <input
-                            type="text" id="service-name" placeholder="title" v-model="formdata.title" required
+                            type="text" id="service-name" placeholder="title" v-model="createservicesformdata.ServiceTitle"
                             class=" py-2.5 rounded outline-none px-3 capitalize tracking-wide text-slate-600 border border-gray-300 bg-gray-50"
                             :class="valid_form.valid_title ? 'border-tomato' : 'border-gray-300'"
                         >
@@ -259,7 +258,7 @@ const completeRedirect = (): void => {
                             class=" relative h-[2.8rem] rounded outline-none px-3 tracking-wide text-slate-500 border border-gray-300 bg-gray-50 flex items-center"
                             :class="valid_form.valid_product ? 'border-tomato' : 'border-gray-300'"
                         >
-                            <span>{{ formdata.service.Name }}</span>
+                            <span>{{ serviceproduct.Name }}</span>
                             <div class="i-mdi-chevron-down text-lg scale-125 absolute right-[5%]"></div>
                         </button>
                         <div class="error-status w-full flex flex-row items-center py-2 px-1 gap-x-2" v-if="valid_form.valid_product">
@@ -269,17 +268,17 @@ const completeRedirect = (): void => {
                     </div>
                     <div
                         v-if="openselect"
-                        class="selection absolute left-1.5 top-full min-h-[5rem] bg-gray-50 rounded border border-gray-200 flex flex-col transition-all duration-200"
-                        :class="toggleservices ? 'right-1.5' : 'right-0 xs:right-1/2 md:right-0 lg:right-1/2'"
+                        class="selection absolute right-1.5 left-1.5 top-full min-h-[5rem] bg-gray-50 rounded border border-gray-200 flex flex-col transition-all duration-200"
+                        
                     >
                         <ul class="categories py-1 w-full flex flex-col max-h-[10rem] overflow-y-auto" v-if="toggleservices">
-                            <li v-for="service in servicecatgories" @click="chooseServiceCategory(service)">
+                            <li v-for="service in servicecategories" @click="chooseServiceCategory(service)">
                                 <div class="i-mdi-tick text-green-500 text-base" :class="selectedcategory.id === service.id ? 'block' : 'hidden'"></div>
                                 {{ service.Name }}
                             </li>
                         </ul>
                         <SelectService
-                            :services="selectedcategory.services" @choose-service="chooseService"
+                            :services="selectedcategory.services" @choose-service="updateProduct"
                             @close-service-list="toggleservices = !toggleservices" v-else
                         />
                     </div>
@@ -290,21 +289,15 @@ const completeRedirect = (): void => {
                         <textarea
                             name="description" id="description" cols="30" rows="4" placeholder="description"
                             class="py-2.5 rounded outline-none px-3 tracking-wide text-slate-600 border border-gray-300 bg-gray-50"
-                            v-model="formdata.description"
+                            v-model="createservicesformdata.ServiceDescription"
                         ></textarea>
                     </div>
                 </div>
-                <!-- <div class="input-field w-full flex flex-col gap-y-2">
-                    <button
-                        class="bg-slate-600 hover:bg-slate-800 text-slate-100 transition-colors duration-300 w-full md:w-[50%] py-2 font-light uppercase tracking-wide text-lg rounded flex flex-row items-center justify-center gap-x-3"
-                    >
-                        <span v-if="!submittingdetails">Submit</span>
-                        <span class="loader" v-else></span>
-                    </button>
-                </div> -->
-            </form>
+            </div>
         </div>
-        <div id="location-details" class="location-details flex flex-col w-full border border-gray-300 rounded py-4 gap-y-10 px-5">
+        <div id="location-details" :class="valid_form.coords ? 'border-tomato' : 'border-gray-300'"
+            class="location-details flex flex-col w-full border rounded py-4 gap-y-10 px-5"
+        >
             <div class="service-details-header w-full items-center flex">
                 <h3 class="text-lg sm:text-xl font-light">Where you offer this service?</h3>
             </div>
@@ -314,9 +307,9 @@ const completeRedirect = (): void => {
                     <span class="loader-location absolute" v-if="submittinglocation"></span>
                 </div>
                 <div class="loc">
-                    <p>{{ providerservice.Location?.DisplayName}}</p>
+                    <p>{{ centerlocation?.DisplayName}}</p>
                 </div>
-                <button @click="getCurrentLocation"
+                <button @click="getCurrentLoc"
                     class="flex fle-row items-center gap-x-3 border border-gray-300 hover:bg-slate-600 hover:text-slate-100 transition-colors duration-200 rounded py-2 px-4"
                 >
                     <div class="i-mdi-map-marker text-xl"></div>
@@ -325,11 +318,13 @@ const completeRedirect = (): void => {
             </div>
         </div>
         <div class="complete w-full flex flex-col items-start px-0 pt-4 sm:pt-10">
-            <button @click="completeRedirect"
+            <button @click="createService"
                 class="text-xl bg-slate-600 w-full hover:bg-slate-700 rounded text-slate-100 tracking-wide px-4 py-3 uppercase flex flex-row items-center gap-x-4 justify-center relative transition-colors duration-200"
             >
-                Submit
-                <!-- <div class="i-mdi-chevron-right text-3xl absolute right-4"></div> -->
+                <Transition mode="out-in">
+                    <span class="loader" v-if="submittingform"></span>
+                    <span v-else>Submit</span>
+                </Transition>
             </button>
         </div>
     </section>
