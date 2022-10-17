@@ -4,7 +4,7 @@ import MainFooter from '../components/Layouts/MainFooter.vue';
 
 </script>
 <template>
-    <main class="relative pb-[280px]">
+    <main class="relative pb-[450px]">
         <MainTopBar class="sticky top-0 z-30" />
         <router-view v-slot="{ Component }">
           <transition name="fade" mode="out-in">

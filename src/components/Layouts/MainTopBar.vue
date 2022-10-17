@@ -82,7 +82,7 @@ const redirectToRegisterProvider = ():void => {
             </div>
         </div>
         <div class="bottom-nav relative">
-            <div class="bottom-left-nav px-1 flex items-center flex-row">
+            <div class="bottom-left-nav px-2.5 flex items-center flex-row">
                 <MainDropDown />
             </div>
             <div class="bottom-right-nav flex flex-row gap-x-6 items-center justify-between">
