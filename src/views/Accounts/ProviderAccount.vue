@@ -37,10 +37,10 @@ const redirectNewServices = () => {
                     </span>
                 </RouterLink>
             </div>
-            <div class="a-container grid grid-cols-1 sm:grid-cols-3 gap-x-2 lg:gap-x-6 gap-y-2 transition-pad duration-300">
-                <ServicesCard />
-                <ServicesCard />
-                <ServicesCard />
+            <div class="a-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-2 lg:gap-x-6 gap-y-2 transition-pad duration-300">
+                <ServicesCard id="services-card" />
+                <ServicesCard id="services-card" />
+                <ServicesCard id="services-card" />
             </div>
         </div>
         <div class="w-full px-3 flex flex-col gap-y-4 pt-12 sm:pt-0">
@@ -56,10 +56,10 @@ const redirectNewServices = () => {
                     </span>
                 </RouterLink>
             </div>
-            <div class="a-container grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-2">
-                <AdvertCard />
-                <AdvertCard />
-                <AdvertCard />
+            <div class="a-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-2">
+                <AdvertCard id="a-card" />
+                <AdvertCard id="a-card" />
+                <AdvertCard id="a-card" />
             </div>
         </div>
     </section>
@@ -68,5 +68,12 @@ const redirectNewServices = () => {
 
 .button-more:hover span {
     @apply flex;
+}
+
+#services-card {
+    @apply last:block sm:last:hidden md:last:block;
+}
+#a-card {
+    @apply last:block sm:last:hidden md:last:block;
 }
 </style>

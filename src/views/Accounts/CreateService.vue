@@ -108,8 +108,8 @@ const submitDetails = async (): Promise<void> => {
     if(response.status === 201) {
         providerservice.value = await response.json();
         console.log(providerservice.value);
-        let scrollinto = document.getElementById("location-details") as HTMLElement;
-        scrollinto.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+        let scrollinto = document.getElementById("details-form") as HTMLElement;
+        scrollinto.scrollIntoView({ block: 'end',  behavior: 'smooth' });
     }
     
 }
@@ -119,7 +119,7 @@ const getCurrentLocation = (): void => {
     if(providerservice.value.id === 0) {
         formdatasubmitted.value = false;
         let scrollinto = document.getElementById("details-form") as HTMLElement;
-        scrollinto.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+        scrollinto.scrollIntoView({ block: 'end',  behavior: 'smooth' });
         setTimeout(() => {formdatasubmitted.value = true}, 1000);
         return;
     }
@@ -211,7 +211,7 @@ const completeRedirect = (): void => {
 }
 </script>
 <template>
-    <section class="w-full flex flex-col px-2 xs:px-4 md:px-8 gap-y-10 sm:gap-y-12 relative">
+    <section class="w-full flex flex-col px-2 xs:px-4 md:px-8 gap-y-6 relative">
         <div class="nav-header flex flex-row justify-between w-full">
             <h3 class="text-xl xs:text-2xl capitalize tracking-wide sm:text-2xl font-bold text-[#014451]">Create New Service</h3>
             <div class="nav-links flex flex-row gap-x-2 items-center">
@@ -232,7 +232,7 @@ const completeRedirect = (): void => {
                 <small class="text-xs md:text-sm">{{ toastmessage }}</small>
             </div>
         </Transition>
-        <div class="service-details flex flex-col w-full border border-gray-300 rounded py-4 gap-y-8 sm:gap-y-12 px-5" :class="formdatasubmitted ? 'border-gray-300' : 'border-tomato'">
+        <div class="service-details mt-4 flex flex-col w-full border border-gray-300 rounded py-4 gap-y-8 sm:gap-y-10 px-5" :class="formdatasubmitted ? 'border-gray-300' : 'border-tomato'">
             <div class="service-details-header text-start w-full px-1 sm:px-2">
                 <h3 class="text-lg sm:text-xl font-light">Service Details</h3>
             </div>
@@ -294,14 +294,14 @@ const completeRedirect = (): void => {
                         ></textarea>
                     </div>
                 </div>
-                <div class="input-field w-full flex flex-col gap-y-2">
+                <!-- <div class="input-field w-full flex flex-col gap-y-2">
                     <button
                         class="bg-slate-600 hover:bg-slate-800 text-slate-100 transition-colors duration-300 w-full md:w-[50%] py-2 font-light uppercase tracking-wide text-lg rounded flex flex-row items-center justify-center gap-x-3"
                     >
                         <span v-if="!submittingdetails">Submit</span>
                         <span class="loader" v-else></span>
                     </button>
-                </div>
+                </div> -->
             </form>
         </div>
         <div id="location-details" class="location-details flex flex-col w-full border border-gray-300 rounded py-4 gap-y-10 px-5">
@@ -326,10 +326,10 @@ const completeRedirect = (): void => {
         </div>
         <div class="complete w-full flex flex-col items-start px-0 pt-4 sm:pt-10">
             <button @click="completeRedirect"
-                class="text-xl bg-green-500 w-full hover:bg-green-600 rounded text-slate-100 tracking-wide px-4 py-3 uppercase flex flex-row items-center gap-x-4 justify-center relative transition-colors duration-200"
+                class="text-xl bg-slate-600 w-full hover:bg-slate-700 rounded text-slate-100 tracking-wide px-4 py-3 uppercase flex flex-row items-center gap-x-4 justify-center relative transition-colors duration-200"
             >
-                complete
-                <div class="i-mdi-chevron-right text-3xl absolute right-4"></div>
+                Submit
+                <!-- <div class="i-mdi-chevron-right text-3xl absolute right-4"></div> -->
             </button>
         </div>
     </section>

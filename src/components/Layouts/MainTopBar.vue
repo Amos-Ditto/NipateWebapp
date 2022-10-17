@@ -19,9 +19,13 @@ const toggleDropDownAccount = (): void => {
 
 const reDirectToUserAccount = (): void => {
     if(Authenticated.value) {
-        router.push({ name: 'User' });
+        if(storeauth.UserDetails.Provider) {
+            router.push({ name: 'Provider-Home' });
+        } else {
+            router.push({ name: 'UserHome' });
+        }
     } else {
-        router.push({name: 'Login', query: { redirect: '/account/me' }});
+        router.push({ name: 'Login' });
     }
 }
 
@@ -99,7 +103,7 @@ const redirectToRegisterProvider = ():void => {
                             class="account-drop-down flex flex-col gap-y-2.5 py-2 absolute top-[145%] right-0 min-h-[4rem] w-[15rem] xs:w-[18rem] bg-gray-50 rounded"
                         >
                             <div class="top-drop-down absolute -z-10 right-3 -top-2 w-4 h-4 rotate-45"></div>
-                            <div class="user-client flex flex-row items-center gap-x-3 py-1.5 px-2 hover:bg-gray-100 cursor-pointer">
+                            <div class="user-client flex flex-row items-center gap-x-3 py-1.5 px-2 hover:bg-gray-100 cursor-pointer" @click="reDirectToUserAccount">
                                 <div class="user-avatar p-1.5 rounded-md bg-gray-200">
                                     <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
                                 </div>
@@ -121,10 +125,6 @@ const redirectToRegisterProvider = ():void => {
                         </div>
                     </Transition>
                 </div>
-                <ul class="flex flex-row items-center gap-4">
-                    <li @click="reDirectToUserAccount">
-                    </li>
-                </ul>
             </div>
         </div>
     </header>

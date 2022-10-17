@@ -78,12 +78,14 @@ const submitOtherDetails = async (): Promise<void> => {
 
     if(response.status === 201) {
         let data = await response.json();
+        console.log(data);
+        
         localStorage.removeItem('nipate_user_id');
         storeauth.updateUser(data);
         
         // Save User to LocalStorage
         localStorage.setItem("Nipate_user_data", JSON.stringify(data));
-
+        checkUserDetails(data['Auth_token']);
         router.push({name: 'Dashboard'});
     } else {
         let error = await response.json();
@@ -92,6 +94,23 @@ const submitOtherDetails = async (): Promise<void> => {
 
     // emit('toggleFinishRegistration');
 }
+
+const checkUserDetails = async (auth_token: string): Promise<void> => {
+  await fetch(`${base_url}provider/status`, {
+    method: 'GET',
+    headers: {
+      "Authorization": auth_token || ""
+    }
+  })
+  .then(async response => {
+    storeauth.updateAuthentication(true);
+    storeauth.updateUserDetails(await response.json());
+    console.log(storeauth.UserDetails);
+    
+  })
+  .catch(error => { console.log(error) })
+}
+
 </script>
 <template>
     <form 
