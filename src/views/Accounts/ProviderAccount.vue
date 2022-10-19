@@ -25,7 +25,7 @@ const redirectNewServices = () => {
                 </button>
             </div>
         </div>
-        <div class="w-full px-3 flex flex-col gap-y-4 border-gray-300 py-2 rounded-lg">
+        <div class="w-full px-3 flex flex-col gap-y-4 border-gray-300 py-2 rounded-lg text-[#346974]">
             <div
             class="nav-section-title flex items-center justify-between px-6 lg:pr-10 py-3 rounded-md border border-gray-300">
                 <h3 class="text-lg capitalize font-bold">Services request</h3>
@@ -43,7 +43,7 @@ const redirectNewServices = () => {
                 <ServicesCard id="services-card" />
             </div>
         </div>
-        <div class="w-full px-3 flex flex-col gap-y-4 pt-12 sm:pt-0">
+        <div class="w-full px-3 flex flex-col gap-y-4 pt-12 sm:pt-0 text-[#346974]">
             <div
                 class="nav-section-title flex items-center justify-between px-6 lg:pr-10 py-3 rounded-md border border-gray-300">
                 <h3 class="text-lg capitalize font-bold">your adverts</h3>

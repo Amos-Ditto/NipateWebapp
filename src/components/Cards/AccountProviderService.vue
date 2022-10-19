@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
+import { ServiceList } from '../../Types/ServiceTypes';
+const props = defineProps<{
+    service: ServiceList,
+}>()
+console.log(props.service)
 
 const requestdelete = ref<boolean>(false);
 
@@ -11,11 +15,11 @@ const executeDelete = (): void => {
 </script>
 <template>
     <div
-        class="service-container py-0 w-full flex flex-col border border-slate-300 rounded relative"
+        class="service-container py-0 w-full flex flex-col border border-slate-300 rounded relative text-[#346974]"
     >
 
         <div class="w-full px-3 sm:px-4 py-5 flex flex-row items-center justify-between border-b border-gray-300">
-            <h3 class="text-xl font-bold tracking-wide">Rafiki Cafe</h3>
+            <h3 class="text-xl font-bold capitalize text-[#346974] tracking-wide">{{props.service.ServiceTitle}}</h3>
             <div class="edit-icons flex flex-row items-center gap-x-4 relative justify-end sm:justify-center">
                 <button class="border border-gray-200 rounded px-4 py-1 text-sm hover:text-dodgerblue hover:border-dodgerblue transition-colors duration-300">Edit</button>
                 <button
@@ -41,11 +45,11 @@ const executeDelete = (): void => {
 
                 <div class="service w-full flex flex-col gap-y-4 gap-x-2 items-start px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base font-light">Service:</small>
-                    <button class="px-4 py-1 rounded-xl font-serif bg-gray-200 text-sm">Boda Boda</button>
+                    <button class="px-4 py-1 rounded-xl font-serif bg-gray-200 text-sm">{{props.service.Service.Name}}</button>
                 </div>
                 <div class="loc w-full flex flex-col gap-y-4 gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base font-light">Located at:</small>
-                    <p class="text-sm">Shoppers Paradise Plaza, Kenyatta Avenue, Nakuru CBD, Biashara, Nakuru, Kenya</p>
+                    <p class="text-sm">{{props.service.Location.DisplayName}}</p>
                 </div>
                 <div class="days-work w-full flex flex-col gap-y-4 items-start gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base font-light">Available Days:</small>
@@ -67,8 +71,7 @@ const executeDelete = (): void => {
             <div class="description-details flex flex-col gap-y-4 py-3 sm:py-4 px-3 sm:px-4">
                 <p>
                     <small class="text-base font-light">Description:</small>
-                    <p class="text-sm font-extralight">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum exercitationem
-                    voluptatibus laudantium expedita illum blanditiis minima id porro.</p>
+                    <p class="text-sm font-extralight">{{props.service.ServiceDescription}}</p>
                 </p>
             </div>
         </div>

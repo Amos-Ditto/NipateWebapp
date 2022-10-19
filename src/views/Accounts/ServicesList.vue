@@ -72,8 +72,7 @@ const redirectNewServices = () => {
         <div class="body-container w-full py-2 px-0 flex flex-col gap-y-8">
             <AccountProviderServiceSuspense v-if="loadingservices" />
             <div class="services-list w-full py-2 px-0 flex flex-col gap-y-8" v-else>
-                <AccountProviderService />
-                <AccountProviderService />
+                <AccountProviderService v-for="service in servicelist" :service="service" />
             </div>
             
             <div class="new-service w-full flex flex-col rounded-sm py-4 px-4 gap-y-8 justify-center items-center border border-gray-300">
@@ -87,7 +86,7 @@ const redirectNewServices = () => {
                     <img src="../../assets/bgImg/undraw_subscribe_vspl.svg" alt="img" class="w-[9rem] h-[4rem]">
                 </div>
                 <div class="new-text flex flex-col items-center justify-center gap-y-4">
-                    <h3 class="text-base font-light">Add a new Service to offer.</h3>
+                    <h3 class="text-base font-light">Add a Service to offer.</h3>
                     <RouterLink
                         :to="{name: 'Provider-Services-New'}" class="uppercase border border-slate-400 hover:bg-slate-700 transition-colors duration-300 text-slate-600 hover:text-slate-100 font-light px-4 py-2 rounded-sm text-xs"
                     >New Service</RouterLink>

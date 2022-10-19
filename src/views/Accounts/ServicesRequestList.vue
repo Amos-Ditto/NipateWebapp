@@ -16,7 +16,7 @@
                 <button class="border border-gray-300 hover:bg-slate-600 transition-colors duration-300 rounded py-1 px-3.5 text-slate-600 hover:text-slate-100 text-sm">Refresh</button>
             </div>
         </div>
-        <div class="body-container w-full flex flex-col gap-y-4 px-1 sm:px-4">
+        <div class="body-container w-full flex flex-col gap-y-4 px-1 sm:px-4 text-[#346974]">
             <div class="requests-card w-full flex flex-col gap-y-6 sm:gap-y-8 px-3 py-3 border border-gray-300 rounded">
                 <div class="card-header flex items-center justify-between w-full px-1 sm:px-3 py-1">
                     <h3 class="text-lg font-semibold tracking-wide">Rafiki Cafe</h3>
