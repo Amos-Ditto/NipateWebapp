@@ -13,7 +13,7 @@ onBeforeMount(() => {
 onMounted(() => {
   setTimeout(() => {
     loadingpage.value = false;
-  }, 1000);
+  }, 2000);
 })
 
 const checkUserDetails = async (auth_token: string): Promise<void> => {
