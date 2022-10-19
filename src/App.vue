@@ -26,6 +26,7 @@ const checkUserDetails = async (auth_token: string): Promise<void> => {
 
 if(localStorage.getItem("Nipate_user_data")) {
   let user_local = JSON.parse(localStorage.getItem("Nipate_user_data") || "");
+  useAuthentication.updateUser(user_local);
   checkUserDetails(user_local["Auth_token"]);
   
 }

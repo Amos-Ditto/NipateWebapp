@@ -1,8 +1,55 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AccountProviderService from '../../components/Cards/AccountProviderService.vue';
+import useAuthentications from '../../store/authentications';
+import type { ServiceList } from '../../Types/ServiceTypes';
+import AccountProviderServiceSuspense from '../../components/Cards/LoadingSuspense/AccountProviderServiceSuspense.vue';
 
+const base_url = import.meta.env.VITE_BASE_URL;
 const router = useRouter();
+const useauth = useAuthentications();
+
+const servicelist = ref<ServiceList[]>([]);
+const loadingservices = ref<boolean>(false);
+
+// onMounted(() => {
+//     if(useauth.getUser.Auth_token === null) {
+//         router.push({name: 'Login', query: { redirect: '/account/me/provider/services' }});
+//     }
+// });
+
+const fetchServices = async (): Promise<void> => {
+    loadingservices.value = true;
+    await fetch(`${base_url}provider/service`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": useauth.User.Auth_token || ""
+        }
+    })
+    .then(async response => {
+        setTimeout(() => {
+            loadingservices.value = false;
+        }, 1000);
+        if(response.status === 200) {
+            servicelist.value = await response.json();
+            console.log(servicelist.value);
+            
+        } else {
+            router.push({name: 'Login', query: { redirect: '/account/me/provider/services' }});
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        setTimeout(() => {
+            loadingservices.value = false;
+        }, 1000);
+    })
+}
+
+// on this page created fetch services
+fetchServices();
 
 const redirectNewServices = () => {
     router.push({ name: 'Provider-Services-New' });
@@ -23,9 +70,11 @@ const redirectNewServices = () => {
             </div>
         </nav>
         <div class="body-container w-full py-2 px-0 flex flex-col gap-y-8">
-            
-            <AccountProviderService />
-            <AccountProviderService />
+            <AccountProviderServiceSuspense v-if="loadingservices" />
+            <div class="services-list w-full py-2 px-0 flex flex-col gap-y-8" v-else>
+                <AccountProviderService />
+                <AccountProviderService />
+            </div>
             
             <div class="new-service w-full flex flex-col rounded-sm py-4 px-4 gap-y-8 justify-center items-center border border-gray-300">
                 <div class="new-nav w-full flex flex-row justify-between items-center">

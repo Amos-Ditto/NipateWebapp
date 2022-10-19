@@ -15,7 +15,7 @@ const services_children = [
 ]
 const children = [
     {
-        path: '/account/provider/services',
+        path: 'provider/services',
         name: 'Provider-Services',
         redirect: { name: 'Provider-Services-List' },
         component: () => import('../views/Accounts/ProviderServices.vue'),
