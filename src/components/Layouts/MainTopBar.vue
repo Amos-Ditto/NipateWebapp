@@ -60,10 +60,10 @@ const redirectToRegisterProvider = ():void => {
 <template>
     <header class="w-full h-full flex flex-col bg-gray-50 relative">
         <div class="top-nav">
-            <div class="top-left-nav">
+            <RouterLink to="/" class="top-left-nav">
                 <img src="../../assets/Logo/Vector.svg" alt="logo">
                 <img src="../../assets/Logo/Nipate.svg" alt="logo">
-            </div>
+            </RouterLink>
             <div class="top-right-nav">
                 <!-- <small>New to this site?</small> -->
                 <Transition name="slide" mode="out-in">

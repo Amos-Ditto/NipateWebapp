@@ -11,7 +11,16 @@ const home = [
         name: 'Dashboard',
         component: () => import('../views/Home/Dashboard.vue'),
         meta: {title: 'Dashboard'},
-    }
+    },
+]
+
+const search = [
+    {
+        path: '',
+        name: 'Search-Home',
+        component: () => import('../views/Search/SearchView.vue'),
+        meta: {title: 'Nipate-search'},
+    },
 ]
 
 const routes = [
@@ -21,6 +30,13 @@ const routes = [
         redirect: {name: 'Dashboard'},
         meta: {title:"Home"},
         children: home
+    },
+    {
+        path: "/search",
+        name: 'Search',
+        component: () => import('../views/Search.vue'),
+        meta: {title:"Nipate-Search"},
+        children: search
     },
     {
         path: '/auth',
