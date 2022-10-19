@@ -156,7 +156,7 @@ nav ul li .router-link-exact-active {
 }
 
 nav ul li.xs-links .router-link-exact-active {
-    @apply bg-gray-100 border-b-0;
+    @apply bg-gray-200 border-b-0;
 }
 nav ul li a.sm-links span {
     @apply text-base font-bold text-[#346974] sm:absolute sm:left-full lg:left-0 lg:relative sm:hidden lg:block;

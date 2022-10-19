@@ -8,13 +8,13 @@ import UserAccountDetails from '../../components/Heroes/UserAccountDetails.vue';
 
         <div class="top-section w-full flex flex-row justify-between gap-y-6">
 
-            <div class="user-container w-full px-3 pb-12 flex flex-col">
+            <div class="user-container w-full px-3 pb-10 flex flex-col">
                 <UserAccountDetails />
             </div>
         </div>
         <div class="body-section w-full flex flex-col gap-y-12 px-1 sm:px-4">
 
-            <div class="other-section flex flex-col gap-y-12 w-full">
+            <div class="other-section flex flex-col gap-y-10 w-full">
                 <div class="requests-dummy w-full flex flex-col gap-y-3">
                     <div class="request-title flex flex-row items-center">
                         <h3 class="font-bold text-lg">Requested Services</h3>

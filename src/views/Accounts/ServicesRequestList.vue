@@ -1,5 +1,5 @@
 <template>
-    <section class="w-full px-1 flex flex-col gap-y-8 sm:gap-y-16">
+    <section class="w-full px-1 flex flex-col gap-y-8 sm:gap-y-10">
         <div class="top-nav flex flex-row justify-between items-start w-full gap-y-6">
             <div class="title">
                 <h3 class="text-2xl font-bold">Service Requests</h3>
