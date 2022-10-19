@@ -1,9 +1,20 @@
 <script setup lang="ts">
 
+import { onBeforeMount, onMounted, ref } from 'vue';
 import useAuthentications from './store/authentications';
 
 const base_url = import.meta.env.VITE_BASE_URL;
 const useAuthentication = useAuthentications();
+const loadingpage = ref<boolean>(false);
+
+onBeforeMount(() => {
+  loadingpage.value = true;
+});
+onMounted(() => {
+  setTimeout(() => {
+    loadingpage.value = false;
+  }, 1000);
+})
 
 const checkUserDetails = async (auth_token: string): Promise<void> => {
   await fetch(`${base_url}provider/status`, {
@@ -34,13 +45,17 @@ if(localStorage.getItem("Nipate_user_data")) {
 </script>
 
 <template>
-  <main>
-    
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-          <component :is="Component" />
-      </transition>
-    </router-view>
+  <main class="relative">
+    <transition name="load-fade" mode="out-in">
+      <div class="loading-bg bg-gray-50 fixed top-0 bottom-0 left-0 right-0 z-30 flex items-center justify-center" v-if="loadingpage">
+        <span class="loader-processing text-black"><span class="text-orange-600">N</span>ipate</span>
+      </div>
+      <router-view v-slot="{ Component }" v-else>
+        <transition name="fade" mode="out-in">
+            <component :is="Component" />
+        </transition>
+      </router-view>
+    </transition>
 
     </main>
 </template>
@@ -71,6 +86,16 @@ body {
   opacity: 0;
 }
 
+.load-fade-enter-active,
+.load-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.load-fade-enter-from,
+.load-fade-leave-to {
+  opacity: 0;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
     transition: background-color 600000s 0s, color 600000s 0s;
@@ -94,4 +119,26 @@ input[data-autocompleted] {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.loader-processing {
+  font-size: 48px;
+  font-weight: 600;
+  display: inline-block;
+  letter-spacing: 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  animation: spotlight 1s linear infinite alternate;
+}
+
+@keyframes spotlight {
+  0% , 20% {
+    opacity: 1;
+    letter-spacing: 2px;
+   }
+ 80% , 100% {
+    opacity: 0;
+    letter-spacing: 32px;
+   }
+}
+      
 </style>

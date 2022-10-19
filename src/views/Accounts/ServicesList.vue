@@ -69,7 +69,7 @@ const redirectNewServices = () => {
                 </button>
             </div>
         </nav>
-        <div class="body-container w-full py-2 px-0 flex flex-col gap-y-8">
+        <div class="body-container w-full py-2 px-0 flex flex-col gap-y-8 text-[#346974]">
             <AccountProviderServiceSuspense v-if="loadingservices" />
             <div class="services-list w-full py-2 px-0 flex flex-col gap-y-8" v-else>
                 <AccountProviderService v-for="service in servicelist" :service="service" />
