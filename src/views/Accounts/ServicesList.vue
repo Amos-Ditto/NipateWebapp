@@ -13,11 +13,11 @@ const useauth = useAuthentications();
 const servicelist = ref<ServiceList[]>([]);
 const loadingservices = ref<boolean>(false);
 
-// onMounted(() => {
-//     if(useauth.getUser.Auth_token === null) {
-//         router.push({name: 'Login', query: { redirect: '/account/me/provider/services' }});
-//     }
-// });
+onMounted(() => {
+    if(useauth.getUser.Auth_token === null) {
+        router.push({name: 'Login', query: { redirect: '/account/me/provider/services' }});
+    }
+});
 
 const fetchServices = async (): Promise<void> => {
     loadingservices.value = true;
@@ -34,8 +34,6 @@ const fetchServices = async (): Promise<void> => {
         }, 1000);
         if(response.status === 200) {
             servicelist.value = await response.json();
-            console.log(servicelist.value);
-            
         } else {
             router.push({name: 'Login', query: { redirect: '/account/me/provider/services' }});
         }

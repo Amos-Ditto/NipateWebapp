@@ -87,7 +87,6 @@ const checkUserDetails = async (auth_token: string): Promise<void> => {
   .then(async response => {
     storeauth.updateAuthentication(true);
     storeauth.updateUserDetails(await response.json());
-    console.log(storeauth.UserDetails);
     
   })
   .catch(error => { console.log(error) })

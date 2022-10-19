@@ -39,7 +39,6 @@ if(localStorage.getItem("Nipate_user_data")) {
   let user_local = JSON.parse(localStorage.getItem("Nipate_user_data") || "");
   useAuthentication.updateUser(user_local);
   checkUserDetails(user_local["Auth_token"]);
-  
 }
 
 </script>
@@ -47,15 +46,15 @@ if(localStorage.getItem("Nipate_user_data")) {
 <template>
   <main class="relative">
     <transition name="load-fade" mode="out-in">
-      <div class="loading-bg bg-gray-50 fixed top-0 bottom-0 left-0 right-0 z-30 flex items-center justify-center" v-if="loadingpage">
+      <div class="loading-bg bg-gray-50 fixed top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center" v-if="loadingpage">
         <span class="loader-processing text-black"><span class="text-orange-600">N</span>ipate</span>
       </div>
-      <router-view v-slot="{ Component }" v-else>
-        <transition name="fade" mode="out-in">
-            <component :is="Component" />
-        </transition>
-      </router-view>
     </transition>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+          <component :is="Component" />
+      </transition>
+    </router-view>
 
     </main>
 </template>

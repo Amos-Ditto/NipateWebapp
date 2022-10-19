@@ -21,12 +21,6 @@ const { userdashboard } = storeToRefs(userlayout);
                             <span>Home</span>
                         </router-link>
                     </li>
-                    <!-- <li>
-                        <router-link :to="{ name: 'Provider-Services-List' }" class="sm-links">
-                            <div class="i-mdi-cog-outline text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
-                            <span>My Services</span>
-                        </router-link>
-                    </li> -->
                     <li>
                         <router-link :to="{ name: 'Service-Requests' }" class="sm-links">
                             <div class="i-mdi-text-box text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
@@ -72,7 +66,7 @@ const { userdashboard } = storeToRefs(userlayout);
                     <div class="absolute left-0 top-0 bottom-0 right-0 opacity-10 bg-gray-100" @click="userlayout.updateUserDashboard"></div>
                     <div class="absolute left-0 top-0 bottom-0 w-[50%] bg-gray-100 py-24">
                         <ul class="w-full flex flex-col gap-y-1 px-1" v-if="!UserDetails.Provider">
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'UserHome' }" class="xs-links">
                                     <div class="i-mdi-home-outline text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Home</span>
@@ -84,13 +78,13 @@ const { userdashboard } = storeToRefs(userlayout);
                                     <span>My Services</span>
                                 </router-link>
                             </li> -->
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'Service-Requests' }" class="xs-links">
                                     <div class="i-mdi-text-box text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Requests</span>
                                 </router-link>
                             </li>
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'User-Adverts' }" class="xs-links">
                                     <div class="i-mdi-plus text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Adverts</span>
@@ -98,25 +92,25 @@ const { userdashboard } = storeToRefs(userlayout);
                             </li>
                         </ul>
                         <ul class="w-full flex flex-col gap-y-1 px-1" v-else>
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'Provider-Home' }" class="xs-links">
                                     <div class="i-mdi-home-outline text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Home</span>
                                 </router-link>
                             </li>
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'Provider-Services-List' }" class="xs-links">
                                     <div class="i-mdi-cog-outline text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>My Services</span>
                                 </router-link>
                             </li>
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'Service-Requests' }" class="xs-links">
                                     <div class="i-mdi-text-box text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Requests</span>
                                 </router-link>
                             </li>
-                            <li class="xs-links">
+                            <li class="xs-links" @click="userlayout.updateUserDashboard()">
                                 <router-link :to="{ name: 'User-Adverts' }" class="xs-links">
                                     <div class="i-mdi-plus text-xl lg:text-2xl transition-font duration-300 text-[#346974]"></div>
                                     <span>Adverts</span>

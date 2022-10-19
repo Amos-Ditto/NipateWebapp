@@ -4,7 +4,6 @@ import { ServiceList } from '../../Types/ServiceTypes';
 const props = defineProps<{
     service: ServiceList,
 }>()
-console.log(props.service)
 
 const requestdelete = ref<boolean>(false);
 
@@ -29,13 +28,17 @@ const executeDelete = (): void => {
                     Delete
                 </button>
                 <Transition name="popup">
-                    <div class="modal-delete absolute  top-[120%] w-[150%] sm:w-[110%] min-h-[4rem] rounded bg-gray-50 shadow-md flex flex-col px-1.5 py-2 gap-y-1" v-if="requestdelete">
+                    <div class="modal-delete absolute right-0 top-[120%] w-[150%] sm:w-[160%] min-h-[4rem] rounded bg-gray-50 shadow-lg flex flex-col px-1.5 py-2 gap-y-1" v-if="requestdelete">
                         <div class="flex flex-col gap-y-0.5">
-                            <small class="text-xs text-slate-500">This action will delete "Rafiki Cafe" from all of your Services.</small>
+                            <small class="text-xs text-slate-500">This action will delete "{{props.service.ServiceTitle}}" from all of your Services.</small>
                             <small class="text-xs text-slate-500">Are you sure you want to delete this service?</small>
                         </div>
-                        <button class="border border-steelblue rounded text-steelblue w-full py-1 text-sm font-light hover:bg-steelblue hover:text-slate-100 tracking-wide transition-colors duration-300" @click="requestdelete = !requestdelete">Decline</button>
-                        <button class="border border-tomato rounded text-tomato w-full py-1 text-sm font-light hover:bg-tomato hover:text-slate-100 tracking-wide transition-colors duration-300" @click="requestdelete = !requestdelete">Accept</button>
+                        <button @click="requestdelete = !requestdelete"
+                            class="border border-steelblue rounded text-steelblue w-full py-1 text-sm font-light hover:bg-steelblue hover:text-slate-100 tracking-wide transition-colors duration-300"
+                        >Decline</button>
+                        <button @click="requestdelete = !requestdelete"
+                            class="border border-tomato rounded text-tomato w-full py-1 text-sm font-light capitalize hover:bg-tomato hover:text-slate-100 tracking-wide transition-colors duration-300"
+                        >yes</button>
                     </div>
                 </Transition>
             </div>
@@ -86,5 +89,9 @@ const executeDelete = (): void => {
 .popup-enter-active , .popup-leave-active {
     transition: opacity 300ms ease , transform 300ms ease;
 }
+
+/* .modal-delete {
+
+} */
 
 </style>
