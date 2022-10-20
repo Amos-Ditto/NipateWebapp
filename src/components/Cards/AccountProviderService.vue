@@ -18,7 +18,7 @@ const executeDelete = (): void => {
     >
 
         <div class="w-full px-3 sm:px-4 py-5 flex flex-row items-center justify-between border-b border-gray-300">
-            <h3 class="text-xl font-bold capitalize text-[#346974] tracking-wide">{{props.service.ServiceTitle}}</h3>
+            <h3 class="text-xl font-bold capitalize text-[#346974] tracking-wide text-ellipsis overflow-hidden truncate">{{props.service.ServiceTitle}}</h3>
             <div class="edit-icons flex flex-row items-center gap-x-4 relative justify-end sm:justify-center">
                 <button class="border border-gray-200 rounded px-4 py-1 text-sm hover:text-dodgerblue hover:border-dodgerblue transition-colors duration-300">Edit</button>
                 <button
@@ -48,7 +48,7 @@ const executeDelete = (): void => {
 
                 <div class="service w-full flex flex-col gap-y-4 gap-x-2 items-start px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base font-light">Service:</small>
-                    <button class="px-4 py-1 rounded-xl font-serif bg-gray-200 text-sm">{{props.service.Service.Name}}</button>
+                    <button class="px-4 py-1 rounded font-serif bg-gray-100 text-sm">{{props.service.Service.Name}}</button>
                 </div>
                 <div class="loc w-full flex flex-col gap-y-4 gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base font-light">Located at:</small>
@@ -57,11 +57,11 @@ const executeDelete = (): void => {
                 <div class="days-work w-full flex flex-col gap-y-4 items-start gap-x-2 flex-wrap px-3 sm:px-4 border-b border-gray-200 py-3 sm:py-4">
                     <small class="text-base font-light">Available Days:</small>
                     <div class="days flex flex-row gap-x-2 gap-y-1 items-center">
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Mon</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Tue</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Wed</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Thur</button>
-                        <button class="px-3 py-1 font-serif rounded-xl bg-gray-200 text-sm">Fri</button>
+                        <button class="px-3 py-1 font-serif rounded bg-gray-100 text-sm">Mon</button>
+                        <button class="px-3 py-1 font-serif rounded bg-gray-100 text-sm">Tue</button>
+                        <button class="px-3 py-1 font-serif rounded bg-gray-100 text-sm">Wed</button>
+                        <button class="px-3 py-1 font-serif rounded bg-gray-100 text-sm">Thur</button>
+                        <button class="px-3 py-1 font-serif rounded bg-gray-100 text-sm">Fri</button>
                     </div>
                     <!-- <p class="text-xs truncate">Mon , Tue , Wed , Thur , Fri</p> -->
                 </div>

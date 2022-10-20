@@ -11,7 +11,7 @@
         <div class="card-details flex flex-col gap-y-4">
             <div class="body-details flex flex-col sm:flex-row gap-x-4 gap-y-4 item-center">
                 <div class="service-details flex flex-row items-center">
-                    <button class="px-4 py-1 bg-gray-200 rounded text-sm tracking-wider text-slate-500">Coffee
+                    <button class="px-4 py-1 bg-gray-100 rounded text-sm tracking-wider text-slate-500">Coffee
                         shop</button>
                 </div>
                 <div class="loc-details flex flex-row items-center gap-x-1 text-slate-500">
