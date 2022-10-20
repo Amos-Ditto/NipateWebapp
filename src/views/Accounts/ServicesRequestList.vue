@@ -1,11 +1,11 @@
 <template>
-    <section class="w-full px-1 flex flex-col gap-y-8 sm:gap-y-10">
-        <div class="top-nav flex flex-row justify-between items-start w-full gap-y-6">
+    <section class="w-full px-1 flex flex-col gap-y-10">
+        <div class="top-nav flex flex-col sm:flex-row justify-between items-start w-full px-2.5 gap-y-8">
             <div class="title">
                 <h3 class="text-2xl font-bold">Service Requests</h3>
             </div>
-            <div class="new flex flex-row items-center gap-x-4">
-                <div class="sort flex flex-row items-center gap-x-1 sm:gap-x-2">
+            <!-- <div class="new flex flex-row items-center justify-between w-full gap-x-4">
+                <div class="sort flex flex-row items-center gap-x-2">
                     <small class="text-base">Sort:</small>
                     <select name="category" id="category" class="w-[5rem] sm:w-[6rem] xs:w-auto px-2 py-1 rounded text-slate-500 border-gray-300 hover:border-slate-600 border text-sm outline-none transition-colors duration-300 cursor-pointer">
                         <option value="all">All</option>
@@ -16,7 +16,7 @@
                 <button
                     class="border border-gray-300 hover:bg-slate-600 transition-colors duration-300 rounded py-1 px-2.5 sm:px-3.5 text-slate-600 hover:text-slate-100 text-sm"
                 >Refresh</button>
-            </div>
+            </div> -->
         </div>
         <div class="body-container w-full flex flex-col gap-y-4 px-1 sm:px-4 text-[#346974]">
             <div class="requests-card w-full flex flex-col gap-y-6 sm:gap-y-8 px-3 py-3 border border-gray-300 rounded">

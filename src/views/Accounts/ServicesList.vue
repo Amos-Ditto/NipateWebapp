@@ -55,7 +55,7 @@ const redirectNewServices = () => {
 
 </script>
 <template>
-    <section class="w-full flex flex-col gap-y-10 sm:gap-y-8 px-1 sm:px-4 lg:px-12">
+    <section class="w-full flex flex-col gap-y-4 sm:gap-y-8 pb-16 px-1 sm:px-4 lg:px-12">
         <nav class="w-full flex flex-row items-center justify-between">
             <div class="left flex items-center">
                 <h3 class="text-2xl font-bold uppercase tracking-wide">My Services</h3>
@@ -73,15 +73,15 @@ const redirectNewServices = () => {
                 <AccountProviderService v-for="service in servicelist" :service="service" />
             </div>
             
-            <div class="new-service w-full flex flex-col rounded-sm py-4 px-4 gap-y-8 justify-center items-center border border-gray-300">
+            <div class="new-service w-full flex flex-col rounded-sm py-2 sm:py-4 px-4 gap-y-4 sm:gap-y-8 justify-center items-center border border-gray-300">
                 <div class="new-nav w-full flex flex-row justify-between items-center">
                     <h3 class="text-xl font-bold tracking-wide">New Service</h3>
-                    <div class="new-icon-link p-2 rounded-full border border-gray-300 hover:bg-gray-300 cursor-pointer transition-colors duration-300">
+                    <div class="new-icon-link p-2 rounded-full border-none sm:border border-gray-300 hover:bg-gray-300 cursor-pointer transition-colors duration-300">
                         <div class="i-mdi-plus text-xl text-gray-500"></div>
                     </div>
                 </div>
                 <div class="new-icon px-1 py-1">
-                    <img src="../../assets/bgImg/undraw_subscribe_vspl.svg" alt="img" class="w-[9rem] h-[4rem]">
+                    <img src="../../assets/bgImg/undraw_subscribe_vspl.svg" alt="img" class="w-[8rem] sm:w-[9rem] h-[3rem] sm:h-[4rem]">
                 </div>
                 <div class="new-text flex flex-col items-center justify-center gap-y-4">
                     <h3 class="text-base font-light">Add a Service to offer.</h3>

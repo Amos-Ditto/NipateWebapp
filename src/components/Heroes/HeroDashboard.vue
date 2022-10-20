@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const searching = ref<boolean>(false);
+
+const searchItem = (): void => {
+    searching.value = true;
+    setTimeout(() => {
+        searching.value = false;
+        router.push({ name: 'Search-Home' });
+    }, 800);
+}
 
 </script>
 <template>
@@ -16,9 +27,12 @@ import { ref } from 'vue';
                 <div class="i-mdi-magnify absolute left-3 scale-125 text-base text-slate-400"></div>
             </div>
             <div class="search-btn">
-                <button
-                    class="capitalize rounded sm:rounded-lg py-2 sm:py-2.5 px-4 sm:px-8 bg-orange-400 hover:bg-orange-500 text-slate-100 text-base sm:text-lg font-light tracking-wider transition-colors duration-300"
-                >search</button>
+                <button @click="searchItem"
+                    class="capitalize flex flex-row items-center justify-center rounded sm:rounded-lg py-2 sm:py-2.5 px-4 sm:px-8 min-w-[5.4rem] sm:min-w-[8rem] bg-orange-400 hover:bg-orange-500 text-slate-100 text-base sm:text-lg font-light tracking-wider transition-colors duration-300"
+                >
+                <span class="loader" v-if="searching"></span>
+                <span v-else>search</span>
+                </button>
             </div>
         </div>
     </div>
@@ -29,5 +43,21 @@ import { ref } from 'vue';
 .search-input input {
     @apply w-full pl-8 md:pl-10 pr-4 py-2 sm:py-2.5 text-base sm:text-lg font-light tracking-wider border border-gray-300 rounded sm:rounded-lg outline-none;
     @apply transition-all duration-300;
+}
+.loader {
+    @apply border-b-gray-400 border-4 border-slate-100 w-6 sm:w-7 h-6 sm:h-7;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>

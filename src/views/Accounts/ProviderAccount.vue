@@ -18,7 +18,7 @@ const redirectNewServices = () => {
             <div class="user-container w-full px-0 sm:px-3 pb-12 flex flex-col">
                 <UserAccountDetails />
             </div>
-            <div class="other-links flex flex-row items-start">
+            <div class="other-links hidden sm:flex flex-row items-start">
                 <button class="bg-slate-700 hover:bg-slate-800 flex flex-row items-center gap-x-0.5 xs:gap-x-1.5 transition-colors capitalize text-slate-100 text-xs xs:text-sm font-light py-2 px-2.5 xs:px-4 rounded-3xl truncate" @click="redirectNewServices">
                     <div class="i-mdi-plus text-base"></div>
                     add new Service

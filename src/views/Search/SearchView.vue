@@ -39,7 +39,7 @@ import SearchServicesCard from '../../components/Cards/SearchServicesCard.vue';
                     <button class="px-2 border border-gray-200 mr-1 rounded-md sm:hidden flex items-center justify-center hover:bg-gray-200 focus:bg-gray-200">
                         <div class="i-mdi-filter-outline text-slate-400 scale-125"></div>
                     </button>
-                    <input type="text" placeholder="Search for services">
+                    <input type="text" placeholder="Search for services or location">
                     <button
                         class="py-1.5 sm:py-2.5 px-3 sm:px-5 tracking-wider text-sm sm:text-base bg-orange-400 hover:bg-orange-500 focus:bg-orange-500 text-slate-100 rounded-r-md sm:rounded-r font-bold capitalize"
                     >
