@@ -21,10 +21,9 @@
             </div>
         </div>
         <div class="card-footer flex flex-row items-center justify-between sm:justify-start gap-x-6 pt-2.5">
-            <button
-                class="capitalize px-4 py-1 border border-dodgerblue text-dodgerblue text-sm rounded-sm tracking-wider"
-            >view</button>
-            <button class="px-4 py-1 border border-dodgerblue text-dodgerblue text-sm tracking-wide capitalize rounded-sm">send request</button>
+            <button 
+                class="px-4 py-1 border border-dodgerblue text-dodgerblue hover:bg-steelblue focus:bg-steelblue hover:text-slate-100 focus:text-slate-100 text-sm tracking-wide capitalize rounded-sm transition-colors"
+            >send request</button>
         </div>
     </div>
 </template>

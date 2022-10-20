@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import SearchServicesCard from '../../components/Cards/SearchServicesCard.vue';
+import SearchCategories from '../../components/DropDowns/SearchCategories.vue';
+import SearchRegions from '../../components/DropDowns/SearchRegions.vue';
+
+
+const opencategories = ref<boolean>(true);
+const openregions = ref<boolean>(true);
 
 </script>
 
@@ -10,26 +17,26 @@ import SearchServicesCard from '../../components/Cards/SearchServicesCard.vue';
             <div class="filter-title px-2 py-1">
                 <h3 class="font-bold text-xl">Find by</h3>
             </div>
-            <ul class="nav-list flex flex-col gap-y-4 text-[#346974]">
+            <ul class="nav-list flex flex-col gap-y-3 text-[#346974]">
                 <li>
-                    <button>
+                    <button @click="opencategories = !opencategories">
                         Categories
-                        <div class="i-mdi-chevron-down"></div>
+                        <div class="i-mdi-chevron-down" :class="opencategories && 'rotate-180'"></div>
                     </button>
-                    <ul class="w-full flex flex-col gap-y-1 border-b border-gray-200">
-                        <li>Food & Catering</li>
-                        <li>Building & Construction</li>
-                    </ul>
+                    <SearchCategories :togglecategories="opencategories" />
+                </li>
+                <li>
+                    <button @click="openregions = !openregions">
+                        Region
+                        <div class="i-mdi-chevron-down" :class="openregions && 'rotate-180'"></div>
+                    </button>
+                    <SearchRegions :toggleregions="openregions" />
                 </li>
                 <li>
                     <button>
-                        Region
+                        Days of the Week
                         <div class="i-mdi-chevron-down"></div>
                     </button>
-                    <ul class="w-full flex flex-col gap-y-1 border-b border-gray-200">
-                        <li>Nakuru</li>
-                        <li>Nairobi</li>
-                    </ul>
                 </li>
             </ul>
         </nav>
@@ -96,7 +103,7 @@ ul.nav-list li button {
     @apply border-b border-gray-200 py-3  px-2 text-base font-bold tracking-wide flex flex-row justify-between items-center w-full;
 }
 ul.nav-list li .i-mdi-chevron-down {
-    @apply text-xl;
+    @apply text-xl transition-transform duration-300;
 }
 
 ul.nav-list li ul li {
