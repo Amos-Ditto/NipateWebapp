@@ -85,7 +85,7 @@ const openmobilenav = ref<boolean>(false);
             <div class="hero-search flex flex-col gap-y-5 px-2.5 sm:px-5 py-0 rounded">
                 <div class="search-bar flex flex-row w-full">
                     <button @click="openmobilenav = !openmobilenav"
-                        class="px-3 border border-gray-200 mr-1 rounded-l-md sm:hidden flex items-center justify-center hover:bg-gray-200 focus:bg-gray-200"
+                        class="px-3 border border-gray-200 mr-1 rounded-l-md md:hidden flex items-center justify-center hover:bg-gray-200 focus:bg-gray-200"
                     >
                         <div class="i-mdi-filter-outline text-slate-400 scale-125"></div>
                     </button>
@@ -94,7 +94,7 @@ const openmobilenav = ref<boolean>(false);
                         class="py-1.5 sm:py-2.5 px-5 sm:px-5 tracking-wider text-sm sm:text-base bg-orange-400 hover:bg-orange-500 focus:bg-orange-500 text-slate-100 rounded-r-md sm:rounded-r font-bold capitalize"
                     >
                         <!-- search -->
-                        <div class="i-mdi-magnify text-lg scale-125"></div>
+                        <div class="i-mdi-magnify text-lg sm:text-xl scale-125"></div>
                     </button>
                 </div>
                 <div class="search-filter w-full xl:w-[84%] flex flex-col gap-y-1">
@@ -113,15 +113,15 @@ const openmobilenav = ref<boolean>(false);
                     </div>
                 </div>
             </div>
-            <div class="body-data w-full xl:w-[88%] px-1 sm:px-5 flex flex-col gap-y-3">
+            <div class="body-data w-full xl:w-[94%] px-1 sm:px-5 flex flex-col gap-y-3">
                 <!-- <div class="body-title">
                     <h3 class="text-lg font-bold tracking-wider">Found:</h3>
                 </div> -->
                 <div class="services-card-body flex flex-col border border-gray-300 rounded-sm">
                     
                     <SearchServicesCard />
-                    <!-- <SearchServicesCard />
-                    <SearchServicesCard /> -->
+                    <SearchServicesCard />
+                    <SearchServicesCard />
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@ section {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
 .search-bar input {
-    @apply py-2.5 sm:py-2.5 px-4 w-full xl:w-[80%] border-gray-200 border border-r-0 rounded-l tracking-wider text-sm sm:text-lg font-light bg-gray-50 outline-none focus:border-gray-300;
+    @apply py-2.5 sm:py-2.5 px-4 w-full xl:w-[80%] border-gray-200 border border-r-0 md:rounded-l tracking-wider text-sm sm:text-lg font-light bg-gray-50 outline-none focus:border-gray-300;
 }
 
 ul.nav-list li {

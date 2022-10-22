@@ -34,7 +34,7 @@
                         <small class="text-xs text-slate-400 italic">30mins ago.</small>
                     </div>
                     <div class="description w-full px-1 sm:px-3">
-                        <p class="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt autem voluptatum eaque exercitationem accusamus delectus.</p>
+                        <p class="text-base line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt autem voluptatum eaque exercitationem accusamus delectus.</p>
                     </div>
                 </div>
                 <div class="card-footer w-full px-1 sm:px-3">
@@ -58,7 +58,7 @@
                         <small class="text-xs text-slate-400 italic">30mins ago.</small>
                     </div>
                     <div class="description w-full px-1 sm:px-3">
-                        <p class="text-base">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt autem voluptatum eaque exercitationem accusamus delectus.</p>
+                        <p class="text-base line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt autem voluptatum eaque exercitationem accusamus delectus.</p>
                     </div>
                 </div>
                 <div class="card-footer w-full px-1 sm:px-3">

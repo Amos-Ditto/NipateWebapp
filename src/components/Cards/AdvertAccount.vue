@@ -55,7 +55,7 @@ const executeDelete = (): void => {
                 </div>
             </div>
             <div class="description">
-                <p class="text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quaerat natus, at dicta
+                <p class="text-sm line-clamp-3">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum quaerat natus, at dicta
                     aperiam nemo libero esse quibusdam, ratione, sunt dolore perspiciatis sed assumenda deserunt
                     quisquam </p>
             </div>

@@ -4,7 +4,7 @@
             <h3 class="text-lg font-bold tracking-wider">Rafiki cafe</h3>
         </div>
         <div class="card-description w-full">
-            <p class="text-sm tracking-wide">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, quasi? Minima
+            <p class="text-sm tracking-wide block line-clamp-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, quasi? Minima
                 culpa, quisquam dolore est quibusdam eius inventore ratione quia alias eveniet nesciunt expedita nisi
                 fugiat labore. Eum, rerum obcaecati.</p>
         </div>
