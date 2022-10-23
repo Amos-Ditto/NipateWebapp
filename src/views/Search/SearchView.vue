@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import SearchServicesCard from '../../components/Cards/SearchServicesCard.vue';
 import SearchCategories from '../../components/DropDowns/SearchCategories.vue';
 import SearchRegions from '../../components/DropDowns/SearchRegions.vue';
 import DaysOfWeek from '../../components/Heroes/DaysOfWeek.vue';
-import { Category, County } from '../../Types/ServiceTypes';
+import { Category, County, ServiceList } from '../../Types/ServiceTypes';
 import SearchingSuspense from '../../components/Cards/LoadingSuspense/SearchingSuspense.vue';
+import SearchEmpty from '../../components/Cards/Empty/SearchEmpty.vue';
 
 const base_url = import.meta.env.VITE_BASE_URL;
 
@@ -13,17 +14,25 @@ const opencategories = ref<boolean>(true);
 const openregions = ref<boolean>(true);
 const openmobilenav = ref<boolean>(false);
 
+// Awaiting animations
+const searching = ref<boolean>(false);
+
 // Search data
 const servicecategories = ref<Category[]>([]);
 const counties = ref<County[]>([]);
 
+const servicelist = ref<ServiceList[]>([]);
+const emptylist = ref<boolean>(false);
+
 
 interface SearchData {
+    searchdata: string
     category: Category
     county: County
 }
 
 const usesearchdata = ref<SearchData>({
+    searchdata: "",
     category: {
         id: 0, Name: "All Categories"
     },
@@ -65,12 +74,91 @@ fetchCounties();
 
 // Selection data Func
 const selectCategory = (payload: Category): void => {
-    usesearchdata.value.category = payload;
+    if(usesearchdata.value.category.Name !== payload.Name) {
+        usesearchdata.value.category = payload;
+        fetchSearchServices();
+    }
 }
 
 const selectRegion = (payload: County): void => {
-    usesearchdata.value.county = payload;
+    if(usesearchdata.value.county.Name !== payload.Name) {
+        usesearchdata.value.county = payload;
+        fetchSearchServices();
+    }
 }
+
+const deleteSearchCategory = (): void => {
+    if(usesearchdata.value.category.id !== 0) {
+        usesearchdata.value.category = {
+            id: 0, Name: "All Categories"
+        }
+        fetchSearchServices();
+    }
+}
+
+const deleteSearchRegion = (): void => {
+    if(usesearchdata.value.county.id !== 0) {
+        usesearchdata.value.county = {
+            id: 0, Name: "All Regions"
+        }
+        fetchSearchServices();
+    }
+}
+
+interface SearchService {
+  searchdata?: string;
+  ServiceCategory?: string;
+  Region?: string;
+}
+
+
+const fetchSearchServices = async (): Promise<void> => {
+    
+    let searchdata: SearchService = {};
+    
+    searchdata.searchdata = usesearchdata.value.searchdata;
+    if(usesearchdata.value.category.id !== 0) {
+        searchdata.ServiceCategory = usesearchdata.value.category.Name;
+    } else {
+        searchdata.ServiceCategory = ""
+    }
+    if(usesearchdata.value.county.id !== 0) {
+        searchdata.Region = usesearchdata.value.county.Name;
+    } else {
+        searchdata.Region = "";
+    }
+    searching.value = true;
+    servicelist.value = [];
+    await fetch(`${base_url}provider/find`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(searchdata)
+    })
+    .then(async response => {
+        servicelist.value = await response.json();
+        setTimeout(() => {
+            searching.value = false;
+        }, 500);
+        
+    })
+    .catch(error => {
+        searching.value = false;
+        console.log(error)
+    })
+}
+
+fetchSearchServices();
+
+// Watchers
+watch(servicelist, (newServiceList) => {
+    if(servicelist.value.length === 0) {
+        emptylist.value = true
+    } else {
+        emptylist.value = false;
+    }
+})
 
 </script>
 
@@ -115,7 +203,7 @@ const selectRegion = (payload: County): void => {
 
         <!-- Mobile Responsive -->
         <Transition name="pop-up">
-            <nav class="fixed top-0 left-0 right-0 bottom-0 overflow-y-auto z-30 sm:hidden flex bg-gray-100 pt-2 pb-8 sm:pb-2 flex-col gap-y-3" v-if="openmobilenav">
+            <nav class="fixed top-0 left-0 right-0 bottom-0 overflow-y-auto z-40 md:hidden flex bg-gray-100 pt-2 pb-8 sm:pb-2 flex-col gap-y-3" v-if="openmobilenav">
                 <div class="filter-title px-4 sm:px-2 py-1 flex flex-row justify-between items-center">
                     <h3 class="font-bold text-xl">Find by</h3>
                     <button class="close p-2 hover:bg-gray-300 focus:bg-gray-300 rounded-md" @click="openmobilenav = !openmobilenav">
@@ -163,8 +251,8 @@ const selectRegion = (payload: County): void => {
                     >
                         <div class="i-mdi-filter-outline text-slate-400 scale-125"></div>
                     </button>
-                    <input type="text" placeholder="Search for services or location">
-                    <button
+                    <input type="text" placeholder="Search for services or location" v-model="usesearchdata.searchdata">
+                    <button @click="fetchSearchServices"
                         class="py-1.5 sm:py-2.5 px-5 sm:px-5 tracking-wider text-sm sm:text-base bg-orange-400 hover:bg-orange-500 focus:bg-orange-500 text-slate-100 rounded-r-md sm:rounded-r font-bold capitalize"
                     >
                         <!-- search -->
@@ -176,11 +264,15 @@ const selectRegion = (payload: County): void => {
                         <h3 class="font-light sm:font-bold capitalize">searched for</h3>
                     </div>
                     <div class="filter-container w-full py-1.5 px-0 gap-x-4 flex flex-row">
-                        <button class="py-1 sm:py-1.5 px-3 sm:px-5 tracking-wider flex flex-row items-center gap-x-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 rounded capitalize">
+                        <button @click="deleteSearchCategory"
+                            class="py-1 sm:py-1.5 px-3 sm:px-5 tracking-wider flex flex-row items-center gap-x-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 rounded capitalize"
+                        >
                             {{ usesearchdata?.category.Name }}
                             <div class="i-mdi-close hidden"></div>
                         </button>
-                        <button class="py-1 sm:py-1.5 px-3 sm:px-5 tracking-wider flex flex-row items-center gap-x-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 rounded capitalize">
+                        <button @click="deleteSearchRegion"
+                            class="py-1 sm:py-1.5 px-3 sm:px-5 tracking-wider flex flex-row items-center gap-x-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 rounded capitalize"
+                        >
                             {{ usesearchdata?.county.Name }}
                             <div class="i-mdi-close hidden"></div>
                         </button>
@@ -188,17 +280,28 @@ const selectRegion = (payload: County): void => {
                 </div>
             </div>
             <div class="body-data w-full xl:w-[94%] px-1 sm:px-5 flex flex-col gap-y-3">
-                <!-- <div class="body-title">
-                    <h3 class="text-lg font-bold tracking-wider">Found:</h3>
-                </div> -->
                 <div class="services-card-body flex flex-col border border-gray-300 rounded-sm">
-                    <div class="w-full flex flex-col">
-                        <SearchingSuspense />
-                        <SearchingSuspense />
-                    </div>
-                    <SearchServicesCard />
-                    <SearchServicesCard />
-                    <SearchServicesCard />
+                    
+                    <Transition name="fade-search" mode="out-in">
+                        <div class="w-full flex flex-col" v-if="searching">
+                            <SearchingSuspense />
+                            <SearchingSuspense />
+                        </div>
+
+                        <div class="w-full flex flex-col" v-else>
+
+                            <!-- <Transition mode="out-in"> -->
+                                
+                                <SearchEmpty v-if="emptylist" />
+                                <div class="list" v-else>
+                                    <SearchServicesCard
+                                        v-for="service in servicelist" :service="service"
+                                    />
+                                </div>
+                            <!-- </Transition> -->
+                        </div>
+                    </Transition>
+
                 </div>
             </div>
         </div>
@@ -239,6 +342,14 @@ ul.nav-list li .i-mdi-chevron-down {
 
 .filter-container button:hover .i-mdi-close {
     @apply flex
+}
+
+
+.fade-search-enter-from {
+    @apply opacity-0;
+}
+.fade-search-enter-active , .fade-search-leave-active{
+    transition: opacity 200ms ease;
 }
 
 ::-webkit-scrollbar {

@@ -12,7 +12,6 @@ const emits = defineEmits<{
 }>();
 
 const selectCategory = (payload: Category): void => {
-    console.log("Select: ", payload);
     emits('selectCategory', payload);
 }
 
