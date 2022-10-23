@@ -6,13 +6,18 @@ defineProps<{
     toggleregions: boolean;
     counties: County[];
 }>();
-
+const emits = defineEmits<{
+    (e: 'selectRegion', payload: County):void
+}>()
 </script>
 
 <template>
     <Transition name="drop-down">
         <ul class="flex flex-col gap-y-1 overflow-y-auto max-h-[12rem]" v-if="toggleregions">
-            <li v-for="county in counties" :key="county.id">{{ county.Name }}</li>
+            <li
+                v-for="county in counties" :key="county.id"
+                @click="emits('selectRegion', county)"
+            >{{ county.Name }}</li>
         </ul>
     </Transition>
 </template>

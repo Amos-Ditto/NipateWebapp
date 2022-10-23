@@ -5,6 +5,7 @@ import SearchCategories from '../../components/DropDowns/SearchCategories.vue';
 import SearchRegions from '../../components/DropDowns/SearchRegions.vue';
 import DaysOfWeek from '../../components/Heroes/DaysOfWeek.vue';
 import { Category, County } from '../../Types/ServiceTypes';
+import SearchingSuspense from '../../components/Cards/LoadingSuspense/SearchingSuspense.vue';
 
 const base_url = import.meta.env.VITE_BASE_URL;
 
@@ -24,10 +25,10 @@ interface SearchData {
 
 const usesearchdata = ref<SearchData>({
     category: {
-        id: 0, Name: "Category"
+        id: 0, Name: "All Categories"
     },
     county: {
-        id: 0, Name: "County"
+        id: 0, Name: "All Regions"
     }
 });
 
@@ -64,9 +65,11 @@ fetchCounties();
 
 // Selection data Func
 const selectCategory = (payload: Category): void => {
-    // console.log("Select: ", payload);
-    
     usesearchdata.value.category = payload;
+}
+
+const selectRegion = (payload: County): void => {
+    usesearchdata.value.county = payload;
 }
 
 </script>
@@ -95,12 +98,15 @@ const selectCategory = (payload: Category): void => {
                         <div class="i-mdi-chevron-down" :class="openregions && 'rotate-180'"></div>
                     </button>
                     
-                    <SearchRegions :toggleregions="openregions" :counties="counties" />
+                    <SearchRegions
+                        :toggleregions="openregions" :counties="counties"
+                        @select-region="selectRegion" 
+                    />
                 </li>
                 <li>
                     <button>
                         <span class="text-ellipsis overflow-hidden truncate">Days of the Week</span>
-                        <div class="i-mdi-chevron-down"></div>
+                        <!-- <div class="i-mdi-chevron-down"></div> -->
                     </button>
                     <DaysOfWeek />
                 </li>
@@ -133,7 +139,10 @@ const selectCategory = (payload: Category): void => {
                             <div class="i-mdi-chevron-down" :class="openregions && 'rotate-180'"></div>
                         </button>
                         
-                        <SearchRegions :toggleregions="openregions" :counties="counties" />
+                        <SearchRegions
+                            :toggleregions="openregions" :counties="counties"
+                            @select-region="selectRegion"
+                        />
                     </li>
                     <li>
                         <button>
@@ -183,7 +192,10 @@ const selectCategory = (payload: Category): void => {
                     <h3 class="text-lg font-bold tracking-wider">Found:</h3>
                 </div> -->
                 <div class="services-card-body flex flex-col border border-gray-300 rounded-sm">
-                    
+                    <div class="w-full flex flex-col">
+                        <SearchingSuspense />
+                        <SearchingSuspense />
+                    </div>
                     <SearchServicesCard />
                     <SearchServicesCard />
                     <SearchServicesCard />
@@ -218,7 +230,7 @@ ul.nav-list li {
 
 ul.nav-list li button {
     /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
-    @apply border-t border-gray-300 py-3 px-5 sm:px-2 text-base font-bold tracking-wide flex flex-row justify-between items-center w-full;
+    @apply border-y border-gray-300 py-3 px-5 sm:px-2 text-base font-bold tracking-wide flex flex-row justify-between items-center w-full;
 }
 ul.nav-list li .i-mdi-chevron-down {
     @apply text-xl transition-transform duration-300;
