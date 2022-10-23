@@ -4,11 +4,70 @@ import SearchServicesCard from '../../components/Cards/SearchServicesCard.vue';
 import SearchCategories from '../../components/DropDowns/SearchCategories.vue';
 import SearchRegions from '../../components/DropDowns/SearchRegions.vue';
 import DaysOfWeek from '../../components/Heroes/DaysOfWeek.vue';
+import { Category, County } from '../../Types/ServiceTypes';
 
+const base_url = import.meta.env.VITE_BASE_URL;
 
 const opencategories = ref<boolean>(true);
 const openregions = ref<boolean>(true);
 const openmobilenav = ref<boolean>(false);
+
+// Search data
+const servicecategories = ref<Category[]>([]);
+const counties = ref<County[]>([]);
+
+
+interface SearchData {
+    category: Category
+    county: County
+}
+
+const usesearchdata = ref<SearchData>({
+    category: {
+        id: 0, Name: "Category"
+    },
+    county: {
+        id: 0, Name: "County"
+    }
+});
+
+const fetchCategories = async (): Promise<void> => {
+    await fetch(`${base_url}service/category`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        servicecategories.value = await response.json();
+    })
+    .catch(error => console.log(error))
+}
+
+const fetchCounties = async(): Promise<void> => {
+    await fetch(`${base_url}location/counties`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(async response => {
+        counties.value = await response.json();
+    })
+    .catch(error => console.log(error))
+}
+
+
+// Onload fetch data
+fetchCategories();
+fetchCounties();
+
+// Selection data Func
+const selectCategory = (payload: Category): void => {
+    // console.log("Select: ", payload);
+    
+    usesearchdata.value.category = payload;
+}
 
 </script>
 
@@ -25,7 +84,10 @@ const openmobilenav = ref<boolean>(false);
                         <span class="text-ellipsis overflow-hidden truncate">Categories</span>
                         <div class="i-mdi-chevron-down" :class="opencategories && 'rotate-180'"></div>
                     </button>
-                    <SearchCategories :togglecategories="opencategories" />
+                    <SearchCategories
+                        :togglecategories="opencategories" :servicecategories="servicecategories"
+                        @select-category="selectCategory"
+                    />
                 </li>
                 <li>
                     <button @click="openregions = !openregions">
@@ -33,7 +95,7 @@ const openmobilenav = ref<boolean>(false);
                         <div class="i-mdi-chevron-down" :class="openregions && 'rotate-180'"></div>
                     </button>
                     
-                    <SearchRegions :toggleregions="openregions" />
+                    <SearchRegions :toggleregions="openregions" :counties="counties" />
                 </li>
                 <li>
                     <button>
@@ -60,7 +122,10 @@ const openmobilenav = ref<boolean>(false);
                             Categories
                             <div class="i-mdi-chevron-down" :class="opencategories && 'rotate-180'"></div>
                         </button>
-                        <SearchCategories :togglecategories="opencategories" />
+                        <SearchCategories
+                            :togglecategories="opencategories"  :servicecategories="servicecategories"
+                            @select-category="selectCategory"
+                        />
                     </li>
                     <li>
                         <button @click="openregions = !openregions">
@@ -68,7 +133,7 @@ const openmobilenav = ref<boolean>(false);
                             <div class="i-mdi-chevron-down" :class="openregions && 'rotate-180'"></div>
                         </button>
                         
-                        <SearchRegions :toggleregions="openregions" />
+                        <SearchRegions :toggleregions="openregions" :counties="counties" />
                     </li>
                     <li>
                         <button>
@@ -103,11 +168,11 @@ const openmobilenav = ref<boolean>(false);
                     </div>
                     <div class="filter-container w-full py-1.5 px-0 gap-x-4 flex flex-row">
                         <button class="py-1 sm:py-1.5 px-3 sm:px-5 tracking-wider flex flex-row items-center gap-x-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 rounded capitalize">
-                            none
+                            {{ usesearchdata?.category.Name }}
                             <div class="i-mdi-close hidden"></div>
                         </button>
                         <button class="py-1 sm:py-1.5 px-3 sm:px-5 tracking-wider flex flex-row items-center gap-x-1 text-xs sm:text-sm bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 rounded capitalize">
-                            Food & Catering
+                            {{ usesearchdata?.county.Name }}
                             <div class="i-mdi-close hidden"></div>
                         </button>
                     </div>
@@ -152,7 +217,8 @@ ul.nav-list li {
 }
 
 ul.nav-list li button {
-    @apply border-b border-gray-200 py-3 px-5 sm:px-2 text-base font-bold tracking-wide flex flex-row justify-between items-center w-full;
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px; */
+    @apply border-t border-gray-300 py-3 px-5 sm:px-2 text-base font-bold tracking-wide flex flex-row justify-between items-center w-full;
 }
 ul.nav-list li .i-mdi-chevron-down {
     @apply text-xl transition-transform duration-300;

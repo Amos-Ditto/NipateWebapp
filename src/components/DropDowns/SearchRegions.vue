@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { County } from '../../Types/ServiceTypes';
+
 
 defineProps<{
     toggleregions: boolean;
+    counties: County[];
 }>();
 
 </script>
@@ -9,22 +12,7 @@ defineProps<{
 <template>
     <Transition name="drop-down">
         <ul class="flex flex-col gap-y-1 overflow-y-auto max-h-[12rem]" v-if="toggleregions">
-            <li>Nakuru</li>
-            <li>Nairobi</li>
-            <li>Baringo</li>
-            <li>Kiambu</li>
-            <li>Nakuru</li>
-            <li>Nairobi</li>
-            <li>Baringo</li>
-            <li>Kiambu</li>
-            <li>Nakuru</li>
-            <li>Nairobi</li>
-            <li>Baringo</li>
-            <li>Kiambu</li>
-            <li>Nakuru</li>
-            <li>Nairobi</li>
-            <li>Baringo</li>
-            <li>Kiambu</li>
+            <li v-for="county in counties" :key="county.id">{{ county.Name }}</li>
         </ul>
     </Transition>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <ul class="grid grid-cols-1 xl:grid-cols-2 gap-y-2 gap-x-1 px-3 py-1">
+    <ul class="grid grid-cols-2 sm:grid-cols-1 xl:grid-cols-2 gap-y-2 gap-x-1 px-3 py-1">
         <li>
             <input type="checkbox" name="mon" id="mon">
             <label for="mon">monday</label>

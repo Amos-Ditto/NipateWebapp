@@ -1,16 +1,31 @@
 <script setup lang="ts">
+import { Category } from '../../Types/ServiceTypes';
+
 
 defineProps<{
     togglecategories: boolean;
+    servicecategories: Category[];
 }>();
+
+const emits = defineEmits<{
+    (e: 'selectCategory', payload: Category): void
+}>();
+
+const selectCategory = (payload: Category): void => {
+    console.log("Select: ", payload);
+    emits('selectCategory', payload);
+}
+
 </script>
 
 <template>
     <Transition name="drop-down">
         <ul class="w-full flex flex-col gap-y-1 max-h-[12rem] overflow-y-auto" v-if="togglecategories">
-            <span class="text-ellipsis overflow-hidden truncate">Food & Catering</span>
-            <span class="text-ellipsis overflow-hidden truncate">Tranport & Movers</span>
-            <span class="text-ellipsis overflow-hidden truncate">Cleaning & Laundry</span>
+            <li 
+                class="text-ellipsis overflow-hidden truncate"
+                v-for="service in servicecategories" :key="service.id"
+                @click="selectCategory(service)"
+            >{{ service.Name }}</li>
         </ul>
     </Transition>
 </template>

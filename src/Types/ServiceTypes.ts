@@ -41,3 +41,10 @@ export interface Location {
     Landmark: string;
     CenterBlock: string;
 }
+
+
+export interface Category {
+    id: number;
+    Name: string;
+  }
+  
