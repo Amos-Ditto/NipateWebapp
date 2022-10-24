@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useSearch } from '../../store/searchData';
 import { County } from '../../Types/ServiceTypes';
 
 
@@ -9,6 +11,14 @@ defineProps<{
 const emits = defineEmits<{
     (e: 'selectRegion', payload: County):void
 }>()
+
+const usesearch = useSearch();
+const selectedid = ref<number>(0);
+
+if(usesearch.searchdata.county.id !== 0) {
+    selectedid.value = usesearch.searchdata.county.id;
+}
+
 </script>
 
 <template>
@@ -16,7 +26,8 @@ const emits = defineEmits<{
         <ul class="flex flex-col gap-y-1 overflow-y-auto max-h-[12rem]" v-if="toggleregions">
             <li
                 v-for="county in counties" :key="county.id"
-                @click="emits('selectRegion', county)"
+                @click="emits('selectRegion', county); selectedid = county.id;"
+                :class="selectedid === county.id && 'bg-gray-200'"
             >{{ county.Name }}</li>
         </ul>
     </Transition>

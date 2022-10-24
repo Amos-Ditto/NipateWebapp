@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useSearch } from '../../store/searchData';
 
 const router = useRouter();
+const usesearch = useSearch();
 const searching = ref<boolean>(false);
 
 const searchItem = (): void => {
@@ -23,7 +25,7 @@ const searchItem = (): void => {
         </div>
         <div class="serch-container grid grid-cols-4 gap-x-2 sm:gap-x-5 w-[84%] sm:w-[65%] lg:w-[50%]">
             <div class="search-input col-span-3 relative flex items-center justify-center">
-                <input type="text" placeholder="Search for service...">
+                <input type="text" placeholder="Search for service..." v-model="usesearch.searchdata.searchdata">
                 <div class="i-mdi-magnify absolute left-3 scale-125 text-base text-slate-400"></div>
             </div>
             <div class="search-btn">

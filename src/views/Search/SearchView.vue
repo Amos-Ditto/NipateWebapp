@@ -7,8 +7,10 @@ import DaysOfWeek from '../../components/Heroes/DaysOfWeek.vue';
 import { Category, County, ServiceList } from '../../Types/ServiceTypes';
 import SearchingSuspense from '../../components/Cards/LoadingSuspense/SearchingSuspense.vue';
 import SearchEmpty from '../../components/Cards/Empty/SearchEmpty.vue';
+import { useSearch } from '../../store/searchData';
 
 const base_url = import.meta.env.VITE_BASE_URL;
+const usesearchstore = useSearch();
 
 const opencategories = ref<boolean>(true);
 const openregions = ref<boolean>(true);
@@ -40,6 +42,10 @@ const usesearchdata = ref<SearchData>({
         id: 0, Name: "All Regions"
     }
 });
+
+const updateSearchData = (): void => {
+    usesearchstore.updateSearchData(usesearchdata.value);
+}
 
 const fetchCategories = async (): Promise<void> => {
     await fetch(`${base_url}service/category`, {
@@ -148,8 +154,12 @@ const fetchSearchServices = async (): Promise<void> => {
         console.log(error)
     })
 }
-
-fetchSearchServices();
+if(usesearchdata.value === usesearchstore.searchdata) {
+    fetchSearchServices();
+} else {
+    usesearchdata.value = usesearchstore.searchdata;
+    fetchSearchServices();
+}
 
 // Watchers
 watch(servicelist, (newServiceList) => {
@@ -296,6 +306,7 @@ watch(servicelist, (newServiceList) => {
                                 <div class="list" v-else>
                                     <SearchServicesCard
                                         v-for="service in servicelist" :service="service"
+                                        @update-search-data="updateSearchData"
                                     />
                                 </div>
                             <!-- </Transition> -->

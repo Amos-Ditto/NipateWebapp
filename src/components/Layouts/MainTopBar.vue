@@ -86,7 +86,8 @@ const redirectToRegisterProvider = ():void => {
             </div>
         </div>
         <div class="bottom-nav relative">
-            <div class="bottom-left-nav px-2.5 flex items-center flex-row">
+            <div class="bottom-left-nav px-2.5 flex items-center flex-row gap-x-2 justify-start">
+                
                 <MainDropDown />
             </div>
             <div class="bottom-right-nav flex flex-row gap-x-6 items-center justify-between">
@@ -160,10 +161,6 @@ const redirectToRegisterProvider = ():void => {
 }
 .bottom-nav button {
     transition: background-color 300ms ease;
-}
-.bottom-left-nav li {
-    @apply text-[#014451] px-1 text-base font-bold hover:text-steelblue cursor-pointer;
-    @apply flex items-center flex-row truncate gap-1 transition-colors duration-200;
 }
 
 

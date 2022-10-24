@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useSearch } from '../../store/searchData';
 import { Category } from '../../Types/ServiceTypes';
 
 
@@ -11,8 +13,17 @@ const emits = defineEmits<{
     (e: 'selectCategory', payload: Category): void
 }>();
 
+const usesearch = useSearch();
+
+const selectedid = ref<number>(0);
+
 const selectCategory = (payload: Category): void => {
+    selectedid.value = payload.id;
     emits('selectCategory', payload);
+}
+
+if(usesearch.searchdata.category.id !== 0) {
+    selectedid.value = usesearch.searchdata.category.id;
 }
 
 </script>
@@ -21,7 +32,7 @@ const selectCategory = (payload: Category): void => {
     <Transition name="drop-down">
         <ul class="w-full flex flex-col gap-y-1 max-h-[12rem] overflow-y-auto" v-if="togglecategories">
             <li 
-                class="text-ellipsis overflow-hidden truncate"
+                class="text-ellipsis overflow-hidden truncate" :class="selectedid === service.id && 'bg-gray-200'"
                 v-for="service in servicecategories" :key="service.id"
                 @click="selectCategory(service)"
             >{{ service.Name }}</li>
