@@ -13,6 +13,21 @@ const services_children = [
         meta: {title: 'New-Services'}
     },
 ]
+
+const requests_list = [
+    {
+        path: 'client',
+        name: 'Client-Requests-List',
+        component: () => import('../views/Accounts/Requests/ClientRequests.vue'),
+        meta: {title: 'My-Services-List'}
+    },
+    {
+        path: 'provider',
+        name: 'Provider-Requests-List',
+        component: () => import('../views/Accounts/Requests/ProviderRequests.vue'),
+        meta: {title: 'My-Services-List'}
+    },
+]
 const children = [
     {
         path: 'provider/services',
@@ -39,7 +54,7 @@ const children = [
         path: 'requests',
         name: 'Service-Requests',
         component: () => import('../views/Accounts/ServicesRequestList.vue'),
-        meta: {title: 'Request-Lists'}
+        children: requests_list
     },
     {
         path: 'adverts',

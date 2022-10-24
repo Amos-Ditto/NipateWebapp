@@ -119,7 +119,11 @@ const submitRequest = async (): Promise<void> => {
         if(response.status === 201) {
             setTimeout(() => {
                 submittingform.value = false;
-                router.push({ name: "Service-Requests" })
+                if(useauth.UserDetails.Provider === true) {
+                    router.push({ name: "Provider-Requests-List" })
+                } else {
+                    router.push({ name: "Client-Requests-List" })
+                }
             }, 400);
         } else {
             return;
