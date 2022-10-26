@@ -4,8 +4,7 @@ import { Request } from '../../../Types/Requests';
 
 defineProps<{
     request: Request
-}>();
-
+}>()
 
 const estimateDuration = (timestamp: string): string => {
     let now = new Date();
@@ -27,26 +26,26 @@ const estimateDuration = (timestamp: string): string => {
 <template>
     <div class="requests-card w-full flex flex-col gap-y-6 sm:gap-y-8 px-3 py-3 border border-gray-300 rounded">
         <div class="card-header flex items-center justify-between w-full px-1 sm:px-3 py-1">
-            <h3 class="text-lg font-semibold tracking-wide capitalize">{{ request.Service.ServiceTitle }}</h3>
+            <h3 class="text-lg font-semibold tracking-wide">{{ request.Service.ServiceTitle }}</h3>
         </div>
         <div class="card-body w-full flex flex-col gap-y-4">
             <div class="details flex flex-row flex-wrap items-center w-full px-1 sm:px-3 gap-x-2 gap-y-2">
                 <small class="text-slate-500 text-xs">{{ request.Service.Service.Name }}</small>
                 <small>-</small>
-                <small class="text-slate-500 text-xs">{{ request.Service.Provider.User.FirstName }} {{ request.Service.Provider.User.SurName }}</small>
+                <small class="text-slate-500 text-xs">{{ request.User.FirstName }} {{ request.User.SurName }}</small>
                 <small>-</small>
-                <small class="text-slate-500 text-xs">{{ request.Service.Location.DisplayName }}</small>
-                <small class="text-xs text-slate-400 italic">{{ estimateDuration(request.TimeStamp) }} ago</small>
+                <small class="text-slate-500 text-xs">{{ request.CenterLocation.DisplayName }}</small>
+                <small class="text-xs text-slate-400 italic">{{ estimateDuration(request.TimeStamp) }} ago.</small>
             </div>
             <div class="description w-full px-1 sm:px-3">
-                <p class="text-base line-clamp-3">{{ request.Service.ServiceDescription }}.</p>
+                <p class="text-base line-clamp-3">{{ request.RequestText }}</p>
             </div>
         </div>
         <div class="card-footer w-full px-1 sm:px-3">
             <div class="response w-full flex flex-row">
                 <button
-                    class="text-sm border border-gray-300 px-4 py-1 rounded text-slate-600"
-                >No response yet</button>
+                    class="text-sm tracking-wide border border-gray-300 px-4 py-1 rounded hover:border-slate-500 transition-colors duration-300 text-slate-600 hover:text-slate-700"
+                >Accept</button>
             </div>
         </div>
     </div>

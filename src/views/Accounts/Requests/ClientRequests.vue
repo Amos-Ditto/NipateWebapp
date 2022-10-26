@@ -72,6 +72,7 @@ const fechResponses = async (): Promise<void> => {
     })
     .catch(error => console.log(error));
 }
+
 fechResponses();
 fetchUnrepondedRequests();
 
