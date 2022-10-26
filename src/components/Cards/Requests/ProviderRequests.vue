@@ -1,19 +1,65 @@
 <script setup lang="ts">
-import { Request } from '../../../Types/Requests';
+import { Request, Response } from '../../../Types/Requests';
 import { estimateDuration } from '../../../composables/estimateDuration';
+import useAuthentications from '../../../store/authentications';
 import { ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     request: Request
 }>();
+
+const emits = defineEmits<{
+    (e: 'updateResponses', payload: Response, id: number): void
+}>();
+
+const base_url = import.meta.env.VITE_BASE_URL;
+const useauth = useAuthentications();
 
 const openresponseform = ref<boolean>(false);
 
 const responsetext = ref<string>("");
-const valid_description = ref<boolean>(true);
+const valid_response = ref<boolean>(true);
+const submitting = ref<boolean>(false);
 
 const submitResponse = async (): Promise<void> => {
+    if (responsetext.value === "") {
+        valid_response.value = false;
+        return;
+    }
+    submitting.value = true;
+    await fetch(`${base_url}service/response`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": useauth.User.Auth_token || ""
+        },
+        body: JSON.stringify({
+            "ServiceRequestID": props.request.id,
+            "ResponseText": responsetext.value
+        })
+    })
+    .then(async response => {
+        if(response.status === 201) {
+            emits('updateResponses', await response.json(), props.request.id);
+            setTimeout(() => {
+                submitting.value = false;
+            }, 400);
 
+            setTimeout(() => {
+                openresponseform.value = false;
+            },550)
+
+        } else {
+            console.log(await response.json());
+            console.log("Not Successful");
+            setTimeout(() => {
+                submitting.value = false;
+            }, 400);
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    })
     console.log("Submitted");
 }
 </script>
@@ -85,17 +131,21 @@ const submitResponse = async (): Promise<void> => {
                     <div class="form flex flex-col gap-y-8 py-4 px-6">
                         <div class="description gap-y-2 flex flex-col">
                             <label for="description" class="text-sm font-semibold">Response Text</label>
-                            <textarea @focus="valid_description = true"
+                            <textarea @focus="valid_response = true"
                                 name="description" id="description" cols="30" rows="4" v-model="responsetext"
                                 class=" outline-none border rounded hover:border-gray-300 focus:border-gray-300 text-sm tracking-wider px-3 py-2"
-                                :class="valid_description ? 'border-gray-200' : 'border-tomato'"
+                                :class="valid_response ? 'border-gray-200' : 'border-tomato'"
                             ></textarea>
                         </div>
 
                         <div class="submit flex flex-col items-start gap-y-2 w-full pt-4">
                             <button @click="submitResponse"
-                                class="w-1/2 sm:w-1/4 py-2 text-base rounded tracking-wide bg-slate-600 hover:bg-slate-700 focus:bg-slate-700 text-slate-100 capitalize transition-colors duration-200"
-                            >Send a response</button>
+                                class="w-1/2 sm:w-1/4 py-2 text-base rounded tracking-wide bg-slate-600 hover:bg-slate-700 focus:bg-slate-700 text-slate-100 \
+                                capitalize transition-colors duration-200 flex flex-row items-center justify-center"
+                            >
+                                <span class="loader" v-if="submitting"></span>
+                                <span v-else>send a response</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -116,6 +166,23 @@ const submitResponse = async (): Promise<void> => {
 
 .pop-up-leave-active {
     transition: opacity 200ms ease, transform 500ms ease;
+}
+
+.loader {
+    @apply border-b-gray-400 border-4 border-slate-100 w-6 h-6;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 ::-webkit-scrollbar {

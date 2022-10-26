@@ -62,6 +62,19 @@ watch(notacceptedrequests, (newNotAcceptedRequests) => {
     }
 });
 
+const updateResponses = (payload: Response, id: number): void => {
+    for(let i=0; i < notacceptedrequests.value.length; i++) {
+        if(notacceptedrequests.value[i].id === id) {
+            notacceptedrequests.value.splice(i, 1);
+            acceptedrequests.value.push(payload);
+            if(notacceptedrequests.value.length === 0) {
+                emptyrequests.value = true;
+            }
+        } else {
+            console.log("Request Not found");
+        }
+    }
+}
 
 </script>
 
@@ -78,7 +91,10 @@ watch(notacceptedrequests, (newNotAcceptedRequests) => {
             </div>
             <div class="body-container w-full flex flex-col gap-y-4 text-[#346974]" v-else>
                 
-                <ProviderRequests v-for="request in notacceptedrequests" :request="request" />
+                <ProviderRequests
+                    v-for="request in notacceptedrequests" :request="request"
+                    @update-responses="updateResponses"
+                />
     
             </div>
             
