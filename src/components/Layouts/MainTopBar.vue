@@ -59,13 +59,64 @@ const redirectToRegisterProvider = ():void => {
 </script>
 <template>
     <header class="w-full h-full flex flex-col bg-gray-50 relative">
-        <div class="top-nav">
+        <div class="top-nav items-center">
             <RouterLink to="/" class="top-left-nav">
                 <img src="../../assets/Logo/Vector.svg" alt="logo">
                 <img src="../../assets/Logo/Nipate.svg" alt="logo">
             </RouterLink>
+
+            <div class="account relative">
+                <div class="account-btn pr-4 sm:pr-0 flex flex-row items-center gap-x-0.5 relative cursor-pointer" @click="toggleDropDownAccount">
+                    <small class="hidden sm:block text-sm sm:text-base font-light">My Account</small>
+                    <div class="user-avatar ml-2 p-2 sm:p-1 rounded-md bg-gray-200">
+                        <div class="i-mdi-account-outline text-2xl sm:text-2xl text-slate-500"></div>
+                    </div>
+                </div>
+                <Transition name="pop-up">
+                    <div v-if="dropdownaccount"
+                        class="account-drop-down z-50 flex flex-col gap-y-2.5 py-2 absolute top-[125%] right-4 sm:-right-4 min-h-[4rem] w-[15rem] xs:w-[18rem] bg-gray-50 rounded"
+                    >
+                        <!-- <div class="top-drop-down absolute z-10 right-3 -top-2 w-4 h-4 rotate-45"></div> -->
+                        <div class="user-client flex flex-row items-center gap-x-3 py-1.5 px-2 hover:bg-gray-100 cursor-pointer" @click="reDirectToUserAccount">
+                            <div class="user-avatar p-1.5 rounded-md bg-gray-200">
+                                <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
+                            </div>
+                            <div class="user-details flex flex-col gap-y-0">
+                                <small class="text-sm text-slate-600">{{ UserDetails.User.FirstName || "Anonymous" }} {{ UserDetails.User.SurName }}</small>
+                                <small class="text-slate-600 text-xs">{{ UserDetails.Provider ? 'Provider' : 'Client' }}</small>
+                            </div>
+                        </div>
+
+                    <button v-if="Authenticated" @click="logoutUser"
+                        class="text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                        <div class="i-mdi-account-arrow-left-outline text-xl"></div>
+                        <small class="text-slate-600 text-base">Logout</small>
+                    </button>
+
+                    <RouterLink :to="{ name: 'Login' }" v-else
+                        class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                        <div class="i-mdi-account-arrow-right-outline text-xl"></div>
+                        <small class="text-base tracking-wide font-light">Login</small>
+                    </RouterLink>
+                        
+                    <RouterLink :to="{ name: 'Register' }" class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
+                        <div class="i-mdi-sign-in text-xl"></div>
+                        <small class="text-base tracking-wide font-light">Register as User</small>
+                    </RouterLink>
+                    <div @click="redirectToRegisterProvider"
+                        class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                            <div class="i-mdi-tools text-xl"></div>
+                            <small class="text-base tracking-wide font-light">Register as Provider</small>
+                        </div>
+                    </div>
+                </Transition>
+            </div>
             
         </div>
+
         <div class="bottom-nav relative">
             <div class="bottom-left-nav px-2.5 flex items-center flex-row gap-x-2 justify-start">
                 
@@ -73,55 +124,7 @@ const redirectToRegisterProvider = ():void => {
             </div>
             <div class="bottom-right-nav flex flex-row gap-x-6 items-center justify-between">
                 <!-- <MainDropDown /> -->
-                <div class="account relative">
-                    <div class="account-btn pr-4 flex flex-row items-center gap-x-0.5 relative cursor-pointer" @click="toggleDropDownAccount">
-                        <small class="hidden sm:block text-sm sm:text-base font-light">My Account</small>
-                        <div class="user-avatar ml-2 p-2 sm:p-1 rounded-md bg-gray-200">
-                            <div class="i-mdi-account-outline text-xl sm:text-2xl text-slate-500"></div>
-                        </div>
-                    </div>
-                    <Transition name="pop-up">
-                        <div v-if="dropdownaccount"
-                            class="account-drop-down flex flex-col gap-y-2.5 py-2 absolute top-[145%] right-0 min-h-[4rem] w-[15rem] xs:w-[18rem] bg-gray-50 rounded"
-                        >
-                            <div class="top-drop-down absolute -z-10 right-3 -top-2 w-4 h-4 rotate-45"></div>
-                            <div class="user-client flex flex-row items-center gap-x-3 py-1.5 px-2 hover:bg-gray-100 cursor-pointer" @click="reDirectToUserAccount">
-                                <div class="user-avatar p-1.5 rounded-md bg-gray-200">
-                                    <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
-                                </div>
-                                <div class="user-details flex flex-col gap-y-0">
-                                    <small class="text-sm text-slate-600">{{ UserDetails.User.FirstName || "Anonymous" }} {{ UserDetails.User.SurName }}</small>
-                                    <small class="text-slate-600 text-xs">{{ UserDetails.Provider ? 'Provider' : 'Client' }}</small>
-                                </div>
-                            </div>
-
-                            <button v-if="Authenticated" @click="logoutUser"
-                                class="text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
-                            >
-                                <div class="i-mdi-account-arrow-left-outline text-xl"></div>
-                                <small class="text-slate-600 text-base">Logout</small>
-                            </button>
-
-                            <RouterLink :to="{ name: 'Login' }" v-else
-                                class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
-                            >
-                                <div class="i-mdi-account-arrow-right-outline text-xl"></div>
-                                <small class="text-base tracking-wide font-light">Login</small>
-                            </RouterLink>
-                            
-                            <RouterLink :to="{ name: 'Register' }" class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
-                                <div class="i-mdi-sign-in text-xl"></div>
-                                <small class="text-base tracking-wide font-light">Register as User</small>
-                            </RouterLink>
-                            <div @click="redirectToRegisterProvider"
-                                class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
-                            >
-                                <div class="i-mdi-tools text-xl"></div>
-                                <small class="text-base tracking-wide font-light">Register as Provider</small>
-                            </div>
-                        </div>
-                    </Transition>
-                </div>
+                
             </div>
         </div>
     </header>
