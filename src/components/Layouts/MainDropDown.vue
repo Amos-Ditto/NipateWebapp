@@ -57,7 +57,7 @@ const selectCounty = (payload: County): void => {
 </script>
 <template>
     <div class="w-full px-1 grid grid-cols-3 gap-x-4 sm:gap-x-8 items-center">
-        <RouterLink :to="{ name: 'Search-Home' }" class="truncate hover:text-steelblue transition-colors duration-200">Browse all</RouterLink>
+        <RouterLink :to="{ name: 'Search-Home' }" class="truncate text-sm sm:text-base font-light tracking-wide hover:text-steelblue transition-colors duration-200">Browse all</RouterLink>
         <div class="services-links flex flex-col gap-y-3 relative">
             <div class="title py-0.5 w-full flex flex-row items-center gap-x-1 cursor-pointer">
                 <h3 class="text-sm sm:text-base font-light tracking-wide transition-colors duration-300 cursor-pointer">Services</h3>

@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { useRouter } from "vue-router";
 import AdvertAccount from "../../components/Cards/AdvertAccount.vue";
+
+const router = useRouter();
+
+const createNewAd = (): void => {
+    router.push({ name: 'Create-Advert' });
+}
 
 </script>
 <template>
@@ -9,7 +16,9 @@ import AdvertAccount from "../../components/Cards/AdvertAccount.vue";
                 <h3 class="text-2xl font-bold">Adverts</h3>
             </div>
             <div class="right-nav pr-1">
-                <button class="px-4 py-1.5 rounded-2xl bg-slate-600 hover:bg-slate-700 transition-colors duration-300 text-slate-100 text-sm flex flex-row items-center gap-x-1">
+                <button @click="createNewAd"
+                    class="px-4 py-1.5 rounded-2xl bg-slate-600 hover:bg-slate-700 transition-colors duration-300 text-slate-100 text-sm flex flex-row items-center gap-x-1"
+                >
                     <div class="i-mdi-plus text-slate-100 text-base"></div>
                     New Advert
                 </button>

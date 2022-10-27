@@ -64,26 +64,7 @@ const redirectToRegisterProvider = ():void => {
                 <img src="../../assets/Logo/Vector.svg" alt="logo">
                 <img src="../../assets/Logo/Nipate.svg" alt="logo">
             </RouterLink>
-            <div class="top-right-nav">
-                <!-- <small>New to this site?</small> -->
-                <Transition name="slide" mode="out-in">
-                    
-                    <div v-if="Authenticated">
-                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800" @click="logoutUser">
-                            Logout
-                        </button>
-                    </div>
-                    <div v-else class="flex flex-row items-center gap-1.5 sm:gap-3 transition-pad">
-                        <button class="bg-orange-400 text-slate-100 font-serif hover:bg-orange-500">
-                            <router-link class="block" :to="{name: 'Register'}" >Register</router-link>
-                        </button>
-                        <small>or</small>
-                        <button class="border-dodgerblue text-dodgerblue font-serif hover:border-blue-800">
-                            <router-link class="block" :to="{name: 'Login'}" >Login</router-link>
-                        </button>
-                    </div>
-                </Transition>
-            </div>
+            
         </div>
         <div class="bottom-nav relative">
             <div class="bottom-left-nav px-2.5 flex items-center flex-row gap-x-2 justify-start">
@@ -93,10 +74,10 @@ const redirectToRegisterProvider = ():void => {
             <div class="bottom-right-nav flex flex-row gap-x-6 items-center justify-between">
                 <!-- <MainDropDown /> -->
                 <div class="account relative">
-                    <div class="account-btn flex flex-row items-center gap-x-0.5 relative cursor-pointer" @click="toggleDropDownAccount">
-                        <small class="text-sm sm:text-base font-light">My Account</small>
-                        <div class="user-avatar ml-2 p-0.5 sm:p-1 rounded-md bg-gray-200">
-                            <div class="i-mdi-account-outline text-2xl text-slate-500"></div>
+                    <div class="account-btn pr-4 flex flex-row items-center gap-x-0.5 relative cursor-pointer" @click="toggleDropDownAccount">
+                        <small class="hidden sm:block text-sm sm:text-base font-light">My Account</small>
+                        <div class="user-avatar ml-2 p-2 sm:p-1 rounded-md bg-gray-200">
+                            <div class="i-mdi-account-outline text-xl sm:text-2xl text-slate-500"></div>
                         </div>
                     </div>
                     <Transition name="pop-up">
@@ -113,6 +94,21 @@ const redirectToRegisterProvider = ():void => {
                                     <small class="text-slate-600 text-xs">{{ UserDetails.Provider ? 'Provider' : 'Client' }}</small>
                                 </div>
                             </div>
+
+                            <button v-if="Authenticated" @click="logoutUser"
+                                class="text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
+                            >
+                                <div class="i-mdi-account-arrow-left-outline text-xl"></div>
+                                <small class="text-slate-600 text-base">Logout</small>
+                            </button>
+
+                            <RouterLink :to="{ name: 'Login' }" v-else
+                                class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer"
+                            >
+                                <div class="i-mdi-account-arrow-right-outline text-xl"></div>
+                                <small class="text-base tracking-wide font-light">Login</small>
+                            </RouterLink>
+                            
                             <RouterLink :to="{ name: 'Register' }" class="register-provider text-slate-600 flex flex-row items-center gap-x-3 py-2 px-2 hover:bg-gray-100 cursor-pointer">
                                 <div class="i-mdi-sign-in text-xl"></div>
                                 <small class="text-base tracking-wide font-light">Register as User</small>

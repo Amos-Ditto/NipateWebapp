@@ -62,6 +62,12 @@ const children = [
         component: () => import('../views/Accounts/AdvertView.vue'),
         meta: {title: 'User-Adverts'}
     },
+    {
+        path: 'new-adverts',
+        name: 'Create-Advert',
+        component: () => import('../views/Accounts/CreateAdvert.vue'),
+        meta: {title: 'New-Advert'}
+    },
 ]
 const accounts = [
     {
