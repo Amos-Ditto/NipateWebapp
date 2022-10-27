@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import ClientResponseSuspense from '../../../components/Cards/LoadingSuspense/ClientResponseSuspense.vue';
 import ClientNoResponse from '../../../components/Cards/Requests/ClientNoResponse.vue';
 import ClientResponse from '../../../components/Cards/Requests/ClientResponse.vue';
 import NoRequests from '../../../components/Cards/Requests/NoRequests.vue';
@@ -14,6 +15,8 @@ const respondedservices = ref<Response[]>([]);
 const unrespondedservices = ref<Request[]>([]);
 const requestempty = ref<boolean>(false);
 const responseempty = ref<boolean>(false);
+
+const loadingfetch = ref<boolean>(false);
 
 const fetchUnrepondedRequests = async (): Promise<void> => {
     await fetch(`${base_url}service/not-accepted/request/client`, {
@@ -55,6 +58,7 @@ watch(respondedservices, (newRespondedServices) => {
 })
 
 const fechResponses = async (): Promise<void> => {
+    loadingfetch.value = true;
     await fetch(`${base_url}service/accepted-requests/client`, {
         method: "GET",
         headers: {
@@ -69,8 +73,16 @@ const fechResponses = async (): Promise<void> => {
         } else {
             console.log(await response.json());
         }
+        setTimeout(() => {
+            loadingfetch.value = false;
+        }, 400);
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.log(error);
+        setTimeout(() => {
+            loadingfetch.value = false;
+        }, 400);
+    });
 }
 
 fechResponses();
@@ -80,28 +92,44 @@ fetchUnrepondedRequests();
 </script>
 <template>
     <section class="w-full px-1 flex flex-col gap-y-10">
-        <div class="with-response flex flex-col gap-y-4" v-if="responseempty">
-            <div class="top-nav flex flex-col sm:flex-row justify-between items-start w-full px-2.5 gap-y-8">
-                <div class="title">
-                    <h3 class="text-xl font-bold tracking-wide text-[#346974]">Accepted Service Requests</h3>
+        <Transition name="fade-loading" mode="out-in">
+            <div class="load-suspense w-full flex flex-col gap-y-3 px-1 sm:px-4" v-if="loadingfetch">
+                <ClientResponseSuspense />
+                <ClientResponseSuspense />
+            </div>
+            <div class="w-full flex flex-col gap-y-10" v-else>
+
+                <div class="with-response flex flex-col gap-y-4" v-if="responseempty">
+                    <div class="title px-1 sm:px-4">
+                        <h3 class="text-xl font-bold tracking-wide text-[#346974]">Accepted Service Requests</h3>
+                    </div>
+        
+                    <div class="body-container w-full flex flex-col gap-y-3 px-1 sm:px-4 text-[#346974]">
+                        <ClientResponse v-for="response in respondedservices" :response="response"/>
+                    </div>
+                </div>
+                <div class="no-response flex flex-col gap-y-4">
+                    <div class="title px-1 sm:px-4">
+                        <h3 class="text-xl font-bold tracking-wide text-[#346974]">Service Requests</h3>
+                    </div>
+        
+                    <div class="body-container w-full flex flex-col gap-y-3 px-1 sm:px-4 text-[#346974]">
+                        <NoRequests v-if="requestempty" />
+                        <ClientNoResponse v-else v-for="service in unrespondedservices" :request="service" />
+                        
+                    </div>
                 </div>
             </div>
-            <div class="body-container w-full flex flex-col gap-y-3 px-1 sm:px-4 text-[#346974]">
-                <ClientResponse v-for="response in respondedservices" :response="response"/>
-            </div>
-        </div>
-        <div class="no-response flex flex-col gap-y-4">
-            
-            <div class="top-nav flex flex-col sm:flex-row justify-between items-start w-full px-2.5 gap-y-8">
-                <div class="title">
-                    <h3 class="text-xl font-bold tracking-wide text-[#346974]">Service Requests</h3>
-                </div>
-            </div>
-            <div class="body-container w-full flex flex-col gap-y-3 px-1 sm:px-4 text-[#346974]">
-                <NoRequests v-if="requestempty" />
-                <ClientNoResponse v-else v-for="service in unrespondedservices" :request="service" />
-                
-            </div>
-        </div>
+        </Transition>
     </section>
 </template>
+
+<style scoped>
+
+.fade-loading-enter-from {
+    @apply opacity-0;
+}
+.fade-loading-enter-active , .fade-loading-leave-active{
+    transition: opacity 200ms ease;
+}
+</style>

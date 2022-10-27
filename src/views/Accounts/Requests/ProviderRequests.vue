@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import ProviderNoRequest from '../../../components/Cards/Requests/ProviderNoRequest.vue';
 import ProviderRequests from '../../../components/Cards/Requests/ProviderRequests.vue';
 import ProviderResponses from '../../../components/Cards/Requests/ProviderResponses.vue';
+import ProviderRequestsSuspense from '../../../components/Cards/LoadingSuspense/ProviderRequestsSuspense.vue'
 import useAuthentications from '../../../store/authentications';
 import { Request, Response } from '../../../Types/Requests';
 
@@ -13,8 +14,11 @@ const useauth = useAuthentications();
 const notacceptedrequests = ref<Request[]>([]);
 const acceptedrequests = ref<Response[]>([]);
 const emptyrequests = ref<boolean>(false);
+const emptyresponses = ref<boolean>(true);
+const loadingrequests = ref<boolean>(false);
 
 const fetchNotAcceptedRequests = async (): Promise<void> => {
+    loadingrequests.value = true;
     await fetch(`${base_url}service/not-accepted/request/provider`, {
         method: "GET",
         headers: {
@@ -25,11 +29,20 @@ const fetchNotAcceptedRequests = async (): Promise<void> => {
     .then(async response => {
         if(response.status === 200) {
             notacceptedrequests.value = await response.json();
+            
         } else {
             console.log(await response.json());
         }
+        setTimeout(() => {
+            loadingrequests.value = false;
+        }, 400);
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+        console.log(error);
+        setTimeout(() => {
+            loadingrequests.value = false;
+        }, 400);
+    })
 }
 
 const fetchAcceptedRequests = async (): Promise<void> => {
@@ -43,7 +56,6 @@ const fetchAcceptedRequests = async (): Promise<void> => {
     .then(async response => {
         if(response.status === 200) {
             acceptedrequests.value = await response.json();
-            console.log(acceptedrequests.value)
         } else {
             console.log(await response.json());
         }
@@ -61,6 +73,14 @@ watch(notacceptedrequests, (newNotAcceptedRequests) => {
         emptyrequests.value = false;
     }
 });
+
+watch(acceptedrequests, (newAcceptedRequests) => {
+    if(acceptedrequests.value.length === 0) {
+        emptyresponses.value = false;
+    } else {
+        emptyresponses.value = true;
+    }
+})
 
 const updateResponses = (payload: Response, id: number): void => {
     for(let i=0; i < notacceptedrequests.value.length; i++) {
@@ -86,21 +106,31 @@ const updateResponses = (payload: Response, id: number): void => {
             <div class="title">
                 <h3 class="text-xl font-bold">Service Requests</h3>
             </div>
-            <div class="flex flex-col text-[#346974] w-full" v-if="emptyrequests">
-                <ProviderNoRequest />
-            </div>
-            <div class="body-container w-full flex flex-col gap-y-4 text-[#346974]" v-else>
-                
-                <ProviderRequests
-                    v-for="request in notacceptedrequests" :request="request"
-                    @update-responses="updateResponses"
-                />
-    
-            </div>
+            <Transition name="fade-loading" mode="out-in">
+                <div class="flex flex-col gap-y-4 w-full" v-if="loadingrequests">
+                    <ProviderRequestsSuspense />
+                    <ProviderRequestsSuspense />
+
+                </div>
+                <div class="body-container w-full flex flex-col gap-y-4 text-[#346974]" v-else>
+
+                    <div class="flex flex-col text-[#346974] w-full" v-if="emptyrequests">
+                        <ProviderNoRequest />
+                    </div>
+                    
+                    <div class="w-full flex flex-col gap-y-4 text-[#346974]" v-else>
+                        <ProviderRequests
+                            v-for="request in notacceptedrequests" :request="request"
+                            @update-responses="updateResponses"
+                        />
+                    </div>
+        
+                </div>
+            </Transition>
             
         </div>
 
-        <div class="responses flex flex-col gap-y-5 px-1 sm:px-4">
+        <div class="responses flex flex-col gap-y-5 px-1 sm:px-4" v-if="emptyresponses">
             <div class="title">
                 <h3 class="text-xl font-bold">Service Responses</h3>
             </div>
@@ -112,3 +142,13 @@ const updateResponses = (payload: Response, id: number): void => {
         </div>
     </section>
 </template>
+
+<style scoped>
+
+.fade-loading-enter-from {
+    @apply opacity-0;
+}
+.fade-loading-enter-active , .fade-loading-leave-active{
+    transition: opacity 200ms ease;
+}
+</style>
