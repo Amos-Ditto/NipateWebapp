@@ -62,6 +62,7 @@ const valid_form = ref<ValidFormData>({
 });
 
 const selectedregion = ref<County>({ id: 0, Name: "select" });
+const submittingad = ref<boolean>(false);
 
 const createNewAd = async (): Promise<void> => {
     if (formdata.value.title === "") {
@@ -81,7 +82,7 @@ const createNewAd = async (): Promise<void> => {
         return;
     }
 
-    console.log("Submitted", "Expiry: ", formdata.value.expirydate);
+    submittingad.value = true;
     await fetch(`${base_url}service/advert`, {
         method: "POST",
         headers: {
@@ -99,9 +100,19 @@ const createNewAd = async (): Promise<void> => {
     })
         .then(async (response) => {
             console.log(await response.json());
-            router.push({ name: "User-Adverts" });
+            setTimeout(() => {
+                submittingad.value = true;
+            }, 400);
+            setTimeout(() => {
+                router.push({ name: "User-Adverts" });
+            }, 500);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+            console.log(error);
+            setTimeout(() => {
+                submittingad.value = true;
+            }, 400);
+        });
 };
 </script>
 
@@ -134,7 +145,7 @@ const createNewAd = async (): Promise<void> => {
                     @focus="valid_form.title = true"
                     type="text"
                     id="title"
-                    class="outline-none py-2 px-4 w-full md:w-2/3 lg:w-1/2 border rounded tracking-wide"
+                    class="outline-none bg-white py-2 px-4 w-full md:w-2/3 lg:w-1/2 border rounded tracking-wide"
                     :class="
                         valid_form.title ? 'border-gray-200' : 'border-tomato'
                     "
@@ -149,7 +160,7 @@ const createNewAd = async (): Promise<void> => {
                 <button
                     @click="toggleregionselect = !toggleregionselect"
                     @focus="valid_form.county = true"
-                    class="py-2 text-base border rounded tracking-wide w-full md:w-2/3 lg:w-1/2 capitalize text-start px-4 relative flex items-center"
+                    class="py-2 text-base bg-white border rounded tracking-wide w-full md:w-2/3 lg:w-1/2 capitalize text-start px-4 relative flex items-center"
                     :class="
                         valid_form.county ? 'border-gray-200' : 'border-tomato'
                     "
@@ -199,7 +210,7 @@ const createNewAd = async (): Promise<void> => {
                     id="desc"
                     cols="30"
                     rows="5"
-                    class="outline-none py-2 px-4 w-full border rounded tracking-wide"
+                    class="outline-none bg-white py-2 px-4 w-full border rounded tracking-wide"
                     :class="
                         valid_form.description
                             ? 'border-gray-200'
@@ -216,7 +227,7 @@ const createNewAd = async (): Promise<void> => {
                         type="date"
                         name="start"
                         id="start"
-                        class="outline-none py-2 px-4 w-full md:w-3/4 border rounded tracking-wide"
+                        class="outline-none bg-white py-2 px-4 w-full md:w-3/4 border rounded tracking-wide"
                         :class="
                             valid_form.startdate
                                 ? 'border-gray-200'
@@ -233,7 +244,7 @@ const createNewAd = async (): Promise<void> => {
                         type="date"
                         name="end"
                         id="end"
-                        class="outline-none py-2 px-4 w-full md:w-3/4 border rounded tracking-wide"
+                        class="outline-none bg-white py-2 px-4 w-full md:w-3/4 border rounded tracking-wide"
                         :class="
                             valid_form.expirydate
                                 ? 'border-gray-200'
@@ -245,9 +256,10 @@ const createNewAd = async (): Promise<void> => {
             <div class="submit w-full flex flex-col pt-8">
                 <button
                     @click="createNewAd"
-                    class="py-3 bg-slate-600 rounded text-slate-100 tracking-wide text-base sm:text-lg uppercase hover:bg-slate-700 focus:bg-slate-700 transition-colors duration-200"
+                    class="py-3 bg-slate-600 rounded text-slate-100 tracking-wide text-base sm:text-lg uppercase hover:bg-slate-700 focus:bg-slate-700 transition-colors duration-200 flex flex-row gap-x-3 items-center justify-center"
                 >
-                    Create
+                    <span class="loader" v-if="submittingad"></span>
+                    <span v-else>Create</span>
                 </button>
             </div>
         </div>
@@ -272,6 +284,23 @@ const createNewAd = async (): Promise<void> => {
 .popup-leave-active {
     transition: opacity 200ms ease, transform 300ms ease, width 300ms ease,
         height 300ms ease;
+}
+
+.loader {
+    @apply border-b-gray-400 border-4 border-slate-100 w-6 h-6;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 ::-webkit-scrollbar {
