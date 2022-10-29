@@ -5,7 +5,7 @@ import ProviderDashboardAdvertEmpty from "../../components/Cards/Empty/ProviderD
 import UserAccountDetails from "../../components/Heroes/UserAccountDetails.vue";
 import ProviderDashboardEdvert from "../../components/Cards/Requests/Dashboard/ProviderDashboardEdvert.vue";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { Request } from "../../Types/Requests";
 import useAuthentications from "../../store/authentications";
 import { Advert } from "../../Types/Adverts";
@@ -53,6 +53,14 @@ const fetchProviderRequests = async (): Promise<void> => {
 // Fetch requests on Update
 fetchProviderRequests();
 
+watch(requestlist, (newRequestList) => {
+	if (requestlist.value.length === 0) {
+		emptyrequestlist.value = true;
+	} else {
+		emptyrequestlist.value = false;
+	}
+});
+
 // Adverts
 const advertlist = ref<Advert[]>([]);
 const emptyadverts = ref<boolean>(false);
@@ -86,6 +94,14 @@ const fetchAdverts = async (): Promise<void> => {
 };
 
 fetchAdverts();
+
+watch(advertlist, (newAdvertList) => {
+	if (advertlist.value.length === 0) {
+		emptyadverts.value = true;
+	} else {
+		emptyadverts.value = false;
+	}
+});
 </script>
 <template>
 	<section class="flex flex-col w-full gap-y-4">
