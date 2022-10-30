@@ -1,0 +1,19 @@
+<template>
+	<div
+		class="card flex flex-col gap-y-2 px-2 sm:px-4 py-3 rounded border border-gray-300 hover:shadow-md transition-shadow duration-200 cursor-pointer"
+	>
+		<div class="card-header py-3">
+			<h3 class="h-3 py-3 w-1/2 bg-gray-200 animate-pulse"></h3>
+		</div>
+		<div class="card-body w-full flex flex-col items-start">
+			<p class="h-6 py-8 bg-gray-200 animate-pulse w-full"></p>
+		</div>
+		<div class="card-footer flex flex-row items-center gap-x-4 pt-3">
+			<button class="bg-gray-200 animate-pulse rounded w-[8rem] py-3 h-3"></button>
+			<div class="details flex flex-row gap-x-2">
+				<div class="i-mdi-call text-lg text-slate-300"></div>
+				<small class="h-3 py-3 w-[10rem] bg-gray-200 animate-pulse"></small>
+			</div>
+		</div>
+	</div>
+</template>

@@ -34,6 +34,7 @@ const fetchProviderRequests = async (): Promise<void> => {
 		.then(async (response) => {
 			if (response.status === 200) {
 				requestlist.value = await response.json();
+				console.log(requestlist.value);
 			} else {
 				console.log(await response.json());
 				router.push({ name: "Login" });
